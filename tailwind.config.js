@@ -3,7 +3,7 @@ const { nextui } = require('@malberee/nextui-native/theme')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/**/*.{js,jsx,ts,tsx}',
+    './app/**/*.{js,jsx,ts,tsx}',
     'node_modules/@malberee/nextui-native/**/*.{js,jsx,ts,tsx}',
   ],
   presets: [require('nativewind/preset')],
