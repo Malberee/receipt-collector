@@ -5,4 +5,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'no-console': 'warn',
   },
+  env: {
+    node: true,
+  },
 }
