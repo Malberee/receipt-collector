@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@malberee/nextui-native": "^1.0.0",
     "expo": "~51.0.28",
     "expo-status-bar": "~1.12.1",
     "nativewind": "4.1.16",

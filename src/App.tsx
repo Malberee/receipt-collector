@@ -1,13 +1,12 @@
 import '../global.css'
+import { Button } from '@malberee/nextui-native'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text className="text-blue-500">
-        Open up App.tsx to start working on your app!
-      </Text>
+    <View className="bg-default-50 dark" style={styles.container}>
+      <Button color="warning">text</Button>
       <StatusBar style="auto" />
     </View>
   )
@@ -16,7 +15,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
