@@ -8,6 +8,16 @@
   "endOfLine": "auto",
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@app/(.*)$",
+    "^@pages/(.*)$",
+    "^@widgets/(.*)$",
+    "^@features/(.*)$",
+    "^@entities/(.*)$",
+    "^@shared/(.*)$",
+    "^[./]"
+  ],
   "tailwindFunctions": ["tv"],
   "plugins": [
     "@trivago/prettier-plugin-sort-imports",
