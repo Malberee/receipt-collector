@@ -12,7 +12,7 @@ module.exports = function (api) {
           extensions: ['.tsx', '.ts', '.js', '.json'],
           root: ['./src/'],
           alias: {
-            '@app': './app',
+            '@app/*': './app',
             '@pages/*': './pages',
             '@widgets/*': './widgets',
             '@features/*': './features',

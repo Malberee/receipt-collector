@@ -1,19 +1,10 @@
 import { NextUIProvider } from '@malberee/nextui-native'
 import { Slot } from 'expo-router'
-import { cssInterop, useColorScheme } from 'nativewind'
+import { useColorScheme } from 'nativewind'
 import { StatusBar } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { Header } from '@shared/ui'
-
-const StyledStatusBar = cssInterop(StatusBar, {
-  className: {
-    target: false,
-    nativeStyleToProp: {
-      color: 'barStyle',
-    },
-  },
-})
+import { Header } from '@app/layouts/header'
 
 function RootLayot() {
   const { colorScheme } = useColorScheme()
@@ -21,7 +12,7 @@ function RootLayot() {
   return (
     <NextUIProvider>
       <SafeAreaView className={`flex-1 bg-default-50 ${colorScheme}`}>
-        <StyledStatusBar
+        <StatusBar
           barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
         />
         <Header />

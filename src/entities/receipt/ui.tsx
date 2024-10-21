@@ -2,7 +2,9 @@ import { Chip } from '@malberee/nextui-native'
 import moment from 'moment'
 import { Pressable, Text, View } from 'react-native'
 
-import { Rarity, rarityColors } from '@shared/config'
+import { type Rarity, rarityColors } from '@shared/config'
+
+import { getLocale } from './lib'
 
 export type ReceiptType = {
   id: string
@@ -14,7 +16,7 @@ export type ReceiptType = {
 export interface ReceiptProps extends ReceiptType {}
 
 export function Receipt({ amount, date, rarity }: ReceiptProps) {
-  const formatter = new Intl.NumberFormat('uk-UA', {
+  const formatter = new Intl.NumberFormat(getLocale(), {
     style: 'currency',
     currency: 'UAH',
   })

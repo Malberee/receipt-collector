@@ -1,8 +1,27 @@
 import { Button, ChevronIcon, Flash } from '@malberee/nextui-native'
 import { Link, usePathname } from 'expo-router'
+import { cssInterop } from 'nativewind'
 import { View } from 'react-native'
 
 import ScannerIcon from './qr-icon'
+
+cssInterop(ScannerIcon, {
+  className: {
+    target: false,
+    nativeStyleToProp: {
+      color: true,
+    },
+  },
+})
+
+cssInterop(Flash, {
+  className: {
+    target: false,
+    nativeStyleToProp: {
+      color: true,
+    },
+  },
+})
 
 function Header() {
   const currentPath = usePathname()
@@ -21,7 +40,11 @@ function Header() {
             currentPath === '/scanner' ? (
               <ChevronIcon color="white" width="24px" height="24px" />
             ) : (
-              <ScannerIcon color="white" width="24px" height="24px" />
+              <ScannerIcon
+                className="text-foreground"
+                width="24px"
+                height="24px"
+              />
             )
           }
         />
@@ -32,7 +55,7 @@ function Header() {
           variant="light"
           color="default"
           size="lg"
-          startContent={<Flash color="white" size="24" />}
+          startContent={<Flash className="text-foreground" size="24" />}
         />
       ) : null}
     </View>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList, Pressable, Text, View } from 'react-native'
 
-import { Receipt, type ReceiptType } from '@widgets/receipt'
+import { Receipt, type ReceiptType } from '@entities/receipt'
 
 const receipts: ReceiptType[] = [
   { id: '1', date: new Date(), amount: 10.0, rarity: 'rare' },
@@ -41,8 +41,8 @@ function Receipts() {
         keyExtractor={(item) => item.id}
       />
       <View className="absolute bottom-4 w-full px-4">
-        <Pressable className="w-full rounded-large border-2 border-dashed border-primary bg-[#171d26] px-3 py-6 transition-colors duration-100 active:bg-[#14253b]">
-          <Text className="text-center text-large text-white">
+        <Pressable className="w-full rounded-large border-2 border-dashed border-primary bg-[#d9eafd] px-3 py-6 transition-colors duration-100 active:bg-[#bfdbfa] dark:bg-[#171d26] dark:active:bg-[#14253b]">
+          <Text className="text-center text-large text-foreground">
             Add manually
           </Text>
         </Pressable>
