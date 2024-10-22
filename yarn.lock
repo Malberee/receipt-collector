@@ -7166,6 +7166,18 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+mobx-react-lite@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-4.0.7.tgz#f4e21e18d05c811010dcb1d3007e797924c4d90b"
+  integrity sha512-RjwdseshK9Mg8On5tyJZHtGD+J78ZnCnRaxeQDSiciKVQDUbfZcXhmld0VMxAwvcTnPEHZySGGewm467Fcpreg==
+  dependencies:
+    use-sync-external-store "^1.2.0"
+
+mobx@^6.13.5:
+  version "6.13.5"
+  resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.13.5.tgz#957d9df88c7f8b4baa7c6f8bdcb6d68b432a6ed5"
+  integrity sha512-/HTWzW2s8J1Gqt+WmUj5Y0mddZk+LInejADc79NJadrWla3rHzmRHki/mnEUH1AvOmbNTZ1BRbKxr8DSgfdjMA==
+
 module-definition@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/module-definition/-/module-definition-6.0.0.tgz#724b4c57543f53f814d2892499857777c3859630"
@@ -7208,14 +7220,14 @@ nanoid@^3.1.23, nanoid@^3.3.7:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
   integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
 
-nativewind@4.1.16:
-  version "4.1.16"
-  resolved "https://registry.yarnpkg.com/nativewind/-/nativewind-4.1.16.tgz#5380fe9870210d88f136d88c8934f065fbb7f9b9"
-  integrity sha512-F+DGF+dOQ5S7s5HTz69vIQN66ID2UeVrDvLsnOX7Q1b65ARfAfYnIvTbuBa1+5xFpcelhPibOZ+8VDlukcTCkw==
+nativewind@4.1.19:
+  version "4.1.19"
+  resolved "https://registry.yarnpkg.com/nativewind/-/nativewind-4.1.19.tgz#d8c1c57c8f1ae0383731cb6a5184f4f6211670d2"
+  integrity sha512-oF7yn7LrY7qSVG90+4Cl8nPrPCGQSxCYWbu6GsOjEqSz6CAJZsUi/n0QhQ7InPjNsxvVY97QoADI7V7wxLP/cQ==
   dependencies:
     comment-json "^4.2.5"
     debug "^4.3.7"
-    react-native-css-interop "0.1.15"
+    react-native-css-interop "0.1.18"
 
 natural-compare@^1.4.0:
   version "1.4.0"
@@ -8054,10 +8066,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-css-interop@0.1.15:
-  version "0.1.15"
-  resolved "https://registry.yarnpkg.com/react-native-css-interop/-/react-native-css-interop-0.1.15.tgz#acc795b21dc96343d1aa1276b6aa3353794341ba"
-  integrity sha512-WrethMEhAUE653NM+RI4nj4MTaBMwlWIuWYpD/soHGUtJSyDPGUrS1NkHhr0vyYMPGGPhHk6iGmfdqetPq0Ncg==
+react-native-css-interop@0.1.18:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/react-native-css-interop/-/react-native-css-interop-0.1.18.tgz#c6290ce066c4b32a5a543c57f380506e75993fdc"
+  integrity sha512-ZDA52ZOr1YQyq9iWncEsbCe1luuAqLX4XeRX9r3XAdHYGc3YpJ5xcL2A6X9wHF39/icISMs3/0OMSnQJe/Flhg==
   dependencies:
     "@babel/helper-module-imports" "^7.22.15"
     "@babel/traverse" "^7.23.0"
@@ -9545,6 +9557,11 @@ use-latest-callback@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/use-latest-callback/-/use-latest-callback-0.2.1.tgz#4d4e6a9e4817b13142834850dcfa8d24ca4569cf"
   integrity sha512-QWlq8Is8BGWBf883QOEQP5HWYX/kMI+JTbJ5rdtvJLmXTIh9XoHIO3PQcmQl8BU44VKxow1kbQUHa6mQSMALDQ==
+
+use-sync-external-store@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.2.tgz#c3b6390f3a30eba13200d2302dcdf1e7b57b2ef9"
+  integrity sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"

@@ -1,14 +1,24 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
   plugins: ['prettier'],
   extends: [
     '@feature-sliced/eslint-config/rules/public-api',
     '@feature-sliced/eslint-config/rules/layers-slices',
     'universe',
+    'universe/shared/typescript-analysis',
     'prettier',
   ],
   rules: {
     'no-console': 'warn',
     'import/order': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      {
+        prefer: 'type-imports',
+        fixStyle: 'inline-type-imports',
+      },
+    ],
     'prettier/prettier': [
       'error',
       {
@@ -39,6 +49,14 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx', '*.d.ts'],
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+    },
+  ],
   env: {
     node: true,
   },
