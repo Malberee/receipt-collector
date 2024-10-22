@@ -13,6 +13,7 @@
   "dependencies": {
     "@malberee/nextui-native": "1.1.1",
     "@shopify/react-native-skia": "1.2.3",
+    "clsx": "^2.1.1",
     "expo": "~51.0.28",
     "expo-camera": "~15.0.16",
     "expo-constants": "~16.0.2",

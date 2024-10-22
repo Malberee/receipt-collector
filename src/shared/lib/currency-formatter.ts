@@ -1,6 +1,6 @@
 import { NativeModules, Platform } from 'react-native'
 
-export const getLocale = () => {
+const getLocale = () => {
   let locale = 'en-US'
 
   if (Platform.OS === 'ios') {
@@ -15,3 +15,8 @@ export const getLocale = () => {
 
   return locale.replace('_', '-')
 }
+
+export const currencyFormatter = new Intl.NumberFormat(getLocale(), {
+  style: 'currency',
+  currency: 'UAH',
+})
