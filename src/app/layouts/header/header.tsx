@@ -15,7 +15,7 @@ cssInterop(ScannerIcon, {
   },
 })
 
-cssInterop(Flash, {
+cssInterop(ChevronIcon, {
   className: {
     target: false,
     nativeStyleToProp: {
@@ -31,15 +31,21 @@ function Header() {
     <View
       className={`z-10 w-full flex-row justify-between p-4 ${currentPath === '/scanner' && 'absolute'}`}
     >
-      <Link href={currentPath === '/scanner' ? '/' : 'scanner'} asChild>
+      <Link href={currentPath !== '/' ? '/' : '/scanner'} asChild>
         <Button
           isIconOnly
           variant="light"
           color="default"
           size="lg"
           startContent={
-            currentPath === '/scanner' ? (
-              <ChevronIcon color="white" width="24px" height="24px" />
+            currentPath !== '/' ? (
+              <ChevronIcon
+                className={
+                  currentPath === '/scanner' ? 'text-white' : 'text-foreground'
+                }
+                width="24px"
+                height="24px"
+              />
             ) : (
               <ScannerIcon
                 className="text-foreground"
@@ -56,7 +62,7 @@ function Header() {
           variant="light"
           color="default"
           size="lg"
-          startContent={<Flash className="text-foreground" size="24" />}
+          startContent={<Flash color="white" size="24px" />}
         />
       ) : (
         <ThemeSwitcher />

@@ -1,47 +1,30 @@
-import { Chip } from '@malberee/nextui-native'
+import { Link } from 'expo-router'
 import moment from 'moment'
-import { Pressable, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 
-import { type Rarity, rarityColors } from '@shared/config'
+import { currencyFormatter } from '@shared/lib'
+import { Chip } from '@shared/ui'
 
-import { getLocale } from './lib'
+import type { ReceiptType } from './model'
 
-export type ReceiptType = {
-  id: string
-  amount: number
-  date: Date
-  rarity: Rarity
-}
+interface ReceiptProps extends ReceiptType {}
 
-export interface ReceiptProps extends ReceiptType {}
-
-export function Receipt({ amount, date, rarity }: ReceiptProps) {
-  const formatter = new Intl.NumberFormat(getLocale(), {
-    style: 'currency',
-    currency: 'UAH',
-  })
-
+export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
   return (
-    <Pressable className="flex-row items-center justify-between border-b border-default-100 bg-default-50 px-9 py-4 transition-colors active:bg-default-100/50">
-      <View className="flex-col justify-between">
-        <Text className="text-xl text-foreground">
-          {formatter.format(amount)}
-        </Text>
-        <Text className="text-sm text-foreground-500">
-          {moment(date).format('DD.MM.YYYY [ - ] HH:mm')}
-        </Text>
+    <Link href={`/receipt-details/${id}`} asChild>
+      <View className="bg-default-50 px-4 transition-colors active:bg-default-100/50">
+        <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
+          <View className="flex-col justify-between">
+            <Text className="text-xl text-foreground">
+              {currencyFormatter.format(amount)}
+            </Text>
+            <Text className="text-sm text-foreground-500">
+              {moment(date).format('DD.MM.YYYY [ - ] HH:mm')}
+            </Text>
+          </View>
+          <Chip rarity={rarity} />
+        </View>
       </View>
-      {rarity !== 'none' && (
-        <Chip
-          size="lg"
-          color={rarityColors[rarity]}
-          classNames={{ content: 'capitalize' }}
-        >
-          {rarity}
-        </Chip>
-      )}
-    </Pressable>
+    </Link>
   )
 }
-
-export default Receipt
