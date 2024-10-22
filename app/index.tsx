@@ -1,7 +1,7 @@
 import { useCameraPermissions } from 'expo-camera'
 import React, { useEffect } from 'react'
 
-import Receipts from '@pages/receipts'
+import { Receipts } from '@pages/receipts'
 
 import '../global.css'
 
