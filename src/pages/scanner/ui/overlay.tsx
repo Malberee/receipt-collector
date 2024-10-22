@@ -1,6 +1,6 @@
 import { Canvas, DiffRect, rect, rrect } from '@shopify/react-native-skia'
 import { cssInterop } from 'nativewind'
-import React, { FC } from 'react'
+import React from 'react'
 import { Dimensions, Platform, StyleSheet } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
