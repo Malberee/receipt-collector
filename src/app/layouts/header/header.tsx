@@ -4,6 +4,7 @@ import { cssInterop } from 'nativewind'
 import { View } from 'react-native'
 
 import ScannerIcon from './qr-icon'
+import ThemeSwitcher from './theme-switcher'
 
 cssInterop(ScannerIcon, {
   className: {
@@ -57,7 +58,9 @@ function Header() {
           size="lg"
           startContent={<Flash className="text-foreground" size="24" />}
         />
-      ) : null}
+      ) : (
+        <ThemeSwitcher />
+      )}
     </View>
   )
 }

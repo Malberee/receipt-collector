@@ -13,7 +13,7 @@ cssInterop(SunFilledIcon, {
 function ThemeSwitcher() {
   const { toggleColorScheme, colorScheme } = useColorScheme()
 
-  const Icon = colorScheme === 'light' ? SunFilledIcon : MoonFilledIcon
+  const Icon = colorScheme === 'dark' ? SunFilledIcon : MoonFilledIcon
 
   return (
     <Button
