@@ -30,6 +30,10 @@ class Receipts {
   getReceiptById(id: string) {
     return this.receipts.find((receipt) => receipt.id === id)
   }
+
+  deleteReceipt(id: string) {
+    this.receipts = this.receipts.filter((receipt) => receipt.id !== id)
+  }
 }
 
 export const receipts = new Receipts()
