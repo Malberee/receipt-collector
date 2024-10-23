@@ -14,6 +14,7 @@ export type ReceiptType = {
   amount: number
   date: Date
   rarity: Rarity
+  fiscalNumber: string
   products?: Product[] | null
 }
 

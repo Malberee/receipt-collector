@@ -1,20 +1,12 @@
 import { CameraView } from 'expo-camera'
 import { Stack } from 'expo-router'
-import { useEffect, useRef, useState } from 'react'
-import {
-  AppState,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native'
+import { useEffect, useRef } from 'react'
+import { AppState, Platform, StatusBar, StyleSheet, View } from 'react-native'
 
+import { handleScan } from '../model'
 import { Overlay } from './overlay'
 
 function Scanner() {
-  const [value, setValue] = useState('')
-
   const qrLock = useRef(false)
   const appState = useRef(AppState.currentState)
 
@@ -53,20 +45,13 @@ function Scanner() {
           if (data && !qrLock.current) {
             qrLock.current = true
             setTimeout(() => {
-              console.log(data)
-
-              setValue(data)
-              //   await Linking.openURL(data)
-            }, 500)
+              handleScan(data)
+              qrLock.current = false
+            }, 2000)
           }
         }}
       />
       <Overlay />
-      {value && (
-        <Text className="absolute left-1/2 top-10 -translate-x-1/2 text-white">
-          {value}
-        </Text>
-      )}
     </View>
   )
 }

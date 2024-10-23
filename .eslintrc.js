@@ -32,6 +32,7 @@ module.exports = {
         importOrderSeparation: true,
         importOrderSortSpecifiers: true,
         importOrder: [
+          'react-native-get-random-values',
           '<THIRD_PARTY_MODULES>',
           '^@app/(.*)$',
           '^@pages/(.*)$',

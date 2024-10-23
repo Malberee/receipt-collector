@@ -15,6 +15,7 @@ const Receipts = observer(() => {
     const rarities = Object.keys(rarityColors)
 
     receipts.addReceipt({
+      fiscalNumber: Math.random().toString().slice(2, 10),
       id: Math.random().toString(),
       amount: Math.round(Math.random() * 100),
       date: new Date(),
