@@ -105,7 +105,7 @@ export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
       <GestureDetector gesture={panGesture}>
         <Animated.View style={animatedStyle}>
           <Link href={`/receipt-details/${id}`} asChild>
-            <View className="z-10 bg-default-50 px-4 transition-colors active:bg-[#f7f7f8] dark:active:bg-[#222222]">
+            <View className="bg-default-50 px-4 transition-colors active:bg-[#f7f7f8] dark:active:bg-[#222222]">
               <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
                 <View className="flex-col justify-between">
                   <Text className="text-xl text-foreground">

@@ -1,4 +1,4 @@
-import { CameraView } from 'expo-camera'
+import { type BarcodeScanningResult, CameraView } from 'expo-camera'
 import { Stack } from 'expo-router'
 import { useEffect, useRef } from 'react'
 import { AppState, Platform, StatusBar, StyleSheet, View } from 'react-native'
@@ -9,6 +9,20 @@ import { Overlay } from './overlay'
 function Scanner() {
   const qrLock = useRef(false)
   const appState = useRef(AppState.currentState)
+
+  const handleBarcodeScanned = ({ data }: BarcodeScanningResult) => {
+    if (data && !qrLock.current) {
+      qrLock.current = true
+
+      setTimeout(() => {
+        qrLock.current = false
+      }, 1500)
+
+      setTimeout(() => {
+        handleScan(data)
+      }, 500)
+    }
+  }
 
   useEffect(() => {
     const subsciption = AppState.addEventListener('change', (nextAppState) => {
@@ -41,15 +55,7 @@ function Scanner() {
           barcodeTypes: ['qr'],
         }}
         facing="back"
-        onBarcodeScanned={({ data }) => {
-          if (data && !qrLock.current) {
-            qrLock.current = true
-            setTimeout(() => {
-              handleScan(data)
-              qrLock.current = false
-            }, 2000)
-          }
-        }}
+        onBarcodeScanned={handleBarcodeScanned}
       />
       <Overlay />
     </View>

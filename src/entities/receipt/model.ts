@@ -14,7 +14,7 @@ export type ReceiptType = {
   amount: number
   date: Date
   rarity: Rarity
-  fiscalNumber: string
+  fiscalNumber: number
   products?: Product[] | null
 }
 
@@ -25,7 +25,15 @@ class Receipts {
   }
 
   addReceipt(receipt: ReceiptType) {
-    this.receipts = [receipt, ...this.receipts]
+    const isExists = !!this.receipts.find(
+      (item) => item.fiscalNumber === receipt.fiscalNumber,
+    )
+
+    if (isExists) {
+      throw 'Receipt already exists!'
+    } else {
+      this.receipts = [receipt, ...this.receipts]
+    }
   }
 
   getReceiptById(id: string) {
