@@ -13,7 +13,7 @@ export type ReceiptType = {
   id: string
   amount: number
   date: Date
-  rarity: Rarity
+  rarity: Rarity | null
   fiscalNumber: number
   products?: Product[] | null
 }

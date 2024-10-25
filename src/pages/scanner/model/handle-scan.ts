@@ -19,7 +19,10 @@ export const handleScan = (data: string) => {
       id,
       products: null,
     })
-    router.navigate('receipt-details/' + id)
+    router.navigate({
+      pathname: 'rarity',
+      params: { id, rarity: receipt.rarity },
+    })
   } catch (error) {
     Toast.show({
       type: 'error',

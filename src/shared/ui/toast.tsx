@@ -14,9 +14,6 @@ cssInterop(CloseFilledIcon, {
 })
 
 export const Toast: FC<BaseToastProps> = ({ text1, text2 }) => {
-  console.log(text1)
-  console.log(text2)
-
   return (
     <View className="z-20 w-full flex-row px-4">
       <View className="h-full flex-row items-center justify-center rounded-l-medium border border-danger-600 bg-danger p-1">
