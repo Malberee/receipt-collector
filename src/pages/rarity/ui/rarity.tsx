@@ -32,7 +32,7 @@ export const Rarity = () => {
 
   return (
     <Pressable
-      onPress={() => router.navigate('/receipt-details/' + id)}
+      onPress={() => router.replace('/receipt-details/' + id)}
       className="flex-1 flex-row items-center justify-center"
     >
       <Text

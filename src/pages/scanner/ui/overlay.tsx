@@ -1,5 +1,4 @@
 import { Canvas, DiffRect, rect, rrect } from '@shopify/react-native-skia'
-import { cssInterop } from 'nativewind'
 import React from 'react'
 import { Dimensions, Platform, StyleSheet } from 'react-native'
 
@@ -18,10 +17,6 @@ const inner = rrect(
   50,
   50,
 )
-
-cssInterop(Canvas, {
-  className: 'style',
-})
 
 export function Overlay() {
   return (

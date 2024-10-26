@@ -1,4 +1,4 @@
-import { Button, ChevronIcon, Flash } from '@malberee/nextui-native'
+import { Button, ChevronIcon } from '@malberee/nextui-native'
 import { Link, usePathname } from 'expo-router'
 import { cssInterop } from 'nativewind'
 import { View } from 'react-native'
@@ -28,10 +28,8 @@ function Header() {
   const currentPath = usePathname()
 
   return (
-    <View
-      className={`z-10 w-full flex-row justify-between p-4 ${currentPath === '/scanner' && 'absolute'}`}
-    >
-      <Link href={currentPath !== '/' ? '/' : '/scanner'} asChild>
+    <View className="z-10 w-full flex-row justify-between p-4">
+      <Link href={currentPath === '/' ? '/scanner' : '/'} asChild>
         <Button
           isIconOnly
           variant="light"
@@ -40,9 +38,7 @@ function Header() {
           startContent={
             currentPath !== '/' ? (
               <ChevronIcon
-                className={
-                  currentPath === '/scanner' ? 'text-white' : 'text-foreground'
-                }
+                className="text-foreground"
                 width="24px"
                 height="24px"
               />
@@ -56,17 +52,7 @@ function Header() {
           }
         />
       </Link>
-      {currentPath === '/scanner' ? (
-        <Button
-          isIconOnly
-          variant="light"
-          color="default"
-          size="lg"
-          startContent={<Flash color="white" size="24px" />}
-        />
-      ) : (
-        <ThemeSwitcher />
-      )}
+      <ThemeSwitcher />
     </View>
   )
 }

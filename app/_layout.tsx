@@ -18,6 +18,8 @@ function RootLayot() {
   const { colorScheme } = useColorScheme()
   const segments = useSegments()
 
+  const shouldShowHeader = segments[0] !== 'rarity' && segments[0] !== 'scanner'
+
   return (
     <GestureHandlerRootView>
       <NextUIProvider>
@@ -31,7 +33,7 @@ function RootLayot() {
             barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
             translucent
           />
-          {segments[0] !== 'rarity' ? <Header /> : null}
+          {shouldShowHeader ? <Header /> : null}
           <Slot />
           <Toast config={toastConfig} position="bottom" />
         </SafeAreaView>

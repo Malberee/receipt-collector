@@ -1,12 +1,15 @@
 import { type BarcodeScanningResult, CameraView } from 'expo-camera'
 import { Stack } from 'expo-router'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AppState, Platform, StatusBar, StyleSheet, View } from 'react-native'
 
 import { handleScan } from '../model'
 import { Overlay } from './overlay'
+import { ScannerHeader } from './scanner-header'
 
 function Scanner() {
+  const [enableTorch, setEnableTorch] = useState(false)
+
   const qrLock = useRef(false)
   const appState = useRef(AppState.currentState)
 
@@ -55,9 +58,13 @@ function Scanner() {
           barcodeTypes: ['qr'],
         }}
         facing="back"
+        enableTorch={enableTorch}
         onBarcodeScanned={handleBarcodeScanned}
       />
       <Overlay />
+      <ScannerHeader
+        toggleTorch={() => setEnableTorch((prevState) => !prevState)}
+      />
     </View>
   )
 }
