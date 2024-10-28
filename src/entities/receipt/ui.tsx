@@ -2,8 +2,8 @@ import { DeleteIcon } from '@malberee/nextui-native'
 import { Link } from 'expo-router'
 import moment from 'moment'
 import { cssInterop } from 'nativewind'
-import React from 'react'
-import { Dimensions, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Dimensions, Text, Vibration, View } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
   runOnJS,
@@ -29,6 +29,7 @@ cssInterop(DeleteIcon, {
 interface ReceiptProps extends ReceiptType {}
 
 export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
+  const [shouldDelete, setShoudlDelete] = useState(false)
   const translateX = useSharedValue(0)
   const scale = useSharedValue(0)
   const opacity = useSharedValue(1)
@@ -40,6 +41,12 @@ export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
     receipts.deleteReceipt(id)
   }
 
+  useEffect(() => {
+    if (shouldDelete) {
+      Vibration.vibrate(50)
+    }
+  }, [shouldDelete])
+
   const panGesture = Gesture.Pan()
     .onChange((event) => {
       if (event.translationX <= 0) {
@@ -47,8 +54,10 @@ export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
       }
 
       if (translateX.value < TRANSLATE_X_THRESHOLD) {
+        runOnJS(setShoudlDelete)(true)
         scale.value = withTiming(1)
       } else {
+        runOnJS(setShoudlDelete)(false)
         scale.value = withTiming(0)
       }
     })
