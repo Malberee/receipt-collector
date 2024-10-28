@@ -46,7 +46,7 @@ const Receipts = observer(() => {
   return (
     <>
       <FlatList
-        contentContainerStyle={{ paddingBottom: 101, minHeight: '100%' }}
+        contentContainerStyle={{ paddingBottom: 101, flex: 1 }}
         data={data}
         renderItem={({ item }) => <Receipt {...item} />}
         keyExtractor={(item) => item.id}
