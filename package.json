@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@malberee/nextui-native": "1.1.1",
+    "@malberee/nextui-native": "1.1.2",
     "@shopify/react-native-skia": "1.2.3",
     "@types/seedrandom": "^3.0.8",
     "clsx": "^2.1.1",
@@ -25,7 +25,7 @@
     "mobx-react-lite": "^4.0.7",
     "moment": "^2.30.1",
     "nanoid": "^5.0.7",
-    "nativewind": "4.1.19",
+    "nativewind": "4.1.21",
     "react": "18.2.0",
     "react-native": "0.74.5",
     "react-native-gesture-handler": "^2.20.1",
