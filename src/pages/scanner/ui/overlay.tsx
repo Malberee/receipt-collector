@@ -2,21 +2,18 @@ import { Canvas, DiffRect, rect, rrect } from '@shopify/react-native-skia'
 import React from 'react'
 import { Dimensions, Platform, StyleSheet, View } from 'react-native'
 
-const { width, height } = Dimensions.get('window')
+import { getScannableAreaSize } from '../lib'
 
-const innerDimension = 300
+const { width, height } = Dimensions.get('window')
+const size = Object.values(getScannableAreaSize(300)) as [
+  number,
+  number,
+  number,
+  number,
+]
 
 const outer = rrect(rect(0, 0, width, height), 0, 0)
-const inner = rrect(
-  rect(
-    width / 2 - innerDimension / 2,
-    height / 2 - innerDimension / 2,
-    innerDimension,
-    innerDimension,
-  ),
-  43,
-  43,
-)
+const inner = rrect(rect(...size), 43, 43)
 
 export function Overlay() {
   return (

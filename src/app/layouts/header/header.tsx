@@ -27,7 +27,7 @@ function Header() {
   const currentPath = usePathname()
 
   return (
-    <View className="z-10 w-full flex-row justify-between bg-default-50 p-4">
+    <View className="z-10 w-full flex-row justify-between p-4">
       <Link href={currentPath === '/' ? '/' : '/'} asChild>
         <Button
           isIconOnly

@@ -3,6 +3,7 @@ import { Stack } from 'expo-router'
 import { useEffect, useRef, useState } from 'react'
 import { AppState, Platform, StatusBar, StyleSheet, View } from 'react-native'
 
+import { getScannableAreaSize, isWithinScannableArea } from '../lib'
 import { handleScan } from '../model'
 import { Overlay } from './overlay'
 import { ScannerHeader } from './scanner-header'
@@ -13,8 +14,20 @@ function Scanner() {
   const qrLock = useRef(false)
   const appState = useRef(AppState.currentState)
 
-  const handleBarcodeScanned = ({ data }: BarcodeScanningResult) => {
+  const handleBarcodeScanned = ({
+    data,
+    cornerPoints,
+  }: BarcodeScanningResult) => {
     if (data && !qrLock.current) {
+      const shouldScan = isWithinScannableArea(
+        cornerPoints,
+        getScannableAreaSize(300),
+      )
+
+      if (!shouldScan) {
+        return
+      }
+
       qrLock.current = true
 
       setTimeout(() => {
