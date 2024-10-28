@@ -31,7 +31,6 @@ function RootLayot() {
         >
           <StatusBar
             barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
-            translucent
           />
           {shouldShowHeader ? <Header /> : null}
           <Slot />
