@@ -14,20 +14,13 @@ cssInterop(ChevronIcon, {
   },
 })
 
-cssInterop(Plus, {
-  className: {
-    target: false,
-    nativeStyleToProp: {
-      color: true,
-    },
-  },
-})
-
 function Header() {
   const currentPath = usePathname()
 
   return (
-    <View className="z-10 w-full flex-row justify-between p-4">
+    <View
+      className={`z-10 w-full flex-row justify-between p-4 ${currentPath === '/scanner' && 'absolute'}`}
+    >
       <Link href={currentPath === '/' ? '/' : '/'} asChild>
         <Button
           isIconOnly
@@ -37,17 +30,19 @@ function Header() {
           startContent={
             currentPath !== '/' ? (
               <ChevronIcon
-                className="text-foreground"
+                className={
+                  currentPath === '/scanner' ? 'text-white' : 'text-foreground'
+                }
                 width="24px"
                 height="24px"
               />
             ) : (
-              <Plus className="text-white" width="24px" height="24px" />
+              <Plus color="white" width="24px" height="24px" />
             )
           }
         />
       </Link>
-      <ThemeSwitcher />
+      {currentPath !== '/scanner' ? <ThemeSwitcher /> : null}
     </View>
   )
 }

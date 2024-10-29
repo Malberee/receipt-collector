@@ -6,7 +6,6 @@ import { AppState, Platform, StatusBar, StyleSheet, View } from 'react-native'
 import { getScannableAreaSize, isWithinScannableArea } from '../lib'
 import { handleScan } from '../model'
 import { Overlay } from './overlay'
-import { ScannerHeader } from './scanner-header'
 
 function Scanner() {
   const [enableTorch, setEnableTorch] = useState(false)
@@ -74,10 +73,7 @@ function Scanner() {
         enableTorch={enableTorch}
         onBarcodeScanned={handleBarcodeScanned}
       />
-      <Overlay />
-      <ScannerHeader
-        toggleTorch={() => setEnableTorch((prevState) => !prevState)}
-      />
+      <Overlay toggleTorch={() => setEnableTorch((prevState) => !prevState)} />
     </View>
   )
 }
