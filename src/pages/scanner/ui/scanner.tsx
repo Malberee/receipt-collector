@@ -56,7 +56,7 @@ function Scanner() {
   }, [])
 
   return (
-    <View className="relative flex-1">
+    <View className="relative -mx-4 flex-1">
       <Stack.Screen
         options={{
           title: 'Overview',

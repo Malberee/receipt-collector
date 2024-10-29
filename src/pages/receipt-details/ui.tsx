@@ -6,7 +6,7 @@ import { FlatList, Text, View } from 'react-native'
 import { receipts } from '@entities/receipt'
 
 import { currencyFormatter } from '@shared/lib'
-import { Chip } from '@shared/ui'
+import { Chip, ScannerButton } from '@shared/ui'
 
 const ReceiptDetails = () => {
   const { id } = useLocalSearchParams()
@@ -16,7 +16,7 @@ const ReceiptDetails = () => {
   )!
 
   return (
-    <View className="flex-1 px-4">
+    <>
       <View className="flex-row justify-between border-b border-default-100 pb-4">
         <View>
           <Text className="text-4xl text-foreground">{amount}</Text>
@@ -49,7 +49,8 @@ const ReceiptDetails = () => {
           </View>
         )}
       />
-    </View>
+      <ScannerButton>Scan barcode</ScannerButton>
+    </>
   )
 }
 
