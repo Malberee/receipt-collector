@@ -6,7 +6,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast, { type BaseToastProps } from 'react-native-toast-message'
 
-import { Header } from '@app/layouts/header'
+import { Container, Header } from '@app/layouts'
 
 import { Toast as CustomToast } from '@shared/ui'
 
@@ -31,7 +31,9 @@ function RootLayot() {
             barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
           />
           <Header />
-          <Slot />
+          <Container>
+            <Slot />
+          </Container>
           <Toast config={toastConfig} position="bottom" />
         </SafeAreaView>
       </NextUIProvider>
