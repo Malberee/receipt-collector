@@ -20,7 +20,7 @@ const Receipts = observer(() => {
         keyExtractor={(item) => item.id}
         ListEmptyComponent={<Empty />}
       />
-      <ScannerButton>Scan QR</ScannerButton>
+      <ScannerButton href="/qr-scanner">Scan QR</ScannerButton>
     </>
   )
 })

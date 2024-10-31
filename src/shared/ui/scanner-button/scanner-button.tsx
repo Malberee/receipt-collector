@@ -7,6 +7,7 @@ import ScannerIcon from './scanner-icon'
 
 interface ScannerButtonProps {
   children?: string
+  href: string
 }
 
 cssInterop(ScannerIcon, {
@@ -18,10 +19,10 @@ cssInterop(ScannerIcon, {
   },
 })
 
-export const ScannerButton: FC<ScannerButtonProps> = ({ children }) => {
+export const ScannerButton: FC<ScannerButtonProps> = ({ children, href }) => {
   return (
     <View className="absolute bottom-4 left-4 w-full">
-      <Link href="/scanner" asChild>
+      <Link href={href} asChild>
         <Pressable
           onPress={() => {}}
           className="w-full flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary bg-[#d9eafd] px-3 py-6 transition-colors duration-100 active:bg-[#bfdbfa] dark:bg-[#171d26] dark:active:bg-[#14253b]"

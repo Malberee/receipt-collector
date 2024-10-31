@@ -41,21 +41,22 @@ function Header() {
     })
   }
 
+  const isScanner =
+    currentPath === '/qr-scanner' || currentPath === '/barcode-scanner'
+
   return (
     <View
-      className={`z-10 w-full flex-row justify-between p-4 ${currentPath === '/scanner' && 'absolute'}`}
+      className={`z-10 w-full flex-row justify-between p-4 ${isScanner && 'absolute'}`}
     >
-      {currentPath === '/' ? (
-        <Link href="/" asChild>
+      <Link href="/" asChild>
+        {currentPath === '/' ? (
           <Button
             isIconOnly
             size="lg"
             startContent={<Plus color="white" width="24px" height="24px" />}
             onPress={handlePress}
           />
-        </Link>
-      ) : (
-        <Link href="/" asChild>
+        ) : (
           <Button
             isIconOnly
             variant="light"
@@ -64,10 +65,10 @@ function Header() {
               <ChevronIcon className="text-white" width="24px" height="24px" />
             }
           />
-        </Link>
-      )}
+        )}
+      </Link>
 
-      {currentPath !== '/scanner' ? <ThemeSwitcher /> : null}
+      {!isScanner ? <ThemeSwitcher /> : null}
     </View>
   )
 }

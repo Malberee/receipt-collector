@@ -49,7 +49,7 @@ const ReceiptDetails = () => {
           </View>
         )}
       />
-      <ScannerButton>Scan barcode</ScannerButton>
+      <ScannerButton href="/barcode-scanner">Scan barcode</ScannerButton>
     </>
   )
 }
