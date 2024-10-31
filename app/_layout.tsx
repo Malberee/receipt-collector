@@ -17,6 +17,9 @@ const toastConfig = {
 function RootLayot() {
   const { colorScheme } = useColorScheme()
   const segments = useSegments()
+  console.log('segments: ', segments)
+
+  const shouldShowHeader = segments[0] !== 'rarity'
 
   return (
     <GestureHandlerRootView>
@@ -30,7 +33,7 @@ function RootLayot() {
           <StatusBar
             barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
           />
-          <Header />
+          {shouldShowHeader ? <Header /> : null}
           <Container>
             <Slot />
           </Container>

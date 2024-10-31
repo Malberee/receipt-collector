@@ -33,7 +33,7 @@ export const Rarity = () => {
   return (
     <Pressable
       onPress={() => router.replace('/receipt-details/' + id)}
-      className="flex-1 flex-row items-center justify-center"
+      className="-mx-4 flex-1 flex-row items-center justify-center"
     >
       <Text
         className={`text-5xl font-bold uppercase tracking-widest ${colors[rarity]}`}
