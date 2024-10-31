@@ -1,11 +1,12 @@
 import { CameraView } from 'expo-camera'
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
+import { useScanner } from '@shared/lib'
 import { Overlay } from '@shared/ui'
 
 export const BarcodeScanner = () => {
-  const [enableTorch, setEnableTorch] = useState(false)
+  const { toggleTorch, enableTorch, handleScan } = useScanner(300, 100)
 
   return (
     <View className="relative -mx-4 flex-1">
@@ -16,12 +17,11 @@ export const BarcodeScanner = () => {
         }}
         facing="back"
         enableTorch={enableTorch}
-        // onBarcodeScanned={handleBarcodeScanned}
+        onBarcodeScanned={(data) =>
+          handleScan(data, (value) => console.log(value))
+        }
       />
-      <Overlay
-        type="barcode"
-        toggleTorch={() => setEnableTorch((prevState) => !prevState)}
-      />
+      <Overlay type="barcode" toggleTorch={toggleTorch} />
     </View>
   )
 }

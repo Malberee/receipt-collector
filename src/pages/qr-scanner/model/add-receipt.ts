@@ -8,7 +8,7 @@ import { receipts } from '@entities/receipt'
 
 import { parseQR } from './parse-qr'
 
-export const handleScan = (data: string) => {
+export const addReceipt = (data: string) => {
   try {
     const receipt = parseQR(data)
 

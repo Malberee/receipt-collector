@@ -1,1 +1,1 @@
-export * from './handle-scan'
+export * from './add-receipt'
