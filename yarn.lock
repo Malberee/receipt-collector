@@ -8122,6 +8122,11 @@ react-native-css-interop@0.1.20:
     lightningcss "1.27.0"
     semver "^7.6.3"
 
+react-native-dashed-line@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-dashed-line/-/react-native-dashed-line-1.1.0.tgz#dd586dbeabee3bc7d51aef0b8ae0d9fda418b1fc"
+  integrity sha512-eO1YxTSYuE/1eaOO/mnV/DSQ45e7LQ690D6iv24Oyl9FcZFFiIIwoCurHnS+myJQvydppsshY1d0WwaQroNx/Q==
+
 react-native-gesture-handler@^2.20.1:
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.20.1.tgz#04743f7064d6ad7d0f66ec0d71c35eeee8c89a97"

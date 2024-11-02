@@ -37,6 +37,20 @@ function Header() {
           price: 123,
           quantity: 1,
         },
+        {
+          id: Math.random().toString(),
+          name: 'sfsdf',
+          price: 123,
+          quantity: 1,
+          picture:
+            'https://images.openfoodfacts.org/images/products/482/307/762/1154/front_en.30.400.jpg',
+        },
+        {
+          id: Math.random().toString(),
+          name: 'sfsdf',
+          price: 123,
+          quantity: 1,
+        },
       ],
     })
   }

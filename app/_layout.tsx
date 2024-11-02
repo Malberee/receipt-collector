@@ -17,7 +17,6 @@ const toastConfig = {
 function RootLayot() {
   const { colorScheme } = useColorScheme()
   const segments = useSegments()
-  console.log('segments: ', segments)
 
   const shouldShowHeader = segments[0] !== 'rarity'
 

@@ -2,11 +2,12 @@ import { makeAutoObservable } from 'mobx'
 
 import type { Rarity } from '@shared/config'
 
-type Product = {
+export type ProductType = {
   id: string
   name: string
   price?: number
   quantity?: number
+  picture?: string
 }
 
 export type ReceiptType = {
@@ -15,7 +16,7 @@ export type ReceiptType = {
   date: Date
   rarity: Rarity | null
   fiscalNumber: number
-  products?: Product[] | null
+  products?: ProductType[] | null
 }
 
 class Receipts {

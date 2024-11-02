@@ -9,7 +9,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
-    'no-console': 'warn',
+    'no-console': 'error',
     'import/order': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/consistent-type-imports': [

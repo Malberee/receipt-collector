@@ -17,9 +17,7 @@ export const BarcodeScanner = () => {
         }}
         facing="back"
         enableTorch={enableTorch}
-        onBarcodeScanned={(data) =>
-          handleScan(data, (value) => console.log(value))
-        }
+        onBarcodeScanned={(data) => handleScan(data, () => {})}
       />
       <Overlay type="barcode" toggleTorch={toggleTorch} />
     </View>
