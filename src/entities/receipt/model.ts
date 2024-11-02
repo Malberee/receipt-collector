@@ -44,6 +44,20 @@ class Receipts {
   deleteReceipt(id: string) {
     this.receipts = this.receipts.filter((receipt) => receipt.id !== id)
   }
+
+  addProduct(receiptId: string, product: ProductType) {
+    const receipt = this.getReceiptById(receiptId)
+
+    if (!receipt) {
+      throw 'Receipt not found!'
+    }
+
+    if (!receipt.products) {
+      receipt.products = []
+    }
+
+    receipt.products.unshift(product)
+  }
 }
 
 export const receipts = new Receipts()

@@ -1,25 +1,57 @@
 import { CameraView } from 'expo-camera'
-import React from 'react'
+import { useLocalSearchParams } from 'expo-router'
+import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 
+import { ProductForm } from '@widgets/product-form'
+
+import type { ProductType } from '@entities/receipt'
+
 import { useScanner } from '@shared/lib'
-import { Overlay } from '@shared/ui'
+import { Modal, Overlay } from '@shared/ui'
+
+import { handleScan } from '../model'
 
 export const BarcodeScanner = () => {
-  const { toggleTorch, enableTorch, handleScan } = useScanner(300, 100)
+  const [product, setProduct] = useState<Omit<ProductType, 'id'> | null>(null)
+  const {
+    toggleTorch,
+    enableTorch,
+    handleScan: onScan,
+    scanLock,
+  } = useScanner(300, 100)
+
+  const { id } = useLocalSearchParams<{ id: string }>()
 
   return (
     <View className="relative -mx-4 flex-1">
       <CameraView
         style={StyleSheet.absoluteFillObject}
         barcodeScannerSettings={{
-          barcodeTypes: ['qr'],
+          barcodeTypes: ['ean8', 'ean13', 'code128', 'code39', 'code93'],
         }}
         facing="back"
         enableTorch={enableTorch}
-        onBarcodeScanned={(data) => handleScan(data, () => {})}
+        onBarcodeScanned={(data) =>
+          onScan(data, (barcodeNumber) =>
+            handleScan(id, barcodeNumber).then((result) => {
+              scanLock.current = true
+              setProduct(result)
+            }),
+          )
+        }
       />
       <Overlay type="barcode" toggleTorch={toggleTorch} />
+      {product ? (
+        <Modal
+          onClose={() => {
+            scanLock.current = true
+            setProduct(null)
+          }}
+        >
+          <ProductForm product={product} receiptId={id} />
+        </Modal>
+      ) : null}
     </View>
   )
 }

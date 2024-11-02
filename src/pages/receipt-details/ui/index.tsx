@@ -30,7 +30,9 @@ export const ReceiptDetails = () => {
           />
         )}
       />
-      <ScannerButton href="/barcode-scanner">Scan barcode</ScannerButton>
+      <ScannerButton href={`/barcode-scanner/${id}`}>
+        Scan barcode
+      </ScannerButton>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { Button, ChevronIcon, Plus } from '@malberee/nextui-native'
-import { Link, usePathname } from 'expo-router'
+import { Link, usePathname, useSegments } from 'expo-router'
 import { cssInterop } from 'nativewind'
 import { View } from 'react-native'
 
@@ -20,6 +20,7 @@ cssInterop(ChevronIcon, {
 
 function Header() {
   const currentPath = usePathname()
+  const segments = useSegments()
 
   const handlePress = () => {
     const rarities = Object.keys(rarityColors)
@@ -56,7 +57,7 @@ function Header() {
   }
 
   const isScanner =
-    currentPath === '/qr-scanner' || currentPath === '/barcode-scanner'
+    segments[0] === 'qr-scanner' || segments[0] === 'barcode-scanner'
 
   return (
     <View
