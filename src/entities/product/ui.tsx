@@ -32,7 +32,7 @@ export const Product: FC<ProductProps> = ({ product, isFirst, isLast }) => {
       <View className="flex-row items-center justify-between p-4">
         <View className="flex-row items-center gap-4">
           <View
-            className={`size-16 flex-row items-center justify-center overflow-hidden rounded-medium ${!picture && 'bg-default-50/40'}`}
+            className={`size-16 flex-row items-center justify-center overflow-hidden rounded-medium ${!picture && 'bg-default-300 dark:bg-default-50/40'}`}
           >
             {picture ? (
               <Image
@@ -41,7 +41,7 @@ export const Product: FC<ProductProps> = ({ product, isFirst, isLast }) => {
                 source={{ uri: picture }}
               />
             ) : (
-              <NoImageIcon className="h-8 w-8 text-foreground-300" />
+              <NoImageIcon className="h-8 w-8 text-foreground-400 dark:text-foreground-300" />
             )}
           </View>
           <View>

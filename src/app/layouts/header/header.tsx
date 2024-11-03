@@ -83,7 +83,11 @@ function Header() {
             variant="light"
             size="lg"
             startContent={
-              <ChevronIcon className="text-white" width="24px" height="24px" />
+              <ChevronIcon
+                className={isScanner ? 'text-white' : 'text-foreground'}
+                width="24px"
+                height="24px"
+              />
             }
           />
         )}

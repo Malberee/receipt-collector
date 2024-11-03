@@ -20,7 +20,7 @@ const StyledDashedLine = cssInterop(DashedLine, {
 
 export const Header: FC<ReceiptType> = ({ amount, date, rarity }) => {
   return (
-    <View className="rounded-t-medium bg-default-100">
+    <View className="rounded-t-medium bg-default-200 dark:bg-default-100">
       <View className="flex-row justify-between p-4">
         <View>
           <Text className="mb-2 text-3xl text-foreground">

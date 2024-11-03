@@ -23,9 +23,6 @@ const StyledDashedLine = cssInterop(Dash, {
   },
   dashClassName: {
     target: 'dashStyle',
-    nativeStyleToProp: {
-      color: 'dashColor',
-    },
   },
 })
 
@@ -44,7 +41,7 @@ export const ReceiptDetails = () => {
           ListHeaderComponent={<Header {...receipt} />}
           stickyHeaderIndices={[0]}
           keyExtractor={(item) => item.id}
-          className="z-10 rounded-t-medium bg-default-100"
+          className="z-10 rounded-t-medium bg-default-200 dark:bg-default-100"
           renderItem={({ item, index }) => (
             <Product
               product={item}
@@ -54,7 +51,7 @@ export const ReceiptDetails = () => {
           )}
         />
         <StyledDashedLine
-          dashClassName="-translate-y-[7px] rotate-45 rounded-[2px] text-default-100 z-0"
+          dashClassName="-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 dark:bg-default-100 z-0"
           dashLength={14}
           dashThickness={14}
         />
