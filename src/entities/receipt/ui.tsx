@@ -121,7 +121,12 @@ export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
                     {currencyFormatter.format(amount)}
                   </Text>
                   <Text className="text-sm text-foreground-500">
-                    {moment(date).format('DD.MM.YYYY [ - ] HH:mm')}
+                    {moment(date).calendar(null, {
+                      sameDay: '[Today] [ • ] HH:mm',
+                      lastDay: '[Yesterday] [ • ] HH:mm',
+                      lastWeek: '[Last] dddd [ • ] HH:mm',
+                      sameElse: `DD MMMM ${moment().year() !== moment(date).year() ? 'YYYY ' : ''}[ • ] HH:mm`,
+                    })}
                   </Text>
                 </View>
                 <Chip rarity={rarity} />

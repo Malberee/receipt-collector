@@ -27,7 +27,7 @@ export const Header: FC<ReceiptType> = ({ amount, date, rarity }) => {
             {currencyFormatter.format(amount)}
           </Text>
           <Text className="text-base text-foreground-400">
-            {moment(date).format('YYYY.MM.DD [-] HH:mm')}
+            {moment(date).format('YYYY.MM.DD [ • ] HH:mm')}
           </Text>
         </View>
         <Chip

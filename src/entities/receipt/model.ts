@@ -19,8 +19,46 @@ export type ReceiptType = {
   products?: ProductType[] | null
 }
 
+const receiptList: ReceiptType[] = [
+  {
+    fiscalNumber: Math.random(),
+    id: Math.random().toString(),
+    amount: Math.round(Math.random() * 100),
+    date: new Date(),
+    rarity: 'epic',
+  },
+  {
+    fiscalNumber: Math.random(),
+    id: Math.random().toString(),
+    amount: Math.round(Math.random() * 100),
+    date: new Date(2024, 10, 2),
+    rarity: 'epic',
+  },
+  {
+    fiscalNumber: Math.random(),
+    id: Math.random().toString(),
+    amount: Math.round(Math.random() * 100),
+    date: new Date(2024, 10, 1),
+    rarity: 'epic',
+  },
+  {
+    fiscalNumber: Math.random(),
+    id: Math.random().toString(),
+    amount: Math.round(Math.random() * 100),
+    date: new Date(2024, 9, 27),
+    rarity: 'epic',
+  },
+  {
+    fiscalNumber: Math.random(),
+    id: Math.random().toString(),
+    amount: Math.round(Math.random() * 100),
+    date: new Date(2023, 9, 27),
+    rarity: 'epic',
+  },
+]
+
 class Receipts {
-  receipts: ReceiptType[] = []
+  receipts: ReceiptType[] = receiptList
   constructor() {
     makeAutoObservable(this)
   }
