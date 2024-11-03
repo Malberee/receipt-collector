@@ -11,7 +11,7 @@ import { Chip } from '@shared/ui'
 
 const StyledDashedLine = cssInterop(DashedLine, {
   className: {
-    target: 'dashStyle',
+    target: 'style',
     nativeStyleToProp: {
       color: 'dashColor',
     },
@@ -20,14 +20,8 @@ const StyledDashedLine = cssInterop(DashedLine, {
 
 export const Header: FC<ReceiptType> = ({ amount, date, rarity }) => {
   return (
-    <View>
-      <StyledDashedLine
-        className="translate-y-[3px] rotate-45 rounded-[2px] text-default-100"
-        dashGap={6}
-        dashLength={6}
-        dashThickness={6}
-      />
-      <View className="flex-row justify-between bg-default-100 p-4">
+    <View className="rounded-t-medium bg-default-100">
+      <View className="flex-row justify-between p-4">
         <View>
           <Text className="mb-2 text-3xl text-foreground">
             {currencyFormatter.format(amount)}
@@ -40,6 +34,19 @@ export const Header: FC<ReceiptType> = ({ amount, date, rarity }) => {
           rarity={rarity}
           classNames={{ base: 'h-9', content: 'text-xl' }}
         />
+      </View>
+
+      <View className="absolute bottom-4 left-0 w-full translate-y-1/2 px-6">
+        <StyledDashedLine
+          className="text-default-50"
+          dashGap={5}
+          dashLength={5}
+          dashThickness={3}
+        />
+      </View>
+      <View className="flex-row justify-between">
+        <View className="z-10 size-8 -translate-x-1/2 rounded-full bg-default-50" />
+        <View className="z-10 size-8 translate-x-1/2 rounded-full bg-default-50" />
       </View>
     </View>
   )

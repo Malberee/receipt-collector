@@ -1,6 +1,8 @@
 import { useLocalSearchParams } from 'expo-router'
+import { cssInterop } from 'nativewind'
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
+import Dash from 'react-native-dashed-line'
 
 import { Product } from '@entities/product'
 import { receipts } from '@entities/receipt'
@@ -8,6 +10,24 @@ import { receipts } from '@entities/receipt'
 import { ScannerButton } from '@shared/ui'
 
 import { Header } from './header'
+
+cssInterop(FlatList, {
+  className: {
+    target: 'style',
+  },
+})
+
+const StyledDashedLine = cssInterop(Dash, {
+  className: {
+    target: 'style',
+  },
+  dashClassName: {
+    target: 'dashStyle',
+    nativeStyleToProp: {
+      color: 'dashColor',
+    },
+  },
+})
 
 export const ReceiptDetails = () => {
   const { id } = useLocalSearchParams()
@@ -18,18 +38,28 @@ export const ReceiptDetails = () => {
 
   return (
     <>
-      <FlatList
-        data={products}
-        ListHeaderComponent={<Header {...receipt} />}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => (
-          <Product
-            product={item}
-            isLast={index + 1 === products?.length}
-            isFirst={index === 0}
-          />
-        )}
-      />
+      <View className="mb-28 overflow-hidden">
+        <FlatList
+          data={products}
+          ListHeaderComponent={<Header {...receipt} />}
+          stickyHeaderIndices={[0]}
+          keyExtractor={(item) => item.id}
+          className="z-10 rounded-t-medium bg-default-100"
+          renderItem={({ item, index }) => (
+            <Product
+              product={item}
+              isLast={index + 1 === products?.length}
+              isFirst={index === 0}
+            />
+          )}
+        />
+        <StyledDashedLine
+          dashClassName="-translate-y-[7px] rotate-45 rounded-[2px] text-default-100 z-0"
+          dashLength={14}
+          dashThickness={14}
+        />
+      </View>
+
       <ScannerButton href={`/barcode-scanner/${id}`}>
         Scan barcode
       </ScannerButton>
