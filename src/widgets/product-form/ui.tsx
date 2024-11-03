@@ -8,6 +8,7 @@ import type { ProductType } from '@entities/receipt'
 
 import { NoImageIcon } from '@shared/ui'
 
+import { schema } from './config'
 import { handleSubmit } from './model'
 
 interface ProductFormProps {
@@ -45,12 +46,15 @@ export const ProductForm: FC<ProductFormProps> = ({ product, receiptId }) => {
         )}
       </View>
       <Formik
-        initialValues={{ name, quantity: 1, amount: 0.0 }}
+        initialValues={{ name, quantity: 1, price: 0.0 }}
+        validationSchema={schema}
+        validateOnBlur={false}
+        validateOnChange={false}
         onSubmit={(values) =>
           handleSubmit({ picture: product?.picture, ...values }, receiptId)
         }
       >
-        {({ handleSubmit, initialValues, handleChange, values }) => (
+        {({ handleSubmit, handleChange, initialValues, errors, values }) => (
           <>
             <Input
               size="lg"
@@ -59,18 +63,31 @@ export const ProductForm: FC<ProductFormProps> = ({ product, receiptId }) => {
               onValueChange={handleChange('name')}
               defaultValue={initialValues.name}
               value={values.name}
+              isInvalid={!!errors.name}
+              errorMessage={errors.name}
             />
             <View className="flex-row gap-4">
               <Input
                 size="lg"
                 fullWidth={false}
                 labelPlacement="inside"
-                label="Amount"
-                endContent={<Text className="text-foreground-400">UAH</Text>}
+                label="Price"
+                endContent={
+                  <Text
+                    className={
+                      !!errors.price ? 'text-danger-400' : 'text-foreground-400'
+                    }
+                  >
+                    UAH
+                  </Text>
+                }
                 className="flex-1"
-                onValueChange={handleChange('amount')}
-                defaultValue={initialValues.amount.toString()}
-                value={values.amount.toString()}
+                onValueChange={handleChange('price')}
+                defaultValue={initialValues.price.toString()}
+                value={values.price.toString()}
+                keyboardType="number-pad"
+                isInvalid={!!errors.price}
+                errorMessage={errors.price}
               />
               <Input
                 size="lg"
@@ -81,6 +98,9 @@ export const ProductForm: FC<ProductFormProps> = ({ product, receiptId }) => {
                 onValueChange={handleChange('quantity')}
                 defaultValue={initialValues.quantity.toString()}
                 value={values.quantity.toString()}
+                keyboardType="number-pad"
+                isInvalid={!!errors.quantity}
+                errorMessage={errors.quantity}
               />
             </View>
             <Button onPress={() => handleSubmit()} size="lg">
