@@ -5,8 +5,8 @@ import type { Rarity } from '@shared/config'
 export type ProductType = {
   id: string
   name: string
-  price?: number
-  quantity?: number
+  price: number
+  quantity: number
   picture?: string
 }
 

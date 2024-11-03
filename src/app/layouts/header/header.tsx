@@ -36,7 +36,7 @@ function Header() {
           id: Math.random().toString(),
           name: 'sfsdf',
           price: 123,
-          quantity: 1,
+          quantity: 3,
         },
         {
           id: Math.random().toString(),
@@ -50,7 +50,13 @@ function Header() {
           id: Math.random().toString(),
           name: 'sfsdf',
           price: 123,
-          quantity: 1,
+          quantity: 2,
+        },
+        {
+          id: Math.random().toString(),
+          name: 'sfsdf',
+          price: 0,
+          quantity: 2,
         },
       ],
     })

@@ -2,7 +2,7 @@ import Toast from 'react-native-toast-message'
 
 import { fetchProduct } from '../api'
 
-export const handleScan = async (receiptId: string, data: string) => {
+export const handleScan = async (data: string) => {
   try {
     const product = await fetchProduct(data)
 

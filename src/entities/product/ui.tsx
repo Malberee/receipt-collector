@@ -25,7 +25,7 @@ cssInterop(NoImageIcon, {
 })
 
 export const Product: FC<ProductProps> = ({ product, isFirst, isLast }) => {
-  const { name, picture, price } = product
+  const { name, picture, price, quantity } = product
 
   return (
     <View>
@@ -44,11 +44,21 @@ export const Product: FC<ProductProps> = ({ product, isFirst, isLast }) => {
               <NoImageIcon className="h-8 w-8 text-foreground-300" />
             )}
           </View>
-          <Text className="text-xl text-foreground">{name}</Text>
+          <View>
+            <Text className="text-xl text-foreground">{name}</Text>
+            <Text className="text-md text-foreground-500">{quantity}pcs</Text>
+          </View>
         </View>
-        <Text className="text-2xl text-foreground">
-          {currencyFormatter.format(price ?? 0)}
-        </Text>
+        <View>
+          <Text className="text-2xl text-foreground">
+            {currencyFormatter.format(price ?? 0)}
+          </Text>
+          {quantity > 1 && price ? (
+            <Text className="text-md text-right text-foreground-500">
+              {currencyFormatter.format(price * quantity)}
+            </Text>
+          ) : null}
+        </View>
       </View>
     </View>
   )

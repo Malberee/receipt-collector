@@ -11,8 +11,10 @@ import { NoImageIcon } from '@shared/ui'
 import { schema } from './config'
 import { handleSubmit } from './model'
 
+export type Product = Pick<ProductType, 'name' | 'picture'>
+
 interface ProductFormProps {
-  product: Omit<ProductType, 'id'>
+  product: Omit<Product, 'id'>
   receiptId: string
 }
 
