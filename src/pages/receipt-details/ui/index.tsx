@@ -1,13 +1,15 @@
 import { useLocalSearchParams } from 'expo-router'
 import { cssInterop } from 'nativewind'
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatList, View } from 'react-native'
 import Dash from 'react-native-dashed-line'
+
+import { ProductForm } from '@widgets/product-form'
 
 import { Product } from '@entities/product'
 import { receipts } from '@entities/receipt'
 
-import { ScannerButton } from '@shared/ui'
+import { Modal, ScannerButton } from '@shared/ui'
 
 import { Header } from './header'
 
@@ -27,7 +29,9 @@ const StyledDashedLine = cssInterop(Dash, {
 })
 
 export const ReceiptDetails = () => {
-  const { id } = useLocalSearchParams()
+  const [modalIsShow, setModalIsShow] = useState(false)
+
+  const { id } = useLocalSearchParams<{ id: string }>()
 
   const receipt = receipts.getReceiptById(id as string)!
 
@@ -38,7 +42,13 @@ export const ReceiptDetails = () => {
       <View className="mb-28 overflow-hidden">
         <FlatList
           data={products}
-          ListHeaderComponent={<Header {...receipt} />}
+          ListHeaderComponent={
+            <Header
+              receipt={receipt}
+              setModalIsShow={() => setModalIsShow(true)}
+              {...receipt}
+            />
+          }
           stickyHeaderIndices={[0]}
           keyExtractor={(item) => item.id}
           className="z-10 rounded-t-medium bg-default-200 dark:bg-default-100"
@@ -50,6 +60,12 @@ export const ReceiptDetails = () => {
           dashThickness={14}
         />
       </View>
+
+      {modalIsShow ? (
+        <Modal onClose={() => setModalIsShow(false)}>
+          <ProductForm receiptId={id} />
+        </Modal>
+      ) : null}
 
       <ScannerButton href={`/barcode-scanner/${id}`}>
         Scan barcode

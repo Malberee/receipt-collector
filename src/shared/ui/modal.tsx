@@ -28,7 +28,7 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
     <Portal hostName="modal-portal">
       <Pressable
         onPress={onClose}
-        className="absolute bottom-0 z-20 h-screen w-screen flex-row items-center justify-center bg-black/40"
+        className="absolute bottom-0 z-20 h-screen w-screen flex-row items-center justify-center bg-black/70"
       >
         <KeyboardAvoidingView behavior="padding">
           <View

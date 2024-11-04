@@ -1,3 +1,4 @@
+import { Button } from '@malberee/nextui-native'
 import moment from 'moment'
 import React, { type FC } from 'react'
 import { Text, View } from 'react-native'
@@ -9,7 +10,14 @@ import { Chip } from '@shared/ui'
 
 import { Divider } from './divider'
 
-export const Header: FC<ReceiptType> = ({ amount, date, rarity }) => {
+interface HeaderProps {
+  receipt: ReceiptType
+  setModalIsShow: () => void
+}
+
+export const Header: FC<HeaderProps> = ({ receipt, setModalIsShow }) => {
+  const { amount, date, rarity } = receipt
+
   return (
     <View className="rounded-t-medium bg-default-200 dark:bg-default-100">
       <View>
@@ -26,6 +34,14 @@ export const Header: FC<ReceiptType> = ({ amount, date, rarity }) => {
             rarity={rarity}
             classNames={{ base: 'h-9', content: 'text-xl' }}
           />
+        </View>
+        <Divider />
+      </View>
+      <View>
+        <View className="p-4">
+          <Button size="lg" variant="flat" onPress={setModalIsShow}>
+            Add product
+          </Button>
         </View>
         <Divider />
       </View>

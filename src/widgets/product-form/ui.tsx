@@ -14,7 +14,7 @@ import { handleSubmit } from './model'
 export type Product = Pick<ProductType, 'name' | 'picture'>
 
 interface ProductFormProps {
-  product: Omit<Product, 'id'>
+  product?: Partial<Omit<Product, 'id'>>
   receiptId: string
 }
 
@@ -30,7 +30,7 @@ cssInterop(NoImageIcon, {
 })
 
 export const ProductForm: FC<ProductFormProps> = ({ product, receiptId }) => {
-  const { picture, name } = product
+  const { picture = '', name = '' } = product ?? {}
 
   return (
     <View className="w-96 flex-col gap-4 pt-8">
