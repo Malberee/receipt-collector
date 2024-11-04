@@ -42,13 +42,7 @@ export const ReceiptDetails = () => {
           stickyHeaderIndices={[0]}
           keyExtractor={(item) => item.id}
           className="z-10 rounded-t-medium bg-default-200 dark:bg-default-100"
-          renderItem={({ item, index }) => (
-            <Product
-              product={item}
-              isLast={index + 1 === products?.length}
-              isFirst={index === 0}
-            />
-          )}
+          renderItem={({ item }) => <Product product={item} />}
         />
         <StyledDashedLine
           dashClassName="-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 dark:bg-default-100 z-0"

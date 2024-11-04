@@ -13,13 +13,16 @@ const Receipts = observer(() => {
 
   return (
     <>
-      <FlatList
-        contentContainerStyle={{ paddingBottom: 101, flex: 1 }}
-        data={data}
-        renderItem={({ item }) => <Receipt {...item} />}
-        keyExtractor={(item) => item.id}
-        ListEmptyComponent={<Empty />}
-      />
+      {data.length ? (
+        <FlatList
+          contentContainerStyle={{ paddingBottom: 101 }}
+          data={data}
+          renderItem={({ item }) => <Receipt {...item} />}
+          keyExtractor={(item) => item.id}
+        />
+      ) : (
+        <Empty />
+      )}
       <ScannerButton href="/qr-scanner">Scan QR</ScannerButton>
     </>
   )

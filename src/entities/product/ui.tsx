@@ -9,8 +9,6 @@ import { NoImageIcon } from '@shared/ui'
 
 interface ProductProps {
   product: ProductType
-  isFirst: boolean
-  isLast: boolean
 }
 
 cssInterop(NoImageIcon, {
@@ -24,7 +22,7 @@ cssInterop(NoImageIcon, {
   },
 })
 
-export const Product: FC<ProductProps> = ({ product, isFirst, isLast }) => {
+export const Product: FC<ProductProps> = ({ product }) => {
   const { name, picture, price, quantity } = product
 
   return (
