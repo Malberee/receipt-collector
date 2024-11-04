@@ -1,3 +1,4 @@
+import { PortalHost, PortalProvider } from '@gorhom/portal'
 import { NextUIProvider } from '@malberee/nextui-native'
 import { Slot, useSegments } from 'expo-router'
 import { useColorScheme } from 'nativewind'
@@ -23,21 +24,26 @@ function RootLayot() {
   return (
     <GestureHandlerRootView>
       <NextUIProvider>
-        <SafeAreaView
-          edges={
-            segments[0] === 'rarity' ? ['right', 'bottom', 'left'] : undefined
-          }
-          className={`flex-1 bg-default-50 ${colorScheme}`}
-        >
-          <StatusBar
-            barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
-          />
-          {shouldShowHeader ? <Header /> : null}
-          <Container>
-            <Slot />
-          </Container>
-          <Toast config={toastConfig} position="bottom" />
-        </SafeAreaView>
+        <PortalProvider>
+          <SafeAreaView
+            edges={
+              segments[0] === 'rarity' ? ['right', 'bottom', 'left'] : undefined
+            }
+            className={`flex-1 bg-default-50 ${colorScheme}`}
+          >
+            <StatusBar
+              barStyle={
+                colorScheme === 'dark' ? 'light-content' : 'dark-content'
+              }
+            />
+            {shouldShowHeader ? <Header /> : null}
+            <Container>
+              <Slot />
+            </Container>
+            <PortalHost name="modal-portal" />
+            <Toast config={toastConfig} position="bottom" />
+          </SafeAreaView>
+        </PortalProvider>
       </NextUIProvider>
     </GestureHandlerRootView>
   )
