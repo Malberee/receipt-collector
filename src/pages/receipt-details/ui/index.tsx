@@ -63,7 +63,7 @@ export const ReceiptDetails = () => {
 
       {modalIsShow ? (
         <Modal onClose={() => setModalIsShow(false)}>
-          <ProductForm receiptId={id} />
+          <ProductForm receiptId={id} onSubmit={() => setModalIsShow(false)} />
         </Modal>
       ) : null}
 

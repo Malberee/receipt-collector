@@ -16,6 +16,7 @@ export type Product = Pick<ProductType, 'name' | 'picture'>
 interface ProductFormProps {
   product?: Partial<Omit<Product, 'id'>>
   receiptId: string
+  onSubmit?: () => void
 }
 
 cssInterop(NoImageIcon, {
@@ -29,7 +30,11 @@ cssInterop(NoImageIcon, {
   },
 })
 
-export const ProductForm: FC<ProductFormProps> = ({ product, receiptId }) => {
+export const ProductForm: FC<ProductFormProps> = ({
+  product,
+  receiptId,
+  onSubmit,
+}) => {
   const { picture = '', name = '' } = product ?? {}
 
   return (
@@ -52,9 +57,10 @@ export const ProductForm: FC<ProductFormProps> = ({ product, receiptId }) => {
         validationSchema={schema}
         validateOnBlur={false}
         validateOnChange={false}
-        onSubmit={(values) =>
+        onSubmit={(values) => {
           handleSubmit({ picture: product?.picture, ...values }, receiptId)
-        }
+          onSubmit?.()
+        }}
       >
         {({ handleSubmit, handleChange, initialValues, errors, values }) => (
           <>
@@ -77,7 +83,7 @@ export const ProductForm: FC<ProductFormProps> = ({ product, receiptId }) => {
                 endContent={
                   <Text
                     className={
-                      !!errors.price ? 'text-danger-400' : 'text-foreground-400'
+                      errors.price ? 'text-danger-400' : 'text-foreground-400'
                     }
                   >
                     UAH

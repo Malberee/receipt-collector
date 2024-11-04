@@ -7,7 +7,7 @@ export const getScannableAreaSize = (width: number, height: number) => {
   return {
     x: SCREEN_WIDTH / 2 - width / 2,
     y: SCREEN_HEIGHT / 2 - height / 2,
-    width: width,
-    height: height,
+    width,
+    height,
   }
 }

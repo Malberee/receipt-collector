@@ -1,5 +1,5 @@
 import { CameraView } from 'expo-camera'
-import { useLocalSearchParams } from 'expo-router'
+import { router, useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 
@@ -47,7 +47,11 @@ export const BarcodeScanner = () => {
             setProduct(null)
           }}
         >
-          <ProductForm product={product} receiptId={id} />
+          <ProductForm
+            product={product}
+            receiptId={id}
+            onSubmit={() => router.navigate(`/receipt-details/${id}`)}
+          />
         </Modal>
       ) : null}
     </View>
