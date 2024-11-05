@@ -1,4 +1,5 @@
 import { useLocalSearchParams } from 'expo-router'
+import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
 import React, { useState } from 'react'
 import { FlatList, View } from 'react-native'
@@ -28,7 +29,7 @@ const StyledDashedLine = cssInterop(Dash, {
   },
 })
 
-export const ReceiptDetails = () => {
+export const ReceiptDetails = observer(() => {
   const [modalIsShow, setModalIsShow] = useState(false)
 
   const { id } = useLocalSearchParams<{ id: string }>()
@@ -52,7 +53,7 @@ export const ReceiptDetails = () => {
           stickyHeaderIndices={[0]}
           keyExtractor={(item) => item.id}
           className="z-10 rounded-t-medium bg-default-200 dark:bg-default-100"
-          renderItem={({ item }) => <Product product={item} />}
+          renderItem={({ item }) => <Product receiptId={id} product={item} />}
         />
         <StyledDashedLine
           dashClassName="-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 dark:bg-default-100 z-0"
@@ -72,4 +73,4 @@ export const ReceiptDetails = () => {
       </ScannerButton>
     </>
   )
-}
+})

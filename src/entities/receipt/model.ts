@@ -96,6 +96,22 @@ class Receipts {
 
     receipt.products.unshift(product)
   }
+
+  deleteProduct(receiptId: string, productId: string) {
+    const receipt = this.getReceiptById(receiptId)
+
+    if (!receipt) {
+      throw 'Receipt not found!'
+    }
+
+    if (!receipt.products) {
+      throw 'Products not found!'
+    }
+
+    receipt.products = receipt.products.filter(
+      (product) => product.id !== productId,
+    )
+  }
 }
 
 export const receipts = new Receipts()
