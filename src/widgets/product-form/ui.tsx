@@ -11,10 +11,8 @@ import { NoImageIcon } from '@shared/ui'
 import { schema } from './config'
 import { handleSubmit, usePickImage } from './model'
 
-export type Product = Pick<ProductType, 'name' | 'picture'>
-
 interface ProductFormProps {
-  product?: Partial<Omit<Product, 'id'>>
+  product?: Partial<ProductType>
   receiptId: string
   onSubmit?: () => void
 }
@@ -35,7 +33,7 @@ export const ProductForm: FC<ProductFormProps> = ({
   receiptId,
   onSubmit,
 }) => {
-  const { picture = '', name = '' } = product ?? {}
+  const { picture, name, price, quantity, id } = product ?? {}
   const { pictureSource, launchLibrary } = usePickImage(picture)
 
   return (
@@ -58,12 +56,16 @@ export const ProductForm: FC<ProductFormProps> = ({
         )}
       </Pressable>
       <Formik
-        initialValues={{ name, quantity: 1, price: 0.0 }}
+        initialValues={{
+          name: name ?? '',
+          quantity: quantity ?? 1,
+          price: price ?? 0.0,
+        }}
         validationSchema={schema}
         validateOnBlur={false}
         validateOnChange={false}
         onSubmit={(values) => {
-          handleSubmit({ picture: pictureSource, ...values }, receiptId)
+          handleSubmit({ picture: pictureSource, ...values }, receiptId, id)
           onSubmit?.()
         }}
       >

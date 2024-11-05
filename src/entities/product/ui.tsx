@@ -1,6 +1,6 @@
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Image, Pressable, Text, View } from 'react-native'
 
 import { type ProductType, receipts } from '@entities/receipt'
 
@@ -10,6 +10,7 @@ import { DeleteLayout, NoImageIcon } from '@shared/ui'
 interface ProductProps {
   product: ProductType
   receiptId: string
+  onPress?: (product: ProductType) => void
 }
 
 cssInterop(NoImageIcon, {
@@ -23,12 +24,15 @@ cssInterop(NoImageIcon, {
   },
 })
 
-export const Product: FC<ProductProps> = ({ product, receiptId }) => {
+export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
   const { name, picture, price, quantity, id: productId } = product
 
   return (
     <DeleteLayout onDelete={() => receipts.deleteProduct(receiptId, productId)}>
-      <View className="flex-row items-center justify-between bg-default-100 p-4">
+      <Pressable
+        onPress={() => onPress?.(product)}
+        className="flex-row items-center justify-between bg-default-200 p-4 transition-colors active:bg-[#dedee0] dark:bg-default-100 dark:active:bg-[#313135]"
+      >
         <View className="flex-row items-center gap-4">
           <View
             className={`size-16 flex-row items-center justify-center overflow-hidden rounded-medium ${!picture && 'bg-default-300 dark:bg-default-50/40'}`}
@@ -58,7 +62,7 @@ export const Product: FC<ProductProps> = ({ product, receiptId }) => {
             </Text>
           ) : null}
         </View>
-      </View>
+      </Pressable>
     </DeleteLayout>
   )
 }

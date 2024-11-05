@@ -3,7 +3,9 @@ import { router, useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { type Product, ProductForm } from '@widgets/product-form'
+import { ProductForm } from '@widgets/product-form'
+
+import { type ProductType } from '@entities/receipt'
 
 import { useScanner } from '@shared/lib'
 import { Modal, Overlay } from '@shared/ui'
@@ -11,7 +13,10 @@ import { Modal, Overlay } from '@shared/ui'
 import { handleScan } from '../model'
 
 export const BarcodeScanner = () => {
-  const [product, setProduct] = useState<Product | null>(null)
+  const [product, setProduct] = useState<Pick<
+    ProductType,
+    'name' | 'picture'
+  > | null>(null)
   const {
     toggleTorch,
     enableTorch,

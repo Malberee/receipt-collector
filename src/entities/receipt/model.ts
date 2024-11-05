@@ -97,6 +97,26 @@ class Receipts {
     receipt.products.unshift(product)
   }
 
+  updateProduct(
+    receiptId: string,
+    productId: string,
+    product: Omit<ProductType, 'id'>,
+  ) {
+    const receipt = this.getReceiptById(receiptId)
+
+    if (!receipt) {
+      throw 'Receipt not found!'
+    }
+
+    if (!receipt.products) {
+      throw 'Products not found!'
+    }
+
+    receipt.products = receipt.products.map((item) =>
+      item.id === productId ? { ...item, ...product } : item,
+    )
+  }
+
   deleteProduct(receiptId: string, productId: string) {
     const receipt = this.getReceiptById(receiptId)
 

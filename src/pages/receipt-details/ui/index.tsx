@@ -8,7 +8,7 @@ import Dash from 'react-native-dashed-line'
 import { ProductForm } from '@widgets/product-form'
 
 import { Product } from '@entities/product'
-import { receipts } from '@entities/receipt'
+import { type ProductType, receipts } from '@entities/receipt'
 
 import { Modal, ScannerButton } from '@shared/ui'
 
@@ -31,6 +31,9 @@ const StyledDashedLine = cssInterop(Dash, {
 
 export const ReceiptDetails = observer(() => {
   const [modalIsShow, setModalIsShow] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(
+    null,
+  )
 
   const { id } = useLocalSearchParams<{ id: string }>()
 
@@ -53,7 +56,16 @@ export const ReceiptDetails = observer(() => {
           stickyHeaderIndices={[0]}
           keyExtractor={(item) => item.id}
           className="z-10 rounded-t-medium bg-default-200 dark:bg-default-100"
-          renderItem={({ item }) => <Product receiptId={id} product={item} />}
+          renderItem={({ item }) => (
+            <Product
+              onPress={(product) => {
+                setModalIsShow(true)
+                setSelectedProduct(product)
+              }}
+              receiptId={id}
+              product={item}
+            />
+          )}
         />
         <StyledDashedLine
           dashClassName="-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 dark:bg-default-100 z-0"
@@ -63,8 +75,17 @@ export const ReceiptDetails = observer(() => {
       </View>
 
       {modalIsShow ? (
-        <Modal onClose={() => setModalIsShow(false)}>
-          <ProductForm receiptId={id} onSubmit={() => setModalIsShow(false)} />
+        <Modal
+          onClose={() => {
+            setModalIsShow(false)
+            setSelectedProduct(null)
+          }}
+        >
+          <ProductForm
+            receiptId={id}
+            product={selectedProduct ?? undefined}
+            onSubmit={() => setModalIsShow(false)}
+          />
         </Modal>
       ) : null}
 
