@@ -2,14 +2,14 @@ import { Button, Input } from '@malberee/nextui-native'
 import { Formik } from 'formik'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Image, Pressable, Text, View } from 'react-native'
 
 import type { ProductType } from '@entities/receipt'
 
 import { NoImageIcon } from '@shared/ui'
 
 import { schema } from './config'
-import { handleSubmit } from './model'
+import { handleSubmit, usePickImage } from './model'
 
 export type Product = Pick<ProductType, 'name' | 'picture'>
 
@@ -36,29 +36,34 @@ export const ProductForm: FC<ProductFormProps> = ({
   onSubmit,
 }) => {
   const { picture = '', name = '' } = product ?? {}
+  const { pictureSource, launchLibrary } = usePickImage(picture)
 
   return (
     <View className="w-96 flex-col gap-4 pt-8">
-      <View
-        className={`h-80 w-full flex-row items-center justify-center rounded-medium ${!picture && 'bg-default-100/40'}`}
+      <Pressable
+        onPress={launchLibrary}
+        className="h-80 w-full flex-row items-center justify-center rounded-medium bg-default-100/40 transition-colors active:bg-default-100/80"
       >
-        {picture ? (
+        {pictureSource ? (
           <Image
-            source={{ uri: picture }}
+            source={{ uri: pictureSource }}
             resizeMode="contain"
             className="h-full w-full"
           />
         ) : (
-          <NoImageIcon className="size-16 text-default-200" />
+          <View className="flex-col items-center justify-center">
+            <NoImageIcon className="mb-2 size-16 text-default-200" />
+            <Text className="text-default-400">Select image</Text>
+          </View>
         )}
-      </View>
+      </Pressable>
       <Formik
         initialValues={{ name, quantity: 1, price: 0.0 }}
         validationSchema={schema}
         validateOnBlur={false}
         validateOnChange={false}
         onSubmit={(values) => {
-          handleSubmit({ picture: product?.picture, ...values }, receiptId)
+          handleSubmit({ picture: pictureSource, ...values }, receiptId)
           onSubmit?.()
         }}
       >
