@@ -62,7 +62,7 @@ export const ReceiptDetails = observer(() => {
           renderItem={({ item }) => (
             <Product
               onPress={(product) => {
-                setModalType('')
+                setModalType('product')
                 setSelectedProduct(product)
               }}
               receiptId={id}
