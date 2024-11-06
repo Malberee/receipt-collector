@@ -14,18 +14,18 @@ interface ReceiptFormProps {
   onSubmit?: () => void
 }
 
-export const ReceiptForm: FC<ReceiptFormProps> = ({ onSubmit }) => {
-  const [date, setDate] = useState<Date>(new Date())
+export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
+  const [date, setDate] = useState<Date>(receipt?.date ?? new Date())
 
   return (
     <View className="w-96 flex-col gap-4 pt-8">
       <Formik
-        initialValues={{ amount: 0 }}
+        initialValues={{ amount: receipt?.amount ?? 0 }}
         validationSchema={schema}
         validateOnBlur={false}
         validateOnChange={false}
         onSubmit={(values) => {
-          handleSubmit({ ...values, date })
+          handleSubmit({ ...values, date, id: receipt?.id })
           onSubmit?.()
         }}
       >

@@ -6,6 +6,7 @@ import { FlatList, View } from 'react-native'
 import Dash from 'react-native-dashed-line'
 
 import { ProductForm } from '@widgets/product-form'
+import { ReceiptForm } from '@widgets/receipt-form'
 
 import { Product } from '@entities/product'
 import { type ProductType, receipts } from '@entities/receipt'
@@ -13,6 +14,8 @@ import { type ProductType, receipts } from '@entities/receipt'
 import { Modal, ScannerButton } from '@shared/ui'
 
 import { Header } from './header'
+
+export type ModalType = 'receipt' | 'product' | ''
 
 cssInterop(FlatList, {
   className: {
@@ -30,7 +33,7 @@ const StyledDashedLine = cssInterop(Dash, {
 })
 
 export const ReceiptDetails = observer(() => {
-  const [modalIsShow, setModalIsShow] = useState(false)
+  const [modalType, setModalType] = useState<ModalType>('')
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(
     null,
   )
@@ -48,7 +51,7 @@ export const ReceiptDetails = observer(() => {
             receipt ? (
               <Header
                 receipt={receipt}
-                setModalIsShow={() => setModalIsShow(true)}
+                setModalType={setModalType}
                 {...receipt}
               />
             ) : null
@@ -59,7 +62,7 @@ export const ReceiptDetails = observer(() => {
           renderItem={({ item }) => (
             <Product
               onPress={(product) => {
-                setModalIsShow(true)
+                setModalType('')
                 setSelectedProduct(product)
               }}
               receiptId={id}
@@ -74,18 +77,22 @@ export const ReceiptDetails = observer(() => {
         />
       </View>
 
-      {modalIsShow ? (
+      {modalType ? (
         <Modal
           onClose={() => {
-            setModalIsShow(false)
+            setModalType('')
             setSelectedProduct(null)
           }}
         >
-          <ProductForm
-            receiptId={id}
-            product={selectedProduct ?? undefined}
-            onSubmit={() => setModalIsShow(false)}
-          />
+          {modalType === 'product' ? (
+            <ProductForm
+              receiptId={id}
+              product={selectedProduct ?? undefined}
+              onSubmit={() => setModalType('')}
+            />
+          ) : (
+            <ReceiptForm receipt={receipt} onSubmit={() => setModalType('')} />
+          )}
         </Modal>
       ) : null}
 

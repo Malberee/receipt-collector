@@ -1,7 +1,7 @@
 import { Button } from '@malberee/nextui-native'
 import moment from 'moment'
 import React, { type FC } from 'react'
-import { Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 
 import type { ReceiptType } from '@entities/receipt'
 
@@ -9,18 +9,22 @@ import { currencyFormatter } from '@shared/lib'
 import { Chip } from '@shared/ui'
 
 import { Divider } from './divider'
+import type { ModalType } from './index'
 
 interface HeaderProps {
   receipt: ReceiptType
-  setModalIsShow: () => void
+  setModalType: (string: ModalType) => void
 }
 
-export const Header: FC<HeaderProps> = ({ receipt, setModalIsShow }) => {
+export const Header: FC<HeaderProps> = ({ receipt, setModalType }) => {
   const { amount, date, rarity } = receipt
 
   return (
-    <View className="rounded-t-medium bg-default-200 dark:bg-default-100">
-      <View>
+    <View>
+      <Pressable
+        onPress={() => setModalType('receipt')}
+        className="rounded-t-medium bg-default-200 transition-colors active:bg-[#dedee0] dark:bg-default-100 dark:active:bg-[#313135]"
+      >
         <View className="flex-row justify-between p-4">
           <View>
             <Text className="mb-2 text-3xl text-foreground">
@@ -36,10 +40,14 @@ export const Header: FC<HeaderProps> = ({ receipt, setModalIsShow }) => {
           />
         </View>
         <Divider />
-      </View>
-      <View>
+      </Pressable>
+      <View className="bg-default-200 dark:bg-default-100">
         <View className="p-4">
-          <Button size="lg" variant="flat" onPress={setModalIsShow}>
+          <Button
+            size="lg"
+            variant="flat"
+            onPress={() => setModalType('product')}
+          >
             Add product
           </Button>
         </View>
