@@ -37,21 +37,21 @@ export const ReceiptDetails = observer(() => {
 
   const { id } = useLocalSearchParams<{ id: string }>()
 
-  const receipt = receipts.getReceiptById(id as string)!
-
-  const { products } = receipt
+  const receipt = receipts.getReceiptById(id)
 
   return (
     <>
       <View className="mb-28 overflow-hidden">
         <FlatList
-          data={products}
+          data={receipt?.products}
           ListHeaderComponent={
-            <Header
-              receipt={receipt}
-              setModalIsShow={() => setModalIsShow(true)}
-              {...receipt}
-            />
+            receipt ? (
+              <Header
+                receipt={receipt}
+                setModalIsShow={() => setModalIsShow(true)}
+                {...receipt}
+              />
+            ) : null
           }
           stickyHeaderIndices={[0]}
           keyExtractor={(item) => item.id}

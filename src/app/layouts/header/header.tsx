@@ -1,11 +1,12 @@
 import { Button, ChevronIcon, Plus } from '@malberee/nextui-native'
 import { Link, usePathname, useSegments } from 'expo-router'
 import { cssInterop } from 'nativewind'
+import { useState } from 'react'
 import { View } from 'react-native'
 
-import { receipts } from '@entities/receipt'
+import { ReceiptForm } from '@widgets/receipt-form'
 
-import { type Rarity, rarityColors } from '@shared/config'
+import { Modal } from '@shared/ui'
 
 import ThemeSwitcher from './theme-switcher'
 
@@ -18,49 +19,11 @@ cssInterop(ChevronIcon, {
   },
 })
 
-function Header() {
+const Header = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
   const currentPath = usePathname()
   const segments = useSegments()
-
-  const handlePress = () => {
-    const rarities = Object.keys(rarityColors)
-
-    receipts.addReceipt({
-      fiscalNumber: Math.random(),
-      id: Math.random().toString(),
-      amount: Math.round(Math.random() * 100),
-      date: new Date(),
-      rarity: rarities[Math.floor(Math.random() * rarities.length)] as Rarity,
-      products: [
-        {
-          id: Math.random().toString(),
-          name: 'sfsdf',
-          price: 123,
-          quantity: 3,
-        },
-        {
-          id: Math.random().toString(),
-          name: 'sfsdf',
-          price: 123,
-          quantity: 1,
-          picture:
-            'https://images.openfoodfacts.org/images/products/482/307/762/1154/front_en.30.400.jpg',
-        },
-        {
-          id: Math.random().toString(),
-          name: 'sfsdf',
-          price: 123,
-          quantity: 2,
-        },
-        {
-          id: Math.random().toString(),
-          name: 'sfsdf',
-          price: 0,
-          quantity: 2,
-        },
-      ],
-    })
-  }
 
   const isScanner =
     segments[0] === 'qr-scanner' || segments[0] === 'barcode-scanner'
@@ -69,15 +32,15 @@ function Header() {
     <View
       className={`z-10 w-full flex-row justify-between p-4 ${isScanner && 'absolute'}`}
     >
-      <Link href="/" asChild>
-        {currentPath === '/' ? (
-          <Button
-            isIconOnly
-            size="lg"
-            startContent={<Plus color="white" width="24px" height="24px" />}
-            onPress={handlePress}
-          />
-        ) : (
+      {currentPath === '/' ? (
+        <Button
+          isIconOnly
+          size="lg"
+          startContent={<Plus color="white" width="24px" height="24px" />}
+          onPress={() => setModalIsOpen(true)}
+        />
+      ) : (
+        <Link href="/" asChild>
           <Button
             isIconOnly
             variant="light"
@@ -90,10 +53,16 @@ function Header() {
               />
             }
           />
-        )}
-      </Link>
+        </Link>
+      )}
 
       {!isScanner ? <ThemeSwitcher /> : null}
+
+      {modalIsOpen ? (
+        <Modal onClose={() => setModalIsOpen(false)}>
+          <ReceiptForm onSubmit={() => setModalIsOpen(false)} />
+        </Modal>
+      ) : null}
     </View>
   )
 }

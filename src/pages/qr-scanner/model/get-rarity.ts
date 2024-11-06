@@ -4,7 +4,7 @@ import type { Rarity } from '@shared/config'
 
 import { rarities } from '../config'
 
-export const getRarity = (seed: string): Rarity | null => {
+export const getRarity = (seed: string): Rarity | undefined => {
   const rng = seedrandom(seed)
 
   const random = rng()
@@ -19,5 +19,5 @@ export const getRarity = (seed: string): Rarity | null => {
     }
   }
 
-  return null
+  return undefined
 }

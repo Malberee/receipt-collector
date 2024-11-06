@@ -14,42 +14,36 @@ export type ReceiptType = {
   id: string
   amount: number
   date: Date
-  rarity: Rarity | null
-  fiscalNumber: number
-  products?: ProductType[] | null
+  rarity?: Rarity
+  products?: ProductType[]
 }
 
 const receiptList: ReceiptType[] = [
   {
-    fiscalNumber: Math.random(),
     id: Math.random().toString(),
     amount: Math.round(Math.random() * 100),
     date: new Date(),
     rarity: 'epic',
   },
   {
-    fiscalNumber: Math.random(),
     id: Math.random().toString(),
     amount: Math.round(Math.random() * 100),
     date: new Date(2024, 10, 2),
     rarity: 'epic',
   },
   {
-    fiscalNumber: Math.random(),
     id: Math.random().toString(),
     amount: Math.round(Math.random() * 100),
     date: new Date(2024, 10, 1),
     rarity: 'epic',
   },
   {
-    fiscalNumber: Math.random(),
     id: Math.random().toString(),
     amount: Math.round(Math.random() * 100),
     date: new Date(2024, 9, 27),
     rarity: 'epic',
   },
   {
-    fiscalNumber: Math.random(),
     id: Math.random().toString(),
     amount: Math.round(Math.random() * 100),
     date: new Date(2023, 9, 27),
@@ -64,23 +58,27 @@ class Receipts {
   }
 
   addReceipt(receipt: ReceiptType) {
-    const isExists = !!this.receipts.find(
-      (item) => item.fiscalNumber === receipt.fiscalNumber,
-    )
+    const isExists = !!this.receipts.find((item) => item.id === receipt.id)
 
     if (isExists) {
       throw 'Receipt already exists!'
     } else {
-      this.receipts = [receipt, ...this.receipts]
+      this.receipts.unshift(receipt)
     }
   }
 
-  getReceiptById(id: string) {
-    return this.receipts.find((receipt) => receipt.id === id)
+  updateReceipt(receipt: ReceiptType) {
+    this.receipts = this.receipts.map((item) =>
+      item.id === receipt.id ? receipt : item,
+    )
   }
 
   deleteReceipt(id: string) {
     this.receipts = this.receipts.filter((receipt) => receipt.id !== id)
+  }
+
+  getReceiptById(id: string) {
+    return this.receipts.find((receipt) => receipt.id === id)
   }
 
   addProduct(receiptId: string, product: ProductType) {

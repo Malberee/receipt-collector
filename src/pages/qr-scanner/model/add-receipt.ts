@@ -1,7 +1,6 @@
 import 'react-native-get-random-values'
 
 import { router } from 'expo-router'
-import { nanoid } from 'nanoid'
 import Toast from 'react-native-toast-message'
 
 import { receipts } from '@entities/receipt'
@@ -12,16 +11,13 @@ export const addReceipt = (data: string) => {
   try {
     const receipt = parseQR(data)
 
-    const id = nanoid()
-
     receipts.addReceipt({
       ...receipt,
-      id,
-      products: null,
     })
+
     router.navigate({
       pathname: 'rarity',
-      params: { id, rarity: receipt.rarity },
+      params: { rarity: receipt.rarity, id: receipt.id },
     })
   } catch (error) {
     Toast.show({

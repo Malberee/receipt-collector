@@ -10,12 +10,12 @@ import React, { type FC } from 'react'
 import { type Rarity, rarityColors } from '@shared/config'
 
 interface ChipProps extends NextUIChipProps {
-  rarity: Rarity | null
+  rarity?: Rarity
   classNames?: SlotsToClasses<ChipSlots>
 }
 
 export const Chip: FC<ChipProps> = ({ rarity, classNames }) => {
-  return rarity === null ? null : (
+  return !rarity ? null : (
     <NextUIChip
       color={rarityColors[rarity]}
       classNames={{
