@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "receipt-collector",
+    "scheme":"com.malberee.receiptcollector",
     "slug": "receipt-collector",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,7 +19,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.malberee.receiptcollector"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -31,13 +37,23 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
       ],
-      ["expo-router", { "root": "./app" }],
+      [
+        "expo-router",
+        {
+          "root": "./app"
+        }
+      ],
       [
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8687f537-0f24-4b87-b945-3ec9f5e08ce8"
+      }
+    }
   }
 }
