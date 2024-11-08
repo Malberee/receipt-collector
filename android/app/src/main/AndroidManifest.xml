@@ -27,6 +27,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="com.malberee.receiptcollector"/>
+        <data android:scheme="com.malberee.receiptcollector"/>
         <data android:scheme="exp+receipt-collector"/>
       </intent-filter>
     </activity>

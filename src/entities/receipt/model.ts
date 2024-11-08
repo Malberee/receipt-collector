@@ -1,4 +1,6 @@
 import { makeAutoObservable } from 'mobx'
+import { configurePersistable, makePersistable } from 'mobx-persist-store'
+import { MMKV } from 'react-native-mmkv'
 
 import type { Rarity } from '@shared/config'
 
@@ -18,43 +20,24 @@ export type ReceiptType = {
   products?: ProductType[]
 }
 
-const receiptList: ReceiptType[] = [
-  {
-    id: Math.random().toString(),
-    amount: Math.round(Math.random() * 100),
-    date: new Date(),
-    rarity: 'epic',
+const storage = new MMKV()
+
+configurePersistable({
+  storage: {
+    setItem: (key, data) => storage.set(key, data),
+    getItem: (key) => storage.getString(key) ?? null,
+    removeItem: (key) => storage.delete(key),
   },
-  {
-    id: Math.random().toString(),
-    amount: Math.round(Math.random() * 100),
-    date: new Date(2024, 10, 2),
-    rarity: 'epic',
-  },
-  {
-    id: Math.random().toString(),
-    amount: Math.round(Math.random() * 100),
-    date: new Date(2024, 10, 1),
-    rarity: 'epic',
-  },
-  {
-    id: Math.random().toString(),
-    amount: Math.round(Math.random() * 100),
-    date: new Date(2024, 9, 27),
-    rarity: 'epic',
-  },
-  {
-    id: Math.random().toString(),
-    amount: Math.round(Math.random() * 100),
-    date: new Date(2023, 9, 27),
-    rarity: 'epic',
-  },
-]
+})
 
 class Receipts {
-  receipts: ReceiptType[] = receiptList
+  receipts: ReceiptType[] = []
   constructor() {
     makeAutoObservable(this)
+    makePersistable(this, {
+      name: 'ReceiptsStore',
+      properties: ['receipts'],
+    })
   }
 
   addReceipt(receipt: ReceiptType) {

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "receipt-collector",
-    "scheme":"com.malberee.receiptcollector",
+    "scheme": "com.malberee.receiptcollector",
     "slug": "receipt-collector",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -47,6 +47,17 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "newArchEnabled": true
+          },
+          "ios": {
+            "newArchEnabled": true
+          }
         }
       ]
     ],
