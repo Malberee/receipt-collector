@@ -15,7 +15,7 @@ export const addReceipt = (data: string) => {
       ...receipt,
     })
 
-    router.navigate({
+    router.replace({
       pathname: 'rarity',
       params: { rarity: receipt.rarity, id: receipt.id },
     })
