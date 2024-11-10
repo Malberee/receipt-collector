@@ -18,7 +18,7 @@ cssInterop(ChevronIcon, {
   },
 })
 
-const Header = () => {
+export const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const currentPath = usePathname()
@@ -65,5 +65,3 @@ const Header = () => {
     </View>
   )
 }
-
-export default Header
