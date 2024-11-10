@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { FlatList, View } from 'react-native'
 import Dash from 'react-native-dashed-line'
 
-import { ProductForm } from '@features/product-form'
+import { ProductForm } from '@features/product-create-edit'
 import { ReceiptForm } from '@features/receipt-form'
 
 import { Product } from '@entities/product'
