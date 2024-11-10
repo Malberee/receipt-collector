@@ -5,8 +5,8 @@ import React, { useState } from 'react'
 import { FlatList, View } from 'react-native'
 import Dash from 'react-native-dashed-line'
 
-import { ProductForm } from '@widgets/product-form'
-import { ReceiptForm } from '@widgets/receipt-form'
+import { ProductForm } from '@features/product-form'
+import { ReceiptForm } from '@features/receipt-form'
 
 import { Product } from '@entities/product'
 import { type ProductType, receipts } from '@entities/receipt'

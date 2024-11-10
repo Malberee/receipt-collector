@@ -4,7 +4,7 @@ import { cssInterop } from 'nativewind'
 import { useState } from 'react'
 import { View } from 'react-native'
 
-import { ReceiptForm } from '@widgets/receipt-form'
+import { ReceiptForm } from '@features/receipt-form'
 
 import { Modal } from '@shared/ui'
 

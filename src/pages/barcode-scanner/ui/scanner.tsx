@@ -3,7 +3,7 @@ import { router, useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { ProductForm } from '@widgets/product-form'
+import { ProductForm } from '@features/product-form'
 
 import { type ProductType } from '@entities/receipt'
 
