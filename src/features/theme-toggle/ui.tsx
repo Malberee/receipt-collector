@@ -1,5 +1,4 @@
 import { Button, MoonFilledIcon, SunFilledIcon } from '@malberee/nextui-native'
-import { usePathname } from 'expo-router'
 import { cssInterop, useColorScheme } from 'nativewind'
 
 cssInterop(SunFilledIcon, {
@@ -11,9 +10,8 @@ cssInterop(SunFilledIcon, {
   },
 })
 
-function ThemeSwitcher() {
+export const ThemeSwitcher = () => {
   const { toggleColorScheme, colorScheme } = useColorScheme()
-  const currentPath = usePathname()
 
   const Icon = colorScheme === 'dark' ? SunFilledIcon : MoonFilledIcon
 
@@ -24,17 +22,9 @@ function ThemeSwitcher() {
       color="default"
       size="lg"
       startContent={
-        <Icon
-          className={
-            currentPath === '/scanner' ? 'text-white' : 'text-foreground'
-          }
-          width="24px"
-          height="24px"
-        />
+        <Icon className="text-foreground" width="24px" height="24px" />
       }
       onPress={toggleColorScheme}
     />
   )
 }
-
-export default ThemeSwitcher
