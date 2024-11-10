@@ -6,7 +6,7 @@ import { FlatList, View } from 'react-native'
 import Dash from 'react-native-dashed-line'
 
 import { ProductForm } from '@features/product-create-edit'
-import { ReceiptForm } from '@features/receipt-form'
+import { ReceiptForm } from '@features/receipt-create-edit'
 
 import { Product } from '@entities/product'
 import { type ProductType, receipts } from '@entities/receipt'
