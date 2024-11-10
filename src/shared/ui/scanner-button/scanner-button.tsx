@@ -23,12 +23,11 @@ export const ScannerButton: FC<ScannerButtonProps> = ({ children, href }) => {
   return (
     <View className="absolute bottom-4 left-4 w-full">
       <Link href={href} asChild>
-        <Pressable
-          onPress={() => {}}
-          className="w-full flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary bg-[#d9eafd] px-3 py-6 transition-colors duration-100 active:bg-[#bfdbfa] dark:bg-[#171d26] dark:active:bg-[#14253b]"
-        >
-          <ScannerIcon className="text-primary" width="24px" height="24px" />
-          <Text className="text-center text-xl text-primary">{children}</Text>
+        <Pressable className="rounded-large bg-[#d9eafd] transition-colors duration-100 active:bg-[#bfdbfa] dark:bg-[#171d26] dark:active:bg-[#14253b]">
+          <View className="w-full flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary px-3 py-6">
+            <ScannerIcon className="text-primary" width="24px" height="24px" />
+            <Text className="text-center text-xl text-primary">{children}</Text>
+          </View>
         </Pressable>
       </Link>
     </View>

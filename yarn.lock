@@ -1775,10 +1775,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@malberee/nextui-native@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@malberee/nextui-native/-/nextui-native-1.1.4.tgz#71435b46c03442911951fb892e6883c16f38b022"
-  integrity sha512-xA923EFUl6IMBqR/D44nqtZWhOLc37Z4rugKw5zRN1f0ja5BfTUWCweuaFrWjYkuCLynzaDJQ8nS2pT0LYLPRA==
+"@malberee/nextui-native@1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@malberee/nextui-native/-/nextui-native-1.1.5.tgz#014873de8fec58c0ba962c7380c74e80bccfd9ef"
+  integrity sha512-i5PHHgoocX9dOBsfk4ZgZfPz8EG7JwdojrHJrM60fV31C0sYsiQtFrU01qWdcORscERlzobseL0/m+dpEwHmjQ==
   dependencies:
     "@react-aria/label" "^3.7.11"
     "@react-aria/progress" "^3.4.17"

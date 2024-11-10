@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@gorhom/portal": "^1.0.14",
-    "@malberee/nextui-native": "1.1.4",
+    "@malberee/nextui-native": "1.1.5",
     "@shopify/react-native-skia": "1.2.3",
     "@types/seedrandom": "^3.0.8",
     "clsx": "^2.1.1",
