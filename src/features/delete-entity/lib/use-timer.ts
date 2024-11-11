@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export const useTimer = (onTimeIsUp: () => void, initialValue?: number) => {
-  const [timerCount, setTimer] = useState(initialValue ?? 5)
+  const [timerCount, setTimer] = useState(initialValue ?? 3)
 
   useEffect(() => {
     const interval = setInterval(() => {

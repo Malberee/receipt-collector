@@ -26,8 +26,8 @@ export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
     /https:\/\/cabinet\.tax\.gov\.ua\/cashregs\/check\?mac=[a-f0-9]{64}&date=\d{8}&time=\d{2}:\d{2}:\d{2}&fn=\d+&id=[A-Za-z0-9]+&sm=\d+\.\d{2}/,
   )
 
-  const dateRegex = new RegExp(/\b\d{2}[\.-]\d{2}[\.-]\d{4}\b/)
-  const dateRegex2 = new RegExp(/\b\d{2}[\.-]\d{2}[\.-]\d{2}\b/)
+  const dateRegex = new RegExp(/\b\d{1,2}[\.-]\d{2}[\.-]\d{4}\b/)
+  const dateRegex2 = new RegExp(/\b\d{1,2}[\.-]\d{2}[\.-]\d{2}\b/)
   const timeRegex = new RegExp(/\b\d{2}:\d{2}:\d{2}\b/)
   const amountRegex = new RegExp(/\b=?\d+\.\d{2}\b(?!\.)/)
   const fiscalNumberRegex = new RegExp(/\bF?N?\d{10}\b/)
