@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast, { type BaseToastProps } from 'react-native-toast-message'
 
-import { Container, Header } from '@app/layouts'
+import { Container } from '@app/layouts'
 
 import { Toast as CustomToast } from '@shared/ui'
 
@@ -15,11 +15,9 @@ const toastConfig = {
   error: (props: BaseToastProps) => <CustomToast {...props} />,
 }
 
-function RootLayot() {
+const RootLayot = () => {
   const { colorScheme } = useColorScheme()
   const segments = useSegments()
-
-  const shouldShowHeader = segments[0] !== 'rarity'
 
   return (
     <GestureHandlerRootView>
@@ -36,7 +34,6 @@ function RootLayot() {
                 colorScheme === 'dark' ? 'light-content' : 'dark-content'
               }
             />
-            {shouldShowHeader ? <Header /> : null}
             <Container>
               <Slot />
             </Container>

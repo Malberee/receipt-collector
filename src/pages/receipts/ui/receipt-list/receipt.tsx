@@ -15,7 +15,7 @@ interface ReceiptProps extends ReceiptType {}
 export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
   return (
     <DeleteLayout onDelete={() => receipts.deleteReceipt(id)}>
-      <Link href={`/${id}`} asChild>
+      <Link href={`/receipts/${id}`} asChild>
         <View className="bg-default-50 transition-colors active:bg-[#f7f7f8] dark:active:bg-[#222222]">
           <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
             <View className="flex-col justify-between">

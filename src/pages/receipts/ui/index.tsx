@@ -8,7 +8,7 @@ export const Receipts = () => {
   return (
     <>
       <ReceiptList />
-      <ScannerButton href="/qr-scanner">Scan QR</ScannerButton>
+      <ScannerButton href="/scanner/qr">Scan QR</ScannerButton>
     </>
   )
 }

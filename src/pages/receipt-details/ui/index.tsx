@@ -96,7 +96,7 @@ export const ReceiptDetails = observer(() => {
         </Modal>
       ) : null}
 
-      <ScannerButton href={`/barcode-scanner/${id}`}>
+      <ScannerButton href={`/scanner/barcode/${id}`}>
         Scan barcode
       </ScannerButton>
     </>

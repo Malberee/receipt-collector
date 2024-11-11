@@ -1,5 +1,5 @@
 import { Button, ChevronIcon, Plus } from '@malberee/nextui-native'
-import { Link, usePathname, useSegments } from 'expo-router'
+import { Link, usePathname } from 'expo-router'
 import { cssInterop } from 'nativewind'
 import { useState } from 'react'
 import { View } from 'react-native'
@@ -23,15 +23,9 @@ export const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const currentPath = usePathname()
-  const segments = useSegments()
-
-  const isScanner =
-    segments[0] === 'qr-scanner' || segments[0] === 'barcode-scanner'
 
   return (
-    <View
-      className={`z-10 w-full flex-row justify-between p-4 ${isScanner && 'absolute'}`}
-    >
+    <View className="z-10 w-full flex-row justify-between py-4">
       {currentPath === '/' ? (
         <Button
           isIconOnly
@@ -47,7 +41,7 @@ export const Header = () => {
             size="lg"
             startContent={
               <ChevronIcon
-                className={isScanner ? 'text-white' : 'text-foreground'}
+                className="text-foreground"
                 width="24px"
                 height="24px"
               />
@@ -56,7 +50,7 @@ export const Header = () => {
         </Link>
       )}
 
-      {!isScanner ? <ThemeSwitcher /> : null}
+      <ThemeSwitcher />
 
       {modalIsOpen ? (
         <Modal onClose={() => setModalIsOpen(false)}>

@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native'
 import { useScanner } from '@shared/lib'
 import { Overlay } from '@shared/ui'
 
-import { addReceipt } from '../model'
+import { addReceipt } from './model'
 
 export const QRScanner = () => {
   const { enableTorch, toggleTorch, handleScan } = useScanner(300, 300)

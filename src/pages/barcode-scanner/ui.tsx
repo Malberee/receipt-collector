@@ -10,7 +10,7 @@ import { type ProductType } from '@entities/receipt'
 import { useScanner } from '@shared/lib'
 import { Modal, Overlay } from '@shared/ui'
 
-import { handleScan } from '../model'
+import { handleScan } from './model'
 
 export const BarcodeScanner = () => {
   const [product, setProduct] = useState<Pick<
