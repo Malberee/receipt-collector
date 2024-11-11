@@ -5,9 +5,10 @@ import { useState } from 'react'
 import { View } from 'react-native'
 
 import { ReceiptForm } from '@features/receipt-create-edit'
-import { ThemeSwitcher } from '@features/theme-toggle'
 
 import { Modal } from '@shared/ui'
+
+import { ThemeSwitcher } from './theme-switcher'
 
 cssInterop(ChevronIcon, {
   className: {

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { ReceiptList } from '@widgets/receipt-list'
-
 import { ScannerButton } from '@shared/ui'
+
+import { ReceiptList } from './receipt-list'
 
 export const Receipts = () => {
   return (

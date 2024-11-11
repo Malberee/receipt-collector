@@ -8,12 +8,12 @@ import Dash from 'react-native-dashed-line'
 import { ProductForm } from '@features/product-create-edit'
 import { ReceiptForm } from '@features/receipt-create-edit'
 
-import { Product } from '@entities/product'
 import { type ProductType, receipts } from '@entities/receipt'
 
 import { Modal, ScannerButton } from '@shared/ui'
 
 import { Header } from './header'
+import { Product } from './product'
 
 export type ModalType = 'receipt' | 'product' | ''
 

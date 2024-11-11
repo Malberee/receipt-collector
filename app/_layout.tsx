@@ -7,9 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast, { type BaseToastProps } from 'react-native-toast-message'
 
-import { Container } from '@app/layouts'
-
-import { Header } from '@widgets/header'
+import { Container, Header } from '@app/layouts'
 
 import { Toast as CustomToast } from '@shared/ui'
 

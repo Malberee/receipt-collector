@@ -2,10 +2,12 @@ import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
 import { Image, Pressable, Text, View } from 'react-native'
 
+import { DeleteLayout } from '@features/delete-entity'
+
 import { type ProductType, receipts } from '@entities/receipt'
 
 import { currencyFormatter } from '@shared/lib'
-import { DeleteLayout, NoImageIcon } from '@shared/ui'
+import { NoImageIcon } from '@shared/ui'
 
 interface ProductProps {
   product: ProductType

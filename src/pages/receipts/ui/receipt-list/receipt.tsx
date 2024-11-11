@@ -3,17 +3,19 @@ import moment from 'moment'
 import React from 'react'
 import { Text, View } from 'react-native'
 
-import { currencyFormatter } from '@shared/lib'
-import { Chip, DeleteLayout } from '@shared/ui'
+import { DeleteLayout } from '@features/delete-entity'
 
-import { type ReceiptType, receipts } from './model'
+import { type ReceiptType, receipts } from '@entities/receipt'
+
+import { currencyFormatter } from '@shared/lib'
+import { Chip } from '@shared/ui'
 
 interface ReceiptProps extends ReceiptType {}
 
 export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
   return (
     <DeleteLayout onDelete={() => receipts.deleteReceipt(id)}>
-      <Link href={`/receipt-details/${id}`} asChild>
+      <Link href={`/${id}`} asChild>
         <View className="bg-default-50 transition-colors active:bg-[#f7f7f8] dark:active:bg-[#222222]">
           <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
             <View className="flex-col justify-between">

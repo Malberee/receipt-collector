@@ -2,9 +2,10 @@ import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { FlatList } from 'react-native'
 
-import { Receipt, receipts } from '@entities/receipt'
+import { receipts } from '@entities/receipt'
 
 import Empty from './empty'
+import { Receipt } from './receipt'
 
 export const ReceiptList = observer(() => {
   const data = receipts.receipts
