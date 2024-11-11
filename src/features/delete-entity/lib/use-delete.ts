@@ -10,12 +10,20 @@ import {
 
 export const useDelete = (onDelete: () => void) => {
   const [shouldDelete, setShoudlDelete] = useState(false)
+  const [showTimer, setShowTimer] = useState(false)
   const translateX = useSharedValue(0)
   const scale = useSharedValue(0)
   const opacity = useSharedValue(1)
 
   const { width: SCREEN_WIDTH } = Dimensions.get('window')
   const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.2
+
+  const cancelDelete = () => {
+    setShowTimer(false)
+    translateX.value = withTiming(0)
+    scale.value = withTiming(0)
+    opacity.value = withTiming(1)
+  }
 
   useEffect(() => {
     if (shouldDelete) {
@@ -46,7 +54,7 @@ export const useDelete = (onDelete: () => void) => {
           undefined,
           (isFinished) => {
             if (isFinished) {
-              runOnJS(onDelete)()
+              runOnJS(setShowTimer)(true)
             }
           },
         )
@@ -77,5 +85,12 @@ export const useDelete = (onDelete: () => void) => {
     ],
   }))
 
-  return { wrapperStyle, iconWrapperStyle, iconStyle, panGesture }
+  return {
+    wrapperStyle,
+    iconWrapperStyle,
+    iconStyle,
+    panGesture,
+    showTimer,
+    cancelDelete,
+  }
 }
