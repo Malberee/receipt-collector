@@ -20,6 +20,22 @@ export type ReceiptType = {
   products?: ProductType[]
 }
 
+type Filters = {
+  amount: {
+    from?: number
+    to?: number
+  }
+  date: {
+    from?: Date
+    to?: Date
+  }
+}
+
+type RangeFilter<T> = {
+  from?: T
+  to?: T
+}
+
 const storage = new MMKV()
 
 configurePersistable({
@@ -32,11 +48,35 @@ configurePersistable({
 
 class Receipts {
   receipts: ReceiptType[] = []
+  filters: Filters = {
+    amount: {},
+    date: {},
+  }
+
   constructor() {
     makeAutoObservable(this)
     makePersistable(this, {
       name: 'ReceiptsStore',
       properties: ['receipts'],
+    })
+  }
+
+  setFilters(filterName: keyof Filters, filters: RangeFilter<number | Date>) {
+    this.filters[filterName] = filters as any
+  }
+
+  getReceipts() {
+    const { from: amountFrom, to: amountTo } = this.filters.amount
+
+    return [...this.receipts].filter((receipt) => {
+      if (
+        typeof amountFrom !== 'undefined' &&
+        typeof amountTo !== 'undefined'
+      ) {
+        return receipt.amount >= amountFrom && receipt.amount <= amountTo
+      }
+
+      return true
     })
   }
 

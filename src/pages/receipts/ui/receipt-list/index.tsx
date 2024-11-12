@@ -8,7 +8,7 @@ import Empty from './empty'
 import { Receipt } from './receipt'
 
 export const ReceiptList = observer(() => {
-  const data = receipts.receipts
+  const data = receipts.getReceipts()
 
   return data.length ? (
     <FlatList

@@ -1,12 +1,26 @@
-import { Slot } from 'expo-router'
+import { Slot, usePathname } from 'expo-router'
 import React from 'react'
+import { useSharedValue } from 'react-native-reanimated'
 
 import { Header } from '@app/layouts'
 
+import { FiltersReceipts } from '@features/filter-receipts'
+
 const Layout = () => {
+  const isExpanded = useSharedValue(true)
+
+  const pathname = usePathname()
+
   return (
     <>
-      <Header />
+      <Header
+        toggleFilters={() => {
+          isExpanded.value = !isExpanded.value
+        }}
+      />
+      {pathname === '/receipts' ? (
+        <FiltersReceipts isExpanded={isExpanded} />
+      ) : null}
       <Slot />
     </>
   )
