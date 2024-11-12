@@ -26,7 +26,7 @@ export const Header = () => {
 
   return (
     <View className="z-10 w-full flex-row justify-between py-4">
-      {currentPath === '/' ? (
+      {currentPath === '/receipts' ? (
         <Button
           isIconOnly
           size="lg"
