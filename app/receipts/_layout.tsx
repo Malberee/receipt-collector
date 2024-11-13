@@ -7,7 +7,7 @@ import { Header } from '@app/layouts'
 import { FiltersReceipts } from '@features/filter-receipts'
 
 const Layout = () => {
-  const isExpanded = useSharedValue(true)
+  const isExpanded = useSharedValue(false)
 
   const pathname = usePathname()
 

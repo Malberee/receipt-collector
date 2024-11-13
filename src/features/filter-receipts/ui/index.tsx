@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated'
 
 import { useFilters } from '../model'
+import { DateRangePicker } from './date-ranger-picker'
 
 interface FiltersReceiptsProps {
   isExpanded: SharedValue<boolean>
@@ -34,7 +35,7 @@ export const FiltersReceipts: FC<FiltersReceiptsProps> = observer(
     return (
       <Animated.View style={bodyStyle}>
         <View
-          className="absolute w-full p-4"
+          className="absolute w-full flex-col gap-4 p-4"
           onLayout={(e) => {
             height.value = e.nativeEvent.layout.height
           }}
@@ -47,6 +48,9 @@ export const FiltersReceipts: FC<FiltersReceiptsProps> = observer(
             onChangeEnd={(values) =>
               handleChange('amount', values as [number, number])
             }
+          />
+          <DateRangePicker
+            onValueChange={(values) => handleChange('date', values)}
           />
         </View>
       </Animated.View>

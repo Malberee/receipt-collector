@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { configurePersistable, makePersistable } from 'mobx-persist-store'
+import moment from 'moment'
 import { MMKV } from 'react-native-mmkv'
 
 import type { Rarity } from '@shared/config'
@@ -67,17 +68,28 @@ class Receipts {
 
   getReceipts() {
     const { from: amountFrom, to: amountTo } = this.filters.amount
+    const { from: dateFrom, to: dateTo } = this.filters.date
 
-    return [...this.receipts].filter((receipt) => {
-      if (
-        typeof amountFrom !== 'undefined' &&
-        typeof amountTo !== 'undefined'
-      ) {
-        return receipt.amount >= amountFrom && receipt.amount <= amountTo
-      }
+    return this.receipts
+      .filter((receipt) => {
+        if (amountFrom !== undefined && amountTo !== undefined) {
+          return receipt.amount >= amountFrom && receipt.amount <= amountTo
+        }
 
-      return true
-    })
+        return true
+      })
+      .filter((receipt) => {
+        if (dateFrom !== undefined && dateTo !== undefined) {
+          return moment(receipt.date).isBetween(
+            dateFrom,
+            dateTo,
+            'second',
+            '[]',
+          )
+        }
+
+        return true
+      })
   }
 
   addReceipt(receipt: ReceiptType) {

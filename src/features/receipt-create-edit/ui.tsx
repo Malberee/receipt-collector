@@ -5,9 +5,10 @@ import { Text, View } from 'react-native'
 
 import { type ReceiptType } from '@entities/receipt'
 
-import { schema } from '../config'
-import { handleSubmit } from '../model'
-import { DatePicker } from './DatePicker'
+import { DatePicker } from '@shared/ui'
+
+import { schema } from './config'
+import { handleSubmit } from './model'
 
 interface ReceiptFormProps {
   receipt?: ReceiptType
