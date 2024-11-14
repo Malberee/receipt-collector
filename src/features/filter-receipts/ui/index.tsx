@@ -34,7 +34,7 @@ export const FiltersReceipts: FC<FiltersReceiptsProps> = observer(
     }))
 
     return (
-      <Animated.View style={bodyStyle}>
+      <Animated.View className="overflow-hidden" style={bodyStyle}>
         <View
           className="absolute w-full flex-col gap-4 p-4"
           onLayout={(e) => {
