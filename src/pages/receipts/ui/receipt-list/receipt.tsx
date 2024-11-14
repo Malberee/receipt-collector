@@ -1,6 +1,6 @@
 import { Link } from 'expo-router'
 import moment from 'moment'
-import React from 'react'
+import React, { memo } from 'react'
 import { Text, View } from 'react-native'
 
 import { DeleteLayout } from '@features/delete-entity'
@@ -12,7 +12,7 @@ import { Chip } from '@shared/ui'
 
 interface ReceiptProps extends ReceiptType {}
 
-export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
+export const Receipt = memo(({ id, amount, date, rarity }: ReceiptProps) => {
   return (
     <DeleteLayout onDelete={() => receipts.deleteReceipt(id)}>
       <Link href={`/receipts/${id}`} asChild>
@@ -37,4 +37,4 @@ export const Receipt = ({ id, amount, date, rarity }: ReceiptProps) => {
       </Link>
     </DeleteLayout>
   )
-}
+})

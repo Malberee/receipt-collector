@@ -12,6 +12,7 @@ import Animated, {
 
 import { useFilters } from '../model'
 import { DateRangePicker } from './date-ranger-picker'
+import { Rarities } from './rarities'
 
 interface FiltersReceiptsProps {
   isExpanded: SharedValue<boolean>
@@ -51,6 +52,9 @@ export const FiltersReceipts: FC<FiltersReceiptsProps> = observer(
           />
           <DateRangePicker
             onValueChange={(values) => handleChange('date', values)}
+          />
+          <Rarities
+            onValueChange={(values) => handleChange('rarities', values)}
           />
         </View>
       </Animated.View>

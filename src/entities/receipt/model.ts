@@ -30,6 +30,7 @@ type Filters = {
     from?: Date
     to?: Date
   }
+  rarities?: Rarity[]
 }
 
 type RangeFilter<T> = {
@@ -62,13 +63,17 @@ class Receipts {
     })
   }
 
-  setFilters(filterName: keyof Filters, filters: RangeFilter<number | Date>) {
+  setFilters(
+    filterName: keyof Filters,
+    filters: RangeFilter<number | Date> | Rarity[],
+  ) {
     this.filters[filterName] = filters as any
   }
 
   getReceipts() {
     const { from: amountFrom, to: amountTo } = this.filters.amount
     const { from: dateFrom, to: dateTo } = this.filters.date
+    const rarities = this.filters.rarities
 
     return this.receipts
       .filter((receipt) => {
@@ -86,6 +91,13 @@ class Receipts {
             'second',
             '[]',
           )
+        }
+
+        return true
+      })
+      .filter((receipt) => {
+        if (rarities?.length) {
+          return rarities.includes(receipt.rarity as any)
         }
 
         return true
