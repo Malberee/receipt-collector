@@ -33,6 +33,8 @@ type Filters = {
   rarities?: Rarity[]
 }
 
+type Theme = 'light' | 'dark' | undefined
+
 type RangeFilter<T> = {
   from?: T
   to?: T
@@ -49,7 +51,9 @@ configurePersistable({
 })
 
 class Receipts {
+  theme: Theme = storage.getString('ReceiptsStore.theme') as Theme
   receipts: ReceiptType[] = []
+
   filters: Filters = {
     amount: {},
     date: {},
@@ -59,8 +63,12 @@ class Receipts {
     makeAutoObservable(this)
     makePersistable(this, {
       name: 'ReceiptsStore',
-      properties: ['receipts'],
+      properties: ['receipts', 'theme'],
     })
+  }
+
+  setTheme(theme: Theme) {
+    this.theme = theme
   }
 
   setFilters(

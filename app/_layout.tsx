@@ -2,12 +2,15 @@ import { PortalHost, PortalProvider } from '@gorhom/portal'
 import { NextUIProvider } from '@malberee/nextui-native'
 import { Slot, useSegments } from 'expo-router'
 import { useColorScheme } from 'nativewind'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { StatusBar } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast, { type BaseToastProps } from 'react-native-toast-message'
 
 import { Container } from '@app/layouts'
+
+import { receipts } from '@entities/receipt'
 
 import { Toast as CustomToast } from '@shared/ui'
 
@@ -16,8 +19,16 @@ const toastConfig = {
 }
 
 const RootLayot = () => {
-  const { colorScheme } = useColorScheme()
+  const { colorScheme, setColorScheme } = useColorScheme()
   const segments = useSegments()
+
+  useEffect(() => {
+    receipts.setTheme(colorScheme)
+  }, [colorScheme])
+
+  useLayoutEffect(() => {
+    setColorScheme(receipts.theme ?? 'dark')
+  }, [])
 
   return (
     <GestureHandlerRootView>
