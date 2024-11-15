@@ -1,8 +1,8 @@
 import { useLocalSearchParams } from 'expo-router'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
-import React, { useState } from 'react'
-import { FlatList, View } from 'react-native'
+import React, { useCallback, useState } from 'react'
+import { FlatList, type ListRenderItem, View } from 'react-native'
 import Dash from 'react-native-dashed-line'
 
 import { ProductForm } from '@features/product-create-edit'
@@ -42,6 +42,20 @@ export const ReceiptDetails = observer(() => {
 
   const receipt = receipts.getReceiptById(id)
 
+  const renderItem = useCallback<ListRenderItem<ProductType>>(
+    ({ item }) => (
+      <Product
+        onPress={(product) => {
+          setModalType('product')
+          setSelectedProduct(product)
+        }}
+        receiptId={id}
+        product={item}
+      />
+    ),
+    [],
+  )
+
   return (
     <>
       <View className="mb-28 overflow-hidden">
@@ -59,16 +73,7 @@ export const ReceiptDetails = observer(() => {
           stickyHeaderIndices={[0]}
           keyExtractor={(item) => item.id}
           className="z-10 rounded-t-medium bg-default-200 dark:bg-default-100"
-          renderItem={({ item }) => (
-            <Product
-              onPress={(product) => {
-                setModalType('product')
-                setSelectedProduct(product)
-              }}
-              receiptId={id}
-              product={item}
-            />
-          )}
+          renderItem={renderItem}
         />
         <StyledDashedLine
           dashClassName="-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 dark:bg-default-100 z-0"

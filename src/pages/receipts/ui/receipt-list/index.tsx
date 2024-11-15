@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
-import React from 'react'
-import { FlatList } from 'react-native'
+import React, { useCallback } from 'react'
+import { FlatList, type ListRenderItem } from 'react-native'
 
-import { receipts } from '@entities/receipt'
+import { type ReceiptType, receipts } from '@entities/receipt'
 
 import Empty from './empty'
 import { Receipt } from './receipt'
@@ -10,12 +10,18 @@ import { Receipt } from './receipt'
 export const ReceiptList = observer(() => {
   const data = receipts.getReceipts()
 
+  const renderItem = useCallback<ListRenderItem<ReceiptType>>(
+    ({ item }) => <Receipt {...item} />,
+    [],
+  )
+
   return data.length ? (
     <FlatList
       contentContainerStyle={{ paddingBottom: 101 }}
       data={data}
-      renderItem={({ item }) => <Receipt {...item} />}
+      renderItem={renderItem}
       keyExtractor={(item) => item.id}
+      removeClippedSubviews
     />
   ) : (
     <Empty />
