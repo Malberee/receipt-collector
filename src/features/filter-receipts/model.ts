@@ -9,9 +9,11 @@ type Overload = {
 }
 
 export const useFilters = () => {
-  const maxAmount = Math.round(
-    Math.max(...receipts.receipts.map((item) => item.amount)),
-  )
+  const data = receipts.receipts
+
+  const maxAmount = data.length
+    ? Math.round(Math.max(...data.map((item) => item.amount)))
+    : 0
 
   const handleChange: Overload = (filter, value) => {
     if (filter === 'amount' || filter === 'date') {
