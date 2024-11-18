@@ -41,15 +41,17 @@ export const FiltersReceipts: FC<FiltersReceiptsProps> = observer(
             height.value = e.nativeEvent.layout.height
           }}
         >
-          <Slider
-            label="Amount"
-            defaultValue={[0, maxAmount]}
-            maxValue={maxAmount}
-            formatOptions={{ style: 'currency', currency: 'UAH' }}
-            onChangeEnd={(values) =>
-              handleChange('amount', values as [number, number])
-            }
-          />
+          {maxAmount > 0 ? (
+            <Slider
+              label="Amount"
+              defaultValue={[0, maxAmount]}
+              maxValue={maxAmount}
+              formatOptions={{ style: 'currency', currency: 'UAH' }}
+              onChangeEnd={(values) =>
+                handleChange('amount', values as [number, number])
+              }
+            />
+          ) : null}
           <DateRangePicker
             onValueChange={(values) => handleChange('date', values)}
           />
