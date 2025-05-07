@@ -8,8 +8,10 @@ type Response = {
 
 export const fetchProduct = async (barcodeNumber: string) => {
   const response: Response = await fetch(
-    `https://world.openfoodfacts.net/api/v2/product/${barcodeNumber}`,
-  ).then((res) => res.json())
+    `https://world.openfoodfacts.org/api/v3/product/${barcodeNumber}`,
+  ).then((res) => {
+    return res.json()
+  })
 
   if (response.status === 0) {
     throw 'Product not found'

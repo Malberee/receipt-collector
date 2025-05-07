@@ -12,7 +12,7 @@ export const useFilters = () => {
   const data = receipts.receipts
 
   const maxAmount = data.length
-    ? Math.round(Math.max(...data.map((item) => item.amount)))
+    ? Math.ceil(Math.max(...data.map((item) => item.amount)))
     : 0
 
   const handleChange: Overload = (filter, value) => {
