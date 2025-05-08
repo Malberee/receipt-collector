@@ -3,22 +3,23 @@ type Response = {
     product_name: string
     image_url: string
   }
-  status: 0 | 1
+  result: {
+    name: string
+  }
 }
 
 export const fetchProduct = async (barcodeNumber: string) => {
-  const response: Response = await fetch(
+  const response = await fetch(
     `https://world.openfoodfacts.org/api/v3/product/${barcodeNumber}`,
-  ).then((res) => {
-    return res.json()
-  })
+  )
+  const data: Response = await response.json()
 
-  if (response.status === 0) {
-    throw 'Product not found'
+  if (!response.ok) {
+    throw new Error(data.result.name)
   }
 
   return {
-    name: response.product.product_name,
-    picture: response.product.image_url,
+    name: data.product.product_name,
+    picture: data.product.image_url,
   }
 }

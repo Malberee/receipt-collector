@@ -7,8 +7,14 @@ export const handleScan = async (data: string) => {
     const product = await fetchProduct(data)
 
     return product
-  } catch (error) {
-    Toast.show({ type: 'error', text1: 'Error', text2: error as string })
+  } catch (err) {
+    let error
+    if (err instanceof Error) error = err.message
+    Toast.show({
+      type: 'error',
+      text1: 'Error',
+      text2: String(error) as string,
+    })
     return null
   }
 }
