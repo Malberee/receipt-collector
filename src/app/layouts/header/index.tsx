@@ -41,7 +41,7 @@ export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
   return (
     <View className="z-10 w-full flex-row justify-between py-4">
       <View className="flex-row gap-4">
-        {currentPath === '/receipts' ? (
+        {currentPath === '/' ? (
           <Button
             isIconOnly
             size="lg"
@@ -54,6 +54,7 @@ export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
               isIconOnly
               variant="light"
               size="lg"
+              color="default"
               startContent={
                 <ChevronIcon
                   className="text-foreground"
@@ -65,7 +66,7 @@ export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
           </Link>
         )}
 
-        {currentPath === '/receipts' ? (
+        {currentPath === '/' ? (
           <Button
             isIconOnly
             variant="light"

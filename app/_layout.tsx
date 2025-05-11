@@ -14,6 +14,8 @@ import { receipts } from '@entities/receipt'
 
 import { Toast as CustomToast } from '@shared/ui'
 
+import '../global.css'
+
 const toastConfig = {
   error: (props: BaseToastProps) => <CustomToast {...props} />,
 }

@@ -8,7 +8,6 @@ import { FiltersReceipts } from '@features/filter-receipts'
 
 const Layout = () => {
   const isExpanded = useSharedValue(false)
-
   const pathname = usePathname()
 
   return (
@@ -18,9 +17,7 @@ const Layout = () => {
           isExpanded.value = !isExpanded.value
         }}
       />
-      {pathname === '/receipts' ? (
-        <FiltersReceipts isExpanded={isExpanded} />
-      ) : null}
+      {pathname === '/' ? <FiltersReceipts isExpanded={isExpanded} /> : null}
       <Slot />
     </>
   )
