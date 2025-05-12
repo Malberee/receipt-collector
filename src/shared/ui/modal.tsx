@@ -26,7 +26,7 @@ cssInterop(Plus, {
 export const Modal: FC<ModalProps> = ({ children, onClose }) => {
   return (
     <Portal hostName="modal-portal">
-      <View className="absolute bottom-0 z-20 h-screen w-screen flex-row items-center justify-center bg-black/70">
+      <View className="absolute left-0 top-0 z-20 size-full flex-row items-center justify-center bg-black/70">
         <Pressable
           className="absolute bottom-0 h-full w-full"
           onPress={onClose}

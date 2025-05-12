@@ -2,6 +2,7 @@ import { router, useLocalSearchParams } from 'expo-router'
 import { cssInterop } from 'nativewind'
 import React from 'react'
 import { Pressable, Text } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import type { Rarity as RarityType } from '@shared/config'
 
@@ -21,6 +22,7 @@ export const Rarity = () => {
     rarity: RarityType
     id: string
   }>()
+  const { top } = useSafeAreaInsets()
 
   const colors: Record<RarityType, string> = {
     common: 'text-default',
@@ -34,6 +36,7 @@ export const Rarity = () => {
     <Pressable
       onPress={() => router.replace(`/${id}`)}
       className="-mx-4 flex-1 flex-row items-center justify-center"
+      style={{ marginTop: -top }}
     >
       <Text
         className={`text-5xl font-bold uppercase tracking-widest ${colors[rarity]}`}

@@ -1,6 +1,6 @@
 import { PortalHost, PortalProvider } from '@gorhom/portal'
 import { NextUIProvider } from '@malberee/nextui-native'
-import { Slot, useSegments } from 'expo-router'
+import { Slot } from 'expo-router'
 import { useColorScheme } from 'nativewind'
 import React, { useEffect, useLayoutEffect } from 'react'
 import { StatusBar } from 'react-native'
@@ -22,7 +22,6 @@ const toastConfig = {
 
 const RootLayot = () => {
   const { colorScheme, setColorScheme } = useColorScheme()
-  const segments = useSegments()
 
   useEffect(() => {
     receipts.setTheme(colorScheme)
@@ -37,15 +36,14 @@ const RootLayot = () => {
       <NextUIProvider>
         <PortalProvider>
           <SafeAreaView
-            edges={
-              segments[0] === 'rarity' ? ['right', 'bottom', 'left'] : undefined
-            }
+            edges={['right', 'bottom', 'left']}
             className={`flex-1 bg-default-50 ${colorScheme}`}
           >
             <StatusBar
               barStyle={
                 colorScheme === 'dark' ? 'light-content' : 'dark-content'
               }
+              translucent
             />
             <Container>
               <Slot />
