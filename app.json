@@ -7,14 +7,13 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "ios": {
-      "supportsTablet": true
-    },
+    "ios": { "supportsTablet": true },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -26,23 +25,13 @@
       ],
       "package": "com.malberee.receiptcollector"
     },
-    "web": {
-      "favicon": "./assets/favicon.png",
-      "bundler": "metro"
-    },
+    "web": { "favicon": "./assets/favicon.png", "bundler": "metro" },
     "plugins": [
       [
         "expo-camera",
-        {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
-        }
+        { "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera" }
       ],
-      [
-        "expo-router",
-        {
-          "root": "./app"
-        }
-      ],
+      ["expo-router", { "root": "./app" }],
       [
         "expo-image-picker",
         {
@@ -52,19 +41,11 @@
       [
         "expo-build-properties",
         {
-          "android": {
-            "newArchEnabled": true
-          },
-          "ios": {
-            "newArchEnabled": true
-          }
+          "android": { "newArchEnabled": true },
+          "ios": { "newArchEnabled": true }
         }
       ]
     ],
-    "extra": {
-      "eas": {
-        "projectId": "8687f537-0f24-4b87-b945-3ec9f5e08ce8"
-      }
-    }
+    "extra": { "eas": { "projectId": "8687f537-0f24-4b87-b945-3ec9f5e08ce8" } }
   }
 }
