@@ -5,14 +5,9 @@
     "slug": "receipt-collector",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": { "supportsTablet": true },
     "android": {
       "adaptiveIcon": {
@@ -25,7 +20,6 @@
       ],
       "package": "com.malberee.receiptcollector"
     },
-    "web": { "favicon": "./assets/favicon.png", "bundler": "metro" },
     "plugins": [
       [
         "expo-camera",
@@ -43,6 +37,18 @@
         {
           "android": { "newArchEnabled": true },
           "ios": { "newArchEnabled": true }
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/images/splash-icon-light.png",
+          "dark": {
+            "image": "./assets/images/splash-icon-dark.png",
+            "backgroundColor": "#18181b"
+          },
+          "imageWidth": 200
         }
       ]
     ],
