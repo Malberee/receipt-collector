@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "receipt-collector",
+    "name": "Receipt collector",
     "scheme": "com.malberee.receiptcollector",
     "slug": "receipt-collector",
     "version": "1.0.0",
