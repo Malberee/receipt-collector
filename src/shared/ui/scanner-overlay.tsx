@@ -35,7 +35,7 @@ export const Overlay: FC<OverlayProps> = ({ toggleTorch, type }) => {
           headerShown: false,
         }}
       />
-      {Platform.OS === 'android' ? <StatusBar hidden /> : null}
+      {Platform.OS === 'android' ? <StatusBar /> : null}
       <Canvas
         style={
           Platform.OS === 'android'

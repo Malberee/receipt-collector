@@ -2,14 +2,16 @@ import { Button, ChevronDown } from '@malberee/nextui-native'
 import { Slot, useLocalSearchParams, useRouter } from 'expo-router'
 import React from 'react'
 import { View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const ScannerLayout = () => {
   const { id } = useLocalSearchParams<{ id?: string }>()
   const router = useRouter()
+  const { top } = useSafeAreaInsets()
 
   return (
     <>
-      <View className="absolute z-10 p-4">
+      <View className="absolute z-10 p-4" style={{ top }}>
         <Button
           className="rotate-90"
           size="lg"

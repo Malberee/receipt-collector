@@ -1,10 +1,11 @@
 import { PortalHost, PortalProvider } from '@gorhom/portal'
 import { NextUIProvider } from '@malberee/nextui-native'
 import { Slot } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 import { useColorScheme } from 'nativewind'
 import React, { useEffect, useLayoutEffect } from 'react'
-import { StatusBar } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { configureReanimatedLogger } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast, { type BaseToastProps } from 'react-native-toast-message'
 
@@ -15,6 +16,8 @@ import { receipts } from '@entities/receipt'
 import { Toast as CustomToast } from '@shared/ui'
 
 import '../global.css'
+
+configureReanimatedLogger({ strict: false })
 
 const toastConfig = {
   error: (props: BaseToastProps) => <CustomToast {...props} />,
@@ -40,9 +43,7 @@ const RootLayot = () => {
             className={`flex-1 bg-default-50 ${colorScheme}`}
           >
             <StatusBar
-              barStyle={
-                colorScheme === 'dark' ? 'light-content' : 'dark-content'
-              }
+              style={colorScheme === 'dark' ? 'light' : 'dark'}
               translucent
             />
             <Container>
