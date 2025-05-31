@@ -1,4 +1,4 @@
-import { Button, ChevronIcon, Plus } from '@malberee/nextui-native'
+import { Button, ChevronIcon, Plus } from '@malberee/heroui-native'
 import { Link, usePathname } from 'expo-router'
 import { cssInterop } from 'nativewind'
 import React, { type FC, useState } from 'react'

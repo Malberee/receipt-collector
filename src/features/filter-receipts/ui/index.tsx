@@ -1,4 +1,4 @@
-import { Slider } from '@malberee/nextui-native'
+import { Slider } from '@malberee/heroui-native'
 import { observer } from 'mobx-react-lite'
 import React, { type FC } from 'react'
 import { View } from 'react-native'

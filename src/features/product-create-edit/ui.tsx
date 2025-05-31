@@ -1,4 +1,4 @@
-import { Button, Input } from '@malberee/nextui-native'
+import { Button, Input } from '@malberee/heroui-native'
 import { Formik } from 'formik'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'

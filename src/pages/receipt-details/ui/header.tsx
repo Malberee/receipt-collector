@@ -1,4 +1,4 @@
-import { Button } from '@malberee/nextui-native'
+import { Button } from '@malberee/heroui-native'
 import moment from 'moment'
 import React, { type FC } from 'react'
 import { Pressable, Text, View } from 'react-native'

@@ -1,9 +1,9 @@
-const { nextui } = require('@malberee/nextui-native/plugin')
+const { heroui } = require('@malberee/heroui-native/plugin')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    'node_modules/@malberee/nextui-native/**/*.{js,jsx,ts,tsx}',
+    'node_modules/@malberee/heroui-native/**/*.{js,jsx,ts,tsx}',
     './src/**/*.{js,jsx,ts,tsx}',
     './app/**/*.{js,jsx,ts,tsx}',
   ],
@@ -12,5 +12,5 @@ module.exports = {
     extend: {},
   },
   darkMode: 'class',
-  plugins: [nextui()],
+  plugins: [heroui()],
 }

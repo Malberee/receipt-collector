@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from '@malberee/nextui-native'
+import { ArrowLeftIcon } from '@malberee/heroui-native'
 import { cssInterop } from 'nativewind'
 import React from 'react'
 import { Text, View } from 'react-native'

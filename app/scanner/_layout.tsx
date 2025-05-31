@@ -1,4 +1,4 @@
-import { Button, ChevronDown } from '@malberee/nextui-native'
+import { Button, ChevronDown } from '@malberee/heroui-native'
 import { Slot, useLocalSearchParams, useRouter } from 'expo-router'
 import React from 'react'
 import { View } from 'react-native'

@@ -1,4 +1,4 @@
-import { DeleteIcon } from '@malberee/nextui-native'
+import { DeleteIcon } from '@malberee/heroui-native'
 import { cssInterop } from 'nativewind'
 import React, { type FC, type ReactNode } from 'react'
 import { View } from 'react-native'

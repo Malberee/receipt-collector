@@ -1,4 +1,4 @@
-import { Button, MoonFilledIcon, SunFilledIcon } from '@malberee/nextui-native'
+import { Button, MoonFilledIcon, SunFilledIcon } from '@malberee/heroui-native'
 import { cssInterop, useColorScheme } from 'nativewind'
 
 cssInterop(SunFilledIcon, {

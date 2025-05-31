@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@gorhom/portal": "^1.0.14",
-    "@malberee/nextui-native": "^1.1.10",
+    "@malberee/heroui-native": "^1.1.11",
     "@shopify/react-native-skia": "1.5.0",
     "@types/seedrandom": "^3.0.8",
     "clsx": "^2.1.1",
@@ -31,7 +31,7 @@
     "mobx-react-lite": "^4.0.7",
     "moment": "^2.30.1",
     "nanoid": "^5.0.7",
-    "nativewind": "4.1.21",
+    "nativewind": "^4.1.23",
     "react": "18.3.1",
     "react-dom": "^19.1.0",
     "react-native": "0.76.9",

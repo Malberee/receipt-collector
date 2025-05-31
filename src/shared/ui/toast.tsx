@@ -1,4 +1,4 @@
-import { CloseFilledIcon } from '@malberee/nextui-native'
+import { CloseFilledIcon } from '@malberee/heroui-native'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
 import { Text, View } from 'react-native'

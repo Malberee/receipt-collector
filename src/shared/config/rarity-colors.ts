@@ -1,4 +1,4 @@
-import type { BaseColors, ThemeColors } from '@malberee/nextui-native'
+import type { BaseColors, ThemeColors } from '@malberee/heroui-native'
 
 export type Rarity = 'common' | 'rare' | 'epic' | 'mythic' | 'legendary'
 

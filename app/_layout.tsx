@@ -1,5 +1,5 @@
 import { PortalHost, PortalProvider } from '@gorhom/portal'
-import { NextUIProvider } from '@malberee/nextui-native'
+import { HeroUIProvider } from '@malberee/heroui-native'
 import { Slot } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useColorScheme } from 'nativewind'
@@ -36,7 +36,7 @@ const RootLayot = () => {
 
   return (
     <GestureHandlerRootView>
-      <NextUIProvider>
+      <HeroUIProvider>
         <PortalProvider>
           <SafeAreaView
             edges={['right', 'bottom', 'left']}
@@ -53,7 +53,7 @@ const RootLayot = () => {
             <Toast config={toastConfig} position="bottom" />
           </SafeAreaView>
         </PortalProvider>
-      </NextUIProvider>
+      </HeroUIProvider>
     </GestureHandlerRootView>
   )
 }

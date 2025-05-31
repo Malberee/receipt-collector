@@ -1,4 +1,4 @@
-import { Button, Flash } from '@malberee/nextui-native'
+import { Button, Flash } from '@malberee/heroui-native'
 import { Canvas, DiffRect, rect, rrect } from '@shopify/react-native-skia'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'

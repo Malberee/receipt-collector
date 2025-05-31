@@ -1,17 +1,17 @@
 import {
   type ChipSlots,
   type ChipVariantProps,
-  Chip as NextUIChip,
-  type ChipProps as NextUIChipProps,
+  Chip as HeroUIChip,
+  type ChipProps as HeroUIChipProps,
   type SlotsToClasses,
-} from '@malberee/nextui-native'
+} from '@malberee/heroui-native'
 import clsx from 'clsx'
 import React, { type FC } from 'react'
 import { Pressable } from 'react-native'
 
 import { type Rarity, rarityColors } from '@shared/config'
 
-interface ChipProps extends NextUIChipProps {
+interface ChipProps extends HeroUIChipProps {
   rarity?: Rarity
   classNames?: SlotsToClasses<ChipSlots>
   variant?: ChipVariantProps['variant']
@@ -26,7 +26,7 @@ export const Chip: FC<ChipProps> = ({
 }) => {
   return !rarity ? null : (
     <Pressable onPress={onPress}>
-      <NextUIChip
+      <HeroUIChip
         color={rarityColors[rarity]}
         variant={variant}
         classNames={{
@@ -35,7 +35,7 @@ export const Chip: FC<ChipProps> = ({
         }}
       >
         {rarity}
-      </NextUIChip>
+      </HeroUIChip>
     </Pressable>
   )
 }

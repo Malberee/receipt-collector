@@ -1,4 +1,4 @@
-import { Button } from '@malberee/nextui-native'
+import { Button } from '@malberee/heroui-native'
 import React, { type FC } from 'react'
 import { Text, View } from 'react-native'
 

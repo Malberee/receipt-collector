@@ -1,5 +1,5 @@
 import { Portal } from '@gorhom/portal'
-import { Button, Plus } from '@malberee/nextui-native'
+import { Button, Plus } from '@malberee/heroui-native'
 import { cssInterop } from 'nativewind'
 import React, { type FC, type ReactNode } from 'react'
 import {

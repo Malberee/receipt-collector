@@ -1,4 +1,4 @@
-import { Button, Input } from '@malberee/nextui-native'
+import { Button, Input } from '@malberee/heroui-native'
 import { Formik } from 'formik'
 import React, { type FC, useState } from 'react'
 import { Text, View } from 'react-native'
