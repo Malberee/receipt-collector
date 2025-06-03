@@ -15,7 +15,7 @@ import { receipts } from '@entities/receipt'
 
 import { Toast as CustomToast } from '@shared/ui'
 
-import '../global.css'
+import '../../../global.css'
 
 configureReanimatedLogger({ strict: false })
 
