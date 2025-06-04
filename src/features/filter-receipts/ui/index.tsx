@@ -14,11 +14,11 @@ import { useFilters } from '../model'
 import { DateRangePicker } from './date-ranger-picker'
 import { Rarities } from './rarities'
 
-interface FiltersReceiptsProps {
+interface FilterReceiptsProps {
   isExpanded: SharedValue<boolean>
 }
 
-export const FiltersReceipts: FC<FiltersReceiptsProps> = observer(
+export const FilterReceipts: FC<FilterReceiptsProps> = observer(
   ({ isExpanded }) => {
     const { maxAmount, handleChange } = useFilters()
 
