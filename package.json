@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@gorhom/portal": "^1.0.14",
-    "@malberee/heroui-native": "^1.1.11",
+    "@malberee/heroui-native": "^1.1.12",
     "@shopify/react-native-skia": "1.5.0",
     "@types/seedrandom": "^3.0.8",
     "clsx": "^2.1.1",
@@ -46,7 +46,7 @@
     "react-native-toast-message": "^2.2.1",
     "react-native-ui-datepicker": "^2.0.4",
     "seedrandom": "^3.0.5",
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.17",
     "yup": "^1.4.0"
   },
   "devDependencies": {

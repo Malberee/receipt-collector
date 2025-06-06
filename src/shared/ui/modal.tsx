@@ -6,8 +6,13 @@ import {
   type GestureResponderEvent,
   KeyboardAvoidingView,
   Pressable,
-  View,
 } from 'react-native'
+import Animated, {
+  FadeIn,
+  FadeOut,
+  ZoomIn,
+  ZoomOut,
+} from 'react-native-reanimated'
 
 interface ModalProps {
   children?: ReactNode
@@ -26,13 +31,21 @@ cssInterop(Plus, {
 export const Modal: FC<ModalProps> = ({ children, onClose }) => {
   return (
     <Portal hostName="modal-portal">
-      <View className="absolute left-0 top-0 z-20 size-full flex-row items-center justify-center bg-black/70">
+      <Animated.View
+        className="absolute left-0 top-0 z-20 size-full flex-row items-center justify-center bg-black/70"
+        entering={FadeIn.duration(100)}
+        exiting={FadeOut.duration(100)}
+      >
         <Pressable
           className="absolute bottom-0 h-full w-full"
           onPress={onClose}
         />
         <KeyboardAvoidingView behavior="height">
-          <View className="rounded-medium bg-default-50 p-4 pt-10">
+          <Animated.View
+            className="rounded-medium bg-default-50 p-4 pt-10"
+            entering={ZoomIn.duration(100)}
+            exiting={ZoomOut.duration(100)}
+          >
             <Button
               startContent={<Plus className="rotate-45 text-foreground" />}
               isIconOnly
@@ -42,9 +55,9 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
               onPress={onClose}
             />
             {children}
-          </View>
+          </Animated.View>
         </KeyboardAvoidingView>
-      </View>
+      </Animated.View>
     </Portal>
   )
 }

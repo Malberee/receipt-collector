@@ -1722,10 +1722,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@malberee/heroui-native@^1.1.11":
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/@malberee/heroui-native/-/heroui-native-1.1.11.tgz#faf05aaded0d7a91afca4dd9f3cd0d22af6d1e6a"
-  integrity sha512-k1w3A3JY/qda0HA4kJ7JFieWvI4eIxjmBCRWSO6xcyR7WkWt2BCUHB73+sYYsc1G1Rneoc+Yw0dhPY3cFFMzQA==
+"@malberee/heroui-native@^1.1.12":
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/@malberee/heroui-native/-/heroui-native-1.1.12.tgz#a7da881b13ff21f72f6700aa2eedab3e8cbddc4e"
+  integrity sha512-54GBNBYruOdydZmF5ChrYqO1f+c2BmvioyLUaLvevIslM9QqRJXGQp35Mu/5Cxt/ej/noiqgnuh20UCM2pKhvA==
   dependencies:
     "@react-aria/label" "^3.7.18"
     "@react-aria/progress" "^3.4.23"
@@ -1747,7 +1747,7 @@
     lodash.kebabcase "^4.1.1"
     lodash.mapkeys "^4.6.0"
     lodash.omit "^4.5.0"
-    tailwind-merge "^3.3.0"
+    tailwind-merge "2.5.4"
     tailwind-variants "^1.0.0"
 
 "@nodelib/fs.scandir@2.1.5":
@@ -9431,15 +9431,15 @@ synckit@^0.11.0:
   dependencies:
     "@pkgr/core" "^0.2.4"
 
+tailwind-merge@2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-2.5.4.tgz#4bf574e81fa061adeceba099ae4df56edcee78d1"
+  integrity sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q==
+
 tailwind-merge@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-3.0.2.tgz#567eff76de12211e24dd909da0f5ed6f4f422b0c"
   integrity sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==
-
-tailwind-merge@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-3.3.0.tgz#d9bb4f298801ef6232ced4f97e830fc79bc3d3e7"
-  integrity sha512-fyW/pEfcQSiigd5SNn0nApUOxx0zB/dm6UDU/rEwc2c3sX2smWUNbapHv+QRqLGVp9GWX3THIa7MUGPo+YkDzQ==
 
 tailwind-variants@^1.0.0:
   version "1.0.0"
@@ -9448,7 +9448,7 @@ tailwind-variants@^1.0.0:
   dependencies:
     tailwind-merge "3.0.2"
 
-tailwindcss@^3.4.14:
+tailwindcss@^3.4.17:
   version "3.4.17"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.17.tgz#ae8406c0f96696a631c790768ff319d46d5e5a63"
   integrity sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==
