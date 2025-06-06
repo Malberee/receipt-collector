@@ -63,7 +63,7 @@ export const Overlay: FC<OverlayProps> = ({ toggleTorch, type }) => {
         />
       </View>
       <Button
-        className="absolute bottom-20 left-1/2 size-24 -translate-x-1/2 dark"
+        className="absolute bottom-20 left-1/2 size-24 -translate-x-1/2 !rounded-full dark"
         isIconOnly
         variant="flat"
         color="default"
