@@ -32,7 +32,7 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
           onPress={onClose}
         />
         <KeyboardAvoidingView behavior="height">
-          <View className="rounded-medium bg-default-50 p-4">
+          <View className="rounded-medium bg-default-50 p-4 pt-10">
             <Button
               startContent={<Plus className="rotate-45 text-foreground" />}
               isIconOnly

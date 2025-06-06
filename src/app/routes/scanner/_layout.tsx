@@ -13,12 +13,16 @@ const ScannerLayout = () => {
     <>
       <View className="absolute z-10 p-4" style={{ top }}>
         <Button
-          className="rotate-90"
           size="lg"
           variant="light"
           color="default"
           isIconOnly
-          startContent={<ChevronDown color="white" />}
+          startContent={
+            <ChevronDown
+              color="white"
+              style={{ transform: [{ rotate: '90deg' }] }}
+            />
+          }
           onPress={() => {
             if (id) {
               router.navigate(`/${id}`)
