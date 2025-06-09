@@ -11,7 +11,7 @@ const parseURL = (data: string) => {
   const time = url.searchParams.get('time')!
   const date = url.searchParams.get('date')!
   const formattedDate = moment(date + time, 'YYYYMMDD HH:mm:ss').toDate()
-  const fiscalNumber = url.searchParams.get('fn')!
+  const fiscalNumber = url.searchParams.get('fn')! + formattedDate
 
   return {
     amount,
@@ -23,7 +23,7 @@ const parseURL = (data: string) => {
 
 export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
   const regexURL = new RegExp(
-    /https:\/\/cabinet\.tax\.gov\.ua\/cashregs\/check\?mac=[a-f0-9]{64}&date=\d{8}&time=\d{2}:\d{2}:\d{2}&fn=\d+&id=[A-Za-z0-9]+&sm=\d+\.\d{2}/,
+    /https:\/\/cabinet\.tax\.gov\.ua\/cashregs\/check\?.*/,
   )
 
   const dateRegex = new RegExp(/\b\d{1,2}[\.-]\d{2}[\.-]\d{4}\b/)
@@ -64,7 +64,7 @@ export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
       amount,
       date,
       rarity: getRarity(data),
-      id: fiscalNumber,
+      id: fiscalNumber + date,
     }
   } catch {
     throw 'Cannot scan this QR code!'
