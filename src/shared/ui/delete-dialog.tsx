@@ -16,7 +16,7 @@ export const DeleteDialog: FC<DeleteDialogProps> = ({
   onDelete,
 }) => {
   return (
-    <Modal>
+    <Modal onClose={onCancel}>
       <Text className="mb-4 text-lg text-foreground">{text}</Text>
       <View className="flex-col gap-2">
         <Button color="default" variant="flat" onPress={onCancel}>

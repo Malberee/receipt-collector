@@ -5,8 +5,9 @@ import { View } from 'react-native'
 import { GestureDetector } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
 
-import { useDelete } from '../lib'
-import { Timer } from './timer'
+import { DeleteDialog } from '@shared/ui'
+
+import { useDelete } from './lib'
 
 interface DeleteLayoutProps {
   onDelete: () => void
@@ -28,19 +29,18 @@ export const DeleteLayout: FC<DeleteLayoutProps> = ({ children, onDelete }) => {
     iconWrapperStyle,
     iconStyle,
     panGesture,
-    showTimer,
+    showDialog,
     cancelDelete,
   } = useDelete(onDelete)
 
   return (
     <View>
-      {showTimer ? (
-        <>
-          <View className="absolute h-full w-full flex-row items-center justify-center">
-            <Timer cancelDelete={cancelDelete} onTimeIsUp={onDelete} />
-          </View>
-          <Animated.View style={wrapperStyle}>{children}</Animated.View>
-        </>
+      {showDialog ? (
+        <DeleteDialog
+          text="Are you sure you want to delete the receipt?"
+          onCancel={cancelDelete}
+          onDelete={onDelete}
+        />
       ) : (
         <>
           <Animated.View
