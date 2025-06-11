@@ -5,9 +5,8 @@ import { View } from 'react-native'
 
 import { receipts } from '@entities/receipt'
 
-import { Modal, Popover } from '@shared/ui'
+import { DeleteDialog, Popover } from '@shared/ui'
 
-import { DialogContent } from './dialog-content'
 import { DotsIcon } from './dots-icon'
 import { PopoverContent } from './popover-content'
 
@@ -69,15 +68,14 @@ export const Header: FC<HeaderProps> = ({ receiptId, onEdit }) => {
         ) : null}
       </View>
       {showDialog ? (
-        <Modal onClose={() => setShowDialog(false)}>
-          <DialogContent
-            onCancel={() => setShowDialog(false)}
-            onDelete={() => {
-              receipts.deleteReceipt(receiptId)
-              router.navigate('../')
-            }}
-          />
-        </Modal>
+        <DeleteDialog
+          text="Are you sure you want to delete the receipt?"
+          onCancel={() => setShowDialog(false)}
+          onDelete={() => {
+            receipts.deleteReceipt(receiptId)
+            router.navigate('../')
+          }}
+        />
       ) : null}
     </View>
   )
