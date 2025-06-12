@@ -4,7 +4,7 @@ import { FlatList, type ListRenderItem } from 'react-native'
 
 import { type ReceiptType, receipts } from '@entities/receipt'
 
-import Empty from './empty'
+import { Empty } from './empty'
 import { Receipt } from './receipt'
 
 export const ReceiptList = observer(() => {
