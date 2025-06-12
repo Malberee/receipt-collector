@@ -1,6 +1,10 @@
+import moment from 'moment'
+
 import { receipts } from '@entities/receipt'
 
 import type { Rarity } from '@shared/config'
+
+import { getMinMaxDates } from './lib'
 
 type Overload = {
   (filter: 'amount', value: [number, number]): void
@@ -16,6 +20,16 @@ export const useFilters = () => {
     : 0
 
   const handleChange: Overload = (filter, value) => {
+    const dates = Object.values(getMinMaxDates())
+
+    if (
+      filter === 'date' &&
+      value.every((date, index) => dates[index].isSame(moment(date)))
+    ) {
+      receipts.setFilters(filter, {})
+      return
+    }
+
     if (filter === 'amount' || filter === 'date') {
       receipts.setFilters(filter, {
         from: value[0] as number | Date,
