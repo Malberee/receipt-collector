@@ -23,6 +23,7 @@ export const Chip: FC<ChipProps> = ({
   classNames,
   variant,
   onPress,
+  ...props
 }) => {
   return !rarity ? null : (
     <Pressable onPress={onPress}>
@@ -33,6 +34,7 @@ export const Chip: FC<ChipProps> = ({
           ...classNames,
           content: clsx('capitalize', classNames?.content),
         }}
+        {...{ ...props, ref: undefined }}
       >
         {rarity}
       </HeroUIChip>
