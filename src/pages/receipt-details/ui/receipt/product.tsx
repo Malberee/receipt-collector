@@ -28,6 +28,7 @@ cssInterop(NoImageIcon, {
 
 export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
   const { name, picture, price, quantity, id: productId } = product
+  const shouldSliceName = name.length >= 17
 
   return (
     <DeleteLayout onDelete={() => receipts.deleteProduct(receiptId, productId)}>
@@ -35,7 +36,7 @@ export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
         onPress={() => onPress?.(product)}
         className="flex-row items-center justify-between bg-default-200 p-4 transition-colors active:bg-[#dedee0] dark:bg-default-100 dark:active:bg-[#313135]"
       >
-        <View className="flex-row items-center gap-4">
+        <View className="shrink flex-row items-center gap-4">
           <View
             className={`size-16 flex-row items-center justify-center overflow-hidden rounded-medium ${!picture && 'bg-default-300 dark:bg-default-50/40'}`}
           >
@@ -50,7 +51,9 @@ export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
             )}
           </View>
           <View>
-            <Text className="text-xl text-foreground">{name}</Text>
+            <Text className="text-xl text-foreground">
+              {shouldSliceName ? name.slice(0, 17).concat('...') : name}
+            </Text>
             <Text className="text-md text-foreground-500">{quantity}pcs</Text>
           </View>
         </View>
