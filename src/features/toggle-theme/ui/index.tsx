@@ -49,6 +49,12 @@ export const ToggleTheme = observer(() => {
     label: 'text-center flex-1',
   }
 
+  const radios = [
+    { value: 'Light', classNames, icon: <SunFilledIcon {...iconProps} /> },
+    { value: 'Dark', classNames, icon: <MoonFilledIcon {...iconProps} /> },
+    { value: 'System', classNames, icon: <SmartphoneIcon {...iconProps} /> },
+  ]
+
   return (
     <View>
       <Button
@@ -70,27 +76,15 @@ export const ToggleTheme = observer(() => {
               changeTheme(value as Theme)
             }}
           >
-            <CustomRadio
-              value="light"
-              classNames={classNames}
-              startContent={<SunFilledIcon {...iconProps} />}
-            >
-              Light
-            </CustomRadio>
-            <CustomRadio
-              value="dark"
-              classNames={classNames}
-              startContent={<MoonFilledIcon {...iconProps} />}
-            >
-              Dark
-            </CustomRadio>
-            <CustomRadio
-              value="system"
-              classNames={classNames}
-              startContent={<SmartphoneIcon {...iconProps} />}
-            >
-              System
-            </CustomRadio>
+            {radios.map((radio) => (
+              <CustomRadio
+                value={radio.value.toLowerCase()}
+                classNames={radio.classNames}
+                startContent={radio.icon}
+              >
+                {radio.value}
+              </CustomRadio>
+            ))}
           </RadioGroup>
         </Popover>
       ) : null}
