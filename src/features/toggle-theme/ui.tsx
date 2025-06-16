@@ -1,5 +1,8 @@
 import { Button, MoonFilledIcon, SunFilledIcon } from '@malberee/heroui-native'
+import { observer } from 'mobx-react-lite'
 import { cssInterop, useColorScheme } from 'nativewind'
+
+import { receipts } from '@entities/receipt'
 
 cssInterop(SunFilledIcon, {
   className: {
@@ -10,8 +13,15 @@ cssInterop(SunFilledIcon, {
   },
 })
 
-export const ThemeSwitcher = () => {
-  const { toggleColorScheme, colorScheme } = useColorScheme()
+export const ToggleTheme = observer(() => {
+  const { setColorScheme, colorScheme } = useColorScheme()
+
+  const toggleTheme = () => {
+    const nextTheme = colorScheme === 'dark' ? 'light' : 'dark'
+
+    receipts.setTheme(nextTheme)
+    setColorScheme(nextTheme)
+  }
 
   const Icon = colorScheme === 'dark' ? SunFilledIcon : MoonFilledIcon
 
@@ -24,7 +34,7 @@ export const ThemeSwitcher = () => {
       startContent={
         <Icon className="text-foreground" width="24px" height="24px" />
       }
-      onPress={toggleColorScheme}
+      onPress={toggleTheme}
     />
   )
-}
+})

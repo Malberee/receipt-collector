@@ -4,11 +4,11 @@ import React, { type FC, useState } from 'react'
 import { View } from 'react-native'
 
 import { ReceiptForm } from '@features/receipt-create-edit'
+import { ToggleTheme } from '@features/toggle-theme'
 
 import { Modal } from '@shared/ui'
 
 import { FilterIcon } from './filter-icon'
-import { ThemeSwitcher } from './theme-switcher'
 
 interface HeaderProps {
   toggleFilters: () => void
@@ -46,7 +46,7 @@ export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
         />
       </View>
 
-      <ThemeSwitcher />
+      <ToggleTheme />
 
       {modalIsOpen ? (
         <Modal onClose={() => setModalIsOpen(false)}>
