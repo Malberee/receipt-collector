@@ -27,7 +27,7 @@ export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   return (
-    <View className="z-10 w-full flex-row justify-between pb-4">
+    <View className="w-full flex-row justify-between pb-4">
       <View className="flex-row gap-4">
         <Button
           isIconOnly
