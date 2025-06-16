@@ -65,7 +65,10 @@ export const ToggleTheme = observer(() => {
           <RadioGroup
             value={receipts.theme}
             classNames={{ wrapper: 'gap-1' }}
-            onValueChange={(value) => changeTheme(value as Theme)}
+            onValueChange={(value) => {
+              setShowPopover(false)
+              changeTheme(value as Theme)
+            }}
           >
             <CustomRadio
               value="light"
