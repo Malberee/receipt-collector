@@ -10,9 +10,12 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const { setColorScheme, colorScheme } = useColorScheme()
 
   useEffect(() => {
-    setColorScheme(receipts.theme ?? 'system')
+    setColorScheme(receipts.theme)
 
-    if (!appIsReady && colorScheme === receipts.theme) {
+    if (
+      !appIsReady &&
+      (colorScheme === receipts.theme || receipts.theme === 'system')
+    ) {
       setTimeout(async () => {
         await SplashScreen.hideAsync()
         setAppIsReady(true)

@@ -78,6 +78,7 @@ export const ToggleTheme = observer(() => {
           >
             {radios.map((radio) => (
               <CustomRadio
+                key={radio.value}
                 value={radio.value.toLowerCase()}
                 classNames={radio.classNames}
                 startContent={radio.icon}
