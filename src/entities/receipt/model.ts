@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { configurePersistable, makePersistable } from 'mobx-persist-store'
+import { makePersistable } from 'mobx-persist-store'
 import moment from 'moment'
 import { MMKV } from 'react-native-mmkv'
 
@@ -33,7 +33,7 @@ type Filters = {
   rarities?: Rarity[]
 }
 
-type Theme = 'light' | 'dark' | undefined
+export type Theme = 'light' | 'dark' | 'system'
 
 type RangeFilter<T> = {
   from?: T
@@ -42,16 +42,8 @@ type RangeFilter<T> = {
 
 const storage = new MMKV()
 
-configurePersistable({
-  storage: {
-    setItem: (key, data) => storage.set(key, data),
-    getItem: (key) => storage.getString(key) ?? null,
-    removeItem: (key) => storage.delete(key),
-  },
-})
-
 class Receipts {
-  theme: Theme = storage.getString('ReceiptsStore.theme') as Theme
+  theme: Theme = 'system'
   receipts: ReceiptType[] = []
 
   filters: Filters = {
@@ -64,6 +56,11 @@ class Receipts {
     makePersistable(this, {
       name: 'ReceiptsStore',
       properties: ['receipts', 'theme'],
+      storage: {
+        setItem: (key, data) => storage.set(key, data),
+        getItem: (key) => storage.getString(key) ?? null,
+        removeItem: (key) => storage.delete(key),
+      },
     })
   }
 
