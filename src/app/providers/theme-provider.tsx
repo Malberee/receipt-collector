@@ -1,3 +1,4 @@
+import * as NavigationBar from 'expo-navigation-bar'
 import * as SplashScreen from 'expo-splash-screen'
 import { useColorScheme } from 'nativewind'
 import { type FC, type PropsWithChildren, useEffect, useState } from 'react'
@@ -10,16 +11,18 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const { setColorScheme, colorScheme } = useColorScheme()
 
   useEffect(() => {
-    setColorScheme(receipts.theme)
+    if (!appIsReady) {
+      setColorScheme(receipts.theme)
+      NavigationBar.setBackgroundColorAsync(
+        colorScheme === 'dark' ? '#18181b' : '#fafafa',
+      )
 
-    if (
-      !appIsReady &&
-      (colorScheme === receipts.theme || receipts.theme === 'system')
-    ) {
-      setTimeout(async () => {
-        await SplashScreen.hideAsync()
-        setAppIsReady(true)
-      }, 200)
+      if (colorScheme === receipts.theme || receipts.theme === 'system') {
+        setTimeout(async () => {
+          await SplashScreen.hideAsync()
+          setAppIsReady(true)
+        }, 200)
+      }
     }
   }, [colorScheme])
 

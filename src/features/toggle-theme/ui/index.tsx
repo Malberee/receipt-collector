@@ -4,6 +4,7 @@ import {
   RadioGroup,
   SunFilledIcon,
 } from '@malberee/heroui-native'
+import * as NavigationBar from 'expo-navigation-bar'
 import { observer } from 'mobx-react-lite'
 import { cssInterop, useColorScheme } from 'nativewind'
 import { useState } from 'react'
@@ -33,6 +34,9 @@ export const ToggleTheme = observer(() => {
   const changeTheme = (theme: Theme) => {
     receipts.setTheme(theme)
     setColorScheme(theme)
+    NavigationBar.setBackgroundColorAsync(
+      theme === 'dark' ? '#18181b' : '#fafafa',
+    )
   }
 
   const Icon = colorScheme === 'dark' ? SunFilledIcon : MoonFilledIcon
