@@ -4,16 +4,15 @@ import {
   RadioGroup,
   SunFilledIcon,
 } from '@malberee/heroui-native'
-import * as NavigationBar from 'expo-navigation-bar'
 import { observer } from 'mobx-react-lite'
-import { cssInterop, useColorScheme } from 'nativewind'
-import { useState } from 'react'
+import { cssInterop } from 'nativewind'
 import { View } from 'react-native'
 
 import { type Theme, receipts } from '@entities/receipt'
 
 import { Popover } from '@shared/ui'
 
+import { useToggleTheme } from '../model'
 import { CustomRadio } from './custom-radio'
 import { SmartphoneIcon } from './smartphone-icon'
 
@@ -26,38 +25,26 @@ cssInterop(SunFilledIcon, {
   },
 })
 
+const iconProps = {
+  className: 'text-foreground',
+  width: 20,
+  height: 20,
+}
+const classNames = {
+  base: 'rounded-2xl active:bg-default-500/20 rounded-2xl transition-colors overflow-hidden',
+  labelWrapper:
+    'ml-0 p-2 flex-row items-center justify-center gap-2 transition-colors group-[[selected=true]]:bg-default-500/20',
+  label: 'text-center flex-1',
+}
+const radios = [
+  { value: 'Light', classNames, icon: <SunFilledIcon {...iconProps} /> },
+  { value: 'Dark', classNames, icon: <MoonFilledIcon {...iconProps} /> },
+  { value: 'System', classNames, icon: <SmartphoneIcon {...iconProps} /> },
+]
+
 export const ToggleTheme = observer(() => {
-  const [showPopover, setShowPopover] = useState(false)
-
-  const { setColorScheme, colorScheme } = useColorScheme()
-
-  const changeTheme = (theme: Theme) => {
-    receipts.setTheme(theme)
-    setColorScheme(theme)
-    NavigationBar.setBackgroundColorAsync(
-      theme === 'dark' ? '#18181b' : '#fafafa',
-    )
-  }
-
-  const Icon = colorScheme === 'dark' ? SunFilledIcon : MoonFilledIcon
-
-  const iconProps = {
-    className: 'text-foreground',
-    width: 20,
-    height: 20,
-  }
-  const classNames = {
-    base: 'rounded-2xl active:bg-default-500/20 rounded-2xl transition-colors overflow-hidden',
-    labelWrapper:
-      'ml-0 p-2 flex-row items-center justify-center gap-2 transition-colors group-[[selected=true]]:bg-default-500/20',
-    label: 'text-center flex-1',
-  }
-
-  const radios = [
-    { value: 'Light', classNames, icon: <SunFilledIcon {...iconProps} /> },
-    { value: 'Dark', classNames, icon: <MoonFilledIcon {...iconProps} /> },
-    { value: 'System', classNames, icon: <SmartphoneIcon {...iconProps} /> },
-  ]
+  const { showPopover, CurrentIcon, togglePopover, changeTheme } =
+    useToggleTheme()
 
   return (
     <View>
@@ -66,17 +53,17 @@ export const ToggleTheme = observer(() => {
         variant="light"
         color="default"
         size="lg"
-        startContent={<Icon {...iconProps} width={24} height={24} />}
-        onPress={() => setShowPopover(true)}
+        startContent={<CurrentIcon {...iconProps} width={24} height={24} />}
+        onPress={togglePopover}
       />
 
       {showPopover ? (
-        <Popover onClose={() => setShowPopover(false)}>
+        <Popover onClose={togglePopover}>
           <RadioGroup
             value={receipts.theme}
             classNames={{ wrapper: 'gap-1' }}
             onValueChange={(value) => {
-              setShowPopover(false)
+              togglePopover()
               changeTheme(value as Theme)
             }}
           >
