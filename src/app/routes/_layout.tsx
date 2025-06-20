@@ -32,7 +32,7 @@ const RootLayot = () => {
         <PortalProvider>
           <SafeAreaView
             edges={['right', 'bottom', 'left']}
-            className="transition-background flex-1 bg-default-50 duration-100"
+            className="flex-1 bg-default-50"
           >
             <StatusBar
               style={colorScheme === 'dark' ? 'light' : 'dark'}
