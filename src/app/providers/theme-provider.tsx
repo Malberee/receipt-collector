@@ -11,12 +11,12 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const { setColorScheme, colorScheme } = useColorScheme()
 
   useEffect(() => {
+    NavigationBar.setBackgroundColorAsync(
+      colorScheme === 'dark' ? '#18181b' : '#fafafa',
+    )
+
     if (!appIsReady) {
       setColorScheme(receipts.theme)
-      NavigationBar.setBackgroundColorAsync(
-        colorScheme === 'dark' ? '#18181b' : '#fafafa',
-      )
-
       if (colorScheme === receipts.theme || receipts.theme === 'system') {
         setTimeout(async () => {
           await SplashScreen.hideAsync()
