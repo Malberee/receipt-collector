@@ -43,7 +43,7 @@ const radios = [
 ]
 
 export const ToggleTheme = observer(() => {
-  const { showPopover, CurrentIcon, togglePopover, changeTheme } =
+  const { showPopover, CurrentIcon, togglePopover, onValueChange } =
     useToggleTheme()
 
   return (
@@ -64,7 +64,7 @@ export const ToggleTheme = observer(() => {
             classNames={{ wrapper: 'gap-1' }}
             onValueChange={(value) => {
               togglePopover()
-              changeTheme(value as Theme)
+              onValueChange(value as Theme)
             }}
           >
             {radios.map((radio) => (

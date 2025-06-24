@@ -5,6 +5,8 @@ import Dash from 'react-native-dashed-line'
 
 import { type ProductType, type ReceiptType } from '@entities/receipt'
 
+import { useTheme } from '@shared/lib'
+
 import { Header } from './header'
 import { Product } from './product'
 
@@ -38,6 +40,8 @@ export const Receipt: FC<ReceiptProps> = ({
   closeModal,
   selectProduct,
 }) => {
+  const { isDark } = useTheme()
+
   const renderItem = useCallback<ListRenderItem<ProductType>>(
     ({ item }) => (
       <Product
@@ -63,11 +67,11 @@ export const Receipt: FC<ReceiptProps> = ({
         }
         stickyHeaderIndices={[0]}
         keyExtractor={(item) => item.id}
-        className="z-10 rounded-t-medium bg-default-200 dark:bg-default-100"
+        className={`z-10 rounded-t-medium bg-default-200 ${isDark && 'bg-default-100'}`}
         renderItem={renderItem}
       />
       <StyledDashedLine
-        dashClassName="-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 dark:bg-default-100 z-0"
+        dashClassName={`-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 ${isDark && 'bg-default-100'} z-0`}
         dashLength={14}
         dashThickness={14}
       />

@@ -7,16 +7,20 @@ import { DeleteLayout } from '@features/delete-entity'
 
 import { type ReceiptType, receipts } from '@entities/receipt'
 
-import { currencyFormatter } from '@shared/lib'
+import { currencyFormatter, useTheme } from '@shared/lib'
 import { Chip } from '@shared/ui'
 
 interface ReceiptProps extends ReceiptType {}
 
 export const Receipt = memo(({ id, amount, date, rarity }: ReceiptProps) => {
+  const { isDark } = useTheme()
+
   return (
     <DeleteLayout onDelete={() => receipts.deleteReceipt(id)}>
       <Link href={`/${id}`} asChild>
-        <View className="bg-default-50 duration-100 active:bg-[#f7f7f8] active:transition-colors dark:active:bg-[#222222]">
+        <View
+          className={`bg-default-50 duration-100 active:bg-[#f7f7f8] active:transition-colors ${isDark && 'active:bg-[#222222]'}`}
+        >
           <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
             <View className="flex-col justify-between">
               <Text className="text-xl text-foreground">

@@ -1,26 +1,32 @@
 import { MoonFilledIcon, SunFilledIcon } from '@malberee/heroui-native'
-import * as NavigationBar from 'expo-navigation-bar'
 import { colorScheme } from 'nativewind'
 import { useState } from 'react'
 import { Dimensions } from 'react-native'
 import switchTheme from 'react-native-theme-switch-animation'
 
-import { type Theme, receipts } from '@entities/receipt'
+import { type Theme } from '@entities/receipt'
+
+import { useTheme } from '@shared/lib'
 
 export const useToggleTheme = () => {
   const [showPopover, setShowPopover] = useState(false)
+  const { current, set } = useTheme()
 
-  const changeTheme = (theme: Theme) => {
+  const onValueChange = (theme: Theme) => {
+    if (
+      theme === current ||
+      (theme === 'system' && current === colorScheme.get())
+    ) {
+      set(theme)
+      return
+    }
+
     switchTheme({
       switchThemeFunction: () => {
-        receipts.setTheme(theme)
-        colorScheme.set(theme)
-        NavigationBar.setBackgroundColorAsync(
-          colorScheme.get() === 'dark' ? '#18181b' : '#fafafa',
-        )
+        set(theme)
       },
       animationConfig: {
-        type: colorScheme.get() === 'light' ? 'circular' : 'inverted-circular',
+        type: current === 'light' ? 'circular' : 'inverted-circular',
         duration: 300,
         startingPoint: {
           cx: Dimensions.get('screen').width,
@@ -39,6 +45,6 @@ export const useToggleTheme = () => {
     showPopover,
     togglePopover: () => setShowPopover((prevState) => !prevState),
     CurrentIcon,
-    changeTheme,
+    onValueChange,
   }
 }
