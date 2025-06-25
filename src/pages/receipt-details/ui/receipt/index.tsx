@@ -67,11 +67,11 @@ export const Receipt: FC<ReceiptProps> = ({
         }
         stickyHeaderIndices={[0]}
         keyExtractor={(item) => item.id}
-        className={`z-10 rounded-t-medium bg-default-200 ${isDark && 'bg-default-100'}`}
+        className={`z-10 rounded-t-medium bg-default-200 ${isDark && '!bg-default-100'}`}
         renderItem={renderItem}
       />
       <StyledDashedLine
-        dashClassName={`-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 ${isDark && 'bg-default-100'} z-0`}
+        dashClassName={`-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 ${isDark && '!bg-default-100'} z-0`}
         dashLength={14}
         dashThickness={14}
       />

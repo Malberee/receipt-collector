@@ -35,11 +35,11 @@ export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
     <DeleteLayout onDelete={() => receipts.deleteProduct(receiptId, productId)}>
       <Pressable
         onPress={() => onPress?.(product)}
-        className={`flex-row items-center justify-between bg-default-200 p-4 transition-colors active:bg-[#dedee0] ${isDark && 'bg-default-100 active:bg-[#313135]'}`}
+        className={`flex-row items-center justify-between bg-default-200 p-4 transition-colors active:bg-[#dedee0] ${isDark && '!active:bg-[#313135] !bg-default-100'}`}
       >
         <View className="shrink flex-row items-center gap-4">
           <View
-            className={`size-16 flex-row items-center justify-center overflow-hidden rounded-medium ${!picture && `bg-default-300 ${isDark && 'bg-default-50/40'}`}`}
+            className={`size-16 flex-row items-center justify-center overflow-hidden rounded-medium ${!picture && `bg-default-300 ${isDark && '!bg-default-50/40'}`}`}
           >
             {picture ? (
               <Image
@@ -49,7 +49,7 @@ export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
               />
             ) : (
               <NoImageIcon
-                className={`h-8 w-8 text-foreground-400 ${isDark && 'text-foreground-300'}`}
+                className={`h-8 w-8 text-foreground-400 ${isDark && '!text-foreground-300'}`}
               />
             )}
           </View>
