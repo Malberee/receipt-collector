@@ -40,9 +40,8 @@ export const ThemeProvider: FC<PropsWithChildren> = observer(({ children }) => {
   }
 
   useEffect(() => {
-    NavigationBar.setBackgroundColorAsync(
-      theme === 'dark' ? '#18181b' : '#fafafa',
-    )
+    NavigationBar.setPositionAsync('absolute')
+    NavigationBar.setBackgroundColorAsync('transparent')
   }, [theme])
 
   useEffect(() => {

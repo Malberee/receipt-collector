@@ -3,6 +3,7 @@ import { Button, Plus } from '@malberee/heroui-native'
 import { cssInterop } from 'nativewind'
 import React, { type FC, type ReactNode } from 'react'
 import {
+  Dimensions,
   type GestureResponderEvent,
   KeyboardAvoidingView,
   Pressable,
@@ -32,7 +33,8 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
   return (
     <Portal hostName="modal-portal">
       <Animated.View
-        className="absolute left-0 top-0 z-20 size-full flex-row items-center justify-center bg-black/70"
+        className="absolute left-0 top-0 z-20 flex-row items-center justify-center bg-black/70"
+        style={{ height: Dimensions.get('screen').height, width: '100%' }}
         entering={FadeIn.duration(100)}
         exiting={FadeOut.duration(100)}
       >
