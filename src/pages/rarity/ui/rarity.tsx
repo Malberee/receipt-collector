@@ -22,7 +22,7 @@ export const Rarity = () => {
     rarity: RarityType
     id: string
   }>()
-  const { top } = useSafeAreaInsets()
+  const { top, bottom } = useSafeAreaInsets()
 
   const colors: Record<RarityType, string> = {
     common: 'text-default',
@@ -36,7 +36,7 @@ export const Rarity = () => {
     <Pressable
       onPress={() => router.replace(`/${id}`)}
       className="-mx-4 flex-1 flex-row items-center justify-center"
-      style={{ marginTop: -top }}
+      style={{ marginTop: -top, marginBottom: -bottom }}
     >
       <Text
         className={`text-5xl font-bold uppercase tracking-widest ${colors[rarity]}`}
