@@ -1,9 +1,7 @@
 import { Button, Flash } from '@malberee/heroui-native'
 import { Canvas, DiffRect, rect, rrect } from '@shopify/react-native-skia'
-import { Stack } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
 import React, { type FC } from 'react'
-import { Dimensions, Platform, StyleSheet, View } from 'react-native'
+import { Dimensions, View } from 'react-native'
 
 import { getScannableAreaSize } from '@shared/lib'
 
@@ -29,20 +27,7 @@ export const Overlay: FC<OverlayProps> = ({ toggleTorch, type }) => {
 
   return (
     <>
-      <Stack.Screen
-        options={{
-          title: 'Overview',
-          headerShown: false,
-        }}
-      />
-      {Platform.OS === 'android' ? <StatusBar /> : null}
-      <Canvas
-        style={
-          Platform.OS === 'android'
-            ? { flex: 1 }
-            : StyleSheet.absoluteFillObject
-        }
-      >
+      <Canvas style={{ flex: 1 }}>
         <DiffRect inner={inner} outer={outer} color="black" opacity={0.5} />
       </Canvas>
       <View

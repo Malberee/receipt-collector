@@ -64,7 +64,7 @@ export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
       amount,
       date,
       rarity: getRarity(data),
-      id: fiscalNumber + date,
+      id: fiscalNumber + date.getTime(),
     }
   } catch {
     throw 'Cannot scan this QR code!'
