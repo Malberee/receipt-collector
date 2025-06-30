@@ -16,6 +16,7 @@ const iconColors = {
   epic: 'text-secondary-foreground',
   mythic: 'text-danger-foreground',
   legendary: 'text-warning-foreground',
+  none: 'text-default-foreground',
 }
 
 export const Rarities: FC<RaritiesProps> = ({ onValueChange }) => {
@@ -29,6 +30,7 @@ export const Rarities: FC<RaritiesProps> = ({ onValueChange }) => {
       setSelectedRarities([...selectedRarities, rarity])
     }
   }
+
   useEffect(() => {
     onValueChange(selectedRarities)
   }, [selectedRarities])

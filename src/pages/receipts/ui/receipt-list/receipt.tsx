@@ -35,7 +35,7 @@ export const Receipt = memo(({ id, amount, date, rarity }: ReceiptProps) => {
                 })}
               </Text>
             </View>
-            <Chip rarity={rarity} />
+            {rarity !== 'none' ? <Chip rarity={rarity} /> : null}
           </View>
         </View>
       </Link>

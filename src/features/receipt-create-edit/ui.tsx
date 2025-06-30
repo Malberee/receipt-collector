@@ -26,7 +26,12 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
         validateOnBlur={false}
         validateOnChange={false}
         onSubmit={(values) => {
-          handleSubmit({ ...values, date, id: receipt?.id })
+          handleSubmit({
+            ...values,
+            date,
+            rarity: receipt?.rarity ?? 'none',
+            id: receipt?.id,
+          })
           onSubmit?.()
         }}
       >

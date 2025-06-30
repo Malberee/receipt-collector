@@ -33,10 +33,12 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
               {moment(date).format('YYYY.MM.DD [ • ] HH:mm')}
             </Text>
           </View>
-          <Chip
-            rarity={rarity}
-            classNames={{ base: 'h-9', content: 'text-xl' }}
-          />
+          {rarity !== 'none' ? (
+            <Chip
+              rarity={rarity}
+              classNames={{ base: 'h-9', content: 'text-xl' }}
+            />
+          ) : null}
         </View>
         <Divider />
       </View>

@@ -1,6 +1,12 @@
 import type { BaseColors, ThemeColors } from '@malberee/heroui-native'
 
-export type Rarity = 'common' | 'rare' | 'epic' | 'mythic' | 'legendary'
+export type Rarity =
+  | 'none'
+  | 'common'
+  | 'rare'
+  | 'epic'
+  | 'mythic'
+  | 'legendary'
 
 export const rarityColors: Record<
   Rarity,
@@ -11,4 +17,5 @@ export const rarityColors: Record<
   epic: 'secondary',
   mythic: 'danger',
   legendary: 'warning',
+  none: 'default',
 }

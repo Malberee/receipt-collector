@@ -20,7 +20,7 @@ interface FilterReceiptsProps {
 
 export const FilterReceipts: FC<FilterReceiptsProps> = observer(
   ({ isExpanded }) => {
-    const { maxAmount, handleChange } = useFilters()
+    const { maxAmount, onValueChange } = useFilters()
 
     const height = useSharedValue(0)
 
@@ -48,15 +48,15 @@ export const FilterReceipts: FC<FilterReceiptsProps> = observer(
               maxValue={maxAmount}
               formatOptions={{ style: 'currency', currency: 'UAH' }}
               onChangeEnd={(values) =>
-                handleChange('amount', values as [number, number])
+                onValueChange('amount', values as [number, number])
               }
             />
           ) : null}
           <DateRangePicker
-            onValueChange={(values) => handleChange('date', values)}
+            onValueChange={(values) => onValueChange('date', values)}
           />
           <Rarities
-            onValueChange={(values) => handleChange('rarities', values)}
+            onValueChange={(values) => onValueChange('rarities', values)}
           />
         </View>
       </Animated.View>

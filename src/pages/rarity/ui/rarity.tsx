@@ -8,6 +8,8 @@ import type { Rarity as RarityType } from '@shared/config'
 
 import { Blobs } from './blobs'
 
+type Rarities = Exclude<RarityType, 'none'>
+
 cssInterop(Blobs, {
   color: {
     target: 'color',
@@ -19,12 +21,12 @@ cssInterop(Blobs, {
 
 export const Rarity = () => {
   const { rarity, id } = useLocalSearchParams<{
-    rarity: RarityType
+    rarity: Rarities
     id: string
   }>()
   const { top, bottom } = useSafeAreaInsets()
 
-  const colors: Record<RarityType, string> = {
+  const colors: Record<Rarities, string> = {
     common: 'text-default',
     rare: 'text-primary',
     epic: 'text-secondary',

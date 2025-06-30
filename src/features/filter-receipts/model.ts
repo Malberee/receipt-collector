@@ -19,7 +19,7 @@ export const useFilters = () => {
     ? Math.ceil(Math.max(...data.map((item) => item.amount)))
     : 0
 
-  const handleChange: Overload = (filter, value) => {
+  const onValueChange: Overload = (filter, value) => {
     const dates = Object.values(getMinMaxDates())
 
     if (
@@ -42,5 +42,5 @@ export const useFilters = () => {
     }
   }
 
-  return { maxAmount, handleChange }
+  return { maxAmount, onValueChange }
 }
