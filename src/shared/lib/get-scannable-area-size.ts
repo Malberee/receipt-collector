@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native'
 
 export const getScannableAreaSize = (width: number, height: number) => {
   const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
-    Dimensions.get('window')
+    Dimensions.get('screen')
 
   return {
     x: SCREEN_WIDTH / 2 - width / 2,

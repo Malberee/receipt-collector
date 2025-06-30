@@ -1,8 +1,9 @@
 import { useCameraPermissions } from 'expo-camera'
 import { router } from 'expo-router'
-import { cssInterop } from 'nativewind'
+import { cssInterop, rem } from 'nativewind'
 import React, { type FC } from 'react'
 import { Pressable, Text, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useTheme } from '@shared/lib'
 
@@ -24,6 +25,7 @@ cssInterop(ScannerIcon, {
 
 export const ScannerButton: FC<ScannerButtonProps> = ({ children, href }) => {
   const { isDark } = useTheme()
+  const { bottom } = useSafeAreaInsets()
   const [permission, requestPermission] = useCameraPermissions()
 
   const handlePress = () => {
@@ -36,7 +38,10 @@ export const ScannerButton: FC<ScannerButtonProps> = ({ children, href }) => {
   }
 
   return (
-    <View className="absolute bottom-4 left-4 w-full">
+    <View
+      className="absolute left-4 w-full"
+      style={{ bottom: bottom + rem.get() }}
+    >
       <Pressable
         onPress={handlePress}
         className={`rounded-large bg-[#d9eafd] duration-100 active:bg-[#bfdbfa] active:transition-colors ${isDark && '!bg-[#171d26] active:!bg-[#14253b]'}`}

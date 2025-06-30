@@ -34,7 +34,7 @@ export const Header: FC<HeaderProps> = ({ receiptId, onEdit }) => {
             style={{ transform: [{ rotate: '90deg' }] }}
           />
         }
-        onPress={() => router.navigate('/')}
+        onPress={() => router.dismiss()}
       />
       <View>
         <Button

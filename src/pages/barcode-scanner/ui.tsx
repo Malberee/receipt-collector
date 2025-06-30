@@ -27,7 +27,7 @@ export const BarcodeScanner = () => {
   const { id } = useLocalSearchParams<{ id: string }>()
 
   return (
-    <View className="relative -mx-4 flex-1">
+    <View className="relative flex-1">
       <CameraView
         style={StyleSheet.absoluteFillObject}
         barcodeScannerSettings={{

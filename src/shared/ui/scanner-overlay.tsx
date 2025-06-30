@@ -11,7 +11,7 @@ interface OverlayProps {
 }
 
 export const Overlay: FC<OverlayProps> = ({ toggleTorch, type }) => {
-  const { width, height } = Dimensions.get('window')
+  const { width, height } = Dimensions.get('screen')
 
   const isQR = type === 'qr'
   const radius = isQR ? 40 : 15
@@ -32,7 +32,10 @@ export const Overlay: FC<OverlayProps> = ({ toggleTorch, type }) => {
       </Canvas>
       <View
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        style={{ width: inner.rect.width, height: inner.rect.height }}
+        style={{
+          width: inner.rect.width,
+          height: inner.rect.height,
+        }}
       >
         <View
           className={`absolute left-0 top-0 ${isQR ? 'size-[100px] rounded-tl-[65px]' : 'size-[40px] rounded-tl-[25px]'} -translate-x-1/4 -translate-y-1/4 border-l-3 border-t-3 border-white`}

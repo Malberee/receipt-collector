@@ -1,16 +1,14 @@
 import { Button, ChevronDown } from '@malberee/heroui-native'
-import { Slot, useLocalSearchParams, useRouter } from 'expo-router'
+import { Slot, router } from 'expo-router'
 import React from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const ScannerLayout = () => {
-  const { id } = useLocalSearchParams<{ id?: string }>()
-  const router = useRouter()
   const { top } = useSafeAreaInsets()
 
   return (
-    <>
+    <View className="flex-1 bg-default-50">
       <View className="absolute z-10 p-4" style={{ top }}>
         <Button
           size="lg"
@@ -23,17 +21,11 @@ const ScannerLayout = () => {
               style={{ transform: [{ rotate: '90deg' }] }}
             />
           }
-          onPress={() => {
-            if (id) {
-              router.navigate(`/${id}`)
-            } else {
-              router.navigate('/')
-            }
-          }}
+          onPress={() => router.dismiss()}
         />
       </View>
       <Slot />
-    </>
+    </View>
   )
 }
 

@@ -10,7 +10,7 @@ export const QRScanner = () => {
   const { enableTorch, toggleTorch, handleScan } = useScanner(300, 300)
 
   return (
-    <View className="relative -mx-4 flex-1">
+    <View className="relative flex-1">
       <CameraView
         style={StyleSheet.absoluteFillObject}
         barcodeScannerSettings={{
