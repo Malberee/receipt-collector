@@ -3,18 +3,22 @@ import moment from 'moment'
 import React, { memo } from 'react'
 import { Text, View } from 'react-native'
 
-import { type ReceiptType, receipts } from '@entities/receipt'
+import { type ReceiptType } from '@entities/receipt'
 
 import { currencyFormatter, useTheme } from '@shared/lib'
 import { Chip, SwipeToDelete } from '@shared/ui'
 
-interface ReceiptProps extends ReceiptType {}
+interface ReceiptProps {
+  receipt: ReceiptType
+  onDelete: (id: string) => void
+}
 
-export const Receipt = memo(({ id, amount, date, rarity }: ReceiptProps) => {
+export const Receipt = memo<ReceiptProps>(({ receipt, onDelete }) => {
+  const { id, amount, date, rarity } = receipt
   const { isDark } = useTheme()
 
   return (
-    <SwipeToDelete onDelete={() => receipts.deleteReceipt(id)}>
+    <SwipeToDelete onDelete={() => onDelete(id)}>
       <Link href={`/${id}`} asChild>
         <View
           className={`bg-default-50 px-4 duration-100 active:bg-[#f7f7f8] active:transition-colors ${isDark && 'active:!bg-[#222222]'}`}
