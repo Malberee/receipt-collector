@@ -14,13 +14,13 @@ import { View } from 'react-native'
 import { type Theme, receipts } from '@entities/receipt'
 
 type ThemeContextType = {
-  current: Exclude<Theme, 'system'> | null
+  current: Exclude<Theme, 'system'>
   isDark: boolean
   set: (theme: Theme) => void
 }
 
 export const ThemeContext = createContext<ThemeContextType>({
-  current: null,
+  current: 'light',
   isDark: false,
   set: () => {},
 })

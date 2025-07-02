@@ -2,12 +2,10 @@ import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
 import { Image, Pressable, Text, View } from 'react-native'
 
-import { DeleteLayout } from '@features/delete-entity'
-
 import { type ProductType, receipts } from '@entities/receipt'
 
 import { currencyFormatter, useTheme } from '@shared/lib'
-import { NoImageIcon } from '@shared/ui'
+import { NoImageIcon, SwipeToDelete } from '@shared/ui'
 
 interface ProductProps {
   product: ProductType
@@ -32,7 +30,9 @@ export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
   const shouldSliceName = name.length >= 17
 
   return (
-    <DeleteLayout onDelete={() => receipts.deleteProduct(receiptId, productId)}>
+    <SwipeToDelete
+      onDelete={() => receipts.deleteProduct(receiptId, productId)}
+    >
       <Pressable
         onPress={() => onPress?.(product)}
         className={`flex-row items-center justify-between bg-default-200 p-4 transition-colors active:bg-[#dedee0] ${isDark && '!bg-default-100 active:!bg-[#313135]'}`}
@@ -71,6 +71,6 @@ export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
           ) : null}
         </View>
       </Pressable>
-    </DeleteLayout>
+    </SwipeToDelete>
   )
 }

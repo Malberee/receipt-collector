@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { rem } from 'nativewind'
 import React, { useCallback } from 'react'
 import { FlatList, type ListRenderItem } from 'react-native'
 
@@ -17,7 +18,10 @@ export const ReceiptList = observer(() => {
 
   return data.length ? (
     <FlatList
-      contentContainerStyle={{ paddingBottom: 101 }}
+      style={{ marginHorizontal: -rem.get() }}
+      contentContainerStyle={{
+        paddingBottom: 101,
+      }}
       data={data}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
