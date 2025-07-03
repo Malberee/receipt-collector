@@ -39,7 +39,7 @@ export const ScannerButton: FC<ScannerButtonProps> = ({ children, href }) => {
 
   return (
     <View
-      className="absolute left-4 w-full"
+      className="absolute left-4 z-10 w-full"
       style={{ bottom: bottom + rem.get() }}
     >
       <Pressable
