@@ -2,7 +2,7 @@ import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
 import { Image, Pressable, Text, View } from 'react-native'
 
-import { type ProductType, receipts } from '@entities/receipt'
+import { type ProductType } from '@entities/receipt'
 
 import { currencyFormatter, useTheme } from '@shared/lib'
 import { NoImageIcon, SwipeToDelete } from '@shared/ui'
@@ -10,7 +10,8 @@ import { NoImageIcon, SwipeToDelete } from '@shared/ui'
 interface ProductProps {
   product: ProductType
   receiptId: string
-  onPress?: (product: ProductType) => void
+  onPress: (product: ProductType) => void
+  onDelete: (id: string) => void
 }
 
 cssInterop(NoImageIcon, {
@@ -24,17 +25,15 @@ cssInterop(NoImageIcon, {
   },
 })
 
-export const Product: FC<ProductProps> = ({ product, receiptId, onPress }) => {
+export const Product: FC<ProductProps> = ({ product, onPress, onDelete }) => {
   const { isDark } = useTheme()
-  const { name, picture, price, quantity, id: productId } = product
+  const { name, picture, price, quantity, id } = product
   const shouldSliceName = name.length >= 17
 
   return (
-    <SwipeToDelete
-      onDelete={() => receipts.deleteProduct(receiptId, productId)}
-    >
+    <SwipeToDelete onDelete={() => onDelete(id)}>
       <Pressable
-        onPress={() => onPress?.(product)}
+        onPress={() => onPress(product)}
         className={`flex-row items-center justify-between bg-default-200 p-4 transition-colors active:bg-[#dedee0] ${isDark && '!bg-default-100 active:!bg-[#313135]'}`}
       >
         <View className="shrink flex-row items-center gap-4">

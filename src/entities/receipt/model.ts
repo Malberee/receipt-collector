@@ -144,7 +144,7 @@ class Receipts {
       receipt.products = []
     }
 
-    receipt.products.unshift(product)
+    receipt.products.push(product)
   }
 
   updateProduct(
