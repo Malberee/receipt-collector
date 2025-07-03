@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
-import React, { type FC, useCallback } from 'react'
+import React, { type FC, useCallback, useState } from 'react'
 import { FlatList, type ListRenderItem, View } from 'react-native'
 import Dash from 'react-native-dashed-line'
 import Animated, { LinearTransition } from 'react-native-reanimated'
@@ -8,6 +8,7 @@ import Animated, { LinearTransition } from 'react-native-reanimated'
 import { type ProductType, type ReceiptType, receipts } from '@entities/receipt'
 
 import { useTheme } from '@shared/lib'
+import { DeleteDialog } from '@shared/ui'
 
 import { Header } from './header'
 import { Product } from './product'
@@ -39,6 +40,7 @@ const StyledDashedLine = cssInterop(Dash, {
 export const Receipt: FC<ReceiptProps> = observer(
   ({ receipt, openModal, closeModal, selectProduct }) => {
     const { isDark } = useTheme()
+    const [productToDelete, setProductToDelete] = useState('')
 
     const renderItem = useCallback<ListRenderItem<ProductType>>(
       ({ item }) => (
@@ -47,7 +49,7 @@ export const Receipt: FC<ReceiptProps> = observer(
             openModal()
             selectProduct(product)
           }}
-          onDelete={(id) => receipts.deleteProduct(receipt.id, id)}
+          onDelete={setProductToDelete}
           receiptId={receipt.id}
           product={item}
         />
@@ -78,6 +80,17 @@ export const Receipt: FC<ReceiptProps> = observer(
             />
           </Animated.View>
         </View>
+
+        {productToDelete ? (
+          <DeleteDialog
+            text="Are you sure you want to delete the product?"
+            onCancel={() => setProductToDelete('')}
+            onDelete={() => {
+              setProductToDelete('')
+              receipts.deleteProduct(receipt.id, productToDelete)
+            }}
+          />
+        ) : null}
       </View>
     )
   },
