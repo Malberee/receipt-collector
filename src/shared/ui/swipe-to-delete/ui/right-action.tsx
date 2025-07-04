@@ -1,8 +1,8 @@
 import { View } from 'react-native'
 import Animated, { type SharedValue } from 'react-native-reanimated'
 
+import { TrashIcon } from '../../icons'
 import { useSwipeToDelete } from '../model'
-import { TrashIcon } from './trash-icon'
 
 const AnimatedTrashIcon = Animated.createAnimatedComponent(TrashIcon)
 

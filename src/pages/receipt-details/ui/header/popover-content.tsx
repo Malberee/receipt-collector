@@ -1,5 +1,7 @@
-import { Button, DeleteIcon, EditIcon } from '@malberee/heroui-native'
+import { Button } from '@malberee/heroui-native'
 import type { FC } from 'react'
+
+import { PenIcon, TrashIcon } from '@shared/ui'
 
 interface PopoverContentProps {
   onEdit: () => void
@@ -16,7 +18,9 @@ export const PopoverContent: FC<PopoverContentProps> = ({
         className="w-full"
         variant="light"
         color="default"
-        startContent={<EditIcon className="text-foreground" />}
+        startContent={
+          <PenIcon className="text-foreground" width={24} height={24} />
+        }
         onPress={onEdit}
       >
         Edit
@@ -25,7 +29,9 @@ export const PopoverContent: FC<PopoverContentProps> = ({
         className="w-full"
         variant="flat"
         color="danger"
-        startContent={<DeleteIcon className="text-danger-500" />}
+        startContent={
+          <TrashIcon className="text-danger-500" width={24} height={24} />
+        }
         onPress={onDelete}
       >
         Delete
