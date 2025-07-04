@@ -42,7 +42,7 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
           className="absolute bottom-0 h-full w-full"
           onPress={onClose}
         />
-        <KeyboardAvoidingView behavior="height">
+        <KeyboardAvoidingView behavior="padding">
           <Animated.View
             className="rounded-medium bg-default-50 p-4 pt-10"
             entering={ZoomIn.duration(100)}
