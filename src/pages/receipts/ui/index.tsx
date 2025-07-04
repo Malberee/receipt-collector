@@ -1,3 +1,4 @@
+import { PortalHost } from '@gorhom/portal'
 import React from 'react'
 import { useSharedValue } from 'react-native-reanimated'
 
@@ -21,6 +22,7 @@ export const Receipts = () => {
       <FilterReceipts isExpanded={isExpanded} />
       <ReceiptList />
       <ScannerButton href="/scanner/qr">Scan QR</ScannerButton>
+      <PortalHost name="popover-portal" />
     </>
   )
 }

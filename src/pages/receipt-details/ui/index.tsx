@@ -1,3 +1,4 @@
+import { PortalHost } from '@gorhom/portal'
 import { useLocalSearchParams } from 'expo-router'
 import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
@@ -54,6 +55,8 @@ export const ReceiptDetails = observer(() => {
           )}
         </Modal>
       ) : null}
+
+      <PortalHost name="popover-portal" />
     </>
   )
 })
