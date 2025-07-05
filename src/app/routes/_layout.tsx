@@ -1,8 +1,9 @@
 import { PortalHost, PortalProvider } from '@gorhom/portal'
 import { semanticColors } from '@malberee/heroui-native'
 import { Stack } from 'expo-router'
+import * as SplashScreen from 'expo-splash-screen'
 import { rem } from 'nativewind'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { configureReanimatedLogger } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -13,6 +14,8 @@ import { Toast as CustomToast } from '@shared/ui'
 
 import '../../../global.css'
 
+SplashScreen.preventAutoHideAsync()
+
 configureReanimatedLogger({ strict: false })
 
 const toastConfig = {
@@ -22,14 +25,20 @@ const toastConfig = {
 const RootLayout = () => {
   const { top, bottom } = useSafeAreaInsets()
 
+  useEffect(() => {
+    if (top !== 0 && bottom !== 0) {
+      SplashScreen.hideAsync()
+    }
+  }, [top, bottom])
+
   return (
     <GestureHandlerRootView>
       <ThemeProvider>
-        <PortalProvider>
-          <SafeAreaView
-            edges={['left', 'right']}
-            className="flex-1 bg-default-50"
-          >
+        <SafeAreaView
+          edges={['left', 'right']}
+          className="flex-1 bg-default-50"
+        >
+          <PortalProvider>
             <PortalHost name="modal-portal" />
             <ThemeContext.Consumer>
               {({ current }) => (
@@ -59,8 +68,8 @@ const RootLayout = () => {
               )}
             </ThemeContext.Consumer>
             <Toast config={toastConfig} position="bottom" />
-          </SafeAreaView>
-        </PortalProvider>
+          </PortalProvider>
+        </SafeAreaView>
       </ThemeProvider>
     </GestureHandlerRootView>
   )
