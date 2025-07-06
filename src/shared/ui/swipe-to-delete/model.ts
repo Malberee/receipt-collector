@@ -6,7 +6,7 @@ import {
   useAnimatedProps,
   useAnimatedReaction,
   useAnimatedStyle,
-  useSharedValue,
+  useDerivedValue,
   withTiming,
 } from 'react-native-reanimated'
 
@@ -17,7 +17,7 @@ const THREESOLD = 0.3
 
 export const useSwipeToDelete = (progress: SharedValue<number>) => {
   const { current } = useTheme()
-  const shouldDelete = useSharedValue(false)
+  const shouldDelete = useDerivedValue(() => progress.value >= THREESOLD)
 
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: withTiming(
@@ -41,16 +41,11 @@ export const useSwipeToDelete = (progress: SharedValue<number>) => {
   const animatedTextStyle = useAnimatedStyle(colorFunc)
 
   useAnimatedReaction(
-    () => progress.value,
-    (currentValue) => {
-      shouldDelete.value = currentValue >= THREESOLD
-    },
-  )
-
-  useAnimatedReaction(
     () => shouldDelete.value,
-    () => {
-      runOnJS(Vibration.vibrate)(50)
+    (result, previous) => {
+      if (result !== previous && previous !== null) {
+        runOnJS(Vibration.vibrate)(50)
+      }
     },
   )
 
