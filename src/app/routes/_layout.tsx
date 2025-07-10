@@ -1,3 +1,5 @@
+import 'react-native-get-random-values'
+
 import { PortalHost, PortalProvider } from '@gorhom/portal'
 import { semanticColors } from '@malberee/heroui-native'
 import { Stack } from 'expo-router'

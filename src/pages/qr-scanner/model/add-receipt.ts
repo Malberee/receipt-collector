@@ -1,5 +1,3 @@
-import 'react-native-get-random-values'
-
 import { router } from 'expo-router'
 import Toast from 'react-native-toast-message'
 
