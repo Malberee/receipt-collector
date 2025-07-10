@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 
 import { type ProductType, receipts } from '@entities/receipt'
 
-export const handleSubmit = async (
+export const submitProduct = async (
   product: Omit<ProductType, 'id'>,
   receiptId: string,
   productId?: string,

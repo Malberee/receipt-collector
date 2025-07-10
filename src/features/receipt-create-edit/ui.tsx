@@ -8,7 +8,7 @@ import { type ReceiptType } from '@entities/receipt'
 import { DatePicker } from '@shared/ui'
 
 import { schema } from './config'
-import { handleSubmit } from './model'
+import { submitReceipt } from './model'
 
 interface ReceiptFormProps {
   receipt?: ReceiptType
@@ -26,7 +26,7 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
         validateOnBlur={false}
         validateOnChange={false}
         onSubmit={(values) => {
-          handleSubmit({
+          submitReceipt({
             ...values,
             date,
             rarity: receipt?.rarity ?? 'none',

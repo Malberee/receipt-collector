@@ -1,2 +1,2 @@
-export * from './handle-submit'
+export * from './submit-product'
 export * from './use-pick-image'

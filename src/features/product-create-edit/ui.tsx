@@ -9,7 +9,7 @@ import type { ProductType } from '@entities/receipt'
 import { NoImageIcon } from '@shared/ui'
 
 import { schema } from './config'
-import { handleSubmit, usePickImage } from './model'
+import { submitProduct, usePickImage } from './model'
 
 interface ProductFormProps {
   product?: Partial<ProductType>
@@ -65,7 +65,7 @@ export const ProductForm: FC<ProductFormProps> = ({
         validateOnBlur={false}
         validateOnChange={false}
         onSubmit={(values) => {
-          handleSubmit({ picture: pictureSource, ...values }, receiptId, id)
+          submitProduct({ picture: pictureSource, ...values }, receiptId, id)
           onSubmit?.()
         }}
       >

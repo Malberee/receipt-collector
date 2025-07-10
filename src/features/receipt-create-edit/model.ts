@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 
 import { type ReceiptType, receipts } from '@entities/receipt'
 
-export const handleSubmit = (
+export const submitReceipt = (
   receipt: Omit<ReceiptType, 'id'> & { id?: string },
 ) => {
   if (receipt?.id) {
