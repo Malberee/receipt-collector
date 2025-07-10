@@ -14,7 +14,7 @@ import { submitProduct, usePickImage } from './model'
 interface ProductFormProps {
   product?: Partial<ProductType>
   receiptId: string
-  onSubmit?: () => void
+  onSubmit: () => void
 }
 
 cssInterop(NoImageIcon, {
@@ -66,7 +66,7 @@ export const ProductForm: FC<ProductFormProps> = ({
         validateOnChange={false}
         onSubmit={(values) => {
           submitProduct({ picture: pictureSource, ...values }, receiptId, id)
-          onSubmit?.()
+          onSubmit()
         }}
       >
         {({ handleSubmit, handleChange, initialValues, errors, values }) => (

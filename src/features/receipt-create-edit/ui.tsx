@@ -12,7 +12,7 @@ import { submitReceipt } from './model'
 
 interface ReceiptFormProps {
   receipt?: ReceiptType
-  onSubmit?: () => void
+  onSubmit: () => void
 }
 
 export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
@@ -32,7 +32,7 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
             rarity: receipt?.rarity ?? 'none',
             id: receipt?.id,
           })
-          onSubmit?.()
+          onSubmit()
         }}
       >
         {({ handleSubmit, handleChange, initialValues, errors, values }) => (
