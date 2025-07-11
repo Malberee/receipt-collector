@@ -21,7 +21,7 @@ export const Receipt = memo<ReceiptProps>(({ receipt, onDelete }) => {
     <SwipeToDelete onDelete={() => onDelete(id)}>
       <Link href={`/${id}`} asChild>
         <View
-          className={`bg-default-50 px-4 duration-100 active:bg-[#f7f7f8] active:transition-colors ${isDark && 'active:!bg-[#222222]'}`}
+          className={`bg-default-50 px-4 transition-colors duration-100 active:bg-[#f7f7f8] ${isDark && 'active:!bg-[#222222]'}`}
         >
           <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
             <View className="flex-col justify-between">
