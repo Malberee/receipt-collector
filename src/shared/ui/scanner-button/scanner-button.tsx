@@ -1,7 +1,7 @@
 import { useCameraPermissions } from 'expo-camera'
 import { router } from 'expo-router'
 import { cssInterop, rem } from 'nativewind'
-import React, { type FC } from 'react'
+import React, { type FC, type ReactNode } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -11,6 +11,7 @@ import ScannerIcon from './scanner-icon'
 
 interface ScannerButtonProps {
   children?: string
+  endContent?: ReactNode
   href: string
 }
 
@@ -23,7 +24,11 @@ cssInterop(ScannerIcon, {
   },
 })
 
-export const ScannerButton: FC<ScannerButtonProps> = ({ children, href }) => {
+export const ScannerButton: FC<ScannerButtonProps> = ({
+  children,
+  endContent,
+  href,
+}) => {
   const { isDark } = useTheme()
   const { bottom } = useSafeAreaInsets()
   const [permission, requestPermission] = useCameraPermissions()
@@ -39,18 +44,19 @@ export const ScannerButton: FC<ScannerButtonProps> = ({ children, href }) => {
 
   return (
     <View
-      className="absolute left-4 z-10 w-full"
+      className="absolute left-4 z-10 w-full flex-row gap-4"
       style={{ bottom: bottom + rem.get() }}
     >
       <Pressable
         onPress={handlePress}
-        className={`rounded-large bg-[#d9eafd] transition-colors duration-100 active:bg-[#bfdbfa] ${isDark && '!bg-[#171d26] active:!bg-[#14253b]'}`}
+        className={`flex-1 rounded-large bg-[#d9eafd] transition-colors duration-100 active:bg-[#bfdbfa] ${isDark && '!bg-[#171d26] active:!bg-[#14253b]'}`}
       >
         <View className="w-full flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary px-3 py-6">
           <ScannerIcon className="text-primary" width="24px" height="24px" />
           <Text className="text-center text-xl text-primary">{children}</Text>
         </View>
       </Pressable>
+      {endContent}
     </View>
   )
 }
