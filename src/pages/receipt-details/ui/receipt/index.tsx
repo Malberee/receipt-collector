@@ -1,3 +1,4 @@
+import { cn } from '@malberee/heroui-native'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
 import React, { type FC, useCallback, useState } from 'react'
@@ -64,7 +65,10 @@ export const Receipt: FC<ReceiptProps> = observer(
           <Animated.FlatList
             data={receipt?.products}
             keyExtractor={(item) => item.id}
-            className={`z-10 max-h-full bg-default-200 ${isDark && '!bg-default-100'}`}
+            className={cn(
+              'z-10 max-h-full bg-default-200',
+              isDark && '!bg-default-100',
+            )}
             renderItem={renderItem}
             itemLayoutAnimation={LinearTransition}
             layout={LinearTransition}
@@ -74,7 +78,10 @@ export const Receipt: FC<ReceiptProps> = observer(
             layout={LinearTransition}
           >
             <StyledDashedLine
-              dashClassName={`-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 ${isDark && '!bg-default-100'} z-0`}
+              dashClassName={cn(
+                '-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 z-0',
+                isDark && '!bg-default-100',
+              )}
               dashLength={14}
               dashThickness={14}
             />

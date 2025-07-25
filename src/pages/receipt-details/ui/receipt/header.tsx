@@ -1,4 +1,4 @@
-import { Button } from '@malberee/heroui-native'
+import { Button, cn } from '@malberee/heroui-native'
 import moment from 'moment'
 import React, { type FC } from 'react'
 import { Text, View } from 'react-native'
@@ -22,7 +22,10 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
   return (
     <View>
       <View
-        className={`rounded-t-medium bg-default-200 ${isDark && '!bg-default-100'}`}
+        className={cn(
+          'rounded-t-medium bg-default-200',
+          isDark && '!bg-default-100',
+        )}
       >
         <View className="flex-row justify-between p-4">
           <View>
@@ -42,7 +45,7 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
         </View>
         <Divider />
       </View>
-      <View className={`bg-default-200 ${isDark && '!bg-default-100'}`}>
+      <View className={cn('bg-default-200', isDark && '!bg-default-100')}>
         <View className="p-4">
           <Button size="lg" variant="flat" onPress={openModal}>
             Add product

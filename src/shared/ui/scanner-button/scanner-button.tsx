@@ -1,3 +1,4 @@
+import { cn } from '@malberee/heroui-native'
 import { useCameraPermissions } from 'expo-camera'
 import { router } from 'expo-router'
 import { cssInterop, rem } from 'nativewind'
@@ -49,7 +50,10 @@ export const ScannerButton: FC<ScannerButtonProps> = ({
     >
       <Pressable
         onPress={handlePress}
-        className={`flex-1 rounded-large bg-[#d9eafd] transition-colors duration-100 active:bg-[#bfdbfa] ${isDark && '!bg-[#171d26] active:!bg-[#14253b]'}`}
+        className={cn(
+          'flex-1 rounded-large bg-[#d9eafd] transition-colors duration-100 active:bg-[#bfdbfa]',
+          isDark && '!bg-[#171d26] active:!bg-[#14253b]',
+        )}
       >
         <View className="w-full flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary px-3 py-6">
           <ScannerIcon className="text-primary" width="24px" height="24px" />

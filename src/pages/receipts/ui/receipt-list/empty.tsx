@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from '@malberee/heroui-native'
+import { ArrowLeftIcon, cn } from '@malberee/heroui-native'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
 import React from 'react'
@@ -32,7 +32,10 @@ export const Empty = observer(() => {
     <View className="flex-1">
       <View className="flex-1 flex-row items-end justify-center">
         <Text
-          className={`px-12 text-center text-xl text-foreground-500 ${isDark && '!text-foreground-300'}`}
+          className={cn(
+            'px-12 text-center text-xl text-foreground-500',
+            isDark && '!text-foreground-300',
+          )}
         >
           {hasFilters
             ? 'No results found for these filters.'
@@ -42,7 +45,10 @@ export const Empty = observer(() => {
       <View className="mb-[101px] flex-1 animate-bounce flex-row items-end justify-center">
         {!hasFilters ? (
           <ArrowLeftIcon
-            className={`-rotate-90 text-default-300 ${isDark && '!text-default-100'}`}
+            className={cn(
+              '-rotate-90 text-default-300',
+              isDark && '!text-default-100',
+            )}
             height="150px"
             width="150px"
           />

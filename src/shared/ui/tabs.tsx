@@ -1,3 +1,4 @@
+import { cn } from '@malberee/heroui-native'
 import { rem } from 'nativewind'
 import { useEffect, useState } from 'react'
 import { Pressable, Text, View } from 'react-native'
@@ -50,7 +51,10 @@ export const Tabs = <T extends string>({
           }}
         >
           <Text
-            className={`text-xl capitalize text-foreground transition-colors duration-200 ${_value === value && 'text-white'}`}
+            className={cn(
+              'text-xl capitalize text-foreground transition-colors duration-200',
+              _value === value && 'text-white',
+            )}
           >
             {value}
           </Text>
