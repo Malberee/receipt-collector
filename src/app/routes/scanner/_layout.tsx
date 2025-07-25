@@ -1,8 +1,9 @@
-import { Button, ChevronDown } from '@malberee/heroui-native'
-import { Slot, router } from 'expo-router'
+import { Slot } from 'expo-router'
 import React from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { BackButton } from '@shared/ui'
 
 const ScannerLayout = () => {
   const { top } = useSafeAreaInsets()
@@ -10,19 +11,7 @@ const ScannerLayout = () => {
   return (
     <View className="flex-1 bg-default-50">
       <View className="absolute z-10 p-4" style={{ top }}>
-        <Button
-          size="lg"
-          variant="light"
-          color="default"
-          isIconOnly
-          startContent={
-            <ChevronDown
-              color="white"
-              style={{ transform: [{ rotate: '90deg' }] }}
-            />
-          }
-          onPress={() => router.dismiss()}
-        />
+        <BackButton />
       </View>
       <Slot />
     </View>

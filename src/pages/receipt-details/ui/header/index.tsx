@@ -1,11 +1,11 @@
-import { Button, ChevronDown } from '@malberee/heroui-native'
+import { Button } from '@malberee/heroui-native'
 import { router } from 'expo-router'
 import { type FC, useState } from 'react'
 import { View } from 'react-native'
 
 import { receipts } from '@entities/receipt'
 
-import { DeleteDialog, Popover } from '@shared/ui'
+import { BackButton, DeleteDialog, Popover } from '@shared/ui'
 
 import { DotsIcon } from './dots-icon'
 import { PopoverContent } from './popover-content'
@@ -21,21 +21,7 @@ export const Header: FC<HeaderProps> = ({ receiptId, onEdit }) => {
 
   return (
     <View className="w-full flex-row justify-between pb-4">
-      <Button
-        isIconOnly
-        variant="light"
-        size="lg"
-        color="default"
-        startContent={
-          <ChevronDown
-            className="text-foreground"
-            width="24px"
-            height="24px"
-            style={{ transform: [{ rotate: '90deg' }] }}
-          />
-        }
-        onPress={() => router.dismiss()}
-      />
+      <BackButton />
       <View>
         <Button
           isIconOnly
