@@ -1,10 +1,12 @@
 import { Button } from '@malberee/heroui-native'
+import { router } from 'expo-router'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
 import { View } from 'react-native'
 
 import { ToggleTheme } from '@features/toggle-theme'
 
+import { ChartIcon } from './chart-icon'
 import { FilterIcon } from './filter-icon'
 
 interface HeaderProps {
@@ -29,7 +31,19 @@ export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
           variant="light"
           size="lg"
           color="default"
-          startContent={<FilterIcon className="text-foreground" />}
+          startContent={
+            <ChartIcon className="text-foreground" width={24} height={24} />
+          }
+          onPress={() => router.navigate('/stats')}
+        />
+        <Button
+          isIconOnly
+          variant="light"
+          size="lg"
+          color="default"
+          startContent={
+            <FilterIcon className="text-foreground" width={24} height={24} />
+          }
           onPress={toggleFilters}
         />
       </View>
