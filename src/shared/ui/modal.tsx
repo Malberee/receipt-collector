@@ -1,10 +1,10 @@
 import { Portal } from '@gorhom/portal'
 import { Button, Plus } from '@malberee/heroui-native'
 import { cssInterop } from 'nativewind'
-import React, { type FC, type ReactNode } from 'react'
+import React, { type FC, type PropsWithChildren, useEffect } from 'react'
 import {
+  BackHandler,
   Dimensions,
-  type GestureResponderEvent,
   KeyboardAvoidingView,
   Pressable,
 } from 'react-native'
@@ -15,9 +15,8 @@ import Animated, {
   ZoomOut,
 } from 'react-native-reanimated'
 
-interface ModalProps {
-  children?: ReactNode
-  onClose?: (e: GestureResponderEvent) => void
+interface ModalProps extends PropsWithChildren {
+  onClose: () => void
 }
 
 cssInterop(Plus, {
@@ -30,6 +29,18 @@ cssInterop(Plus, {
 })
 
 export const Modal: FC<ModalProps> = ({ children, onClose }) => {
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        onClose()
+        return true
+      },
+    )
+
+    return () => backHandler.remove()
+  }, [])
+
   return (
     <Portal hostName="modal-portal">
       <Animated.View
