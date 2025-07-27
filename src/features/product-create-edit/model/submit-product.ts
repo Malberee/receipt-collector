@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid'
-
 import { type ProductType, receipts } from '@entities/receipt'
 
 export const submitProduct = (
@@ -10,6 +8,6 @@ export const submitProduct = (
   if (productId) {
     receipts.updateProduct(receiptId, productId, product)
   } else {
-    receipts.addProduct(receiptId, { id: nanoid(), ...product })
+    receipts.addProduct(receiptId, product)
   }
 }

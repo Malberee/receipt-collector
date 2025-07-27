@@ -1,9 +1,16 @@
 import { makeAutoObservable } from 'mobx'
 import { makePersistable } from 'mobx-persist-store'
 import moment from 'moment'
+import { nanoid } from 'nanoid'
 import { MMKV } from 'react-native-mmkv'
 
 import type { Rarity } from '@shared/config'
+
+type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [P in K]?: T[P] }
+export type AddReceiptArg = Omit<
+  MakeOptional<ReceiptType, 'id' | 'autoCalcAmount' | 'rarity'>,
+  'products'
+>
 
 export type ProductType = {
   id: string
@@ -110,17 +117,23 @@ class Receipts {
       })
   }
 
-  addReceipt(receipt: ReceiptType) {
+  addReceipt(receipt: AddReceiptArg) {
     const isExists = !!this.receipts.find((item) => item.id === receipt.id)
 
     if (isExists) {
       throw 'Receipt already exists!'
     } else {
-      this.receipts.unshift(receipt)
+      this.receipts.unshift({
+        autoCalcAmount: false,
+        rarity: 'none',
+        products: [],
+        ...receipt,
+        id: receipt?.id ?? nanoid(),
+      })
     }
   }
 
-  updateReceipt(receipt: ReceiptType) {
+  updateReceipt(receipt: Partial<ReceiptType>) {
     this.receipts = this.receipts.map((item) =>
       item.id === receipt.id ? { ...item, ...receipt } : item,
     )
@@ -134,7 +147,7 @@ class Receipts {
     return this.receipts.find((receipt) => receipt.id === id)
   }
 
-  addProduct(receiptId: string, product: ProductType) {
+  addProduct(receiptId: string, product: Omit<ProductType, 'id'>) {
     const receipt = this.getReceiptById(receiptId)
 
     if (!receipt) {
@@ -145,7 +158,7 @@ class Receipts {
       receipt.products = []
     }
 
-    receipt.products.push(product)
+    receipt.products.push({ id: nanoid(), ...product })
   }
 
   updateProduct(

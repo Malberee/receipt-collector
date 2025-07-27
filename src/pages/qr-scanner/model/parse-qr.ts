@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-import type { ReceiptType } from '@entities/receipt'
+import type { AddReceiptArg } from '@entities/receipt'
 
 import { getRarity } from './get-rarity'
 
@@ -21,7 +21,7 @@ const parseURL = (data: string) => {
   }
 }
 
-export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
+export const parseQR = (data: string): AddReceiptArg => {
   const regexURL = new RegExp(
     /https:\/\/cabinet\.tax\.gov\.ua\/cashregs\/check\?.*/,
   )
@@ -34,7 +34,7 @@ export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
 
   try {
     if (regexURL.test(data)) {
-      return { ...parseURL(data), autoCalcAmount: false }
+      return parseURL(data)
     }
 
     const getFormattedDate = (string?: string) => {
@@ -65,7 +65,6 @@ export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
       date,
       rarity: getRarity(data),
       id: fiscalNumber + date.getTime(),
-      autoCalcAmount: false,
     }
   } catch {
     throw 'Cannot scan this QR code!'

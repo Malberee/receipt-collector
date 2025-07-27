@@ -1,15 +1,9 @@
-import { nanoid } from 'nanoid'
+import { type AddReceiptArg, receipts } from '@entities/receipt'
 
-import { type ReceiptType, receipts } from '@entities/receipt'
-
-export const submitReceipt = (
-  receipt: Omit<ReceiptType, 'id'> & {
-    id?: string
-  },
-) => {
+export const submitReceipt = (receipt: AddReceiptArg) => {
   if (receipt?.id) {
-    receipts.updateReceipt(receipt as ReceiptType)
+    receipts.updateReceipt(receipt)
   } else {
-    receipts.addReceipt({ ...receipt, id: nanoid() })
+    receipts.addReceipt(receipt)
   }
 }

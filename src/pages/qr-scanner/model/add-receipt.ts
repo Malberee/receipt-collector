@@ -9,11 +9,7 @@ export const addReceipt = (data: string) => {
   try {
     const receipt = parseQR(data)
 
-    receipts.addReceipt({
-      ...receipt,
-      autoCalcAmount: false,
-      products: [],
-    })
+    receipts.addReceipt(receipt)
 
     router.replace({
       pathname: 'rarity',

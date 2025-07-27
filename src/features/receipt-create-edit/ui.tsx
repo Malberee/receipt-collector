@@ -32,9 +32,7 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
           submitReceipt({
             ...values,
             date,
-            rarity: receipt?.rarity ?? 'none',
             id: receipt?.id,
-            products: [],
           })
           onSubmit()
         }}
