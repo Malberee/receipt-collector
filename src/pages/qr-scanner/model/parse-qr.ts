@@ -34,7 +34,7 @@ export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
 
   try {
     if (regexURL.test(data)) {
-      return parseURL(data)
+      return { ...parseURL(data), autoCalcAmount: false }
     }
 
     const getFormattedDate = (string?: string) => {
@@ -65,6 +65,7 @@ export const parseQR = (data: string): Omit<ReceiptType, 'products'> => {
       date,
       rarity: getRarity(data),
       id: fiscalNumber + date.getTime(),
+      autoCalcAmount: false,
     }
   } catch {
     throw 'Cannot scan this QR code!'

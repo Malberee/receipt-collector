@@ -27,10 +27,6 @@ export const ReceiptDetails = observer(() => {
       <Receipt
         receipt={receipt}
         openModal={() => setModalType('product')}
-        closeModal={() => {
-          setModalType('')
-          setSelectedProduct(null)
-        }}
         selectProduct={setSelectedProduct}
       />
       <ScannerButton href={`/scanner/barcode/${id}`}>

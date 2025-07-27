@@ -16,9 +16,10 @@ export type ProductType = {
 export type ReceiptType = {
   id: string
   amount: number
+  autoCalcAmount: boolean
   date: Date
   rarity: Rarity
-  products?: ProductType[]
+  products: ProductType[]
 }
 
 type Filters = {
@@ -121,7 +122,7 @@ class Receipts {
 
   updateReceipt(receipt: ReceiptType) {
     this.receipts = this.receipts.map((item) =>
-      item.id === receipt.id ? receipt : item,
+      item.id === receipt.id ? { ...item, ...receipt } : item,
     )
   }
 

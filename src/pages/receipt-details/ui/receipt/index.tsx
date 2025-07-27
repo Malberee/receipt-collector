@@ -17,7 +17,6 @@ import { Product } from './product'
 interface ReceiptProps {
   receipt: ReceiptType
   openModal: () => void
-  closeModal: () => void
   selectProduct: (product: ProductType) => void
 }
 
@@ -39,7 +38,7 @@ const StyledDashedLine = cssInterop(Dash, {
 })
 
 export const Receipt: FC<ReceiptProps> = observer(
-  ({ receipt, openModal, closeModal, selectProduct }) => {
+  ({ receipt, openModal, selectProduct }) => {
     const { isDark } = useTheme()
     const [productToDelete, setProductToDelete] = useState('')
 

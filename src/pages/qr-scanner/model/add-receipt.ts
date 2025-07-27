@@ -11,6 +11,8 @@ export const addReceipt = (data: string) => {
 
     receipts.addReceipt({
       ...receipt,
+      autoCalcAmount: false,
+      products: [],
     })
 
     router.replace({

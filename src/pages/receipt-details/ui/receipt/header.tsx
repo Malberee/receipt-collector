@@ -19,6 +19,10 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
   const { isDark } = useTheme()
   const { amount, date, rarity } = receipt
 
+  const receiptAmount = receipt.autoCalcAmount
+    ? (receipt.products?.reduce((acc, product) => acc + product.price, 0) ?? 0)
+    : amount
+
   return (
     <View>
       <View
@@ -30,7 +34,7 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
         <View className="flex-row justify-between p-4">
           <View>
             <Text className="mb-2 text-3xl text-foreground">
-              {currencyFormatter.format(amount)}
+              {currencyFormatter.format(receiptAmount)}
             </Text>
             <Text className="text-base text-foreground-400">
               {moment(date).format('YYYY.MM.DD [ • ] HH:mm')}
