@@ -1,3 +1,3 @@
-import { BarcodeScanner } from '@pages/barcode-scanner'
+import { BarcodeScanner } from 'screens/barcode-scanner'
 
 export default BarcodeScanner

@@ -1,3 +1,3 @@
-import { Stats } from '@pages/stats'
+import { Stats } from '@screens'
 
 export default Stats

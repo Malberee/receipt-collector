@@ -11,8 +11,8 @@ import { configureReanimatedLogger } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import Toast, { type BaseToastProps } from 'react-native-toast-message'
 
-import { ThemeContext, ThemeProvider } from '@shared/lib'
-import { Toast as CustomToast } from '@shared/ui'
+import { Toast as CustomToast } from '@components'
+import { ThemeContext, ThemeProvider } from '@providers'
 
 import '../../../global.css'
 
