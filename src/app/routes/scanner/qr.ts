@@ -1,3 +1,3 @@
-import { QRScanner } from '@pages/qr-scanner'
+import { QRScanner } from '@screens'
 
 export default QRScanner

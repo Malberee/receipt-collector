@@ -1,3 +1,3 @@
-import { ReceiptDetails } from '@pages/receipt-details'
+import { ReceiptDetails } from '@screens'
 
 export default ReceiptDetails

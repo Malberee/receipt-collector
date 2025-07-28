@@ -1,3 +1,3 @@
-import { Rarity } from '@pages/rarity'
+import { Rarity } from '@screens'
 
 export default Rarity

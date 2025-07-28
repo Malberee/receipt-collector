@@ -3,7 +3,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { BackButton } from '@shared/ui'
+import { BackButton } from '@components'
 
 const ScannerLayout = () => {
   const { top } = useSafeAreaInsets()

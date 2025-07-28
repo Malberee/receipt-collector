@@ -1,14 +1,10 @@
+const prettierConfig = require('./prettier.config.js')
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['prettier'],
   ignorePatterns: ['android/*'],
-  extends: [
-    '@feature-sliced/eslint-config/rules/public-api',
-    '@feature-sliced/eslint-config/rules/layers-slices',
-    'universe',
-    'universe/shared/typescript-analysis',
-    'prettier',
-  ],
+  extends: ['universe', 'universe/shared/typescript-analysis', 'prettier'],
   rules: {
     'no-console': 'error',
     'import/order': 'off',
@@ -20,36 +16,7 @@ module.exports = {
         fixStyle: 'inline-type-imports',
       },
     ],
-    'prettier/prettier': [
-      'error',
-      {
-        semi: false,
-        singleQuote: true,
-        quoteProps: 'as-needed',
-        bracketSpacing: true,
-        trailingComma: 'all',
-        arrowParens: 'always',
-        endOfLine: 'auto',
-        importOrderSeparation: true,
-        importOrderSortSpecifiers: true,
-        importOrder: [
-          'react-native-get-random-values',
-          '<THIRD_PARTY_MODULES>',
-          '^@app/(.*)$',
-          '^@pages/(.*)$',
-          '^@widgets/(.*)$',
-          '^@features/(.*)$',
-          '^@entities/(.*)$',
-          '^@shared/(.*)$',
-          '^[./]',
-        ],
-        tailwindFunctions: ['tv'],
-        plugins: [
-          '@trivago/prettier-plugin-sort-imports',
-          'prettier-plugin-tailwindcss',
-        ],
-      },
-    ],
+    'prettier/prettier': ['error', prettierConfig],
   },
   overrides: [
     {
