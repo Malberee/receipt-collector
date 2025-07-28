@@ -30,7 +30,7 @@ export const useChart = (
         acc[day] = 0
       }
 
-      if (param === 'sum') {
+      if (param === 'amount') {
         acc[day] += Number(item.value)
       } else {
         acc[day]++

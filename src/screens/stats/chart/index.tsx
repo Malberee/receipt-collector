@@ -8,7 +8,7 @@ import { useChart } from './use-chart'
 
 export interface ChartProps {
   title: string
-  param: 'amount' | 'sum'
+  param: 'amount' | 'count'
   period: 'week' | 'month'
 }
 
@@ -33,7 +33,7 @@ export const Chart: FC<ChartProps> = ({ title, param, period }) => {
             ))}
         </View>
 
-        {data.map(({ value, date }, index) => (
+        {data.map(({ value, date }) => (
           <View
             className="w-8 flex-col items-center justify-end"
             style={{
@@ -53,7 +53,7 @@ export const Chart: FC<ChartProps> = ({ title, param, period }) => {
               entering={EntryAnimation}
             >
               <Text className="absolute -top-6 text-center text-foreground">
-                {param === 'sum' ? '₴' : ''}
+                {param === 'amount' ? '₴' : ''}
                 {value}
               </Text>
             </Animated.View>

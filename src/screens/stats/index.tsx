@@ -14,8 +14,8 @@ export const Stats = () => {
       <BackButton />
 
       <View className="flex-1 flex-col gap-4">
-        <Chart title="Amount" param="amount" period={period} />
-        <Chart title="Sum" param="sum" period={period} />
+        <Chart title="Receipts over time" param="count" period={period} />
+        <Chart title="Spending over time" param="amount" period={period} />
       </View>
       <View className="mt-6">
         <Tabs
