@@ -61,7 +61,7 @@ export const Receipt: FC<ReceiptProps> = observer(
         <View className="max-h-full">
           <Header receipt={receipt} openModal={openModal} {...receipt} />
           <Animated.FlatList
-            data={receipt?.products}
+            data={receipt.products}
             keyExtractor={(item) => item.id}
             className={cn(
               'z-10 max-h-full bg-default-200',
