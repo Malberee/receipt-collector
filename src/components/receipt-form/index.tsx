@@ -1,7 +1,7 @@
 import { Button, Checkbox, Input } from '@malberee/heroui-native'
 import { type AddReceiptArg, type ReceiptType, receipts } from '@store'
 import { Formik } from 'formik'
-import React, { type FC, useState } from 'react'
+import type { FC } from 'react'
 import { Text, View } from 'react-native'
 
 import { DatePicker } from '../date-picker'
@@ -13,8 +13,6 @@ interface ReceiptFormProps {
 }
 
 export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
-  const [date, setDate] = useState<Date>(receipt?.date ?? new Date())
-
   const submitReceipt = (receipt: AddReceiptArg) => {
     if (receipt?.id) {
       receipts.updateReceipt(receipt)
@@ -29,6 +27,7 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
         initialValues={{
           amount: receipt?.amount ?? 0,
           autoCalcAmount: receipt?.autoCalcAmount ?? true,
+          date: receipt?.date ?? new Date(),
         }}
         validationSchema={schema}
         validateOnBlur={false}
@@ -36,7 +35,6 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
         onSubmit={(values) => {
           submitReceipt({
             ...values,
-            date,
             id: receipt?.id,
           })
           onSubmit()
@@ -84,7 +82,10 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
                 Auto calculate amount based on products price
               </Checkbox>
             </View>
-            <DatePicker date={date} setDate={setDate} />
+            <DatePicker
+              date={values.date}
+              setDate={(date) => setFieldValue('date', date)}
+            />
             <Button size="lg" onPress={() => handleSubmit()}>
               Submit
             </Button>
