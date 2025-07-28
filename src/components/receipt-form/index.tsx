@@ -5,15 +5,18 @@ import type { FC } from 'react'
 import { Text, View } from 'react-native'
 
 import { DatePicker } from '../date-picker'
-import { schema } from './schema'
+import { getSchema } from './schema'
 
 interface ReceiptFormProps {
   receipt?: ReceiptType
   onSubmit: () => void
 }
 
-export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
-  const submitReceipt = (receipt: AddReceiptArg) => {
+export const ReceiptForm: FC<ReceiptFormProps> = ({
+  receipt,
+  onSubmit: _onSubmit,
+}) => {
+  const onSubmit = (receipt: AddReceiptArg) => {
     if (receipt?.id) {
       receipts.updateReceipt(receipt)
     } else {
@@ -21,39 +24,40 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
     }
   }
 
+  const initialValues = {
+    amount: receipt?.amount ?? '',
+    autoCalcAmount: receipt?.autoCalcAmount ?? true,
+    date: receipt?.date ?? new Date(),
+  }
+
   return (
     <View className="w-96 flex-col gap-4 pt-8">
       <Formik
         initialValues={{
-          amount: receipt?.amount ?? 0,
-          autoCalcAmount: receipt?.autoCalcAmount ?? true,
-          date: receipt?.date ?? new Date(),
+          ...initialValues,
+          amount: '',
         }}
-        validationSchema={schema}
+        validationSchema={getSchema(!receipt)}
         validateOnBlur={false}
         validateOnChange={false}
-        onSubmit={(values) => {
-          submitReceipt({
-            ...values,
+        onSubmit={({ amount, autoCalcAmount, date }) => {
+          onSubmit({
+            amount: Number(amount || initialValues.amount),
+            autoCalcAmount: autoCalcAmount ?? initialValues.autoCalcAmount,
+            date: date || initialValues.date,
             id: receipt?.id,
           })
-          onSubmit()
+          _onSubmit()
         }}
       >
-        {({
-          handleSubmit,
-          handleChange,
-          setFieldValue,
-          initialValues,
-          errors,
-          values,
-        }) => (
+        {({ handleSubmit, handleChange, setFieldValue, errors, values }) => (
           <>
             <View className="flex-col gap-2">
               <Input
                 size="lg"
                 labelPlacement="inside"
                 label="Amount"
+                placeholder={initialValues.amount.toString()}
                 keyboardType="number-pad"
                 endContent={
                   <Text
@@ -64,20 +68,20 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({ receipt, onSubmit }) => {
                     UAH
                   </Text>
                 }
-                defaultValue={initialValues.amount.toString()}
                 onValueChange={handleChange('amount')}
-                value={values.amount.toString()}
+                value={values.amount}
                 isInvalid={!!errors.amount}
                 errorMessage={errors.amount}
                 isDisabled={values.autoCalcAmount}
               />
               <Checkbox
                 size="md"
+                isInvalid={!!errors.autoCalcAmount}
                 defaultSelected={initialValues.autoCalcAmount}
                 onValueChange={(value) =>
                   setFieldValue('autoCalcAmount', value)
                 }
-                value={values.autoCalcAmount.toString()}
+                isSelected={values.autoCalcAmount}
               >
                 Auto calculate amount based on products price
               </Checkbox>

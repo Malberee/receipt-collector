@@ -7,7 +7,7 @@ import { Image, Pressable, Text, View } from 'react-native'
 
 import { NoImageIcon } from '@icons'
 
-import { schema } from './schema'
+import { getSchema } from './schema'
 import { usePickImage } from './use-pick-image'
 
 interface ProductFormProps {
@@ -45,6 +45,12 @@ export const ProductForm: FC<ProductFormProps> = ({
     _onSubmit()
   }
 
+  const initialValues = {
+    name: name ?? '',
+    quantity: quantity ?? 1,
+    price: price ?? 0.0,
+  }
+
   return (
     <View className="w-96 flex-col gap-4 pt-8">
       <Pressable
@@ -66,25 +72,30 @@ export const ProductForm: FC<ProductFormProps> = ({
       </Pressable>
       <Formik
         initialValues={{
-          name: name ?? '',
-          quantity: quantity ?? 1,
-          price: price ?? 0.0,
+          name: '',
+          quantity: '',
+          price: '',
         }}
-        validationSchema={schema}
+        validationSchema={getSchema(!product)}
         validateOnBlur={false}
         validateOnChange={false}
-        onSubmit={(values) => {
-          onSubmit({ picture: pictureSource, ...values })
+        onSubmit={({ name, price, quantity }) => {
+          onSubmit({
+            picture: pictureSource,
+            name: name || initialValues.name,
+            price: Number(price || initialValues.price),
+            quantity: Number(quantity || initialValues.price),
+          })
         }}
       >
-        {({ handleSubmit, handleChange, initialValues, errors, values }) => (
+        {({ handleSubmit, handleChange, errors, values }) => (
           <>
             <Input
               size="lg"
               labelPlacement="inside"
               label="Name"
+              placeholder={initialValues.name.toString()}
               onValueChange={handleChange('name')}
-              defaultValue={initialValues.name}
               value={values.name}
               isInvalid={!!errors.name}
               errorMessage={errors.name}
@@ -95,6 +106,7 @@ export const ProductForm: FC<ProductFormProps> = ({
                 fullWidth={false}
                 labelPlacement="inside"
                 label="Price"
+                placeholder={initialValues.price.toString()}
                 endContent={
                   <Text
                     className={
@@ -106,8 +118,7 @@ export const ProductForm: FC<ProductFormProps> = ({
                 }
                 className="flex-1"
                 onValueChange={handleChange('price')}
-                defaultValue={initialValues.price.toString()}
-                value={values.price.toString()}
+                value={values.price}
                 keyboardType="number-pad"
                 isInvalid={!!errors.price}
                 errorMessage={errors.price}
@@ -117,10 +128,11 @@ export const ProductForm: FC<ProductFormProps> = ({
                 fullWidth={false}
                 labelPlacement="inside"
                 label="Quantity"
+                placeholder={initialValues.quantity.toString()}
                 className="flex-1"
                 onValueChange={handleChange('quantity')}
-                defaultValue={initialValues.quantity.toString()}
-                value={values.quantity.toString()}
+                defaultValue={initialValues.quantity}
+                value={values.quantity}
                 keyboardType="number-pad"
                 isInvalid={!!errors.quantity}
                 errorMessage={errors.quantity}
