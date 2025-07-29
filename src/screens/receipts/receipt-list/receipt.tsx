@@ -1,8 +1,9 @@
 import { cn } from '@malberee/heroui-native'
 import { type ReceiptType } from '@store'
 import { Link } from 'expo-router'
+import { observer } from 'mobx-react-lite'
 import moment from 'moment'
-import React, { memo } from 'react'
+import React from 'react'
 import { Text, View } from 'react-native'
 
 import { RarityChip, SwipeToDelete } from '@components'
@@ -14,9 +15,13 @@ interface ReceiptProps {
   onDelete: (id: string) => void
 }
 
-export const Receipt = memo<ReceiptProps>(({ receipt, onDelete }) => {
-  const { id, amount, date, rarity } = receipt
+export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
+  const { id, amount, date, rarity, products, autoCalcAmount } = receipt
   const { isDark } = useTheme()
+
+  const receiptAmount = autoCalcAmount
+    ? products.reduce((acc, product) => acc + product.price, 0)
+    : amount
 
   return (
     <SwipeToDelete onDelete={() => onDelete(id)}>
@@ -30,7 +35,7 @@ export const Receipt = memo<ReceiptProps>(({ receipt, onDelete }) => {
           <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
             <View className="flex-col justify-between">
               <Text className="text-xl text-foreground">
-                {formatCurrency(amount)}
+                {formatCurrency(receiptAmount)}
               </Text>
               <Text className="text-sm text-foreground-500">
                 {moment(date).calendar(null, {
