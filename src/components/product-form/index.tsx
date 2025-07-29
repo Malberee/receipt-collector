@@ -47,8 +47,8 @@ export const ProductForm: FC<ProductFormProps> = ({
 
   const initialValues = {
     name: name ?? '',
-    quantity: quantity ?? 1,
-    price: price ?? 0.0,
+    quantity: quantity ?? '',
+    price: price ?? '',
   }
 
   return (
@@ -73,8 +73,8 @@ export const ProductForm: FC<ProductFormProps> = ({
       <Formik
         initialValues={{
           name: '',
-          quantity: '',
-          price: '',
+          quantity: quantity === undefined ? '1' : '',
+          price: price === undefined ? '0' : '',
         }}
         validationSchema={getSchema(!product)}
         validateOnBlur={false}
