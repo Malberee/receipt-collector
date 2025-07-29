@@ -1,5 +1,5 @@
 import { semanticColors } from '@malberee/heroui-native'
-import { Vibration } from 'react-native'
+import * as Haptics from 'expo-haptics'
 import {
   type SharedValue,
   runOnJS,
@@ -44,7 +44,7 @@ export const useSwipeToDelete = (progress: SharedValue<number>) => {
     () => shouldDelete.value,
     (result, previous) => {
       if (result !== previous && previous !== null) {
-        runOnJS(Vibration.vibrate)(50)
+        runOnJS(Haptics.impactAsync)(Haptics.ImpactFeedbackStyle.Soft)
       }
     },
   )
