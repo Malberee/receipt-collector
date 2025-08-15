@@ -1,7 +1,7 @@
 import { Button, Flash } from '@malberee/heroui-native'
 import { Canvas, DiffRect, rect, rrect } from '@shopify/react-native-skia'
 import React, { type FC } from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 
 import type { ScannerType } from '@hooks'
 import { getScanArea } from '@utils'
@@ -34,6 +34,7 @@ export const ScannerOverlay: FC<ScannerOverlayProps> = ({
       <Canvas style={{ flex: 1 }}>
         <DiffRect inner={inner} outer={outer} color="black" opacity={0.5} />
       </Canvas>
+
       <View
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         style={{
@@ -41,6 +42,10 @@ export const ScannerOverlay: FC<ScannerOverlayProps> = ({
           height: inner.rect.height,
         }}
       >
+        <Text className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[150%] text-3xl text-white">
+          {type === 'qr' ? 'QR code' : 'Barcode'}
+        </Text>
+
         <View
           className={`absolute left-0 top-0 ${isQR ? 'size-[100px] rounded-tl-[65px]' : 'size-[40px] rounded-tl-[25px]'} -translate-x-1/4 -translate-y-1/4 border-l-3 border-t-3 border-white`}
         />
@@ -54,6 +59,7 @@ export const ScannerOverlay: FC<ScannerOverlayProps> = ({
           className={`absolute bottom-0 right-0 ${isQR ? 'size-[100px] rounded-bl-[65px]' : 'size-[40px] rounded-bl-[25px]'} translate-x-1/4 translate-y-1/4 scale-x-[-1] border-b-3 border-l-3 border-white`}
         />
       </View>
+
       <Button
         className="absolute bottom-20 left-1/2 size-24 -translate-x-1/2 !rounded-full dark"
         isIconOnly
