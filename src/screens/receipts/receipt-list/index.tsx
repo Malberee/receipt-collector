@@ -1,4 +1,5 @@
 import { type ReceiptType, receipts } from '@store'
+import { observer } from 'mobx-react-lite'
 import { rem } from 'nativewind'
 import React, { useCallback, useState } from 'react'
 import { type ListRenderItem } from 'react-native'
@@ -9,7 +10,7 @@ import { DeleteDialog } from '@components'
 import { Empty } from './empty'
 import { Receipt } from './receipt'
 
-export const ReceiptList = () => {
+export const ReceiptList = observer(() => {
   const [receiptToDelete, setReceiptToDelete] = useState('')
   const data = receipts.getReceipts()
 
@@ -45,4 +46,4 @@ export const ReceiptList = () => {
   ) : (
     <Empty />
   )
-}
+})
