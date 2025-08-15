@@ -1,17 +1,17 @@
 import { cn } from '@malberee/heroui-native'
-import { useCameraPermissions } from 'expo-camera'
 import { router } from 'expo-router'
 import { cssInterop, rem } from 'nativewind'
 import React, { type FC, type ReactNode } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useCameraPermission } from 'react-native-vision-camera'
 
 import { useTheme } from '@providers'
 
 import ScannerIcon from './scanner-icon'
 
 interface ScannerButtonProps {
-  children?: string
+  children: string
   endContent?: ReactNode
   href: string
 }
@@ -32,10 +32,10 @@ export const ScannerButton: FC<ScannerButtonProps> = ({
 }) => {
   const { isDark } = useTheme()
   const { bottom } = useSafeAreaInsets()
-  const [permission, requestPermission] = useCameraPermissions()
+  const { hasPermission, requestPermission } = useCameraPermission()
 
   const handlePress = () => {
-    if (!permission?.granted) {
+    if (!hasPermission) {
       requestPermission()
       return
     }

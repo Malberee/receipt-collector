@@ -1,3 +1,4 @@
 export * from './format-currency'
-export * from './get-scannable-area-size'
-export * from './is-within-scannable-area'
+export * from './get-scan-area'
+export * from './is-within-scan-area'
+export * from './map-screen-to-frame'

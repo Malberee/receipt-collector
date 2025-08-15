@@ -21,10 +21,6 @@
       "package": "com.malberee.receiptcollector"
     },
     "plugins": [
-      [
-        "expo-camera",
-        { "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera" }
-      ],
       ["expo-router", { "root": "./src/app/routes" }],
       [
         "expo-image-picker",
@@ -42,6 +38,13 @@
             "backgroundColor": "#18181b"
           },
           "imageWidth": 200
+        }
+      ],
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera.",
+          "enableCodeScanner": true
         }
       ]
     ],

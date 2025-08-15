@@ -1,17 +1,15 @@
 import { receipts } from '@store'
-import { CameraView } from 'expo-camera'
 import { router } from 'expo-router'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import Toast from 'react-native-toast-message'
+import { Camera } from 'react-native-vision-camera'
 
-import { Overlay } from '@components'
+import { ScannerOverlay } from '@components'
 import { useScanner } from '@hooks'
 
 import { parseQR } from './utils'
 
 export const QRScanner = () => {
-  const { enableTorch, toggleTorch, onScan } = useScanner(300, 300)
-
   const addReceipt = (data: string) => {
     try {
       const receipt = parseQR(data)
@@ -31,18 +29,12 @@ export const QRScanner = () => {
     }
   }
 
+  const { cameraProps, toggleTorch } = useScanner('qr', addReceipt)
+
   return (
     <View className="relative flex-1">
-      <CameraView
-        style={StyleSheet.absoluteFillObject}
-        barcodeScannerSettings={{
-          barcodeTypes: ['qr'],
-        }}
-        facing="back"
-        enableTorch={enableTorch}
-        onBarcodeScanned={(data) => onScan(data, addReceipt)}
-      />
-      <Overlay type="qr" toggleTorch={toggleTorch} />
+      <Camera {...cameraProps} style={{ flex: 1 }} />
+      <ScannerOverlay type="qr" toggleTorch={toggleTorch} />
     </View>
   )
 }

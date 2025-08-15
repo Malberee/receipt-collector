@@ -1,21 +1,25 @@
 import { Button, Flash } from '@malberee/heroui-native'
 import { Canvas, DiffRect, rect, rrect } from '@shopify/react-native-skia'
 import React, { type FC } from 'react'
-import { Dimensions, View } from 'react-native'
+import { Dimensions, StyleSheet, View } from 'react-native'
 
-import { getScannableAreaSize } from '@utils'
+import type { ScannerType } from '@hooks'
+import { getScanArea } from '@utils'
 
-interface OverlayProps {
+interface ScannerOverlayProps {
   toggleTorch: () => void
-  type: 'qr' | 'barcode'
+  type: ScannerType
 }
 
-export const Overlay: FC<OverlayProps> = ({ toggleTorch, type }) => {
+export const ScannerOverlay: FC<ScannerOverlayProps> = ({
+  toggleTorch,
+  type,
+}) => {
   const { width, height } = Dimensions.get('screen')
 
   const isQR = type === 'qr'
   const radius = isQR ? 40 : 15
-  const size = Object.values(getScannableAreaSize(300, isQR ? 300 : 100)) as [
+  const size = Object.values(getScanArea(300, isQR ? 300 : 100)) as [
     number,
     number,
     number,
@@ -26,7 +30,7 @@ export const Overlay: FC<OverlayProps> = ({ toggleTorch, type }) => {
   const inner = rrect(rect(...size), radius, radius)
 
   return (
-    <>
+    <View style={StyleSheet.absoluteFill}>
       <Canvas style={{ flex: 1 }}>
         <DiffRect inner={inner} outer={outer} color="black" opacity={0.5} />
       </Canvas>
@@ -60,6 +64,6 @@ export const Overlay: FC<OverlayProps> = ({ toggleTorch, type }) => {
         startContent={<Flash color="white" size="32px" />}
         onPress={toggleTorch}
       />
-    </>
+    </View>
   )
 }

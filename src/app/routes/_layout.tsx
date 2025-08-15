@@ -36,10 +36,7 @@ const RootLayout = () => {
   return (
     <GestureHandlerRootView>
       <ThemeProvider>
-        <SafeAreaView
-          edges={['left', 'right']}
-          className="flex-1 bg-default-50"
-        >
+        <SafeAreaView edges={['left', 'right']} className="flex-1">
           <PortalProvider>
             <PortalHost name="modal-portal" />
             <ThemeContext.Consumer>

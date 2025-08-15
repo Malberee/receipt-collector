@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native'
 
-export const getScannableAreaSize = (width: number, height: number) => {
+export const getScanArea = (width: number, height: number) => {
   const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
     Dimensions.get('screen')
 

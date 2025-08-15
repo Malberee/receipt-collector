@@ -1,58 +1,61 @@
-import type { BarcodeScanningResult } from 'expo-camera'
-import { useEffect, useRef, useState } from 'react'
-import { AppState } from 'react-native'
+import { useRef, useState } from 'react'
+import {
+  type Camera,
+  type CodeScanner,
+  type CodeType,
+  useCameraDevice,
+  useCodeScanner,
+} from 'react-native-vision-camera'
 
-import { getScannableAreaSize, isWithinScannableArea } from '@utils'
+import { getScanArea, isWithinScanArea, mapScreenToFrame } from '@utils'
 
-export const useScanner = (width: number, height: number) => {
+export type ScannerType = 'barcode' | 'qr'
+
+const codeTypes: Record<string, CodeType[]> = {
+  qr: ['qr'],
+  barcode: ['ean-8', 'ean-13', 'code-128', 'code-39', 'code-93'],
+}
+
+export const useScanner = (
+  type: ScannerType,
+  onScan: (data: string) => void,
+) => {
+  const scanAreaSize = { width: 300, height: type === 'qr' ? 300 : 100 }
+
   const [enableTorch, setEnableTorch] = useState(false)
+  const camera = useRef<Camera>(null)
 
-  const scanLock = useRef(false)
-  const appState = useRef(AppState.currentState)
+  const scanAreaScreen = getScanArea(scanAreaSize.width, scanAreaSize.height)
 
-  const toggleTorch = () => setEnableTorch((prevState) => !prevState)
+  const onCodeScanned: CodeScanner['onCodeScanned'] = async (codes, frame) => {
+    if (!codes[0].frame || !codes[0].value || camera.current === null) return
 
-  const onScan = (
-    { data, cornerPoints }: BarcodeScanningResult,
-    parseFn: (data: string) => void,
-  ) => {
-    if (data && !scanLock.current) {
-      const shouldScan = isWithinScannableArea(
-        cornerPoints,
-        getScannableAreaSize(width, height),
-      )
+    frame = { width: frame.height, height: frame.width }
+    const area = mapScreenToFrame(frame, scanAreaScreen)
+    const isInside = isWithinScanArea(codes[0].frame, area)
 
-      if (!shouldScan) {
-        return
-      }
-
-      scanLock.current = true
-
-      setTimeout(() => {
-        scanLock.current = false
-      }, 1500)
-
-      setTimeout(() => {
-        parseFn(data)
-      }, 500)
+    if (isInside) {
+      onScan(codes[0].value)
     }
   }
 
-  useEffect(() => {
-    const subsciption = AppState.addEventListener('change', (nextAppState) => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === 'active'
-      ) {
-        scanLock.current = false
-      }
-      appState.current = nextAppState
-    })
+  const device = useCameraDevice('back')!
+  const codeScanner = useCodeScanner({
+    codeTypes: codeTypes[type],
+    onCodeScanned,
+  })
 
-    return () => {
-      subsciption.remove()
-    }
-  }, [])
+  const cameraProps: Camera['props'] & { ref: Camera['ref'] } = {
+    ref: camera,
+    codeScanner,
+    photoQualityBalance: 'speed',
+    device,
+    torch: enableTorch ? 'on' : 'off',
+    isActive: true,
+  }
 
-  return { toggleTorch, onScan, enableTorch, scanLock }
+  return {
+    cameraProps,
+    toggleTorch: () => setEnableTorch((prevState) => !prevState),
+  }
 }
