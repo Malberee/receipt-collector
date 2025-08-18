@@ -27,7 +27,7 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
     <View>
       <View
         className={cn(
-          'rounded-t-medium bg-default-200',
+          'rounded-t-medium bg-default-50',
           isDark && '!bg-default-100',
         )}
       >
@@ -49,7 +49,7 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
         </View>
         <Divider />
       </View>
-      <View className={cn('bg-default-200', isDark && '!bg-default-100')}>
+      <View className={cn('bg-default-50', isDark && '!bg-default-100')}>
         <View className="p-4">
           <Button size="lg" variant="flat" onPress={openModal}>
             Add product

@@ -33,6 +33,13 @@ const RootLayout = () => {
     }
   }, [top, bottom])
 
+  const contentStyle = {
+    flex: 1,
+    paddingTop: top,
+    paddingBottom: bottom,
+    paddingHorizontal: rem.get(),
+  }
+
   return (
     <GestureHandlerRootView>
       <ThemeProvider>
@@ -40,22 +47,30 @@ const RootLayout = () => {
           <PortalProvider>
             <PortalHost name="modal-portal" />
             <ThemeContext.Consumer>
-              {({ current }) => (
+              {({ current = 'light' }) => (
                 <Stack
                   screenOptions={{
                     headerShown: false,
                     contentStyle: {
-                      flex: 1,
-                      backgroundColor:
-                        semanticColors[current ?? 'light'].default[50],
-                      paddingTop: top,
-                      paddingBottom: bottom,
-                      paddingHorizontal: rem.get(),
+                      ...contentStyle,
+                      backgroundColor: semanticColors[current].default[50],
                     },
                   }}
                 >
                   <Stack.Screen name="index" />
-                  <Stack.Screen name="[id]" />
+                  <Stack.Screen
+                    name="[id]"
+                    options={{
+                      headerShown: false,
+                      contentStyle: {
+                        ...contentStyle,
+                        backgroundColor:
+                          semanticColors[current].default[
+                            current === 'light' ? '200' : '50'
+                          ],
+                      },
+                    }}
+                  />
                   <Stack.Screen name="rarity" />
                   <Stack.Screen name="stats" />
                   <Stack.Screen

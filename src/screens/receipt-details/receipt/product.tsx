@@ -37,7 +37,7 @@ export const Product: FC<ProductProps> = ({ product, onPress, onDelete }) => {
       <Pressable
         onPress={() => onPress(product)}
         className={cn(
-          'flex-row items-center justify-between bg-default-200 p-4 transition-colors active:bg-[#dedee0]',
+          'flex-row items-center justify-between bg-default-50 p-4 transition-colors active:bg-default-100',
           isDark && '!bg-default-100 active:!bg-[#313135]',
         )}
       >
@@ -45,7 +45,7 @@ export const Product: FC<ProductProps> = ({ product, onPress, onDelete }) => {
           <View
             className={cn(
               'size-16 flex-row items-center justify-center overflow-hidden rounded-medium',
-              !picture && 'bg-default-300',
+              !picture && 'bg-default-100',
               !picture && isDark && '!bg-default-50/40',
             )}
           >

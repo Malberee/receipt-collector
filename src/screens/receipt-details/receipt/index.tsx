@@ -64,7 +64,7 @@ export const Receipt: FC<ReceiptProps> = observer(
             data={receipt.products}
             keyExtractor={(item) => item.id}
             className={cn(
-              'z-10 max-h-full bg-default-200',
+              'z-10 max-h-full bg-default-50',
               isDark && '!bg-default-100',
             )}
             renderItem={renderItem}
@@ -77,7 +77,7 @@ export const Receipt: FC<ReceiptProps> = observer(
           >
             <StyledDashedLine
               dashClassName={cn(
-                '-translate-y-[7px] rotate-45 rounded-[2px] bg-default-200 z-0',
+                '-translate-y-[7px] rotate-45 rounded-[2px] bg-default-50 z-0',
                 isDark && '!bg-default-100',
               )}
               dashLength={14}

@@ -17,13 +17,16 @@ const THREESOLD = 0.3
 
 export const useSwipeToDelete = (progress: SharedValue<number>) => {
   const { current } = useTheme()
+  const isDark = current === 'dark'
   const shouldDelete = useDerivedValue(() => progress.value >= THREESOLD)
 
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: withTiming(
       progress.value >= THREESOLD
         ? semanticColors[current].danger[50]!
-        : semanticColors[current].default[200]!,
+        : isDark
+          ? semanticColors[current].default[200]!
+          : semanticColors[current].default[100]!,
       { duration: ANIMATION_TIME },
     ),
   }))
