@@ -33,14 +33,18 @@ export const BarcodeScanner = () => {
     }
   }
 
-  const { cameraProps, toggleTorch } = useScanner('barcode', onScan)
+  const { cameraProps, hasTorch, toggleTorch } = useScanner('barcode', onScan)
 
   const { id } = useLocalSearchParams<{ id: string }>()
 
   return (
     <View className="relative flex-1">
       <Camera {...cameraProps} style={{ flex: 1 }} />
-      <ScannerOverlay type="barcode" toggleTorch={toggleTorch} />
+      <ScannerOverlay
+        type="barcode"
+        hasTorch={hasTorch}
+        toggleTorch={toggleTorch}
+      />
       {product ? (
         <Modal onClose={() => setProduct(null)}>
           <ProductForm

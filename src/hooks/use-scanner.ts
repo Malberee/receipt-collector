@@ -56,6 +56,7 @@ export const useScanner = (
 
   return {
     cameraProps,
+    hasTorch: device.hasFlash || device.hasTorch,
     toggleTorch: () => setEnableTorch((prevState) => !prevState),
   }
 }

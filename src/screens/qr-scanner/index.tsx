@@ -29,12 +29,12 @@ export const QRScanner = () => {
     }
   }
 
-  const { cameraProps, toggleTorch } = useScanner('qr', addReceipt)
+  const { cameraProps, hasTorch, toggleTorch } = useScanner('qr', addReceipt)
 
   return (
     <View className="relative flex-1">
       <Camera {...cameraProps} style={{ flex: 1 }} />
-      <ScannerOverlay type="qr" toggleTorch={toggleTorch} />
+      <ScannerOverlay type="qr" hasTorch={hasTorch} toggleTorch={toggleTorch} />
     </View>
   )
 }

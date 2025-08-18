@@ -22,13 +22,15 @@ import { getScanArea } from '@utils'
 import { makeCornerPath } from './utils'
 
 interface ScannerOverlayProps {
-  toggleTorch: () => void
   type: ScannerType
+  hasTorch: boolean
+  toggleTorch: () => void
 }
 
 export const ScannerOverlay: FC<ScannerOverlayProps> = ({
-  toggleTorch,
   type,
+  hasTorch,
+  toggleTorch,
 }) => {
   const screen = Dimensions.get('screen')
 
@@ -129,16 +131,18 @@ export const ScannerOverlay: FC<ScannerOverlayProps> = ({
         {type === 'qr' ? 'QR code' : 'Barcode'}
       </Text>
 
-      <Button
-        className="absolute bottom-20 left-1/2 size-24 -translate-x-1/2 !rounded-full dark"
-        isIconOnly
-        variant="flat"
-        color="default"
-        size="lg"
-        radius="full"
-        startContent={<Flash color="white" size="32px" />}
-        onPress={toggleTorch}
-      />
+      {hasTorch ? (
+        <Button
+          className="absolute bottom-20 left-1/2 size-24 -translate-x-1/2 !rounded-full dark"
+          isIconOnly
+          variant="flat"
+          color="default"
+          size="lg"
+          radius="full"
+          startContent={<Flash color="white" size="32px" />}
+          onPress={toggleTorch}
+        />
+      ) : null}
     </View>
   )
 }
