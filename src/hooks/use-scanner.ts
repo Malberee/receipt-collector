@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   type Camera,
   type CodeScanner,
@@ -18,17 +18,17 @@ const codeTypes: Record<string, CodeType[]> = {
 
 export const useScanner = (
   type: ScannerType,
+  shouldScan: boolean,
   onScan: (data: string) => void,
 ) => {
   const scanAreaSize = { width: 300, height: type === 'qr' ? 300 : 100 }
 
   const [enableTorch, setEnableTorch] = useState(false)
-  const camera = useRef<Camera>(null)
 
   const scanAreaScreen = getScanArea(scanAreaSize.width, scanAreaSize.height)
 
   const onCodeScanned: CodeScanner['onCodeScanned'] = async (codes, frame) => {
-    if (!codes[0].frame || !codes[0].value || camera.current === null) return
+    if (!codes[0].frame || !codes[0].value || !shouldScan) return
 
     frame = { width: frame.height, height: frame.width }
     const area = mapScreenToFrame(frame, scanAreaScreen)
@@ -45,8 +45,7 @@ export const useScanner = (
     onCodeScanned,
   })
 
-  const cameraProps: Camera['props'] & { ref: Camera['ref'] } = {
-    ref: camera,
+  const cameraProps: Camera['props'] = {
     codeScanner,
     photoQualityBalance: 'speed',
     device,

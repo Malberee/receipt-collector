@@ -29,7 +29,11 @@ export const QRScanner = () => {
     }
   }
 
-  const { cameraProps, hasTorch, toggleTorch } = useScanner('qr', addReceipt)
+  const { cameraProps, hasTorch, toggleTorch } = useScanner(
+    'qr',
+    true,
+    addReceipt,
+  )
 
   return (
     <View className="relative flex-1">
