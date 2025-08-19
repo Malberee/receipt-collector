@@ -1,3 +1,4 @@
+import * as Haptics from 'expo-haptics'
 import { useState } from 'react'
 import {
   type Camera,
@@ -35,6 +36,7 @@ export const useScanner = (
     const isInside = isWithinScanArea(codes[0].frame, area)
 
     if (isInside) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
       onScan(codes[0].value)
     }
   }
