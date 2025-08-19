@@ -34,12 +34,10 @@ export const ScannerButton: FC<ScannerButtonProps> = ({
   const { bottom } = useSafeAreaInsets()
   const { hasPermission, requestPermission } = useCameraPermission()
 
-  const handlePress = () => {
+  const handlePress = async () => {
     if (!hasPermission) {
-      requestPermission()
-      return
+      await requestPermission()
     }
-
     router.navigate(href)
   }
 

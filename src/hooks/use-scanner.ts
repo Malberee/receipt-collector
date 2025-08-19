@@ -5,6 +5,7 @@ import {
   type CodeScanner,
   type CodeType,
   useCameraDevice,
+  useCameraPermission,
   useCodeScanner,
 } from 'react-native-vision-camera'
 
@@ -22,10 +23,10 @@ export const useScanner = (
   shouldScan: boolean,
   onScan: (data: string) => void,
 ) => {
-  const scanAreaSize = { width: 300, height: type === 'qr' ? 300 : 100 }
-
   const [enableTorch, setEnableTorch] = useState(false)
+  const { hasPermission } = useCameraPermission()
 
+  const scanAreaSize = { width: 300, height: type === 'qr' ? 300 : 100 }
   const scanAreaScreen = getScanArea(scanAreaSize.width, scanAreaSize.height)
 
   const onCodeScanned: CodeScanner['onCodeScanned'] = async (codes, frame) => {
@@ -56,6 +57,7 @@ export const useScanner = (
   }
 
   return {
+    hasPermission,
     cameraProps,
     hasTorch: device.hasFlash || device.hasTorch,
     toggleTorch: () => setEnableTorch((prevState) => !prevState),

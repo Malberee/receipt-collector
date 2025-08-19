@@ -2,7 +2,7 @@ import React, { type FC } from 'react'
 import { Text, View } from 'react-native'
 import type { BaseToastProps } from 'react-native-toast-message'
 
-import { DangerIcon } from './danger-icon'
+import { DangerIcon } from '@icons'
 
 export const Toast: FC<BaseToastProps> = ({ text1, text2 }) => {
   return (

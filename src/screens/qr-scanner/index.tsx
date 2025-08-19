@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import Toast from 'react-native-toast-message'
 import { Camera } from 'react-native-vision-camera'
 
-import { ScannerOverlay } from '@components'
+import { NoPermission, ScannerOverlay } from '@components'
 import { useScanner } from '@hooks'
 
 import { parseQR } from './utils'
@@ -29,16 +29,26 @@ export const QRScanner = () => {
     }
   }
 
-  const { cameraProps, hasTorch, toggleTorch } = useScanner(
+  const { hasPermission, cameraProps, hasTorch, toggleTorch } = useScanner(
     'qr',
     true,
     addReceipt,
   )
 
   return (
-    <View className="relative flex-1">
-      <Camera {...cameraProps} style={{ flex: 1 }} />
-      <ScannerOverlay type="qr" hasTorch={hasTorch} toggleTorch={toggleTorch} />
-    </View>
+    <>
+      {hasPermission ? (
+        <View className="relative flex-1">
+          <Camera {...cameraProps} style={{ flex: 1 }} />
+          <ScannerOverlay
+            type="qr"
+            hasTorch={hasTorch}
+            toggleTorch={toggleTorch}
+          />
+        </View>
+      ) : (
+        <NoPermission />
+      )}
+    </>
   )
 }
