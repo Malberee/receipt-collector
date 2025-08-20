@@ -35,7 +35,7 @@ export const ProductForm: FC<ProductFormProps> = ({
   const { picture, name, price, quantity, id } = product ?? {}
   const { pictureSource, launchLibrary } = usePickImage(picture)
 
-  const onSubmit = (product: Omit<ProductType, 'id'>) => {
+  const onSubmit = (product: Omit<ProductType, 'id' | 'calculatedPrice'>) => {
     if (id) {
       receipts.updateProduct(receiptId, id, product)
     } else {

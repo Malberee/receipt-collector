@@ -16,6 +16,7 @@ export type ProductType = {
   id: string
   name: string
   price: number
+  calculatedPrice: number
   quantity: number
   picture?: string
 }
@@ -147,7 +148,10 @@ class Receipts {
     return this.receipts.find((receipt) => receipt.id === id)
   }
 
-  addProduct(receiptId: string, product: Omit<ProductType, 'id'>) {
+  addProduct(
+    receiptId: string,
+    product: Omit<ProductType, 'id' | 'calculatedPrice'>,
+  ) {
     const receipt = this.getReceiptById(receiptId)
 
     if (!receipt) {
@@ -158,13 +162,17 @@ class Receipts {
       receipt.products = []
     }
 
-    receipt.products.push({ id: nanoid(), ...product })
+    receipt.products.push({
+      id: nanoid(),
+      calculatedPrice: product.price * product.quantity,
+      ...product,
+    })
   }
 
   updateProduct(
     receiptId: string,
     productId: string,
-    product: Omit<ProductType, 'id'>,
+    product: Omit<ProductType, 'id' | 'calculatedPrice'>,
   ) {
     const receipt = this.getReceiptById(receiptId)
 
@@ -177,7 +185,13 @@ class Receipts {
     }
 
     receipt.products = receipt.products.map((item) =>
-      item.id === productId ? { ...item, ...product } : item,
+      item.id === productId
+        ? {
+            ...item,
+            ...product,
+            calculatedPrice: product.price * product.quantity,
+          }
+        : item,
     )
   }
 

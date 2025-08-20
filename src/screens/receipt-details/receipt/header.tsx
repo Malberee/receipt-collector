@@ -21,7 +21,7 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
 
   const receiptAmount = receipt.autoCalcAmount
     ? (receipt.products.reduce(
-        (acc, product) => acc + product.price * product.quantity,
+        (acc, product) => acc + product.calculatedPrice,
         0,
       ) ?? 0)
     : amount
