@@ -49,7 +49,7 @@ export const ScannerButton: FC<ScannerButtonProps> = ({
       <Pressable
         onPress={handlePress}
         className={cn(
-          'flex-1 rounded-large bg-[#d9eafd] transition-colors duration-100 active:bg-[#bfdbfa]',
+          'flex-1 rounded-large bg-[#d9eafd] active:bg-[#bfdbfa]',
           isDark && '!bg-[#171d26] active:!bg-[#14253b]',
         )}
       >

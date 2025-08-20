@@ -28,7 +28,7 @@ export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
       <Link href={`/${id}`} asChild>
         <View
           className={cn(
-            'bg-default-50 px-4 transition-colors duration-100 active:bg-[#f7f7f8]',
+            'bg-default-50 px-4 active:bg-[#f7f7f8]',
             isDark && 'active:!bg-[#222222]',
           )}
         >
