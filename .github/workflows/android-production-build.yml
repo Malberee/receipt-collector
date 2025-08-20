@@ -1,7 +1,7 @@
 name: Android App Release Build
 
 on:
-  # Specify when you want the build to run here
+  workflow_dispatch:
 
 jobs:
   build:
