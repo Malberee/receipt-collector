@@ -89,7 +89,7 @@ export const BarcodeScanner = () => {
           <ProductForm
             product={product}
             receiptId={id}
-            onSubmit={() => router.replace(`/${id}`)}
+            onSubmit={() => router.dismissTo(`/${id}`)}
           />
         </Modal>
       ) : null}
