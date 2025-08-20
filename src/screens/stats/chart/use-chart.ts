@@ -1,7 +1,7 @@
-import { receipts } from '@store'
+import { receipts, type ReceiptType } from '@store'
 import moment from 'moment'
 
-import type { ChartProps } from '.'
+import type { ChartProps } from './index'
 
 export const useChart = (
   param: ChartProps['param'],
@@ -9,6 +9,9 @@ export const useChart = (
 ) => {
   const isWeek = period === 'week'
   const format = isWeek ? 'YYYY-MM-DD' : 'YYYY-MM'
+
+  const getAutoCalcReceiptAmount = (receipt: ReceiptType) =>
+    receipt.products.reduce((acc, product) => acc + product.calculatedPrice, 0)
 
   const dates = Array.from({ length: isWeek ? 7 : 6 }, (_, i) =>
     moment()
@@ -19,7 +22,12 @@ export const useChart = (
   const data = receipts
     .getReceipts()
     .filter((receipt) => moment(receipt.date).isSameOrAfter(dates[0]))
-    .map((receipt) => ({ value: receipt.amount, date: receipt.date }))
+    .map((receipt) => ({
+      value: receipt.autoCalcAmount
+        ? getAutoCalcReceiptAmount(receipt)
+        : receipt.amount,
+      date: receipt.date,
+    }))
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   const grouped = data.reduce(
