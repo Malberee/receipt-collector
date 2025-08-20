@@ -20,7 +20,10 @@ export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
   const { isDark } = useTheme()
 
   const receiptAmount = autoCalcAmount
-    ? products.reduce((acc, product) => acc + product.price, 0)
+    ? products.reduce(
+        (acc, product) => acc + product.price * product.quantity,
+        0,
+      )
     : amount
 
   return (
