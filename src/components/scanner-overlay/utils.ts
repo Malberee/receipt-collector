@@ -1,5 +1,3 @@
-import { Skia } from '@shopify/react-native-skia'
-
 type Position = 'tl' | 'tr' | 'bl' | 'br'
 
 export const makeCornerPath = (
@@ -10,32 +8,37 @@ export const makeCornerPath = (
   lineLength: number,
   position: Position,
 ) => {
-  const path = Skia.Path.Make()
-
   if (position === 'tl') {
-    path.moveTo(x - spacing, y + lineLength + radius - spacing)
-    path.rLineTo(0, -lineLength)
-    path.rArcTo(radius, radius, 0, true, false, radius, -radius)
-    path.rLineTo(lineLength, 0)
+    return `
+      M${x - spacing} ${y + lineLength + radius - spacing}
+      v-${lineLength}
+      A${radius} ${radius} 0 0 1 ${x + radius - spacing} ${y - spacing}
+      h${lineLength}
+    `
   }
   if (position === 'tr') {
-    path.moveTo(x + spacing, y + lineLength + radius - spacing)
-    path.rLineTo(0, -lineLength)
-    path.rArcTo(radius, radius, 0, true, true, -radius, -radius)
-    path.rLineTo(-lineLength, 0)
+    return `
+      M${x + spacing} ${y + lineLength + radius - spacing}
+      v-${lineLength}
+      A${radius} ${radius} 0 0 0 ${x - radius + spacing} ${y - spacing}
+      h-${lineLength}
+    `
   }
   if (position === 'bl') {
-    path.moveTo(x - spacing, y - lineLength - radius + spacing)
-    path.rLineTo(0, lineLength)
-    path.rArcTo(radius, radius, 0, true, true, radius, radius)
-    path.rLineTo(lineLength, 0)
+    return `
+      M${x - spacing} ${y - lineLength - radius + spacing}
+      v${lineLength}
+      A${radius} ${radius} 0 0 0 ${x + radius - spacing} ${y + spacing}
+      h${lineLength}
+    `
   }
   if (position === 'br') {
-    path.moveTo(x + spacing, y - lineLength - radius + spacing)
-    path.rLineTo(0, lineLength)
-    path.rArcTo(radius, radius, 0, true, false, -radius, radius)
-    path.rLineTo(-lineLength, 0)
+    return `
+      M${x + spacing} ${y - lineLength - radius + spacing}
+      v${lineLength}
+      A${radius} ${radius} 0 0 1 ${x - radius + spacing} ${y + spacing}
+      h-${lineLength}
+    `
   }
-
-  return path
+  return ''
 }

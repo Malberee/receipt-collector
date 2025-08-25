@@ -14,7 +14,6 @@
   "dependencies": {
     "@gorhom/portal": "^1.0.14",
     "@malberee/heroui-native": "^1.1.12",
-    "@shopify/react-native-skia": "2.0.0-next.4",
     "@types/seedrandom": "^3.0.8",
     "clsx": "^2.1.1",
     "expo": "53.0.22",
@@ -44,6 +43,7 @@
     "react-native-get-random-values": "~1.11.0",
     "react-native-mmkv": "^3.2.0",
     "react-native-reanimated": "~3.17.4",
+    "react-native-redash": "^18.1.3",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-svg": "15.11.2",
