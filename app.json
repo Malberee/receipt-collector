@@ -57,6 +57,7 @@
         {
           "android": {
             "enableBundleCompression": true,
+            "enableProguardInReleaseBuilds": true,
             "useLegacyPackaging": true
           }
         }
