@@ -50,7 +50,7 @@
     "react-native-svg": "15.11.2",
     "react-native-theme-switch-animation": "^0.8.0",
     "react-native-toast-message": "^2.2.1",
-    "react-native-ui-datepicker": "^2.0.4",
+    "react-native-ui-datepicker": "^3.1.2",
     "react-native-vision-camera": "^4.7.1",
     "seedrandom": "^3.0.5",
     "tailwindcss": "^3.4.17",
