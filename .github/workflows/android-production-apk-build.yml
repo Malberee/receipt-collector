@@ -1,4 +1,4 @@
-name: Android Development Build
+name: Android App Release APK Build
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Setup repo
         uses: actions/checkout@v4
-
+      
       - name: Setup node
         uses: actions/setup-node@v4.0.2
         with:
@@ -36,10 +36,10 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build Android app
-        run: eas build --platform android --profile development --local --output ${{ github.workspace }}/app-development.apk
+        run: eas build --platform android --profile production-apk --local --output ${{ github.workspace }}/app-release.apk
 
-      - name: Upload APK artifact
+      - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: ${{ github.workspace }}/app-release.apk
+          path: ${{ github.workspace }}/app-release.aab
