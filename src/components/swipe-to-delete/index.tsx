@@ -5,6 +5,7 @@ import Swipeable, {
 } from 'react-native-gesture-handler/ReanimatedSwipeable'
 
 import { RightAction } from './right-action'
+import { THRESHOLD } from './use-swipe-to-delete'
 
 interface SwipeToDeleteProps extends PropsWithChildren {
   onDelete: () => void
@@ -18,7 +19,7 @@ export const SwipeToDelete: FC<SwipeToDeleteProps> = ({
 
   return (
     <Swipeable
-      rightThreshold={Dimensions.get('window').width * 0.2}
+      rightThreshold={Dimensions.get('window').width * THRESHOLD}
       onSwipeableWillOpen={() => {
         onDelete()
         ref?.current?.close()
