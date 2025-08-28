@@ -1,7 +1,7 @@
 <img width="1326" height="336" alt="cover" src="https://github.com/user-attachments/assets/837ab750-a09c-4d4f-bda0-9e8e4c6dfcf6" />
 
 # 🧾 Collect, Scan & Track Your Receipts
-**Receipt Collector** is a React Native mobile app that helps you keep track of your shopping receipts. Instead of manually entering the amount and date, simply scan the receipt’s QR code. You can also add products to a receipt manually or by scanning their barcodes.
+**Receipt Collector** is a React Native mobile app that helps you keep track of your shopping receipts. Instead of manually entering the amount and date, simply scan the receipt’s QR code.
 
 <div align="center">
     <img width="200" height="408" alt="home screen" src="https://github.com/user-attachments/assets/e54ffc04-ef97-432e-af09-160bf04786d7" />
