@@ -42,13 +42,8 @@ const radios = [
 ]
 
 export const ThemeChanger = observer(() => {
-  const {
-    showPopover,
-    CurrentIcon,
-    togglePopover,
-    onValueChange,
-    setCoordinates,
-  } = useToggleChanger()
+  const { showPopover, CurrentIcon, togglePopover, onValueChange } =
+    useToggleChanger()
 
   return (
     <View>
@@ -59,11 +54,6 @@ export const ThemeChanger = observer(() => {
         size="lg"
         startContent={<CurrentIcon {...iconProps} width={24} height={24} />}
         onPress={togglePopover}
-        onLayout={(event) => {
-          event.target.measure((_, __, width, height, pageX, pageY) =>
-            setCoordinates({ x: pageX + width / 2, y: pageY + height / 2 }),
-          )
-        }}
       />
 
       {showPopover ? (
