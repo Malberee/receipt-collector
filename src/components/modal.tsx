@@ -58,7 +58,7 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
         />
         <KeyboardAvoidingView behavior="padding">
           <Animated.View
-            className="rounded-medium bg-default-50 p-4 pt-10"
+            className="rounded-medium border border-default-100 bg-default-50 p-4 pt-10"
             entering={FadeInDown.duration(100)}
             exiting={FadeOutDown.duration(100)}
           >
