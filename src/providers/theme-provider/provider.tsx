@@ -41,7 +41,7 @@ export const ThemeProvider: FC<PropsWithChildren> = observer(({ children }) => {
   useEffect(() => {
     NavigationBar.setPositionAsync('absolute')
     NavigationBar.setBackgroundColorAsync('transparent')
-  }, [theme])
+  }, [])
 
   useEffect(() => {
     if (receipts.theme === 'system') {
