@@ -1,3 +1,16 @@
+diff --git a/node_modules/react-native-theme-switch-animation/lib/module/index.js b/node_modules/react-native-theme-switch-animation/lib/module/index.js
+index 0848c56..a65acda 100644
+--- a/node_modules/react-native-theme-switch-animation/lib/module/index.js
++++ b/node_modules/react-native-theme-switch-animation/lib/module/index.js
+@@ -37,7 +37,7 @@ const switchTheme = ({
+ };
+ const unfreezeWrapper = () => {
+   const defaultRatio = 0.5;
+-  setImmediate(() => {
++  setTimeout(() => {
+     if (localAnimationConfig.type === 'circular' || localAnimationConfig.type === 'inverted-circular') {
+       if ('cx' in localAnimationConfig.startingPoint && 'cy' in localAnimationConfig.startingPoint) {
+         var _localAnimationConfig;
 diff --git a/node_modules/react-native-theme-switch-animation/src/index.tsx b/node_modules/react-native-theme-switch-animation/src/index.tsx
 index d2175df..b6d37cf 100644
 --- a/node_modules/react-native-theme-switch-animation/src/index.tsx
