@@ -1,10 +1,12 @@
 import { cn } from '@malberee/heroui-native'
 import { type ReceiptType } from '@store'
-import { Link } from 'expo-router'
+import { router } from 'expo-router'
 import { observer } from 'mobx-react-lite'
 import moment from 'moment'
+import { cssInterop } from 'nativewind'
 import React from 'react'
 import { Dimensions, Text, View } from 'react-native'
+import { Pressable } from 'react-native-gesture-handler'
 
 import { RarityChip, SwipeToDelete } from '@components'
 import { useTheme } from '@providers'
@@ -14,6 +16,12 @@ interface ReceiptProps {
   receipt: ReceiptType
   onDelete: (id: string) => void
 }
+
+cssInterop(Pressable, {
+  className: {
+    target: 'style',
+  },
+})
 
 export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
   const { id, amount, date, rarity, products, autoCalcAmount } = receipt
@@ -28,31 +36,32 @@ export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
       width={Dimensions.get('screen').width}
       onDelete={() => onDelete(id)}
     >
-      <Link href={`/${id}`} asChild>
-        <View
-          className={cn(
-            'bg-default-50 px-4 active:bg-[#f7f7f8]',
-            isDark && 'active:!bg-[#222222]',
-          )}
-        >
-          <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
-            <View className="flex-col justify-between">
-              <Text className="text-xl text-foreground">
-                {formatCurrency(receiptAmount)}
-              </Text>
-              <Text className="text-sm text-foreground-500">
-                {moment(date).calendar(null, {
-                  sameDay: '[Today] [ • ] HH:mm',
-                  lastDay: '[Yesterday] [ • ] HH:mm',
-                  lastWeek: '[Last] dddd [ • ] HH:mm',
-                  sameElse: `DD MMMM ${moment().year() !== moment(date).year() ? 'YYYY ' : ''}[ • ] HH:mm`,
-                })}
-              </Text>
-            </View>
-            {rarity !== 'none' ? <RarityChip rarity={rarity} /> : null}
+      <Pressable
+        className={cn(
+          'bg-default-50 px-4 active:bg-[#f7f7f8]',
+          isDark && 'active:!bg-[#222222]',
+        )}
+        onPress={() => router.navigate(`/${id}`)}
+      >
+        <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
+          <View className="flex-col justify-between">
+            <Text className="text-xl text-foreground">
+              {formatCurrency(receiptAmount)}
+            </Text>
+            <Text className="text-sm text-foreground-500">
+              {moment(date).calendar(null, {
+                sameDay: '[Today] [ • ] HH:mm',
+                lastDay: '[Yesterday] [ • ] HH:mm',
+                lastWeek: '[Last] dddd [ • ] HH:mm',
+                sameElse: `DD MMMM ${moment().year() !== moment(date).year() ? 'YYYY ' : ''}[ • ] HH:mm`,
+              })}
+            </Text>
           </View>
+          {rarity !== 'none' ? (
+            <RarityChip rarity={rarity} pointerEvents="none" />
+          ) : null}
         </View>
-      </Link>
+      </Pressable>
     </SwipeToDelete>
   )
 })
