@@ -1,3 +1,4 @@
+import { ChevronIcon } from '@malberee/heroui-native'
 import React, { type FC } from 'react'
 import { View } from 'react-native'
 import DateTimePicker from 'react-native-ui-datepicker'
@@ -14,6 +15,15 @@ export const DatePicker: FC<DatePickerProps> = ({ date, setDate }) => {
         mode="single"
         date={date}
         onChange={(params) => setDate(params.date as Date)}
+        components={{
+          IconPrev: <ChevronIcon className="text-foreground" />,
+          IconNext: (
+            <ChevronIcon
+              transform={[{ rotate: '180deg' }]}
+              className="text-foreground"
+            />
+          ),
+        }}
         classNames={{
           time_label: 'text-foreground text-3xl',
           time_selector_label: 'text-foreground',
