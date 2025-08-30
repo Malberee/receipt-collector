@@ -1,8 +1,8 @@
 import { cn } from '@malberee/heroui-native'
 import { type ProductType } from '@store'
-import { cssInterop } from 'nativewind'
+import { cssInterop, rem } from 'nativewind'
 import React, { type FC } from 'react'
-import { Image, Pressable, Text, View } from 'react-native'
+import { Dimensions, Image, Pressable, Text, View } from 'react-native'
 
 import { SwipeToDelete } from '@components'
 import { NoImageIcon } from '@icons'
@@ -33,7 +33,10 @@ export const Product: FC<ProductProps> = ({ product, onPress, onDelete }) => {
   const shouldSliceName = name.length >= 17
 
   return (
-    <SwipeToDelete onDelete={() => onDelete(id)}>
+    <SwipeToDelete
+      width={Dimensions.get('screen').width - rem.get() * 2}
+      onDelete={() => onDelete(id)}
+    >
       <Pressable
         onPress={() => onPress(product)}
         className={cn(

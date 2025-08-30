@@ -4,7 +4,7 @@ import { Link } from 'expo-router'
 import { observer } from 'mobx-react-lite'
 import moment from 'moment'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Dimensions, Text, View } from 'react-native'
 
 import { RarityChip, SwipeToDelete } from '@components'
 import { useTheme } from '@providers'
@@ -24,7 +24,10 @@ export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
     : amount
 
   return (
-    <SwipeToDelete onDelete={() => onDelete(id)}>
+    <SwipeToDelete
+      width={Dimensions.get('screen').width}
+      onDelete={() => onDelete(id)}
+    >
       <Link href={`/${id}`} asChild>
         <View
           className={cn(
