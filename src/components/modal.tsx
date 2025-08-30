@@ -5,6 +5,7 @@ import React, { type FC, type PropsWithChildren, useEffect } from 'react'
 import {
   BackHandler,
   Dimensions,
+  Keyboard,
   KeyboardAvoidingView,
   Pressable,
   View,
@@ -40,8 +41,14 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
         return true
       },
     )
+    const keyboardListener = Keyboard.addListener('keyboardDidHide', () => {
+      Keyboard.dismiss()
+    })
 
-    return () => backHandler.remove()
+    return () => {
+      backHandler.remove()
+      keyboardListener.remove()
+    }
   }, [])
 
   return (
@@ -49,6 +56,7 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
       <View
         className="absolute left-0 top-0 z-20 flex-row items-center justify-center"
         style={{ height: Dimensions.get('screen').height, width: '100%' }}
+        onTouchStart={Keyboard.dismiss}
       >
         <AnimatedPressable
           className="absolute bottom-0 h-full w-full bg-black/70"
