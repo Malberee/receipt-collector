@@ -10,7 +10,7 @@ interface DatePickerProps {
 
 export const DatePicker: FC<DatePickerProps> = ({ date, setDate }) => {
   return (
-    <View className="rounded-xl bg-default-100">
+    <View className="rounded-xl bg-default-100 p-2">
       <DateTimePicker
         mode="single"
         date={date}
@@ -27,17 +27,20 @@ export const DatePicker: FC<DatePickerProps> = ({ date, setDate }) => {
         classNames={{
           time_label: 'text-foreground text-3xl',
           time_selector_label: 'text-foreground',
-          year_label: 'text-foreground',
+          year_label: 'text-foreground text-center w-full',
           year_selector_label: 'text-foreground',
-          selected_year: 'bg-primary rounded-xl',
+          selected_year: 'bg-default-300 dark:bg-default-200 rounded-md',
+          active_year: '!bg-primary rounded-md',
+          active_year_label: 'text-primary-foreground',
           month_selector_label: 'text-foreground',
-          selected_month: 'bg-primary rounded-xl',
           month_label: 'text-foreground',
+          selected_month_label: 'text-primary-foreground text-center w-full',
+          selected_month: 'bg-primary rounded-md',
           weekday_label: 'text-primary-foreground bg-primary rounded-full px-2',
-          day_label: 'text-foreground',
-          selected: 'rounded-xl aspect-square !bg-primary',
+          day_label: 'text-foreground text-center w-full',
+          selected: 'rounded-md !bg-primary',
           selected_label: 'text-primary-foreground',
-          today: 'rounded-xl bg-default-300 dark:bg-default-200',
+          today: 'rounded-md bg-default-300 dark:bg-default-200',
         }}
         timePicker
       />
