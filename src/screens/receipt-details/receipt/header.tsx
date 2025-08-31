@@ -27,7 +27,7 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
     : amount
 
   return (
-    <View>
+    <View className="-mb-[0.1px]">
       <View
         className={cn(
           'rounded-t-medium bg-default-50',

@@ -1,11 +1,11 @@
 import { cn } from '@malberee/heroui-native'
 import { type ProductType, type ReceiptType, receipts } from '@store'
 import { observer } from 'mobx-react-lite'
-import { cssInterop } from 'nativewind'
-import React, { type FC, useCallback, useState } from 'react'
-import { FlatList, type ListRenderItem, View } from 'react-native'
-import Dash from 'react-native-dashed-line'
+import { cssInterop, rem } from 'nativewind'
+import React, { type FC, useCallback, useMemo, useState } from 'react'
+import { Dimensions, FlatList, type ListRenderItem, View } from 'react-native'
 import Animated, { LinearTransition } from 'react-native-reanimated'
+import ZigzagLines from 'react-native-zigzag-lines'
 
 import { DeleteDialog } from '@components'
 import { useTheme } from '@providers'
@@ -27,12 +27,13 @@ cssInterop(FlatList, {
   },
 })
 
-const StyledDashedLine = cssInterop(Dash, {
+const StyledZigzagLines = cssInterop(ZigzagLines, {
   className: {
     target: 'style',
-  },
-  dashClassName: {
-    target: 'dashStyle',
+    nativeStyleToProp: {
+      backgroundColor: 'backgroundColor',
+      color: 'color',
+    },
   },
 })
 
@@ -56,6 +57,22 @@ export const Receipt: FC<ReceiptProps> = observer(
       [],
     )
 
+    const zigzag = useMemo(
+      () => (
+        <StyledZigzagLines
+          width={Dimensions.get('screen').width - rem.get() * 2}
+          height={7}
+          jagBottom={1}
+          jagWidth={20}
+          className={cn(
+            'bg-default-50 text-default-50',
+            isDark && '!bg-default-100',
+          )}
+        />
+      ),
+      [],
+    )
+
     return (
       <View className="mb-28 flex-1">
         <View className="max-h-full">
@@ -71,19 +88,7 @@ export const Receipt: FC<ReceiptProps> = observer(
             itemLayoutAnimation={LinearTransition}
             layout={LinearTransition}
           />
-          <Animated.View
-            className="w-full overflow-hidden"
-            layout={LinearTransition}
-          >
-            <StyledDashedLine
-              dashClassName={cn(
-                '-translate-y-[7px] rotate-45 rounded-[2px] bg-default-50 z-0',
-                isDark && '!bg-default-100',
-              )}
-              dashLength={14}
-              dashThickness={14}
-            />
-          </Animated.View>
+          <Animated.View layout={LinearTransition}>{zigzag}</Animated.View>
         </View>
 
         {productToDelete ? (

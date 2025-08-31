@@ -50,6 +50,7 @@
     "react-native-toast-message": "^2.2.1",
     "react-native-ui-datepicker": "^3.1.2",
     "react-native-vision-camera": "^4.7.1",
+    "react-native-zigzag-lines": "^0.2.0",
     "seedrandom": "^3.0.5",
     "tailwindcss": "^3.4.17",
     "yup": "^1.4.0"

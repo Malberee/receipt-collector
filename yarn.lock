@@ -7591,6 +7591,11 @@ react-native-vision-camera@^4.7.1:
   resolved "https://registry.yarnpkg.com/react-native-vision-camera/-/react-native-vision-camera-4.7.1.tgz#4a373e8d2ebad4d652eb0de1a50e620940a074dd"
   integrity sha512-N6qqjhUSC9XRUQzqx+647+sPsrf9FcEYGjRhif1WNy2z8AwPMOSLINIcmMM6C4drxH2CdiaULGAWHpx/cnsBpw==
 
+react-native-zigzag-lines@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-zigzag-lines/-/react-native-zigzag-lines-0.2.0.tgz#38aed17e5d7329d79c79cc9b2cad7c53425e8713"
+  integrity sha512-oVxxF6c4rG8T4kNLFCZD5GbVOqsa8A7tHknSSnvA9H1SkIuKonYBkmFSU3VU1nfnrXr0VRhhQjeMF4n08izPRQ==
+
 react-native@0.79.5:
   version "0.79.5"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.79.5.tgz#a91cd92bb282a4f8420fdd64fe3a9434580404b2"
