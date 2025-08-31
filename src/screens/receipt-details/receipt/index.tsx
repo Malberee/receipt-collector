@@ -64,10 +64,11 @@ export const Receipt: FC<ReceiptProps> = observer(
           height={7}
           jagBottom={1}
           jagWidth={20}
-          className={cn(
-            'bg-default-50 text-default-50',
-            isDark && '!bg-default-100',
-          )}
+          className={
+            isDark
+              ? 'bg-default-100 text-default-50'
+              : 'bg-default-50 text-default-200'
+          }
         />
       ),
       [],
