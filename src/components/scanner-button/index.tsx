@@ -1,38 +1,24 @@
 import { cn } from '@malberee/heroui-native'
 import { router } from 'expo-router'
-import { cssInterop, rem } from 'nativewind'
-import React, { type FC, type ReactNode } from 'react'
+import React, { type FC } from 'react'
 import { Pressable, Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useCameraPermission } from 'react-native-vision-camera'
 
 import { useTheme } from '@providers'
 
-import ScannerIcon from './scanner-icon'
+import { BarcodeScan } from './barcode-scan'
+import { QRCodeScan } from './qr-code-scan'
 
-interface ScannerButtonProps {
-  children: string
-  endContent?: ReactNode
-  href: string
-}
+type ScannerButtonProps = { type: 'qr' } | { type: 'barcode'; id: string }
 
-cssInterop(ScannerIcon, {
-  className: {
-    target: false,
-    nativeStyleToProp: {
-      color: true,
-    },
-  },
-})
+const QR_HREF = '/scanner/qr'
+const BARCODE_HREF = '/scanner/barcode'
 
-export const ScannerButton: FC<ScannerButtonProps> = ({
-  children,
-  endContent,
-  href,
-}) => {
+export const ScannerButton: FC<ScannerButtonProps> = (props) => {
   const { isDark } = useTheme()
-  const { bottom } = useSafeAreaInsets()
   const { hasPermission, requestPermission } = useCameraPermission()
+
+  const href = props.type === 'qr' ? QR_HREF : `${BARCODE_HREF}/${props.id}`
 
   const handlePress = async () => {
     if (!hasPermission) {
@@ -41,24 +27,21 @@ export const ScannerButton: FC<ScannerButtonProps> = ({
     router.navigate(href)
   }
 
+  const Icon = props.type === 'qr' ? QRCodeScan : BarcodeScan
+  const text = props.type === 'qr' ? 'Scan QR Code' : 'Scan barcode'
+
   return (
-    <View
-      className="absolute left-4 z-10 w-full flex-row gap-4"
-      style={{ bottom: bottom + rem.get() }}
+    <Pressable
+      onPress={handlePress}
+      className={cn(
+        'flex-1 rounded-large bg-[#d9eafd] active:bg-[#bfdbfa]',
+        isDark && '!bg-[#171d26] active:!bg-[#14253b]',
+      )}
     >
-      <Pressable
-        onPress={handlePress}
-        className={cn(
-          'flex-1 rounded-large bg-[#d9eafd] active:bg-[#bfdbfa]',
-          isDark && '!bg-[#171d26] active:!bg-[#14253b]',
-        )}
-      >
-        <View className="w-full flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary px-3 py-6">
-          <ScannerIcon className="text-primary" width="24px" height="24px" />
-          <Text className="text-center text-xl text-primary">{children}</Text>
-        </View>
-      </Pressable>
-      {endContent}
-    </View>
+      <View className="w-full flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary px-3 py-6">
+        <Icon className="text-primary" />
+        <Text className="text-center text-xl text-primary">{text}</Text>
+      </View>
+    </Pressable>
   )
 }

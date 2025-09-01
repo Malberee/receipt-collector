@@ -1,7 +1,10 @@
 import { PortalHost } from '@gorhom/portal'
 import { Button, Plus } from '@malberee/heroui-native'
+import { rem } from 'nativewind'
 import React, { useState } from 'react'
+import { View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Modal, ReceiptForm, ScannerButton } from '@components'
 
@@ -12,6 +15,7 @@ import { ReceiptList } from './receipt-list'
 export const Receipts = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const isExpanded = useSharedValue(false)
+  const { bottom } = useSafeAreaInsets()
 
   return (
     <>
@@ -22,25 +26,20 @@ export const Receipts = () => {
       />
       <Filters isExpanded={isExpanded} />
       <ReceiptList />
-      <ScannerButton
-        href="/scanner/qr"
-        endContent={
-          <Button
-            isIconOnly
-            startContent={
-              <Plus
-                width={38}
-                height={38}
-                className="text-primary-foreground"
-              />
-            }
-            className="aspect-square h-full w-auto"
-            onPress={() => setModalIsOpen(true)}
-          />
-        }
+      <View
+        className="absolute left-4 z-10 w-full flex-row gap-4"
+        style={{ bottom: bottom + rem.get() }}
       >
-        Scan QR code
-      </ScannerButton>
+        <ScannerButton type="qr" />
+        <Button
+          isIconOnly
+          startContent={
+            <Plus width={38} height={38} className="text-primary-foreground" />
+          }
+          className="aspect-square h-full w-auto"
+          onPress={() => setModalIsOpen(true)}
+        />
+      </View>
       <PortalHost name="popover-portal" />
 
       {modalIsOpen ? (

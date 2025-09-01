@@ -2,7 +2,10 @@ import { PortalHost } from '@gorhom/portal'
 import { type ProductType, receipts } from '@store'
 import { useLocalSearchParams } from 'expo-router'
 import { observer } from 'mobx-react-lite'
+import { rem } from 'nativewind'
 import React, { useState } from 'react'
+import { View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Modal, ProductForm, ReceiptForm, ScannerButton } from '@components'
 
@@ -15,6 +18,8 @@ export const ReceiptDetails = observer(() => {
     null,
   )
   const { id } = useLocalSearchParams<{ id: string }>()
+  const { bottom } = useSafeAreaInsets()
+
   const receipt = receipts.getReceiptById(id)!
 
   return (
@@ -25,9 +30,12 @@ export const ReceiptDetails = observer(() => {
         openModal={() => setModalType('product')}
         selectProduct={setSelectedProduct}
       />
-      <ScannerButton href={`/scanner/barcode/${id}`}>
-        Scan barcode
-      </ScannerButton>
+      <View
+        className="absolute left-4 z-10 w-full flex-row gap-4"
+        style={{ bottom: bottom + rem.get() }}
+      >
+        <ScannerButton type="barcode" id={id} />
+      </View>
 
       {modalType ? (
         <Modal
