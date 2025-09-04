@@ -75,7 +75,7 @@ export const Receipt: FC<ReceiptProps> = observer(
     )
 
     return (
-      <View className="mb-28 flex-1">
+      <View className="mb-4 flex-1">
         <View className="max-h-full">
           <Header receipt={receipt} openModal={openModal} {...receipt} />
           <Animated.FlatList

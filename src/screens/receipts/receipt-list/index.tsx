@@ -1,6 +1,5 @@
 import { type ReceiptType, receipts } from '@store'
 import { observer } from 'mobx-react-lite'
-import { rem } from 'nativewind'
 import React, { useCallback, useState } from 'react'
 import { type ListRenderItem } from 'react-native'
 import Animated, { LinearTransition } from 'react-native-reanimated'
@@ -22,10 +21,7 @@ export const ReceiptList = observer(() => {
   return data.length ? (
     <>
       <Animated.FlatList
-        style={{ marginHorizontal: -rem.get() }}
-        contentContainerStyle={{
-          paddingBottom: 7 * rem.get(),
-        }}
+        className="-mx-4"
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}

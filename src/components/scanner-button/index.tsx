@@ -20,7 +20,7 @@ export const ScannerButton: FC<ScannerButtonProps> = (props) => {
 
   const href = props.type === 'qr' ? QR_HREF : `${BARCODE_HREF}/${props.id}`
 
-  const handlePress = async () => {
+  const onPress = async () => {
     if (!hasPermission) {
       await requestPermission()
     }
@@ -32,13 +32,13 @@ export const ScannerButton: FC<ScannerButtonProps> = (props) => {
 
   return (
     <Pressable
-      onPress={handlePress}
       className={cn(
-        'flex-1 rounded-large bg-[#d9eafd] active:bg-[#bfdbfa]',
+        'grow rounded-large bg-[#d9eafd] active:bg-[#bfdbfa]',
         isDark && '!bg-[#171d26] active:!bg-[#14253b]',
       )}
+      onPress={onPress}
     >
-      <View className="w-full flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary px-3 py-6">
+      <View className="flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary px-3 py-6">
         <Icon className="text-primary" />
         <Text className="text-center text-xl text-primary">{text}</Text>
       </View>
