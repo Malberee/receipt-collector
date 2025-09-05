@@ -5,7 +5,13 @@ import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
 import { View } from 'react-native'
 
-import { Modal, ProductForm, ReceiptForm, ScannerButton } from '@components'
+import {
+  Container,
+  Modal,
+  ProductForm,
+  ReceiptForm,
+  ScannerButton,
+} from '@components'
 
 import { Header } from './header'
 import { type ModalType, Receipt } from './receipt'
@@ -20,7 +26,7 @@ export const ReceiptDetails = observer(() => {
   const receipt = receipts.getReceiptById(id)!
 
   return (
-    <>
+    <Container>
       <Header onEdit={() => setModalType('receipt')} receiptId={id} />
       <Receipt
         receipt={receipt}
@@ -51,6 +57,6 @@ export const ReceiptDetails = observer(() => {
       ) : null}
 
       <PortalHost name="popover-portal" />
-    </>
+    </Container>
   )
 })

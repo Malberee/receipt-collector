@@ -8,7 +8,6 @@ export const BackButton = () => {
       variant="light"
       size="lg"
       color="default"
-      className="mb-4"
       startContent={
         <ChevronDown
           className="text-foreground"

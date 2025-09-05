@@ -1,11 +1,12 @@
 import { Button } from '@malberee/heroui-native'
-import { router } from 'expo-router'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
 import { View } from 'react-native'
 
+import { MenuIcon } from '@icons'
+import { useDrawer } from '@providers'
+
 import { ThemeChanger } from '../theme-changer'
-import { ChartIcon } from './chart-icon'
 import { FilterIcon } from './filter-icon'
 
 interface HeaderProps {
@@ -22,6 +23,8 @@ cssInterop(FilterIcon, {
 })
 
 export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
+  const { show } = useDrawer()
+
   return (
     <View className="w-full flex-row justify-between pb-4">
       <View className="flex-row gap-4">
@@ -31,9 +34,9 @@ export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
           size="lg"
           color="default"
           startContent={
-            <ChartIcon className="text-foreground" width={24} height={24} />
+            <MenuIcon className="text-foreground" width={28} height={28} />
           }
-          onPress={() => router.navigate('/stats')}
+          onPress={show}
         />
         <Button
           isIconOnly

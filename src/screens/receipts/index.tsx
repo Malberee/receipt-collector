@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
-import { Modal, ReceiptForm, ScannerButton } from '@components'
+import { Container, Modal, ReceiptForm, ScannerButton } from '@components'
 
 import { Filters } from './filters'
 import { Header } from './header'
@@ -15,7 +15,7 @@ export const Receipts = () => {
   const isExpanded = useSharedValue(false)
 
   return (
-    <>
+    <Container>
       <Header
         toggleFilters={() => {
           isExpanded.value = !isExpanded.value
@@ -34,6 +34,7 @@ export const Receipts = () => {
           onPress={() => setModalIsOpen(true)}
         />
       </View>
+
       <PortalHost name="popover-portal" />
 
       {modalIsOpen ? (
@@ -41,6 +42,6 @@ export const Receipts = () => {
           <ReceiptForm onSubmit={() => setModalIsOpen(false)} />
         </Modal>
       ) : null}
-    </>
+    </Container>
   )
 }
