@@ -1,5 +1,5 @@
 import { Button, Input } from '@malberee/heroui-native'
-import { type ProductType, receipts } from '@store'
+import { type ProductType, store } from '@store'
 import { Formik } from 'formik'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
@@ -37,9 +37,9 @@ export const ProductForm: FC<ProductFormProps> = ({
 
   const onSubmit = (product: Omit<ProductType, 'id' | 'calculatedPrice'>) => {
     if (id) {
-      receipts.updateProduct(receiptId, id, product)
+      store.updateProduct(receiptId, id, product)
     } else {
-      receipts.addProduct(receiptId, product)
+      store.addProduct(receiptId, product)
     }
 
     _onSubmit()

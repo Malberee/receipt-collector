@@ -1,5 +1,5 @@
 import { Button } from '@malberee/heroui-native'
-import { receipts } from '@store'
+import { store } from '@store'
 import moment, { type Moment } from 'moment'
 import React, { type FC, useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
@@ -36,7 +36,7 @@ export const DateRangePicker: FC<DateRangePickerProps> = ({
 
     setStartDate(minDate.toDate())
     setEndDate(maxDate.toDate())
-  }, [JSON.stringify(receipts.receipts)])
+  }, [JSON.stringify(store.receipts)])
 
   return (
     <View>

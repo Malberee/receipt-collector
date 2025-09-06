@@ -1,4 +1,4 @@
-import { type Theme, receipts } from '@store'
+import { type Theme, store } from '@store'
 import * as NavigationBar from 'expo-navigation-bar'
 import { StatusBar } from 'expo-status-bar'
 import { observer } from 'mobx-react-lite'
@@ -27,15 +27,15 @@ export const ThemeContext = createContext<ThemeContextType>({
 export const ThemeProvider: FC<PropsWithChildren> = observer(({ children }) => {
   const { colorScheme } = useColorScheme()
   const [theme, setTheme] = useState(() => {
-    if (receipts.theme === 'system') return colorScheme ?? 'light'
-    return receipts.theme
+    if (store.preferences.theme === 'system') return colorScheme ?? 'light'
+    return store.preferences.theme
   })
 
   const onThemeChange = (theme: Theme) => {
     if (theme === 'system') setTheme(colorScheme ?? 'light')
     else setTheme(theme)
 
-    receipts.setTheme(theme)
+    store.setPreferences('theme', theme)
   }
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const ThemeProvider: FC<PropsWithChildren> = observer(({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (receipts.theme === 'system') {
+    if (store.preferences.theme === 'system') {
       setTheme(colorScheme ?? 'light')
     }
   }, [colorScheme])

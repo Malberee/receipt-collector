@@ -1,5 +1,5 @@
 import { cn } from '@malberee/heroui-native'
-import { type ProductType, type ReceiptType, receipts } from '@store'
+import { type ProductType, type ReceiptType, store } from '@store'
 import { observer } from 'mobx-react-lite'
 import { cssInterop, rem } from 'nativewind'
 import React, { type FC, useCallback, useMemo, useState } from 'react'
@@ -98,7 +98,7 @@ export const Receipt: FC<ReceiptProps> = observer(
             onCancel={() => setProductToDelete('')}
             onDelete={() => {
               setProductToDelete('')
-              receipts.deleteProduct(receipt.id, productToDelete)
+              store.deleteProduct(receipt.id, productToDelete)
             }}
           />
         ) : null}

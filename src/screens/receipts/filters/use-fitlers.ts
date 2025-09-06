@@ -1,4 +1,4 @@
-import { receipts } from '@store'
+import { store } from '@store'
 import moment from 'moment'
 
 import type { Rarity } from '@constants'
@@ -12,7 +12,7 @@ type Overload = {
 }
 
 export const useFilters = () => {
-  const data = receipts.receipts
+  const data = store.receipts
 
   const maxAmount = data.length
     ? Math.ceil(Math.max(...data.map((item) => item.amount)))
@@ -25,19 +25,19 @@ export const useFilters = () => {
       filter === 'date' &&
       value.every((date, index) => dates[index].isSame(moment(date)))
     ) {
-      receipts.setFilters(filter, {})
+      store.setFilters(filter, {})
       return
     }
 
     if (filter === 'amount' || filter === 'date') {
-      receipts.setFilters(filter, {
+      store.setFilters(filter, {
         from: value[0] as number | Date,
         to: value[1] as number | Date,
       })
     }
 
     if (filter === 'rarities') {
-      receipts.setFilters(filter, value as Rarity[])
+      store.setFilters(filter, value as Rarity[])
     }
   }
 

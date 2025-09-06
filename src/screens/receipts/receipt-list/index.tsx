@@ -1,4 +1,4 @@
-import { type ReceiptType, receipts } from '@store'
+import { type ReceiptType, store } from '@store'
 import { observer } from 'mobx-react-lite'
 import React, { useCallback, useState } from 'react'
 import { type ListRenderItem } from 'react-native'
@@ -11,7 +11,7 @@ import { Receipt } from './receipt'
 
 export const ReceiptList = observer(() => {
   const [receiptToDelete, setReceiptToDelete] = useState('')
-  const data = receipts.getReceipts()
+  const data = store.getReceipts()
 
   const renderItem = useCallback<ListRenderItem<ReceiptType>>(
     ({ item }) => <Receipt receipt={item} onDelete={setReceiptToDelete} />,
@@ -33,7 +33,7 @@ export const ReceiptList = observer(() => {
           text="Are you sure you want to delete the receipt?"
           onCancel={() => setReceiptToDelete('')}
           onDelete={() => {
-            receipts.deleteReceipt(receiptToDelete)
+            store.deleteReceipt(receiptToDelete)
             setReceiptToDelete('')
           }}
         />

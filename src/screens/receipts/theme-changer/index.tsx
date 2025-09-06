@@ -4,7 +4,7 @@ import {
   RadioGroup,
   SunFilledIcon,
 } from '@malberee/heroui-native'
-import { type Theme, receipts } from '@store'
+import { type Theme, store } from '@store'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
 import { View } from 'react-native'
@@ -59,7 +59,7 @@ export const ThemeChanger = observer(() => {
       {showPopover ? (
         <Popover onClose={togglePopover}>
           <RadioGroup
-            value={receipts.theme}
+            value={store.preferences.theme}
             classNames={{ wrapper: 'gap-1' }}
             onValueChange={(value) => {
               togglePopover()

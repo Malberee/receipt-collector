@@ -1,4 +1,4 @@
-import { receipts, type ReceiptType } from '@store'
+import { store, type ReceiptType } from '@store'
 import moment from 'moment'
 
 import type { ChartProps } from './index'
@@ -19,7 +19,7 @@ export const useChart = (
       .subtract((isWeek ? 6 : 5) - i, isWeek ? 'days' : 'months')
       .format(format),
   )
-  const data = receipts
+  const data = store
     .getReceipts()
     .filter((receipt) => moment(receipt.date).isSameOrAfter(dates[0]))
     .map((receipt) => ({

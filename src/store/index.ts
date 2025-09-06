@@ -44,6 +44,10 @@ type Filters = {
 
 export type Theme = 'light' | 'dark' | 'system'
 
+type Preferences = {
+  theme: Theme
+}
+
 type RangeFilter<T> = {
   from?: T
   to?: T
@@ -51,9 +55,11 @@ type RangeFilter<T> = {
 
 const storage = new MMKV()
 
-class Receipts {
-  theme: Theme = 'system'
+class Store {
   receipts: ReceiptType[] = []
+  preferences: Preferences = {
+    theme: 'system',
+  }
 
   filters: Filters = {
     amount: {},
@@ -64,24 +70,13 @@ class Receipts {
     makeAutoObservable(this)
     makePersistable(this, {
       name: 'ReceiptsStore',
-      properties: ['receipts', 'theme'],
+      properties: ['receipts', 'preferences'],
       storage: {
         setItem: (key, data) => storage.set(key, data),
         getItem: (key) => storage.getString(key) ?? null,
         removeItem: (key) => storage.delete(key),
       },
     })
-  }
-
-  setTheme(theme: Theme) {
-    this.theme = theme
-  }
-
-  setFilters(
-    filterName: keyof Filters,
-    filters: RangeFilter<number | Date> | Rarity[],
-  ) {
-    this.filters[filterName] = filters as any
   }
 
   getReceipts() {
@@ -210,6 +205,20 @@ class Receipts {
       (product) => product.id !== productId,
     )
   }
+
+  setFilters(
+    filterName: keyof Filters,
+    filters: RangeFilter<number | Date> | Rarity[],
+  ) {
+    this.filters[filterName] = filters as any
+  }
+
+  setPreferences<T extends keyof Preferences>(
+    preferenceName: T,
+    value: Preferences[T],
+  ) {
+    this.preferences[preferenceName] = value
+  }
 }
 
-export const receipts = new Receipts()
+export const store = new Store()

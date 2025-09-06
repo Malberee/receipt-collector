@@ -1,5 +1,5 @@
 import { PortalHost } from '@gorhom/portal'
-import { type ProductType, receipts } from '@store'
+import { type ProductType, store } from '@store'
 import { useLocalSearchParams } from 'expo-router'
 import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
@@ -23,7 +23,7 @@ export const ReceiptDetails = observer(() => {
   )
   const { id } = useLocalSearchParams<{ id: string }>()
 
-  const receipt = receipts.getReceiptById(id)!
+  const receipt = store.getReceiptById(id)!
 
   return (
     <Container>

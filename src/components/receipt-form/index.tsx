@@ -1,5 +1,5 @@
 import { Button, Checkbox, Input } from '@malberee/heroui-native'
-import { type AddReceiptArg, type ReceiptType, receipts } from '@store'
+import { type AddReceiptArg, type ReceiptType, store } from '@store'
 import { Formik } from 'formik'
 import type { FC } from 'react'
 import { Text, View } from 'react-native'
@@ -18,9 +18,9 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({
 }) => {
   const onSubmit = (receipt: AddReceiptArg) => {
     if (receipt?.id) {
-      receipts.updateReceipt(receipt)
+      store.updateReceipt(receipt)
     } else {
-      receipts.addReceipt(receipt)
+      store.addReceipt(receipt)
     }
   }
 

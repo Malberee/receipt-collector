@@ -1,5 +1,5 @@
 import { Button } from '@malberee/heroui-native'
-import { receipts } from '@store'
+import { store } from '@store'
 import { router } from 'expo-router'
 import { type FC, useState } from 'react'
 import { View } from 'react-native'
@@ -57,7 +57,7 @@ export const Header: FC<HeaderProps> = ({ receiptId, onEdit }) => {
           text="Are you sure you want to delete the receipt?"
           onCancel={() => setShowDialog(false)}
           onDelete={() => {
-            receipts.deleteReceipt(receiptId)
+            store.deleteReceipt(receiptId)
             router.navigate('../')
           }}
         />

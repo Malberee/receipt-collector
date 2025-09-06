@@ -18,8 +18,6 @@ export const SettingList = () => {
           />
         }
       />
-      {/* <Option title="Option 2" endContent={<Select options={['1', '2']} />} />
-      <Option title="Option 3" endContent={<Select options={['1', '2']} />} /> */}
     </View>
   )
 }

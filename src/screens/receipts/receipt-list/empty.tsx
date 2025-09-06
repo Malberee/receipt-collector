@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, cn } from '@malberee/heroui-native'
-import { receipts } from '@store'
+import { store } from '@store'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
 import React from 'react'
@@ -19,7 +19,7 @@ cssInterop(ArrowLeftIcon, {
 export const Empty = observer(() => {
   const { isDark } = useTheme()
 
-  const filters = receipts.filters
+  const filters = store.filters
   const hasFilters = Object.values(filters).some((filter) => {
     if (Array.isArray(filter)) {
       return !!filter.length

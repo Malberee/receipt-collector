@@ -1,4 +1,4 @@
-import { receipts } from '@store'
+import { store } from '@store'
 import { router } from 'expo-router'
 import { View } from 'react-native'
 import Toast from 'react-native-toast-message'
@@ -14,7 +14,7 @@ export const QRScanner = () => {
     try {
       const receipt = parseQR(data)
 
-      receipts.addReceipt(receipt)
+      store.addReceipt(receipt)
 
       router.replace({
         pathname: 'rarity',
