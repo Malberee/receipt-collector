@@ -4,8 +4,12 @@ import { type FC, useState } from 'react'
 import { Dimensions, Pressable, Text, View } from 'react-native'
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated'
 
+type Option = {
+  label: string
+  value: string
+}
 interface SelectProps {
-  options: string[]
+  options: Option[]
   onValueChange?: (value: string) => void
 }
 
@@ -13,7 +17,7 @@ export const Select: FC<SelectProps> = ({ options, onValueChange }) => {
   const { width, height } = Dimensions.get('screen')
 
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState(options[0])
+  const [selectedOption, setSelectedOption] = useState(options[0].value)
 
   return (
     <View>
@@ -21,8 +25,15 @@ export const Select: FC<SelectProps> = ({ options, onValueChange }) => {
         className="flex-row items-center gap-4 rounded-xl border border-default-200 bg-default-100 p-2"
         onPress={() => setIsOpen(true)}
       >
-        <Text className="text-foreground">{selectedOption}</Text>
-        <ChevronDown className="text-default-500" width={16} height={16} />
+        <Text className="text-foreground">
+          {options.find((option) => option.value === selectedOption)?.label}
+        </Text>
+        <View
+          className="transition-transform"
+          style={{ transform: [{ rotate: isOpen ? '180deg' : '0deg' }] }}
+        >
+          <ChevronDown className="text-default-500" width={16} height={16} />
+        </View>
       </Pressable>
 
       {isOpen ? (
@@ -35,7 +46,7 @@ export const Select: FC<SelectProps> = ({ options, onValueChange }) => {
             />
           </Portal>
           <Animated.View
-            className="absolute bottom-0 left-0 z-20 w-full"
+            className="pointer-events-box-none absolute bottom-0 left-0 z-20 w-full"
             entering={FadeInUp.duration(100)}
             exiting={FadeOutUp.duration(100)}
           >
@@ -44,17 +55,17 @@ export const Select: FC<SelectProps> = ({ options, onValueChange }) => {
               style={{ transform: [{ translateY: '100%' }] }}
             >
               <View className="flex-col gap-2 rounded-xl border border-default-200 bg-default-100 p-2">
-                {options.map((option) => (
+                {options.map(({ label, value }) => (
                   <Pressable
-                    key={option}
-                    className={`rounded-md px-2 py-1 transition-colors ${option === selectedOption ? 'bg-default-200' : 'bg-transparent'}`}
+                    key={value}
+                    className={`rounded-md px-2 py-1 transition-colors ${value === selectedOption ? 'bg-default-200' : 'bg-transparent'}`}
                     onPress={() => {
-                      setSelectedOption(option)
-                      onValueChange?.(option)
+                      setSelectedOption(value)
+                      onValueChange?.(value)
                       setIsOpen(false)
                     }}
                   >
-                    <Text className="text-foreground">{option}</Text>
+                    <Text className="text-foreground">{label}</Text>
                   </Pressable>
                 ))}
               </View>
