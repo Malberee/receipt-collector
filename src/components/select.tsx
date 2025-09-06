@@ -1,23 +1,30 @@
 import { Portal } from '@gorhom/portal'
 import { ChevronDown } from '@malberee/heroui-native'
-import { type FC, useState } from 'react'
+import { useState } from 'react'
 import { Dimensions, Pressable, Text, View } from 'react-native'
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated'
 
-type Option = {
+type Option<T extends string = string> = {
   label: string
-  value: string
+  value: T
 }
-interface SelectProps {
-  options: Option[]
-  onValueChange?: (value: string) => void
+interface SelectProps<T extends string> {
+  options: Option<T>[]
+  defaultValue?: T
+  onValueChange?: (value: T) => void
 }
 
-export const Select: FC<SelectProps> = ({ options, onValueChange }) => {
+export const Select = <T extends string>({
+  options,
+  defaultValue,
+  onValueChange,
+}: SelectProps<T>) => {
   const { width, height } = Dimensions.get('screen')
 
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState(options[0].value)
+  const [selectedOption, setSelectedOption] = useState(
+    defaultValue ?? options[0].value,
+  )
 
   return (
     <View>
