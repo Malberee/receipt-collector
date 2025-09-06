@@ -5,6 +5,7 @@ import { View } from 'react-native'
 
 import { ChartIcon } from './chart-icon'
 import { ReceiptIcon } from './receipt-icon'
+import { SettingsIcon } from './settings-icon'
 
 interface NavbarProps {
   onNavigate: () => void
@@ -13,6 +14,7 @@ interface NavbarProps {
 const routes = {
   '/': { label: 'Receipt list', Icon: ReceiptIcon },
   '/stats': { label: 'Stats', Icon: ChartIcon },
+  '/settings': { label: 'Settings', Icon: SettingsIcon },
 }
 
 export const Navbar: FC<NavbarProps> = ({ onNavigate }) => {
