@@ -1,5 +1,4 @@
 import { type Theme, store } from '@store'
-import * as NavigationBar from 'expo-navigation-bar'
 import { StatusBar } from 'expo-status-bar'
 import { observer } from 'mobx-react-lite'
 import { useColorScheme } from 'nativewind'
@@ -37,11 +36,6 @@ export const ThemeProvider: FC<PropsWithChildren> = observer(({ children }) => {
 
     store.setPreferences('theme', theme)
   }
-
-  useEffect(() => {
-    NavigationBar.setPositionAsync('absolute')
-    NavigationBar.setBackgroundColorAsync('transparent')
-  }, [])
 
   useEffect(() => {
     if (store.preferences.theme === 'system') {
