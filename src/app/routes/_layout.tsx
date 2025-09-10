@@ -13,6 +13,7 @@ import { Toast as CustomToast } from '@components'
 import { ThemeContext, ThemeProvider } from '@providers'
 
 import '../../../global.css'
+import '../../utils/i18n'
 
 configureReanimatedLogger({ strict: false })
 

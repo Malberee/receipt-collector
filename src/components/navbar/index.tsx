@@ -1,6 +1,7 @@
 import { Button } from '@malberee/heroui-native'
 import { router, usePathname } from 'expo-router'
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import { ChartIcon } from './chart-icon'
@@ -18,6 +19,7 @@ const routes = {
 }
 
 export const Navbar: FC<NavbarProps> = ({ onNavigate }) => {
+  const { t } = useTranslation()
   const pathname = usePathname()
 
   return (
@@ -41,7 +43,7 @@ export const Navbar: FC<NavbarProps> = ({ onNavigate }) => {
             }}
             key={label}
           >
-            {label}
+            {t(label)}
           </Button>
         )
       })}

@@ -1,5 +1,6 @@
 import { Button } from '@malberee/heroui-native'
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 import { Modal } from './modal'
@@ -15,15 +16,17 @@ export const DeleteDialog: FC<DeleteDialogProps> = ({
   onCancel,
   onDelete,
 }) => {
+  const { t } = useTranslation()
+
   return (
     <Modal onClose={onCancel}>
       <Text className="mb-4 text-lg text-foreground">{text}</Text>
       <View className="flex-col gap-2">
         <Button color="default" variant="flat" onPress={onCancel}>
-          Cancel
+          {t('Cancel')}
         </Button>
         <Button color="danger" variant="flat" onPress={onDelete}>
-          Delete
+          {t('Delete')}
         </Button>
       </View>
     </Modal>

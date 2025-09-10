@@ -7,6 +7,7 @@ import {
 import { type Theme, store } from '@store'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import { Popover } from '@components'
@@ -42,6 +43,7 @@ const radios = [
 ]
 
 export const ThemeChanger = observer(() => {
+  const { t } = useTranslation()
   const { showPopover, CurrentIcon, togglePopover, onValueChange } =
     useToggleChanger()
 
@@ -73,7 +75,7 @@ export const ThemeChanger = observer(() => {
                 classNames={radio.classNames}
                 startContent={radio.icon}
               >
-                {radio.value}
+                {t(radio.value)}
               </CustomRadio>
             ))}
           </RadioGroup>

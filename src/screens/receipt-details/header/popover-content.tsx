@@ -1,5 +1,6 @@
 import { Button } from '@malberee/heroui-native'
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { PenIcon, TrashIcon } from '@icons'
 
@@ -12,6 +13,8 @@ export const PopoverContent: FC<PopoverContentProps> = ({
   onEdit,
   onDelete,
 }) => {
+  const { t } = useTranslation()
+
   return (
     <>
       <Button
@@ -23,7 +26,7 @@ export const PopoverContent: FC<PopoverContentProps> = ({
         }
         onPress={onEdit}
       >
-        Edit
+        {t('Edit')}
       </Button>
       <Button
         className="w-full"
@@ -34,7 +37,7 @@ export const PopoverContent: FC<PopoverContentProps> = ({
         }
         onPress={onDelete}
       >
-        Delete
+        {t('Delete')}
       </Button>
     </>
   )

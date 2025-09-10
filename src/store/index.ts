@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import { makeAutoObservable } from 'mobx'
 import { makePersistable } from 'mobx-persist-store'
 import moment from 'moment'
@@ -43,9 +44,11 @@ type Filters = {
 }
 
 export type Theme = 'light' | 'dark' | 'system'
+export type Language = 'en' | 'uk'
 
 type Preferences = {
   theme: Theme
+  lang: Language
 }
 
 type RangeFilter<T> = {
@@ -53,12 +56,13 @@ type RangeFilter<T> = {
   to?: T
 }
 
-const storage = new MMKV()
+export const storage = new MMKV()
 
 class Store {
   receipts: ReceiptType[] = []
   preferences: Preferences = {
     theme: 'system',
+    lang: 'en',
   }
 
   filters: Filters = {
@@ -69,7 +73,7 @@ class Store {
   constructor() {
     makeAutoObservable(this)
     makePersistable(this, {
-      name: 'ReceiptsStore',
+      name: 'store',
       properties: ['receipts', 'preferences'],
       storage: {
         setItem: (key, data) => storage.set(key, data),
@@ -117,7 +121,7 @@ class Store {
     const isExists = !!this.receipts.find((item) => item.id === receipt.id)
 
     if (isExists) {
-      throw 'Receipt already exists!'
+      throw i18n.t('Receipt already exists!')
     } else {
       this.receipts.unshift({
         autoCalcAmount: false,

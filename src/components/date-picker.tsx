@@ -1,4 +1,5 @@
 import { ChevronIcon } from '@malberee/heroui-native'
+import { store } from '@store'
 import React, { type FC } from 'react'
 import { View } from 'react-native'
 import DateTimePicker from 'react-native-ui-datepicker'
@@ -14,6 +15,7 @@ export const DatePicker: FC<DatePickerProps> = ({ date, setDate }) => {
       <DateTimePicker
         mode="single"
         date={date}
+        locale={store.preferences.lang}
         onChange={(params) => setDate(params.date as Date)}
         components={{
           IconPrev: <ChevronIcon className="text-foreground" />,
@@ -32,11 +34,12 @@ export const DatePicker: FC<DatePickerProps> = ({ date, setDate }) => {
           selected_year: 'bg-default-300 dark:bg-default-200 rounded-md',
           active_year: '!bg-primary rounded-md',
           active_year_label: 'text-primary-foreground',
-          month_selector_label: 'text-foreground',
-          month_label: 'text-foreground',
+          month_selector_label: 'text-foreground capitalize',
+          month_label: 'text-foreground capitalize',
           selected_month_label: 'text-primary-foreground text-center w-full',
           selected_month: 'bg-primary rounded-md',
-          weekday_label: 'text-primary-foreground bg-primary rounded-full px-2',
+          weekday_label:
+            'text-primary-foreground bg-primary rounded-full px-2 capitalize',
           day_label: 'text-foreground text-center w-full',
           selected: 'rounded-md !bg-primary',
           selected_label: 'text-primary-foreground',

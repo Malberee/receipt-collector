@@ -1,5 +1,6 @@
 import { Button, Flash } from '@malberee/heroui-native'
 import React, { useEffect, type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import Animated, {
   useAnimatedProps,
@@ -27,6 +28,7 @@ export const ScannerOverlay: FC<ScannerOverlayProps> = ({
   hasTorch,
   toggleTorch,
 }) => {
+  const { t } = useTranslation()
   const screen = Dimensions.get('screen')
 
   const isQR = type === 'qr'
@@ -108,7 +110,7 @@ export const ScannerOverlay: FC<ScannerOverlayProps> = ({
           transform: [{ translateY: '-200%' }, { translateX: '-50%' }],
         }}
       >
-        {type === 'qr' ? 'QR code' : 'Barcode'}
+        {t(type === 'qr' ? 'QR code' : 'Barcode')}
       </Text>
 
       {hasTorch ? (

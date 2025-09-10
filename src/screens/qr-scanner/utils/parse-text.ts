@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import moment from 'moment'
 
 import { getRarity } from './get-rarity'
@@ -24,7 +25,7 @@ export const parseText = (data: string) => {
     )
 
     if (values.length !== 4) {
-      throw 'Cannot scan this QR code!'
+      throw i18n.t('Cannot scan this QR code!')
     }
 
     const [_fiscalNumber, _amount, _date, time] = values

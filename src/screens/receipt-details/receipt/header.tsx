@@ -2,6 +2,7 @@ import { Button, cn } from '@malberee/heroui-native'
 import type { ReceiptType } from '@store'
 import moment from 'moment'
 import React, { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 import { RarityChip } from '@components'
@@ -16,6 +17,7 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
+  const { t } = useTranslation()
   const { isDark } = useTheme()
   const { amount, date, rarity } = receipt
 
@@ -55,7 +57,7 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
       <View className={cn('bg-default-50', isDark && '!bg-default-100')}>
         <View className="p-4">
           <Button size="lg" variant="flat" onPress={openModal}>
-            Add product
+            {t('Add product')}
           </Button>
         </View>
         <Divider />

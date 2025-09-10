@@ -1,6 +1,7 @@
 import { Slider } from '@malberee/heroui-native'
 import { observer } from 'mobx-react-lite'
 import React, { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, {
   type SharedValue,
@@ -19,6 +20,7 @@ interface FiltersProps {
 }
 
 export const Filters: FC<FiltersProps> = observer(({ isExpanded }) => {
+  const { t } = useTranslation()
   const { maxAmount, onValueChange } = useFilters()
 
   const height = useSharedValue(0)
@@ -42,7 +44,7 @@ export const Filters: FC<FiltersProps> = observer(({ isExpanded }) => {
       >
         {maxAmount > 0 ? (
           <Slider
-            label="Amount"
+            label={t('Amount')}
             defaultValue={[0, maxAmount]}
             maxValue={maxAmount}
             formatOptions={{ style: 'currency', currency: 'UAH' }}

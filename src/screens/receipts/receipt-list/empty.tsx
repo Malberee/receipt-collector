@@ -3,6 +3,7 @@ import { store } from '@store'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 import { useTheme } from '@providers'
@@ -17,6 +18,7 @@ cssInterop(ArrowLeftIcon, {
 })
 
 export const Empty = observer(() => {
+  const { t } = useTranslation()
   const { isDark } = useTheme()
 
   const filters = store.filters
@@ -36,9 +38,7 @@ export const Empty = observer(() => {
             isDark && '!text-foreground-300',
           )}
         >
-          {hasFilters
-            ? 'No results found for these filters.'
-            : `Oops! It's empty. Try scanning the receipt or adding it manually.`}
+          {hasFilters ? t('No results found') : t('Oops!')}
         </Text>
       </View>
       <View className="mb-[101px] flex-1 animate-bounce flex-row items-end justify-center">

@@ -1,6 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router'
 import { cssInterop } from 'nativewind'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Pressable, Text } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -24,6 +25,7 @@ export const Rarity = () => {
     rarity: Rarities
     id: string
   }>()
+  const { t } = useTranslation()
   const { top, bottom } = useSafeAreaInsets()
 
   const colors: Record<Rarities, string> = {
@@ -43,7 +45,7 @@ export const Rarity = () => {
       <Text
         className={`text-5xl font-bold uppercase tracking-widest ${colors[rarity]}`}
       >
-        {rarity}
+        {t(rarity)}
       </Text>
       <Blobs color={colors[rarity]} />
     </Pressable>

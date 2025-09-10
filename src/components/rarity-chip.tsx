@@ -7,6 +7,7 @@ import {
 } from '@malberee/heroui-native'
 import clsx from 'clsx'
 import React, { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Pressable } from 'react-native'
 
 import { type Rarity, rarityColors } from '@constants'
@@ -25,6 +26,8 @@ export const RarityChip: FC<ChipProps> = ({
   onPress,
   ...props
 }) => {
+  const { t } = useTranslation()
+
   return !rarity ? null : (
     <Pressable onPress={onPress}>
       <HeroUIChip
@@ -36,7 +39,7 @@ export const RarityChip: FC<ChipProps> = ({
         }}
         {...{ ...props, ref: undefined }}
       >
-        {rarity}
+        {t(rarity)}
       </HeroUIChip>
     </Pressable>
   )

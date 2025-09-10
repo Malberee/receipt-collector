@@ -1,5 +1,6 @@
 import { store } from '@store'
 import { router } from 'expo-router'
+import i18n from 'i18next'
 import { View } from 'react-native'
 import Toast from 'react-native-toast-message'
 import { Camera } from 'react-native-vision-camera'
@@ -23,7 +24,7 @@ export const QRScanner = () => {
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: i18n.t('Error'),
         text2: error as string,
       })
     }

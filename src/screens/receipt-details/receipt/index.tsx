@@ -3,6 +3,7 @@ import { type ProductType, type ReceiptType, store } from '@store'
 import { observer } from 'mobx-react-lite'
 import { cssInterop, rem } from 'nativewind'
 import React, { type FC, useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Dimensions, FlatList, type ListRenderItem, View } from 'react-native'
 import Animated, { LinearTransition } from 'react-native-reanimated'
 import ZigzagLines from 'react-native-zigzag-lines'
@@ -39,6 +40,7 @@ const StyledZigzagLines = cssInterop(ZigzagLines, {
 
 export const Receipt: FC<ReceiptProps> = observer(
   ({ receipt, openModal, selectProduct }) => {
+    const { t } = useTranslation()
     const { isDark } = useTheme()
     const [productToDelete, setProductToDelete] = useState('')
 
@@ -94,7 +96,7 @@ export const Receipt: FC<ReceiptProps> = observer(
 
         {productToDelete ? (
           <DeleteDialog
-            text="Are you sure you want to delete the product?"
+            text={t('Are you sure you want to delete the product?')}
             onCancel={() => setProductToDelete('')}
             onDelete={() => {
               setProductToDelete('')

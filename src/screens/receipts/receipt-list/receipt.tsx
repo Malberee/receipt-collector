@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite'
 import moment from 'moment'
 import { cssInterop } from 'nativewind'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Dimensions, Text, View } from 'react-native'
 import { Pressable } from 'react-native-gesture-handler'
 
@@ -25,6 +26,7 @@ cssInterop(Pressable, {
 
 export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
   const { id, amount, date, rarity, products, autoCalcAmount } = receipt
+  const { t } = useTranslation()
   const { isDark } = useTheme()
 
   const receiptAmount = autoCalcAmount
@@ -48,11 +50,11 @@ export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
             <Text className="text-xl text-foreground">
               {formatCurrency(receiptAmount)}
             </Text>
-            <Text className="text-sm text-foreground-500">
+            <Text className="text-sm capitalize text-foreground-500">
               {moment(date).calendar(null, {
-                sameDay: '[Today] [ • ] HH:mm',
-                lastDay: '[Yesterday] [ • ] HH:mm',
-                lastWeek: '[Last] dddd [ • ] HH:mm',
+                sameDay: `dddd [ • ] HH:mm`,
+                lastDay: `[${t('Yesterday')}] [ • ] HH:mm`,
+                lastWeek: 'DD MMMM [ • ] LT',
                 sameElse: `DD MMMM ${moment().year() !== moment(date).year() ? 'YYYY ' : ''}[ • ] HH:mm`,
               })}
             </Text>

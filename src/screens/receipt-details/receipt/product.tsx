@@ -2,6 +2,7 @@ import { cn } from '@malberee/heroui-native'
 import { type ProductType } from '@store'
 import { cssInterop, rem } from 'nativewind'
 import React, { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Dimensions, Image, Pressable, Text, View } from 'react-native'
 
 import { SwipeToDelete } from '@components'
@@ -28,6 +29,7 @@ cssInterop(NoImageIcon, {
 })
 
 export const Product: FC<ProductProps> = ({ product, onPress, onDelete }) => {
+  const { t } = useTranslation()
   const { isDark } = useTheme()
   const { name, picture, price, quantity, id } = product
   const shouldSliceName = name.length >= 17
@@ -71,7 +73,10 @@ export const Product: FC<ProductProps> = ({ product, onPress, onDelete }) => {
             <Text className="text-xl text-foreground">
               {shouldSliceName ? name.slice(0, 17).concat('...') : name}
             </Text>
-            <Text className="text-md text-foreground-500">{quantity}pcs</Text>
+            <Text className="text-md text-foreground-500">
+              {quantity}
+              {t('pcs')}
+            </Text>
           </View>
         </View>
         <View>

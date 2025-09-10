@@ -1,0 +1,58 @@
+{
+  "common": "Common",
+  "rare": "Rare",
+  "epic": "Epic",
+  "mythic": "Mythic",
+  "legendary": "Legendary",
+  "none": "None",
+
+  "Light": "Light",
+  "Dark": "Dark",
+  "System": "System",
+
+  "start": "start",
+  "end": "end",
+  "Rarity": "Rarity",
+
+  "Receipt list": "Receipt list",
+  "Stats": "Stats",
+  "Settings": "Settings",
+
+  "Scan QR Code": "Scan QR Code",
+  "Scan barcode": "Scan barcode",
+
+  "No results found": "No results found for these filters.",
+  "Oops!": "Oops! It's empty. Try scanning the receipt or adding it manually.",
+
+  "Name": "Name",
+  "Price": "Price",
+  "Quantity": "Quantity",
+  "Amount": "Amount",
+  "Select image": "Select image",
+  "Auto calculate": "Auto calculate amount based on products price",
+  "Submit": "Submit",
+
+  "QR code": "QR code",
+  "Barcode": "Barcode",
+  "Cannot scan this QR code!": "Cannot scan this QR code!",
+  "Receipt already exists!": "Receipt already exists!",
+  "Product not found": "Product not found",
+  "Error": "Error",
+
+  "Add product": "Add product",
+  "pcs": "pcs",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Cancel": "Cancel",
+  "Are you sure you want to delete the receipt?": "Are you sure you want to delete the receipt?",
+  "Are you sure you want to delete the product?": "Are you sure you want to delete the product?",
+
+  "Receipts over time": "Receipts over time",
+  "Spending over time": "Spending over time",
+  "Week": "Week",
+  "Month": "Month",
+
+  "Language": "Language",
+  "English": "English",
+  "Ukrainian": "Ukrainian"
+}

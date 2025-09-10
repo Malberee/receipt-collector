@@ -1,6 +1,7 @@
 import { Spinner } from '@malberee/heroui-native'
 import { type ProductType } from '@store'
 import { router, useLocalSearchParams } from 'expo-router'
+import i18n from 'i18next'
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
@@ -40,7 +41,7 @@ export const BarcodeScanner = () => {
       setIsActive(true)
       Toast.show({
         type: 'error',
-        text1: 'Error',
+        text1: i18n.t('Error'),
         text2: String(error),
       })
 

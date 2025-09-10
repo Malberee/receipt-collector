@@ -1,6 +1,7 @@
 import { cn } from '@malberee/heroui-native'
 import { router } from 'expo-router'
 import React, { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'
 import { useCameraPermission } from 'react-native-vision-camera'
 
@@ -15,6 +16,7 @@ const QR_HREF = '/scanner/qr'
 const BARCODE_HREF = '/scanner/barcode'
 
 export const ScannerButton: FC<ScannerButtonProps> = (props) => {
+  const { t } = useTranslation()
   const { isDark } = useTheme()
   const { hasPermission, requestPermission } = useCameraPermission()
 
@@ -40,7 +42,7 @@ export const ScannerButton: FC<ScannerButtonProps> = (props) => {
     >
       <View className="flex-row items-center justify-center gap-2 rounded-large border-2 border-dashed border-primary px-3 py-6">
         <Icon className="text-primary" />
-        <Text className="text-center text-xl text-primary">{text}</Text>
+        <Text className="text-center text-xl text-primary">{t(text)}</Text>
       </View>
     </Pressable>
   )

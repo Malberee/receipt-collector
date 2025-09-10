@@ -2,6 +2,7 @@ import { Button, Checkbox, Input } from '@malberee/heroui-native'
 import { type AddReceiptArg, type ReceiptType, store } from '@store'
 import { Formik } from 'formik'
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 import { DatePicker } from '../date-picker'
@@ -16,6 +17,8 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({
   receipt,
   onSubmit: _onSubmit,
 }) => {
+  const { t } = useTranslation()
+
   const onSubmit = (receipt: AddReceiptArg) => {
     if (receipt?.id) {
       store.updateReceipt(receipt)
@@ -56,7 +59,7 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({
               <Input
                 size="lg"
                 labelPlacement="inside"
-                label="Amount"
+                label={t('Amount')}
                 placeholder={initialValues.amount.toString()}
                 keyboardType="number-pad"
                 endContent={
@@ -83,7 +86,7 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({
                 }
                 isSelected={values.autoCalcAmount}
               >
-                Auto calculate amount based on products price
+                {t('Auto calculate')}
               </Checkbox>
             </View>
             <DatePicker
@@ -91,7 +94,7 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({
               setDate={(date) => setFieldValue('date', date)}
             />
             <Button size="lg" onPress={() => handleSubmit()}>
-              Submit
+              {t('Submit')}
             </Button>
           </>
         )}

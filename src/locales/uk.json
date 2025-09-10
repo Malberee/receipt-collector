@@ -1,0 +1,58 @@
+{
+  "common": "Звичайний",
+  "rare": "Рідкісний",
+  "epic": "Епічний",
+  "mythic": "Міфічний",
+  "legendary": "Легендарний",
+  "none": "Немає",
+
+  "Light": "Світла",
+  "Dark": "Темна",
+  "System": "Системна",
+
+  "start": "початок",
+  "end": "кінець",
+  "Rarity": "Рідкість",
+
+  "Receipt list": "Список чеків",
+  "Stats": "Статистика",
+  "Settings": "Налаштування",
+
+  "Scan QR Code": "Сканувати QR-код",
+  "Scan barcode": "Сканувати штрихкод",
+
+  "No results found": "За цими фільтрами нічого не знайдено.",
+  "Oops!": "Ой! Тут порожньо. Спробуйте відсканувати чек або додати його вручну.",
+
+  "Name": "Назва",
+  "Price": "Ціна",
+  "Quantity": "Кількість",
+  "Amount": "Сума",
+  "Select image": "Вибрати зображення",
+  "Auto calculate": "Авто розрахунок суми за цінами товарів",
+  "Submit": "Підтвердити",
+
+  "QR code": "QR-код",
+  "Barcode": "Штрихкод",
+  "Cannot scan this QR code!": "Неможливо відсканувати цей QR-код!",
+  "Receipt already exists!": "Чек вже існує!",
+  "Product not found": "Продукт не знайдено",
+  "Error": "Помилка",
+
+  "Add product": "Додати товар",
+  "pcs": "шт.",
+  "Edit": "Редагувати",
+  "Delete": "Видалити",
+  "Cancel": "Скасувати",
+  "Are you sure you want to delete the receipt?": "Ви впевнені що хочете видалити чек?",
+  "Are you sure you want to delete the product?": "Ви впевнені що хочете видалити продукт?",
+
+  "Receipts over time": "Чеки з часом",
+  "Spending over time": "Витрати з часом",
+  "Week": "Тиждень",
+  "Month": "Місяць",
+
+  "Language": "Мова",
+  "English": "Англійська",
+  "Ukrainian": "Українська"
+}

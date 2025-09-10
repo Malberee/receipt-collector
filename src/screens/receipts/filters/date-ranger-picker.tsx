@@ -2,6 +2,7 @@ import { Button } from '@malberee/heroui-native'
 import { store } from '@store'
 import moment, { type Moment } from 'moment'
 import React, { type FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 import { DatePicker, Modal } from '@components'
@@ -17,6 +18,7 @@ interface DateRangePickerProps {
 export const DateRangePicker: FC<DateRangePickerProps> = ({
   onValueChange,
 }) => {
+  const { t } = useTranslation()
   const { minDate, maxDate } = getMinMaxDates()
 
   const formatDate = (date: Moment | Date) =>
@@ -41,8 +43,12 @@ export const DateRangePicker: FC<DateRangePickerProps> = ({
   return (
     <View>
       <View className="mb-0.5 flex-row gap-16">
-        <Text className="flex-1 text-center text-foreground">Start</Text>
-        <Text className="flex-1 text-center text-foreground">End</Text>
+        <Text className="flex-1 text-center capitalize text-foreground">
+          {t('start')}
+        </Text>
+        <Text className="flex-1 text-center capitalize text-foreground">
+          {t('end')}
+        </Text>
       </View>
       <View className="flex-row items-center justify-center gap-4">
         <Button
@@ -73,7 +79,7 @@ export const DateRangePicker: FC<DateRangePickerProps> = ({
         >
           <View className="w-96">
             <Text className="mb-4 text-2xl capitalize text-foreground">
-              {modalType}
+              {t(modalType)}
             </Text>
             <DatePicker
               date={dates[modalType].value}

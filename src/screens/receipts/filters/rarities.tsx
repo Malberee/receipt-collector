@@ -1,4 +1,5 @@
 import React, { type FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 import { RarityChip } from '@components'
@@ -20,6 +21,7 @@ const iconColors = {
 }
 
 export const Rarities: FC<RaritiesProps> = ({ onValueChange }) => {
+  const { t } = useTranslation()
   const [selectedRarities, setSelectedRarities] = useState<Rarity[]>([])
   const rarities = Object.keys(rarityColors) as Rarity[]
 
@@ -37,7 +39,7 @@ export const Rarities: FC<RaritiesProps> = ({ onValueChange }) => {
 
   return (
     <View>
-      <Text className="mb-0.5 text-foreground">Rarity</Text>
+      <Text className="mb-0.5 text-foreground">{t('Rarity')}</Text>
       <View className="flex-row flex-wrap gap-2">
         {rarities.map((rarity) => (
           <RarityChip

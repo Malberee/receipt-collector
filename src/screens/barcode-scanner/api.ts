@@ -1,3 +1,5 @@
+import i18n from 'i18next'
+
 type Response = {
   product: {
     product_name: string
@@ -15,7 +17,7 @@ export const fetchProduct = async (barcodeNumber: string) => {
   const data: Response = await response.json()
 
   if (!response.ok) {
-    throw new Error(data.result.name)
+    throw new Error(i18n.t(data.result.name))
   }
 
   return {

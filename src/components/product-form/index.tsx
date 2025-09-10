@@ -3,6 +3,7 @@ import { type ProductType, store } from '@store'
 import { Formik } from 'formik'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Image, Pressable, Text, View } from 'react-native'
 
 import { NoImageIcon } from '@icons'
@@ -32,6 +33,7 @@ export const ProductForm: FC<ProductFormProps> = ({
   receiptId,
   onSubmit: _onSubmit,
 }) => {
+  const { t } = useTranslation()
   const { picture, name, price, quantity, id } = product ?? {}
   const { pictureSource, launchLibrary } = usePickImage(picture)
 
@@ -66,7 +68,7 @@ export const ProductForm: FC<ProductFormProps> = ({
         ) : (
           <View className="flex-col items-center justify-center">
             <NoImageIcon className="mb-2 size-16 text-default-200" />
-            <Text className="text-default-400">Select image</Text>
+            <Text className="text-default-400">{t('Select image')}</Text>
           </View>
         )}
       </Pressable>
@@ -93,7 +95,7 @@ export const ProductForm: FC<ProductFormProps> = ({
             <Input
               size="lg"
               labelPlacement="inside"
-              label="Name"
+              label={t('Name')}
               placeholder={initialValues.name.toString()}
               onValueChange={handleChange('name')}
               value={values.name}
@@ -105,7 +107,7 @@ export const ProductForm: FC<ProductFormProps> = ({
                 size="lg"
                 fullWidth={false}
                 labelPlacement="inside"
-                label="Price"
+                label={t('Price')}
                 placeholder={initialValues.price.toString()}
                 endContent={
                   <Text
@@ -127,7 +129,7 @@ export const ProductForm: FC<ProductFormProps> = ({
                 size="lg"
                 fullWidth={false}
                 labelPlacement="inside"
-                label="Quantity"
+                label={t('Quantity')}
                 placeholder={initialValues.quantity.toString()}
                 className="flex-1"
                 onValueChange={handleChange('quantity')}
@@ -139,7 +141,7 @@ export const ProductForm: FC<ProductFormProps> = ({
               />
             </View>
             <Button onPress={() => handleSubmit()} size="lg">
-              Submit
+              {t('Submit')}
             </Button>
           </>
         )}

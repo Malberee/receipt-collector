@@ -2,6 +2,7 @@ import { Button } from '@malberee/heroui-native'
 import { store } from '@store'
 import { router } from 'expo-router'
 import { type FC, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import { BackButton, DeleteDialog, Popover } from '@components'
@@ -15,6 +16,7 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ receiptId, onEdit }) => {
+  const { t } = useTranslation()
   const [showPopover, setShowPopover] = useState(false)
   const [showDialog, setShowDialog] = useState(false)
 
@@ -54,7 +56,7 @@ export const Header: FC<HeaderProps> = ({ receiptId, onEdit }) => {
       </View>
       {showDialog ? (
         <DeleteDialog
-          text="Are you sure you want to delete the receipt?"
+          text={t('Are you sure you want to delete the receipt?')}
           onCancel={() => setShowDialog(false)}
           onDelete={() => {
             store.deleteReceipt(receiptId)
