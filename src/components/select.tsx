@@ -1,7 +1,8 @@
 import { Portal } from '@gorhom/portal'
 import { ChevronDown } from '@malberee/heroui-native'
+import { rem } from 'nativewind'
 import { useState } from 'react'
-import { Dimensions, Pressable, Text, View } from 'react-native'
+import { Dimensions, FlatList, Pressable, Text, View } from 'react-native'
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated'
 
 type Option<T extends string = string> = {
@@ -25,6 +26,8 @@ export const Select = <T extends string>({
   const [selectedOption, setSelectedOption] = useState(
     defaultValue ?? options[0].value,
   )
+
+  const ITEM_HEIGHT = rem.get() * 2 + rem.get() / 2
 
   return (
     <View>
@@ -53,30 +56,49 @@ export const Select = <T extends string>({
             />
           </Portal>
           <Animated.View
-            className="pointer-events-box-none absolute bottom-0 left-0 z-20 w-full"
+            className="pointer-events-box-none absolute left-0 top-full z-20 max-h-56 w-full"
             entering={FadeInUp.duration(100)}
             exiting={FadeOutUp.duration(100)}
           >
-            <View
-              className="pt-1"
-              style={{ transform: [{ translateY: '100%' }] }}
-            >
-              <View className="flex-col gap-2 rounded-xl border border-default-200 bg-default-100 p-2">
-                {options.map(({ label, value }) => (
-                  <Pressable
-                    key={value}
-                    className={`rounded-md px-2 py-1 transition-colors ${value === selectedOption ? 'bg-default-200' : 'bg-transparent'}`}
-                    onPress={() => {
-                      setSelectedOption(value)
-                      onValueChange?.(value)
-                      setIsOpen(false)
-                    }}
+            <FlatList
+              className="rounded-xl border border-default-200 bg-default-100"
+              contentContainerStyle={{
+                padding: rem.get() / 2,
+              }}
+              data={options}
+              removeClippedSubviews
+              initialScrollIndex={
+                options.length >= 5
+                  ? options.findIndex(
+                      (option) => option.value === selectedOption,
+                    )
+                  : undefined
+              }
+              getItemLayout={(_, index) => ({
+                length: ITEM_HEIGHT,
+                offset: ITEM_HEIGHT * index,
+                index,
+              })}
+              renderItem={({ item: { label, value }, index }) => (
+                <Pressable
+                  key={value}
+                  className={`h-8 flex-row items-center rounded-md px-2 transition-colors ${index !== options.length - 1 && 'mb-2'} ${value === selectedOption ? 'bg-default-200' : 'bg-transparent'}`}
+                  onPress={() => {
+                    setSelectedOption(value)
+                    onValueChange?.(value)
+                    setIsOpen(false)
+                  }}
+                >
+                  <Text
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                    className="text-foreground"
                   >
-                    <Text className="text-foreground">{label}</Text>
-                  </Pressable>
-                ))}
-              </View>
-            </View>
+                    {label}
+                  </Text>
+                </Pressable>
+              )}
+            />
           </Animated.View>
         </>
       ) : null}
