@@ -1,3 +1,5 @@
+import { store } from '@store'
+import getSymbolFromCurrency from 'currency-symbol-map'
 import { I18nManager } from 'react-native'
 
 const getLocale = () => {
@@ -6,9 +8,30 @@ const getLocale = () => {
   return locale.replace('_', '-')
 }
 
-const currencyFormatter = new Intl.NumberFormat(getLocale(), {
-  style: 'currency',
-  currency: 'UAH',
-})
+export const formatCurrency = (
+  value: number,
+  options?: Intl.NumberFormatOptions,
+) => {
+  const formatter = new Intl.NumberFormat(getLocale(), {
+    style: 'currency',
+    currency: store.preferences.currency,
+    currencyDisplay: 'symbol',
+    ...options,
+  })
 
-export const formatCurrency = (value: number) => currencyFormatter.format(value)
+  const useSymbol = formatter.resolvedOptions().currencyDisplay === 'symbol'
+
+  return formatter
+    .formatToParts(value)
+    .map((part) => {
+      if (part.type === 'currency' && useSymbol) {
+        return getSymbolFromCurrency(store.preferences.currency)
+      }
+      if (part.type === 'literal' && useSymbol) {
+        return ''
+      }
+
+      return part.value
+    })
+    .join('')
+}

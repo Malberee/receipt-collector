@@ -3,6 +3,8 @@ import { type FC, useState } from 'react'
 import { Text, View } from 'react-native'
 import Animated from 'react-native-reanimated'
 
+import { formatCurrency } from '@utils'
+
 import { EntryAnimation, ExitingAnimation } from './animations'
 import { useChart } from './use-chart'
 
@@ -22,7 +24,7 @@ export const Chart: FC<ChartProps> = ({ title, param, period }) => {
     <View className="flex-1 rounded-medium bg-default-100 p-4">
       <Text className="mb-4 text-2xl text-foreground">{title}</Text>
       <View
-        className="flex-1 flex-row items-end justify-around"
+        className="flex-1 flex-row items-end justify-between"
         onLayout={(e) => setHeight(e.nativeEvent.layout.height)}
       >
         <View className="absolute left-0 top-0 size-full flex-col justify-between">
@@ -52,16 +54,17 @@ export const Chart: FC<ChartProps> = ({ title, param, period }) => {
               exiting={ExitingAnimation}
               entering={EntryAnimation}
             >
-              <Text className="absolute -top-6 text-center text-foreground">
-                {param === 'amount' ? '₴' : ''}
-                {value}
+              <Text className="absolute -top-6 text-center text-small text-primary-foreground">
+                {param === 'amount'
+                  ? formatCurrency(value, { maximumFractionDigits: 0 })
+                  : value}
               </Text>
             </Animated.View>
           </View>
         ))}
       </View>
 
-      <View className="flex-row justify-around">
+      <View className="flex-row justify-between">
         {data.map(({ date }) => (
           <Text
             key={date.toString()}

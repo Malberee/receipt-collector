@@ -1,4 +1,5 @@
 import { store } from '@store'
+import currencyToSymbolMap from 'currency-symbol-map/map'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -24,6 +25,21 @@ export const SettingList = observer(() => {
             ]}
             defaultValue={lang}
             onValueChange={(value) => changeLocale(value)}
+          />
+        }
+      />
+      <Option
+        title={t('Currency')}
+        endContent={
+          <Select
+            options={Object.entries(currencyToSymbolMap).map(
+              ([key, value]) => ({
+                value: key,
+                label: `${key} ${value}`,
+              }),
+            )}
+            defaultValue={store.preferences.currency}
+            onValueChange={(value) => store.setPreferences('currency', value)}
           />
         }
       />

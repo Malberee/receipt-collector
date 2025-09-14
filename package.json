@@ -15,6 +15,7 @@
     "@malberee/heroui-native": "^1.1.12",
     "@types/seedrandom": "^3.0.8",
     "clsx": "^2.1.1",
+    "currency-symbol-map": "^5.1.0",
     "expo": "53.0.22",
     "expo-build-properties": "~0.14.8",
     "expo-constants": "~17.1.7",

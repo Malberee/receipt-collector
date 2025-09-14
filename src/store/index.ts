@@ -49,6 +49,7 @@ export type Language = 'en' | 'uk'
 type Preferences = {
   theme: Theme
   lang: Language
+  currency: string
 }
 
 type RangeFilter<T> = {
@@ -63,6 +64,7 @@ class Store {
   preferences: Preferences = {
     theme: 'system',
     lang: 'en',
+    currency: 'USD',
   }
 
   filters: Filters = {
