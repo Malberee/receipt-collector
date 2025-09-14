@@ -69,7 +69,6 @@ export const Chart: FC<ChartProps> = ({ title, param, period }) => {
           <Text
             key={date.toString()}
             className="w-8 text-center text-sm text-foreground"
-            style={{ transformOrigin: 'top' }}
           >
             {moment(date).format(period === 'week' ? 'ddd' : 'MMM')}
           </Text>

@@ -47,10 +47,10 @@
   "Are you sure you want to delete the receipt?": "Ви впевнені що хочете видалити чек?",
   "Are you sure you want to delete the product?": "Ви впевнені що хочете видалити продукт?",
 
-  "Receipts over time": "Чеки з часом",
-  "Spending over time": "Витрати з часом",
-  "Week": "Тиждень",
-  "Month": "Місяць",
+  "Number of receipts": "Кількість чеків",
+  "Expenses": "Витрати",
+  "week": "тиждень",
+  "month": "місяць",
 
   "Language": "Мова",
   "Currency": "Валюта",

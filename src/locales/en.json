@@ -47,10 +47,10 @@
   "Are you sure you want to delete the receipt?": "Are you sure you want to delete the receipt?",
   "Are you sure you want to delete the product?": "Are you sure you want to delete the product?",
 
-  "Receipts over time": "Receipts over time",
-  "Spending over time": "Spending over time",
-  "Week": "Week",
-  "Month": "Month",
+  "Number of receipts": "Number of receipts",
+  "Expenses": "Expenses",
+  "week": "week",
+  "month": "month",
 
   "Language": "Language",
   "Currency": "Currency",
