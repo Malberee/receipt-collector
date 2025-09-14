@@ -115,7 +115,7 @@ export const ProductForm: FC<ProductFormProps> = ({
                       errors.price ? 'text-danger-400' : 'text-foreground-400'
                     }
                   >
-                    UAH
+                    {store.preferences.currency}
                   </Text>
                 }
                 className="flex-1"

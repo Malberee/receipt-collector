@@ -68,7 +68,7 @@ export const ReceiptForm: FC<ReceiptFormProps> = ({
                       errors.amount ? 'text-danger-400' : 'text-foreground-400'
                     }
                   >
-                    UAH
+                    {store.preferences.currency}
                   </Text>
                 }
                 onValueChange={handleChange('amount')}

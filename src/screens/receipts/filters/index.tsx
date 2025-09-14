@@ -1,4 +1,5 @@
 import { Slider } from '@malberee/heroui-native'
+import { store } from '@store'
 import { observer } from 'mobx-react-lite'
 import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -47,7 +48,10 @@ export const Filters: FC<FiltersProps> = observer(({ isExpanded }) => {
             label={t('Amount')}
             defaultValue={[0, maxAmount]}
             maxValue={maxAmount}
-            formatOptions={{ style: 'currency', currency: 'UAH' }}
+            formatOptions={{
+              style: 'currency',
+              currency: store.preferences.currency,
+            }}
             onChangeEnd={(values) =>
               onValueChange('amount', values as [number, number])
             }
