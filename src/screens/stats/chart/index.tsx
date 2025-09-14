@@ -58,7 +58,10 @@ export const Chart: FC<ChartProps> = ({ title, param, period }) => {
             >
               <Text className="absolute -top-6 text-center text-sm text-primary-foreground">
                 {param === 'amount'
-                  ? formatCurrency(value, { maximumFractionDigits: 0 })
+                  ? formatCurrency(value, {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 2,
+                    })
                   : value}
               </Text>
             </Animated.View>
