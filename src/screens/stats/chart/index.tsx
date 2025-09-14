@@ -43,7 +43,9 @@ export const Chart: FC<ChartProps> = ({ title, param, period }) => {
             }}
             key={date.toString()}
           >
-            <Text className="opacity-0">{value}</Text>
+            <Text className="text-sm opacity-0" numberOfLines={1}>
+              {value}
+            </Text>
             <Animated.View
               className="w-full flex-1 flex-row justify-center rounded-t-lg bg-primary"
               style={{
@@ -54,7 +56,7 @@ export const Chart: FC<ChartProps> = ({ title, param, period }) => {
               exiting={ExitingAnimation}
               entering={EntryAnimation}
             >
-              <Text className="absolute -top-6 text-center text-small text-primary-foreground">
+              <Text className="absolute -top-6 text-center text-sm text-primary-foreground">
                 {param === 'amount'
                   ? formatCurrency(value, { maximumFractionDigits: 0 })
                   : value}
