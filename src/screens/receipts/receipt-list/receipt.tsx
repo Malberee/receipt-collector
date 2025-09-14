@@ -52,7 +52,7 @@ export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
             </Text>
             <Text className="text-sm capitalize text-foreground-500">
               {moment(date).calendar(null, {
-                sameDay: `dddd [ • ] HH:mm`,
+                sameDay: `[${t('Today')}] [ • ] HH:mm`,
                 lastDay: `[${t('Yesterday')}] [ • ] HH:mm`,
                 lastWeek: 'DD MMMM [ • ] LT',
                 sameElse: `DD MMMM ${moment().year() !== moment(date).year() ? 'YYYY ' : ''}[ • ] HH:mm`,

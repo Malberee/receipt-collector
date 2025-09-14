@@ -55,5 +55,8 @@
   "Language": "Мова",
   "Currency": "Валюта",
   "English": "Англійська",
-  "Ukrainian": "Українська"
+  "Ukrainian": "Українська",
+
+  "Today": "Сьогодні",
+  "Yesterday": "Вчора"
 }

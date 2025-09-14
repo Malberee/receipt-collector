@@ -55,5 +55,8 @@
   "Language": "Language",
   "Currency": "Currency",
   "English": "English",
-  "Ukrainian": "Ukrainian"
+  "Ukrainian": "Ukrainian",
+
+  "Today": "Today",
+  "Yesterday": "Yesterday"
 }
