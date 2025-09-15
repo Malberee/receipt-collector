@@ -1,8 +1,8 @@
 import 'react-native-get-random-values'
 
 import { PortalHost, PortalProvider } from '@gorhom/portal'
-import { semanticColors } from '@malberee/heroui-native'
 import { Stack } from 'expo-router'
+import { semanticColors } from 'merlo-ui'
 import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { configureReanimatedLogger } from 'react-native-reanimated'

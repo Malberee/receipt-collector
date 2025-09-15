@@ -1,4 +1,4 @@
-import { cn } from '@malberee/heroui-native'
+import { cn } from 'merlo-ui'
 import { rem } from 'nativewind'
 import { useEffect, useState } from 'react'
 import { Pressable, Text, View } from 'react-native'

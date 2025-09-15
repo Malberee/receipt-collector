@@ -1,6 +1,6 @@
-import { Button, Checkbox, Input } from '@malberee/heroui-native'
 import { type AddReceiptArg, type ReceiptType, store } from '@store'
 import { Formik } from 'formik'
+import { Button, Checkbox, Input } from 'merlo-ui'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'

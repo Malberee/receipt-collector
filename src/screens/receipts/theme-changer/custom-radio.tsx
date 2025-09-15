@@ -1,4 +1,4 @@
-import { type RadioProps, useRadio } from '@malberee/heroui-native'
+import { type RadioProps, useRadio } from 'merlo-ui'
 import type { FC, ReactNode } from 'react'
 import { Pressable, Text, View } from 'react-native'
 

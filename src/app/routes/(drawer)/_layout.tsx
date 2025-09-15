@@ -1,5 +1,5 @@
-import { semanticColors } from '@malberee/heroui-native'
 import { Stack } from 'expo-router'
+import { semanticColors } from 'merlo-ui'
 
 import { Drawer, Navbar } from '@components'
 import { DrawerContext, DrawerProvider, useTheme } from '@providers'

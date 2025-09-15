@@ -1,5 +1,5 @@
-import { Button, cn } from '@malberee/heroui-native'
 import type { ReceiptType } from '@store'
+import { Button, cn } from 'merlo-ui'
 import moment from 'moment'
 import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -1,6 +1,6 @@
-import { cn } from '@malberee/heroui-native'
 import { type ReceiptType } from '@store'
 import { router } from 'expo-router'
+import { cn } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
 import moment from 'moment'
 import { cssInterop } from 'nativewind'

@@ -1,5 +1,5 @@
-import { cn } from '@malberee/heroui-native'
 import { type ProductType, type ReceiptType, store } from '@store'
+import { cn } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
 import { cssInterop, rem } from 'nativewind'
 import React, { type FC, useCallback, useMemo, useState } from 'react'

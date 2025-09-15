@@ -1,5 +1,5 @@
-import { cn } from '@malberee/heroui-native'
 import { type ProductType } from '@store'
+import { cn } from 'merlo-ui'
 import { cssInterop, rem } from 'nativewind'
 import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'

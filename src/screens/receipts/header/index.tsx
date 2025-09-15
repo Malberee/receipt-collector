@@ -1,4 +1,4 @@
-import { Button } from '@malberee/heroui-native'
+import { Button } from 'merlo-ui'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
 import { View } from 'react-native'

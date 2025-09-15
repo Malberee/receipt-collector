@@ -1,4 +1,4 @@
-import { MoonFilledIcon, SunFilledIcon } from '@malberee/heroui-native'
+import { MoonFilledIcon, SunFilledIcon } from 'merlo-ui'
 import { colorScheme } from 'nativewind'
 import { useState } from 'react'
 

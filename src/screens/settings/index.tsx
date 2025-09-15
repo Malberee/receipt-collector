@@ -1,5 +1,5 @@
 import { PortalHost } from '@gorhom/portal'
-import { Button } from '@malberee/heroui-native'
+import { Button } from 'merlo-ui'
 
 import { Container } from '@components'
 import { MenuIcon } from '@icons'

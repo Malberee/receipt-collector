@@ -1,5 +1,5 @@
 import { PortalHost } from '@gorhom/portal'
-import { Button, Plus } from '@malberee/heroui-native'
+import { Button, Plus } from 'merlo-ui'
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'

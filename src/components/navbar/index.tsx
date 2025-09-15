@@ -1,5 +1,5 @@
-import { Button } from '@malberee/heroui-native'
 import { router, usePathname } from 'expo-router'
+import { Button } from 'merlo-ui'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'

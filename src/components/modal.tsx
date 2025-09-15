@@ -1,5 +1,5 @@
 import { Portal } from '@gorhom/portal'
-import { Button, Plus } from '@malberee/heroui-native'
+import { Button, Plus } from 'merlo-ui'
 import { cssInterop } from 'nativewind'
 import React, { type FC, type PropsWithChildren, useEffect } from 'react'
 import {

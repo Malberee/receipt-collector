@@ -1,5 +1,5 @@
 import { Portal } from '@gorhom/portal'
-import { ChevronDown } from '@malberee/heroui-native'
+import { ChevronDown } from 'merlo-ui'
 import { rem } from 'nativewind'
 import { useState } from 'react'
 import { Dimensions, FlatList, Pressable, Text, View } from 'react-native'

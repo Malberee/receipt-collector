@@ -1,4 +1,4 @@
-import type { BaseColors, ThemeColors } from '@malberee/heroui-native'
+import type { BaseColors, ThemeColors } from 'merlo-ui'
 
 export type Rarity =
   | 'none'

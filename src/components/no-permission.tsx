@@ -1,4 +1,4 @@
-import { Button } from '@malberee/heroui-native'
+import { Button } from 'merlo-ui'
 import { Linking, Text, View } from 'react-native'
 
 import { DangerIcon } from '@icons'

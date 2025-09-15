@@ -1,5 +1,5 @@
-import { cn } from '@malberee/heroui-native'
 import { router } from 'expo-router'
+import { cn } from 'merlo-ui'
 import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, Text, View } from 'react-native'

@@ -1,4 +1,4 @@
-import { Button } from '@malberee/heroui-native'
+import { Button } from 'merlo-ui'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 

@@ -1,5 +1,5 @@
-import { semanticColors } from '@malberee/heroui-native'
 import * as Haptics from 'expo-haptics'
+import { semanticColors } from 'merlo-ui'
 import {
   type SharedValue,
   runOnJS,

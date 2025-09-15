@@ -1,11 +1,11 @@
+import clsx from 'clsx'
 import {
   type ChipSlots,
   type ChipVariantProps,
   Chip as HeroUIChip,
   type ChipProps as HeroUIChipProps,
   type SlotsToClasses,
-} from '@malberee/heroui-native'
-import clsx from 'clsx'
+} from 'merlo-ui'
 import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable } from 'react-native'

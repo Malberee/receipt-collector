@@ -1,6 +1,6 @@
-import { Button, Input } from '@malberee/heroui-native'
 import { type ProductType, store } from '@store'
 import { Formik } from 'formik'
+import { Button, Input } from 'merlo-ui'
 import { cssInterop } from 'nativewind'
 import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'

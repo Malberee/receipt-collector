@@ -1,5 +1,5 @@
-import { ArrowLeftIcon, cn } from '@malberee/heroui-native'
 import { store } from '@store'
+import { ArrowLeftIcon, cn } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
 import React from 'react'

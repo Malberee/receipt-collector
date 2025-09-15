@@ -1,6 +1,6 @@
-import { Button } from '@malberee/heroui-native'
 import { store } from '@store'
 import { router } from 'expo-router'
+import { Button } from 'merlo-ui'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'

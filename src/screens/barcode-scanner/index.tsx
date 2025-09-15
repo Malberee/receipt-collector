@@ -1,7 +1,7 @@
-import { Spinner } from '@malberee/heroui-native'
 import { type ProductType } from '@store'
 import { router, useLocalSearchParams } from 'expo-router'
 import i18n from 'i18next'
+import { Spinner } from 'merlo-ui'
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'

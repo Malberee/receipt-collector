@@ -1,10 +1,5 @@
-import {
-  Button,
-  MoonFilledIcon,
-  RadioGroup,
-  SunFilledIcon,
-} from '@malberee/heroui-native'
 import { type Theme, store } from '@store'
+import { Button, MoonFilledIcon, RadioGroup, SunFilledIcon } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
 import { useTranslation } from 'react-i18next'

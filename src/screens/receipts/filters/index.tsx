@@ -1,5 +1,5 @@
-import { Slider } from '@malberee/heroui-native'
 import { store } from '@store'
+import { Slider } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
 import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -1,4 +1,4 @@
-import { Button, Flash } from '@malberee/heroui-native'
+import { Button, Flash } from 'merlo-ui'
 import React, { useEffect, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'

@@ -1,4 +1,4 @@
-import { cn } from '@malberee/heroui-native'
+import { cn } from 'merlo-ui'
 import { cssInterop } from 'nativewind'
 import React from 'react'
 import { View } from 'react-native'

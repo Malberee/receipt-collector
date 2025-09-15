@@ -1,6 +1,7 @@
 <img width="1326" height="336" alt="cover" src="https://github.com/user-attachments/assets/837ab750-a09c-4d4f-bda0-9e8e4c6dfcf6" />
 
 # 🧾 Collect, Scan & Track Your Receipts
+
 **Receipt Collector** is a React Native mobile app that helps you keep track of your shopping receipts. Instead of manually entering the amount and date, simply scan the receipt’s QR code.
 
 <div align="center">
@@ -10,6 +11,7 @@
 </div>
 
 ## 🚀 Features
+
 - 📷 QR Code Scanning\
   Automatically extracts the amount and date from the receipt.
 
@@ -28,11 +30,9 @@
   In case scanning is not possible, you can always enter data manually.
 
 ## 📱 Tech Stack
-- **Core:** [React Native](https://reactnative.dev/), [Expo](https://expo.dev/), [Expo Router](https://expo.github.io/router/)  
-  
-- **State Management:** [MobX](https://mobx.js.org/), [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)  
-  
-- **UI & Styling:** [NativeWind](https://www.nativewind.dev/), [@malberee/heroui-native](https://github.com/Malberee/heroui-native)  
-- **Camera & Scanning:** [react-native-vision-camera](https://github.com/mrousavy/react-native-vision-camera)  
-  
-- **Animations:** [Reanimated](https://docs.swmansion.com/react-native-reanimated/) 
+
+- **Core:** [React Native](https://reactnative.dev/), [Expo](https://expo.dev/), [Expo Router](https://expo.github.io/router/)
+- **State Management:** [MobX](https://mobx.js.org/), [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)
+- **UI & Styling:** [NativeWind](https://www.nativewind.dev/), [Merlo UI](https://github.com/Malberee/merlo-ui)
+- **Camera & Scanning:** [react-native-vision-camera](https://github.com/mrousavy/react-native-vision-camera)
+- **Animations:** [Reanimated](https://docs.swmansion.com/react-native-reanimated/)

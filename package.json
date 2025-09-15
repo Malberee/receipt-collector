@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@gorhom/portal": "^1.0.14",
-    "@malberee/heroui-native": "^1.1.12",
     "@types/seedrandom": "^3.0.8",
     "clsx": "^2.1.1",
     "currency-symbol-map": "^5.1.0",
@@ -28,6 +27,7 @@
     "expo-status-bar": "~2.2.3",
     "formik": "^2.4.6",
     "i18next": "^25.5.2",
+    "merlo-ui": "^1.1.13",
     "mobx": "^6.13.5",
     "mobx-persist-store": "^1.1.5",
     "mobx-react-lite": "^4.0.7",
