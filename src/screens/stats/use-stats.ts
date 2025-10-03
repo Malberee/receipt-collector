@@ -1,12 +1,9 @@
-import { store, type ReceiptType } from '@store'
+import { type ReceiptType, store } from '@store'
 import moment from 'moment'
 
-import type { ChartProps } from './index'
+export type Period = 'week' | 'month'
 
-export const useChart = (
-  param: ChartProps['param'],
-  period: ChartProps['period'],
-) => {
+export const useStats = (param: 'amount' | 'count', period: Period) => {
   const isWeek = period === 'week'
   const format = isWeek ? 'YYYY-MM-DD' : 'YYYY-MM'
 
@@ -54,5 +51,5 @@ export const useChart = (
     value: grouped[date] ?? 0,
   }))
 
-  return { data: result }
+  return result
 }

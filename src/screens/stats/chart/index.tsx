@@ -1,84 +1,186 @@
-import moment from 'moment'
-import { type FC, useState } from 'react'
-import { Text, View } from 'react-native'
-import Animated from 'react-native-reanimated'
+import * as scale from 'd3-scale'
+import * as shape from 'd3-shape'
+import { type FC, useEffect, useLayoutEffect, useState } from 'react'
+import { View } from 'react-native'
+import Svg from 'react-native-svg'
 
-import { formatCurrency } from '@utils'
+import { AnimatedPath } from './animated-path'
+import { SELECTED_POINT_RADIUS } from './constants'
+import { Cursor } from './cursor'
+import { DataPoint } from './data-point'
+import { Defs } from './defs'
+import { Grid } from './grid'
+import { Tooltip } from './tooltip'
 
-import { EntryAnimation, ExitingAnimation } from './animations'
-import { useChart } from './use-chart'
-
-export interface ChartProps {
-  title: string
-  param: 'amount' | 'count'
-  period: 'week' | 'month'
+type DataItem = {
+  value: number
+  date: Date
 }
 
-export const Chart: FC<ChartProps> = ({ title, param, period }) => {
-  const [height, setHeight] = useState(20)
-  const { data } = useChart(param, period)
+export interface ChartProps {
+  data: DataItem[]
+  colors: {
+    default: string
+    active: string
+    tooltipBackground: string
+  }
+  formatValue?: (value: number) => string
+  formatDate?: (date: Date) => string
+}
 
-  const maxValue = Math.max(...data.map((item) => item.value))
+export type ExtraProps = {
+  width: number
+  height: number
+  x: scale.ScaleLinear<number, number, never>
+  y: scale.ScaleLinear<number, number, never>
+  min: number
+  max: number
+  selectedPoint: number | null
+} & ChartProps
+
+export const Chart: FC<ChartProps> = ({
+  data: _data,
+  colors,
+  formatValue,
+  formatDate,
+}) => {
+  const MAX_DATA_POINTS = 7
+
+  const [data, setData] = useState<DataItem[]>(
+    Array(MAX_DATA_POINTS).fill({ value: 0, date: new Date() }),
+  )
+  const [isMounted, setIsMounted] = useState(false)
+
+  if (_data.length > MAX_DATA_POINTS) {
+    throw Error(
+      `The length of the data array must not exceed ${MAX_DATA_POINTS}!`,
+    )
+  }
+
+  const [{ width, height }, setDimensions] = useState({
+    width: 0,
+    height: 0,
+  })
+  const [selectedPoint, setSelectedPoint] =
+    useState<ExtraProps['selectedPoint']>(null)
+
+  const extractValue = (item: DataItem) => item.value
+
+  const max =
+    Math.max(
+      ...(data.every((item) => item.value <= 0)
+        ? _data.map(extractValue)
+        : data.map(extractValue)),
+    ) || 1
+
+  const y = scale
+    .scaleLinear()
+    .domain([0, max])
+    .range([height - SELECTED_POINT_RADIUS, SELECTED_POINT_RADIUS])
+  const x = scale
+    .scaleLinear()
+    .domain([0, _data.length - 1])
+    .range([SELECTED_POINT_RADIUS, width - SELECTED_POINT_RADIUS])
+
+  const lineFn = shape
+    .line<number>()
+    .x((_, ix) => x(ix))
+    .y((d) => y(d))
+    .curve(shape.curveMonotoneX)
+  const areaFn = shape
+    .area<number>()
+    .x((_, ix) => x(ix))
+    .y0(height)
+    .y1((d) => y(d))
+    .curve(shape.curveMonotoneX)
+
+  const line = lineFn(data.map(extractValue))!
+  const area = areaFn(data.map(extractValue))!
+
+  const extraProps: ExtraProps = {
+    data,
+    colors,
+    width,
+    height,
+    x,
+    y,
+    min: 0,
+    max,
+    selectedPoint,
+  }
+
+  const getNormalizedData = (arr: DataItem[]): DataItem[] => {
+    if (arr.length >= MAX_DATA_POINTS) return arr
+    return [
+      ...arr,
+      ...Array(MAX_DATA_POINTS - arr.length).fill(arr[arr.length - 1]),
+    ]
+  }
+
+  useLayoutEffect(() => {
+    setSelectedPoint(null)
+    if (isMounted) setData(getNormalizedData(_data))
+  }, [_data])
+
+  useEffect(() => {
+    if (width > 0 && height > 0) {
+      setData(getNormalizedData(_data))
+    }
+    if (!isMounted) setIsMounted(true)
+  }, [width, height])
 
   return (
-    <View className="flex-1 rounded-medium bg-default-100 p-4">
-      <Text className="mb-4 text-2xl text-foreground">{title}</Text>
-      <View
-        className="flex-1 flex-row items-end justify-between"
-        onLayout={(e) => setHeight(e.nativeEvent.layout.height)}
-      >
-        <View className="absolute left-0 top-0 size-full flex-col justify-between">
-          {Array(6)
-            .fill(undefined)
-            .map((_, index) => (
-              <View key={index} className="h-px w-full bg-default-200" />
-            ))}
-        </View>
+    <View
+      className="flex-1"
+      onLayout={(e) => {
+        const { width, height } = e.nativeEvent.layout
+        setDimensions({ width, height })
+      }}
+    >
+      {width > 0 && height > 0 ? (
+        <Svg
+          width="100%"
+          height="100%"
+          onPressIn={() => setSelectedPoint(null)}
+        >
+          <Defs {...extraProps} />
+          <Grid {...extraProps} />
 
-        {data.map(({ value, date }) => (
-          <View
-            className="w-8 flex-col items-center justify-end"
-            style={{
-              height: (value / maxValue) * height,
-            }}
-            key={date.toString()}
-          >
-            <Text className="text-sm opacity-0" numberOfLines={1}>
-              {value}
-            </Text>
-            <Animated.View
-              className="w-full flex-1 flex-row justify-center rounded-t-lg bg-primary"
-              style={{
-                maxHeight: height && value === 0 ? 1 : 'auto',
-                minHeight: 1,
-                transformOrigin: 'bottom',
-              }}
-              exiting={ExitingAnimation}
-              entering={EntryAnimation}
-            >
-              <Text className="absolute -top-6 text-center text-sm text-primary-foreground">
-                {param === 'amount'
-                  ? formatCurrency(value, {
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    })
-                  : value}
-              </Text>
-            </Animated.View>
-          </View>
-        ))}
-      </View>
+          <Cursor {...extraProps} />
 
-      <View className="flex-row justify-between">
-        {data.map(({ date }) => (
-          <Text
-            key={date.toString()}
-            className="w-8 text-center text-sm text-foreground"
-          >
-            {moment(date).format(period === 'week' ? 'ddd' : 'MMM')}
-          </Text>
-        ))}
-      </View>
+          <AnimatedPath
+            d={area}
+            stroke="none"
+            fill="url(#area-gradient)"
+            clipPath="url(#grid-mask)"
+          />
+          <AnimatedPath
+            d={line}
+            fill="none"
+            stroke={colors.default}
+            clipPath="url(#points-mask)"
+          />
+
+          {data.map(({ value }, index) => (
+            <DataPoint
+              key={index}
+              value={value}
+              index={index}
+              onSelect={setSelectedPoint}
+              {...extraProps}
+            />
+          ))}
+        </Svg>
+      ) : null}
+
+      {selectedPoint !== null ? (
+        <Tooltip
+          {...extraProps}
+          formatValue={formatValue}
+          formatDate={formatDate}
+          selectedPoint={selectedPoint}
+        />
+      ) : null}
     </View>
   )
 }
