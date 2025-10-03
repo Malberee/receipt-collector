@@ -1,4 +1,4 @@
-import { Button, Flash } from 'merlo-ui'
+import { Button } from 'merlo-ui'
 import React, { useEffect, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
@@ -13,6 +13,7 @@ import Svg, { Path } from 'react-native-svg'
 import type { ScannerType } from '@hooks'
 import { getScanArea } from '@utils'
 
+import { TorchIcon } from './torch-icon'
 import { makeCornerPath } from './utils'
 
 interface ScannerOverlayProps {
@@ -121,7 +122,7 @@ export const ScannerOverlay: FC<ScannerOverlayProps> = ({
           color="default"
           size="lg"
           radius="full"
-          startContent={<Flash color="white" size="32px" />}
+          startContent={<TorchIcon color="white" />}
           onPress={toggleTorch}
         />
       ) : null}
