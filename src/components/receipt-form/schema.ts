@@ -1,3 +1,4 @@
+import { t } from 'i18next'
 import * as yup from 'yup'
 
 export const getSchema = (required: boolean) => {
@@ -5,18 +6,22 @@ export const getSchema = (required: boolean) => {
     return yup.object().shape({
       amount: yup
         .number()
-        .typeError('Amount must be a number')
+        .positive(t('Amount must be a positive number'))
+        .typeError(t('Amount must be a number'))
         .when('autoCalcAmount', {
           is: true,
           then: (schema) => schema.optional(),
-          otherwise: (schema) => schema.required('Amount is required'),
+          otherwise: (schema) => schema.required(t('Amount is required')),
         }),
       autoCalcAmount: yup.boolean().required(),
     })
   }
 
   return yup.object().shape({
-    amount: yup.number().typeError('Amount must be a number'),
+    amount: yup
+      .number()
+      .positive(t('Amount must be a positive number'))
+      .typeError(t('Amount must be a number')),
     autoCalcAmount: yup.boolean().required(),
   })
 }
