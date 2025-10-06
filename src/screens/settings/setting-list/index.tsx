@@ -1,5 +1,6 @@
 import { store } from '@store'
 import currencyToSymbolMap from 'currency-symbol-map/map'
+import { Switch } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -11,7 +12,7 @@ import { Option } from './option'
 
 export const SettingList = observer(() => {
   const { t } = useTranslation()
-  const { lang } = store.preferences
+  const { lang, currency, showRarityAnimation } = store.preferences
 
   return (
     <View className="flex-col">
@@ -38,8 +39,20 @@ export const SettingList = observer(() => {
                 label: `${key} ${value}`,
               }),
             )}
-            defaultValue={store.preferences.currency}
+            defaultValue={currency}
             onValueChange={(value) => store.setPreferences('currency', value)}
+          />
+        }
+      />
+      <Option
+        title={t('Show rarity animation')}
+        endContent={
+          <Switch
+            size="lg"
+            defaultSelected={showRarityAnimation}
+            onValueChange={(value) =>
+              store.setPreferences('showRarityAnimation', value)
+            }
           />
         }
       />

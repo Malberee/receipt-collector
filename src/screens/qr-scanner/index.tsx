@@ -17,10 +17,14 @@ export const QRScanner = () => {
 
       store.addReceipt(receipt)
 
-      router.replace({
-        pathname: 'rarity',
-        params: { rarity: receipt.rarity, id: receipt.id },
-      })
+      if (store.preferences.showRarityAnimation) {
+        router.replace({
+          pathname: 'rarity',
+          params: { rarity: receipt.rarity, id: receipt.id },
+        })
+      } else {
+        router.replace(`/${receipt.id}`)
+      }
     } catch (error) {
       Toast.show({
         type: 'error',

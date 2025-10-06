@@ -50,6 +50,7 @@ type Preferences = {
   theme: Theme
   lang: Language
   currency: string
+  showRarityAnimation: boolean
 }
 
 type RangeFilter<T> = {
@@ -65,6 +66,7 @@ class Store {
     theme: 'system',
     lang: 'en',
     currency: 'USD',
+    showRarityAnimation: true,
   }
 
   filters: Filters = {
