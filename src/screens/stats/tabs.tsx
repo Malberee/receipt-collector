@@ -10,16 +10,16 @@ import Animated, {
 
 interface TabsProps<T> {
   value?: T
-  values: T[]
+  options: { value: T; label: string }[]
   onValueChange: (value: T) => void
 }
 
 export const Tabs = <T extends string>({
   value: _value,
-  values,
+  options,
   onValueChange,
 }: TabsProps<T>) => {
-  const [value, setValue] = useState(_value ?? values[0])
+  const [value, setValue] = useState(_value ?? options[0].value)
   const translateX = useSharedValue(0)
 
   const style = useAnimatedStyle(() => ({
@@ -37,10 +37,10 @@ export const Tabs = <T extends string>({
     >
       <Animated.View
         className="absolute left-2 top-2 h-full rounded-md bg-primary"
-        style={[style, { width: `${100 / values.length}%` }]}
+        style={[style, { width: `${100 / options.length}%` }]}
       />
 
-      {values.map((value, index) => (
+      {options.map(({ value, label }, index) => (
         <Pressable
           key={value}
           className="flex-1 flex-row items-center justify-center py-4"
@@ -56,7 +56,7 @@ export const Tabs = <T extends string>({
               _value === value && 'text-white',
             )}
           >
-            {value}
+            {label}
           </Text>
         </Pressable>
       ))}

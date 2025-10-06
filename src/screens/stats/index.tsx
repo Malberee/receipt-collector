@@ -134,7 +134,10 @@ export const Stats = () => {
       <View className="mt-6">
         <Tabs
           value={period}
-          values={[t('day'), t('month')] as ['day', 'month']}
+          options={[
+            { value: 'day', label: t('day') },
+            { value: 'month', label: t('month') },
+          ]}
           onValueChange={(value) => {
             setPeriod(value)
             setDates(getDatesArray(value))
