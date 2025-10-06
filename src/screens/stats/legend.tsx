@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 type Chart = {
@@ -11,6 +12,8 @@ interface LegendProps {
 }
 
 export const Legend: FC<LegendProps> = ({ charts }) => {
+  const { t } = useTranslation()
+
   return (
     <View className="mt-4 flex-row justify-center gap-4">
       {charts.map(({ name, color }) => (
@@ -19,7 +22,7 @@ export const Legend: FC<LegendProps> = ({ charts }) => {
             className="size-3 rounded-full"
             style={{ backgroundColor: color }}
           />
-          <Text className="text-foreground">{name}</Text>
+          <Text className="text-foreground">{t(name)}</Text>
         </View>
       ))}
     </View>

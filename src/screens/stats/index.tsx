@@ -74,7 +74,7 @@ export const Stats = () => {
       },
     },
     {
-      name: 'Number of reciepts',
+      name: 'Number of receipts',
       data: count,
       colors: {
         default: semanticColors[current].primary[400]!,
