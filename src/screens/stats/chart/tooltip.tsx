@@ -103,16 +103,12 @@ export const Tooltip: FC<TooltipProps> = ({
       ref={ref}
       exiting={FadeOut.duration(TOOLTIP_ANIMATION_DURATION)}
     >
-      <Text className="capitalize text-white" style={{ color: colors.default }}>
+      <Text className="capitalize" style={{ color: colors.default }}>
         {formatDate
           ? formatDate(data[selectedPoint].date)
           : data[selectedPoint].date.toString()}
       </Text>
-      <Text
-        className="text-white"
-        style={{ color: colors.default }}
-        numberOfLines={1}
-      >
+      <Text style={{ color: colors.default }} numberOfLines={1}>
         {formatValue
           ? formatValue(data[selectedPoint].value)
           : data[selectedPoint].value}

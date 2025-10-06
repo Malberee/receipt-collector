@@ -13,7 +13,6 @@ import {
 import { ANIMATION_EASING, CURSOR_ANIMATION_DURATION } from '../../constants'
 import { percentToFloat } from './percent-to-float'
 
-// import extractGradient from 'react-native-svg/src/lib/extract/extractGradient'
 const extractGradient: any =
   require('react-native-svg/src/lib/extract/extractGradient').default
 
