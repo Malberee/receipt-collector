@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { type SharedValue } from 'react-native-reanimated'
 
@@ -19,6 +20,7 @@ export const RightAction: FC<RightActionProps> = ({
   color,
   backgroundColor,
 }) => {
+  const { t } = useTranslation()
   const { animatedStyle, animatedTextStyle, animatedProps } = useSwipeToDelete(
     progress,
     color,
@@ -37,7 +39,7 @@ export const RightAction: FC<RightActionProps> = ({
           height={24}
         />
         <Animated.Text style={animatedTextStyle} className="text-center">
-          Delete
+          {t('Delete')}
         </Animated.Text>
       </View>
     </Animated.View>
