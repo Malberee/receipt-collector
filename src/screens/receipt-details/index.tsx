@@ -1,6 +1,7 @@
 import { PortalHost } from '@gorhom/portal'
 import { type ProductType, store } from '@store'
 import { useLocalSearchParams } from 'expo-router'
+import { semanticColors } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
 import { View } from 'react-native'
@@ -12,6 +13,7 @@ import {
   ReceiptForm,
   ScannerButton,
 } from '@components'
+import { useTheme } from '@providers'
 
 import { Header } from './header'
 import { type ModalType, Receipt } from './receipt'
@@ -22,11 +24,16 @@ export const ReceiptDetails = observer(() => {
     null,
   )
   const { id } = useLocalSearchParams<{ id: string }>()
+  const { current, isDark } = useTheme()
 
   const receipt = store.getReceiptById(id)!
 
   return (
-    <Container>
+    <Container
+      backgroundColor={
+        !isDark ? semanticColors[current].default[200] : undefined
+      }
+    >
       <Header onEdit={() => setModalType('receipt')} receiptId={id} />
       <Receipt
         receipt={receipt}
