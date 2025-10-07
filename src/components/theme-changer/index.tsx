@@ -1,6 +1,7 @@
 import { store } from '@store'
 import { cn, MoonFilledIcon, SunFilledIcon } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 import { useTheme } from '@providers'
@@ -9,6 +10,7 @@ import { Tabs } from '../tabs'
 import { SmartphoneIcon } from './smartphone-icon'
 
 export const ThemeChanger = observer(() => {
+  const { t } = useTranslation()
   const { set } = useTheme()
 
   const icons = {
@@ -20,9 +22,9 @@ export const ThemeChanger = observer(() => {
   return (
     <Tabs
       options={[
-        { label: 'Dark', value: 'dark' },
-        { label: 'Light', value: 'light' },
-        { label: 'System', value: 'system' },
+        { label: t('Dark'), value: 'dark' },
+        { label: t('Light'), value: 'light' },
+        { label: t('System'), value: 'system' },
       ]}
       value={store.preferences.theme}
       onValueChange={set}
