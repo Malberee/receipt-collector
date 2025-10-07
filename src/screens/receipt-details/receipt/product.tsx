@@ -1,5 +1,5 @@
 import { type ProductType } from '@store'
-import { cn } from 'merlo-ui'
+import { cn, semanticColors } from 'merlo-ui'
 import { cssInterop, rem } from 'nativewind'
 import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -30,13 +30,15 @@ cssInterop(NoImageIcon, {
 
 export const Product: FC<ProductProps> = ({ product, onPress, onDelete }) => {
   const { t } = useTranslation()
-  const { isDark } = useTheme()
+  const { current, isDark } = useTheme()
   const { name, picture, price, quantity, id } = product
   const shouldSliceName = name.length >= 17
 
   return (
     <SwipeToDelete
       width={Dimensions.get('screen').width - rem.get() * 2}
+      color={semanticColors[current].default[500]}
+      backgroundColor={semanticColors[current].default[200]}
       onDelete={() => onDelete(id)}
     >
       <Pressable

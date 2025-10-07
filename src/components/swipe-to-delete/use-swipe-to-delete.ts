@@ -2,6 +2,7 @@ import * as Haptics from 'expo-haptics'
 import { semanticColors } from 'merlo-ui'
 import {
   type SharedValue,
+  interpolateColor,
   runOnJS,
   useAnimatedProps,
   useAnimatedReaction,
@@ -12,31 +13,49 @@ import {
 
 import { useTheme } from '@providers'
 
-const ANIMATION_TIME = 50
+const ANIMATION_DURATION = 50
 export const THRESHOLD = 0.3
 
-export const useSwipeToDelete = (progress: SharedValue<number>) => {
+export const useSwipeToDelete = (
+  progress: SharedValue<number>,
+  color?: string,
+  backgroundColor?: string,
+) => {
   const { current } = useTheme()
   const isDark = current === 'dark'
-  const shouldDelete = useDerivedValue(() => progress.value >= THRESHOLD)
+  const shouldDelete = useDerivedValue(() =>
+    withTiming(progress.value >= THRESHOLD ? 1 : 0, {
+      duration: ANIMATION_DURATION,
+    }),
+  )
+
+  const activeBgColor = isDark
+    ? '#2e1822'
+    : semanticColors[current].danger[100]!
+  const bgColor =
+    backgroundColor ??
+    (isDark
+      ? semanticColors[current].default[100]!
+      : semanticColors[current].default[200]!)
+  const textColor =
+    color ??
+    (isDark
+      ? semanticColors[current].foreground[400]!
+      : semanticColors[current].foreground[500]!)
 
   const animatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: withTiming(
-      progress.value >= THRESHOLD
-        ? semanticColors[current].danger[50]!
-        : isDark
-          ? semanticColors[current].default[200]!
-          : semanticColors[current].default[100]!,
-      { duration: ANIMATION_TIME },
+    backgroundColor: interpolateColor(
+      shouldDelete.value,
+      [0, 1],
+      [bgColor, activeBgColor],
     ),
   }))
 
   const colorFunc = () => ({
-    color: withTiming(
-      progress.value >= THRESHOLD
-        ? semanticColors[current].danger[500]!
-        : semanticColors[current].foreground[600]!,
-      { duration: ANIMATION_TIME },
+    color: interpolateColor(
+      shouldDelete.value,
+      [0, 1],
+      [textColor, semanticColors[current].danger[400]!],
     ),
   })
 

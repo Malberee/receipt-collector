@@ -1,3 +1,4 @@
+import type { FC } from 'react'
 import { View } from 'react-native'
 import Animated, { type SharedValue } from 'react-native-reanimated'
 
@@ -7,9 +8,22 @@ import { useSwipeToDelete } from './use-swipe-to-delete'
 
 const AnimatedTrashIcon = Animated.createAnimatedComponent(TrashIcon)
 
-export const RightAction = (progress: SharedValue<number>) => {
-  const { animatedStyle, animatedTextStyle, animatedProps } =
-    useSwipeToDelete(progress)
+interface RightActionProps {
+  progress: SharedValue<number>
+  color?: string
+  backgroundColor?: string
+}
+
+export const RightAction: FC<RightActionProps> = ({
+  progress,
+  color,
+  backgroundColor,
+}) => {
+  const { animatedStyle, animatedTextStyle, animatedProps } = useSwipeToDelete(
+    progress,
+    color,
+    backgroundColor,
+  )
 
   return (
     <Animated.View
