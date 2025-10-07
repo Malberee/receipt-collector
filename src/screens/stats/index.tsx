@@ -5,7 +5,7 @@ import { Fragment, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { Container } from '@components'
+import { Container, Tabs } from '@components'
 import { MenuIcon } from '@icons'
 import { useDrawer, useTheme } from '@providers'
 import { formatCurrency } from '@utils'
@@ -13,7 +13,6 @@ import { formatCurrency } from '@utils'
 import { Chart } from './chart'
 import { DateRangePicker } from './date-range-picker'
 import { Legend } from './legend'
-import { Tabs } from './tabs'
 import { type Period, useStats } from './use-stats'
 import { YAxisLabels } from './y-axis-labels'
 
@@ -131,7 +130,7 @@ export const Stats = () => {
         }))}
       />
 
-      <View className="mt-6">
+      <View className="mt-6 h-24">
         <Tabs
           value={period}
           options={[

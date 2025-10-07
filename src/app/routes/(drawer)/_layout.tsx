@@ -1,7 +1,8 @@
 import { Stack } from 'expo-router'
 import { semanticColors } from 'merlo-ui'
+import { View } from 'react-native'
 
-import { Drawer, Navbar } from '@components'
+import { Drawer, Navbar, ThemeChanger } from '@components'
 import { DrawerContext, DrawerProvider, useTheme } from '@providers'
 
 const Layout = () => {
@@ -21,7 +22,12 @@ const Layout = () => {
         {({ isShown, hide }) =>
           isShown ? (
             <Drawer onClose={hide}>
-              <Navbar onNavigate={hide} />
+              <View className="flex-1 flex-col justify-between">
+                <Navbar onNavigate={hide} />
+                <View className="h-20">
+                  <ThemeChanger />
+                </View>
+              </View>
             </Drawer>
           ) : null
         }

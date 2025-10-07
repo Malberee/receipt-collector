@@ -1,4 +1,5 @@
 import { Portal } from '@gorhom/portal'
+import { rem } from 'nativewind'
 import type { FC, PropsWithChildren } from 'react'
 import { Dimensions, Pressable, View } from 'react-native'
 import Animated, {
@@ -8,6 +9,7 @@ import Animated, {
   SlideInLeft,
   SlideOutLeft,
 } from 'react-native-reanimated'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface DrawerProps extends PropsWithChildren {
   onClose: () => void
@@ -19,6 +21,7 @@ const ANIMATION_DURATION = 500
 
 export const Drawer: FC<DrawerProps> = ({ children, onClose }) => {
   const { width, height } = Dimensions.get('screen')
+  const { top, bottom } = useSafeAreaInsets()
 
   return (
     <Portal hostName="modal-portal">
@@ -34,7 +37,11 @@ export const Drawer: FC<DrawerProps> = ({ children, onClose }) => {
           )}
         />
         <Animated.View
-          className="h-full w-[65%] rounded-r-3xl border-r border-default-100 bg-default-50 px-6 py-20"
+          className="h-full w-[65%] rounded-r-3xl border-r border-default-100 bg-default-50 px-6"
+          style={{
+            paddingTop: top + rem.get(),
+            paddingBottom: bottom + rem.get(),
+          }}
           entering={SlideInLeft.easing(Easing.inOut(Easing.cubic)).duration(
             ANIMATION_DURATION,
           )}
