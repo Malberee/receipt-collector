@@ -50,7 +50,7 @@ export const DataPoint = memo<PointProps>(
           y={y(value)}
           r={24}
           fill="none"
-          onPress={() => onSelect(index)}
+          onPressIn={() => onSelect(index)}
         />
       </G>
     )
