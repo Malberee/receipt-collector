@@ -12,11 +12,11 @@ import {
   SELECTED_POINT_RADIUS,
   CURSOR_ANIMATION_DURATION,
 } from './constants'
-import type { ChartProps, ExtraProps } from './index'
+import type { ChartProps, DataItem } from './index'
+import { useChart } from './provider'
 
-interface TooltipProps
-  extends ExtraProps,
-    Pick<ChartProps, 'formatValue' | 'formatDate'> {
+interface TooltipProps extends Pick<ChartProps, 'formatValue' | 'formatDate'> {
+  data: DataItem[]
   selectedPoint: number
 }
 
@@ -24,15 +24,19 @@ const TOOLTIP_ANIMATION_DURATION = 200
 
 export const Tooltip: FC<TooltipProps> = ({
   data,
-  colors,
-  width: containerWidth,
-  height: containerHeight,
-  x,
-  y,
+
   selectedPoint,
   formatValue,
   formatDate,
 }) => {
+  const {
+    colors,
+    width: containerWidth,
+    height: containerHeight,
+    x,
+    y,
+  } = useChart()
+
   const space = 24
 
   const getTranslateX = (width: number) => {

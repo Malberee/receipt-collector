@@ -12,17 +12,18 @@ import {
   POINT_STROKE_WIDTH,
   SELECTED_POINT_RADIUS,
 } from '../constants'
-import type { ExtraProps } from '../index'
+import type { DataItem } from '../index'
+import { useChart } from '../provider'
 import { AnimatedLinearGradient } from './animated-linear-gradient'
 
-export const Defs: FC<ExtraProps> = ({
-  data,
-  y,
-  colors,
-  width,
-  height,
-  selectedPoint,
-}) => {
+interface DefsProps {
+  data: DataItem[]
+  selectedPoint: number | null
+}
+
+export const Defs: FC<DefsProps> = ({ data, selectedPoint }) => {
+  const { y, width, height, colors } = useChart()
+
   const MASK_OFFSET =
     SELECTED_POINT_RADIUS - POINT_RADIUS - POINT_STROKE_WIDTH / 2
 

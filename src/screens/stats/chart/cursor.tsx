@@ -11,11 +11,16 @@ import {
   CURSOR_ANIMATION_DURATION,
   SELECTED_POINT_RADIUS,
 } from './constants'
-import type { ExtraProps } from './index'
+import { useChart } from './provider'
+
+interface CursorProps {
+  selectedPoint: number | null
+}
 
 const AnimatedLine = Animated.createAnimatedComponent(Line)
 
-export const Cursor: FC<ExtraProps> = ({ x, height, selectedPoint }) => {
+export const Cursor: FC<CursorProps> = ({ selectedPoint }) => {
+  const { x, height } = useChart()
   const lastSelectedIndex = useSharedValue<number | null>(null)
   const xPos = useSharedValue(0)
   const opacity = useSharedValue(0)

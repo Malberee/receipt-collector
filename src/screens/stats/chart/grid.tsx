@@ -6,36 +6,35 @@ import { useTheme } from '@providers'
 
 import { AnimatedLine } from './animated-line'
 import { SELECTED_POINT_RADIUS } from './constants'
-import { type ExtraProps } from './index'
+import { useChart } from './provider'
+
+interface GridProps {
+  numberOfPoints: number
+}
 
 const STROKE_DASHARRAY = [6, 6]
 
-export const Grid: FC<ExtraProps> = ({
-  data,
-  width,
-  height,
-  x,
-  y,
-  min,
-  max,
-}) => {
+export const Grid: FC<GridProps> = ({ numberOfPoints }) => {
   const { current } = useTheme()
+  const { x, y, width, height, min, max } = useChart()
 
   const gridColor = semanticColors[current].default[200]!
   const ticks = Array.from({ length: 5 }, (_, i) => min + ((max - min) / 4) * i)
 
   return (
     <G clipPath="url(#grid-mask)">
-      {data.map((_, index) => (
-        <AnimatedLine
-          key={`${index}-v-line`}
-          x={x(index)}
-          y1={SELECTED_POINT_RADIUS}
-          y2={height - SELECTED_POINT_RADIUS}
-          stroke={gridColor}
-          strokeDasharray={STROKE_DASHARRAY}
-        />
-      ))}
+      {Array(numberOfPoints)
+        .fill(null)
+        .map((_, index) => (
+          <AnimatedLine
+            key={`${index}-v-line`}
+            x={x(index)}
+            y1={SELECTED_POINT_RADIUS}
+            y2={height - SELECTED_POINT_RADIUS}
+            stroke={gridColor}
+            strokeDasharray={STROKE_DASHARRAY}
+          />
+        ))}
       {ticks.map((item, index) => (
         <Line
           key={`${index}-h-line`}
