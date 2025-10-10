@@ -1,7 +1,7 @@
 import { store } from '@store'
 import { Slider } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
-import React, { type FC } from 'react'
+import React, { useEffect, useState, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, {
@@ -41,6 +41,7 @@ export const Filters: FC<FiltersProps> = observer(
 
     const { t } = useTranslation()
     const height = useSharedValue(0)
+    const [amountRange, setAmountRange] = useState([amount.from, amount.to])
 
     const derivedHeight = useDerivedValue(() =>
       withTiming(height.value * Number(isExpanded.value), {
@@ -51,6 +52,10 @@ export const Filters: FC<FiltersProps> = observer(
     const bodyStyle = useAnimatedStyle(() => ({
       height: derivedHeight.value,
     }))
+
+    useEffect(() => {
+      setAmountRange([amount.from, amount.to])
+    }, [amount.from, amount.to])
 
     return (
       <Animated.View style={[bodyStyle, { overflow: 'hidden' }]}>
@@ -65,7 +70,9 @@ export const Filters: FC<FiltersProps> = observer(
               label={t('Amount')}
               maxValue={amount.to}
               defaultValue={[0, amount.to]}
-              value={[amount.from, amount.to]}
+              value={amountRange}
+              // value={[amount.from, amount.to]}
+              onChange={(values) => setAmountRange(values as number[])}
               onChangeEnd={(values) => {
                 const [from, to] = values as number[]
                 onValueChange('amount', { from, to })
