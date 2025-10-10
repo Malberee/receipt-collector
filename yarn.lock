@@ -6424,10 +6424,10 @@ merge2@^1.3.0, merge2@^1.4.1:
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
   integrity sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
 
-merlo-ui@^1.1.13:
-  version "1.1.13"
-  resolved "https://registry.yarnpkg.com/merlo-ui/-/merlo-ui-1.1.13.tgz#c05a59f1b4f1b172e5fdbb5a1bbbc2e7a060c7d1"
-  integrity sha512-Kn4XryFonkKJtaOL53hFbFPdcaLDpSTk1qrzo5+RnJOAihA/pXgFK5/QhOAzXMUHU4wEPLjR2IuUl8pz1ZTs+w==
+merlo-ui@^1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/merlo-ui/-/merlo-ui-1.1.14.tgz#5bec500b9e25dffcd34458da9d81ecbc4b8fd8a2"
+  integrity sha512-U5IE5YtjGZ9UCC9MnY/xIvBumTvHaDZUtGAxL0K/5CukkC7ERkbY0+EXJQWY2zlyS2J51Mu3Z+z0Crs9037nTg==
   dependencies:
     "@react-aria/label" "^3.7.18"
     "@react-aria/progress" "^3.4.23"

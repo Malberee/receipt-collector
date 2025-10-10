@@ -1,7 +1,6 @@
 import i18n from 'i18next'
 import { makeAutoObservable } from 'mobx'
 import { makePersistable } from 'mobx-persist-store'
-import moment from 'moment'
 import { nanoid } from 'nanoid'
 import { MMKV } from 'react-native-mmkv'
 
@@ -53,11 +52,6 @@ type Preferences = {
   showRarityAnimation: boolean
 }
 
-type RangeFilter<T> = {
-  from?: T
-  to?: T
-}
-
 export const storage = new MMKV()
 
 class Store {
@@ -85,40 +79,6 @@ class Store {
         removeItem: (key) => storage.delete(key),
       },
     })
-  }
-
-  getReceipts() {
-    const { from: amountFrom, to: amountTo } = this.filters.amount
-    const { from: dateFrom, to: dateTo } = this.filters.date
-    const rarities = this.filters.rarities
-
-    return this.receipts
-      .filter((receipt) => {
-        if (amountFrom !== undefined && amountTo !== undefined) {
-          return receipt.amount >= amountFrom && receipt.amount <= amountTo
-        }
-
-        return true
-      })
-      .filter((receipt) => {
-        if (dateFrom !== undefined && dateTo !== undefined) {
-          return moment(receipt.date).isBetween(
-            dateFrom,
-            dateTo,
-            'second',
-            '[]',
-          )
-        }
-
-        return true
-      })
-      .filter((receipt) => {
-        if (rarities?.length) {
-          return rarities.includes(receipt.rarity as any)
-        }
-
-        return true
-      })
   }
 
   addReceipt(receipt: AddReceiptArg) {
@@ -212,13 +172,6 @@ class Store {
     receipt.products = receipt.products.filter(
       (product) => product.id !== productId,
     )
-  }
-
-  setFilters(
-    filterName: keyof Filters,
-    filters: RangeFilter<number | Date> | Rarity[],
-  ) {
-    this.filters[filterName] = filters as any
   }
 
   setPreferences<T extends keyof Preferences>(

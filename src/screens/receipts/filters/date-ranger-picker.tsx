@@ -1,4 +1,3 @@
-import { store } from '@store'
 import { Button } from 'merlo-ui'
 import moment, { type Moment } from 'moment'
 import React, { type FC, useEffect, useState } from 'react'
@@ -7,25 +6,26 @@ import { Text, View } from 'react-native'
 
 import { DatePicker, Modal } from '@components'
 
-import { getMinMaxDates } from './utils'
-
 type ModalType = 'start' | 'end' | 'none'
 
 interface DateRangePickerProps {
+  min: number
+  max: number
   onValueChange: (value: [Date, Date]) => void
 }
 
 export const DateRangePicker: FC<DateRangePickerProps> = ({
+  min,
+  max,
   onValueChange,
 }) => {
   const { t } = useTranslation()
-  const { minDate, maxDate } = getMinMaxDates()
 
   const formatDate = (date: Moment | Date) =>
     moment(date).format('DD.MM.YYYY [ • ] HH:mm')
 
-  const [startDate, setStartDate] = useState<Date>(minDate.toDate())
-  const [endDate, setEndDate] = useState<Date>(maxDate.toDate())
+  const [startDate, setStartDate] = useState<Date>(new Date(min))
+  const [endDate, setEndDate] = useState<Date>(new Date(max))
   const [modalType, setModalType] = useState<ModalType>('none')
 
   const dates = {
@@ -34,11 +34,9 @@ export const DateRangePicker: FC<DateRangePickerProps> = ({
   }
 
   useEffect(() => {
-    const { minDate, maxDate } = getMinMaxDates()
-
-    setStartDate(minDate.toDate())
-    setEndDate(maxDate.toDate())
-  }, [JSON.stringify(store.receipts)])
+    setStartDate(new Date(min))
+    setEndDate(new Date(max))
+  }, [min, max])
 
   return (
     <View>
@@ -71,12 +69,7 @@ export const DateRangePicker: FC<DateRangePickerProps> = ({
       </View>
 
       {modalType !== 'none' ? (
-        <Modal
-          onClose={() => {
-            setModalType('none')
-            onValueChange([startDate, endDate])
-          }}
-        >
+        <Modal onClose={() => setModalType('none')}>
           <View className="w-96">
             <Text className="mb-4 text-2xl capitalize text-foreground">
               {t(modalType)}
@@ -85,6 +78,12 @@ export const DateRangePicker: FC<DateRangePickerProps> = ({
               date={dates[modalType].value}
               setDate={(value) => {
                 dates[modalType].setState(new Date(value))
+                if (modalType === 'start') {
+                  onValueChange([value, endDate])
+                } else {
+                  onValueChange([startDate, value])
+                }
+                setModalType('none')
               }}
             />
           </View>

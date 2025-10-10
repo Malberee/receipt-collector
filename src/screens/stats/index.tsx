@@ -50,9 +50,9 @@ export const Stats = () => {
   const amount = useStats('amount', dates, period)
   const count = useStats('count', dates, period)
 
-  const timestamps = store
-    .getReceipts()
-    .map((receipt) => new Date(receipt.date).getTime())
+  const timestamps = store.receipts.map((receipt) =>
+    new Date(receipt.date).getTime(),
+  )
 
   const charts = [
     {

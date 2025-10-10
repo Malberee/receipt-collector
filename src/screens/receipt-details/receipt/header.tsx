@@ -42,7 +42,7 @@ export const Header: FC<HeaderProps> = ({ receipt, openModal }) => {
               {formatCurrency(receiptAmount)}
             </Text>
             <Text className="text-base text-foreground-400">
-              {moment(date).format('YYYY.MM.DD [ • ] HH:mm')}
+              {moment(date).format('DD.MM.YYYY [ • ] HH:mm')}
             </Text>
           </View>
           {rarity !== 'none' ? (

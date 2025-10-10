@@ -1,5 +1,7 @@
 import { PortalHost } from '@gorhom/portal'
+import { store } from '@store'
 import { Button, Plus } from 'merlo-ui'
+import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
@@ -9,10 +11,14 @@ import { Container, Modal, ReceiptForm, ScannerButton } from '@components'
 import { Filters } from './filters'
 import { Header } from './header'
 import { ReceiptList } from './receipt-list'
+import { filterReceipts, type FiltersType } from './utils'
 
-export const Receipts = () => {
+export const Receipts = observer(() => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [filters, setFilters] = useState<FiltersType>({ amount: {}, date: {} })
   const isExpanded = useSharedValue(false)
+
+  const data = filterReceipts(store.receipts, filters)
 
   return (
     <Container>
@@ -21,8 +27,13 @@ export const Receipts = () => {
           isExpanded.value = !isExpanded.value
         }}
       />
-      <Filters isExpanded={isExpanded} />
-      <ReceiptList />
+      <Filters
+        isExpanded={isExpanded}
+        onValueChange={(key, value) =>
+          setFilters((prevState) => ({ ...prevState, [key]: value }))
+        }
+      />
+      <ReceiptList data={data} />
       <View className="mb-4 w-full flex-row gap-4">
         <ScannerButton type="qr" />
         <Button
@@ -44,4 +55,4 @@ export const Receipts = () => {
       ) : null}
     </Container>
   )
-}
+})

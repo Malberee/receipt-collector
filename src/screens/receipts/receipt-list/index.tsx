@@ -1,6 +1,5 @@
 import { type ReceiptType, store } from '@store'
-import { observer } from 'mobx-react-lite'
-import React, { useCallback, useState } from 'react'
+import { type FC, useCallback, useState } from 'react'
 import { type ListRenderItem } from 'react-native'
 import Animated, { LinearTransition } from 'react-native-reanimated'
 
@@ -9,9 +8,12 @@ import { DeleteDialog } from '@components'
 import { Empty } from './empty'
 import { Receipt } from './receipt'
 
-export const ReceiptList = observer(() => {
+interface ReceiptListProps {
+  data: ReceiptType[]
+}
+
+export const ReceiptList: FC<ReceiptListProps> = ({ data }) => {
   const [receiptToDelete, setReceiptToDelete] = useState('')
-  const data = store.getReceipts()
 
   const renderItem = useCallback<ListRenderItem<ReceiptType>>(
     ({ item }) => <Receipt receipt={item} onDelete={setReceiptToDelete} />,
@@ -42,4 +44,4 @@ export const ReceiptList = observer(() => {
   ) : (
     <Empty />
   )
-})
+}

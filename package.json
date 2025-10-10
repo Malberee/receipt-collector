@@ -29,7 +29,7 @@
     "expo-status-bar": "~2.2.3",
     "formik": "^2.4.6",
     "i18next": "^25.5.2",
-    "merlo-ui": "^1.1.13",
+    "merlo-ui": "^1.1.14",
     "mobx": "^6.13.5",
     "mobx-persist-store": "^1.1.5",
     "mobx-react-lite": "^4.0.7",

@@ -11,8 +11,7 @@ export const useStats = (
   const getAutoCalcReceiptAmount = (receipt: ReceiptType) =>
     receipt.products.reduce((acc, product) => acc + product.calculatedPrice, 0)
 
-  const data = store
-    .getReceipts()
+  const data = store.receipts
     .filter((receipt) => {
       return (
         moment(receipt.date).startOf('day').isSameOrAfter(dates[0]) &&
