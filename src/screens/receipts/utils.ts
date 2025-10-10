@@ -5,14 +5,14 @@ import type { Rarity } from '@constants'
 
 export type FiltersType = {
   amount: {
-    from?: number
-    to?: number
+    from: number
+    to: number
   }
   date: {
-    from?: Date
-    to?: Date
+    from: Date
+    to: Date
   }
-  rarities?: Rarity[]
+  rarities: Rarity[]
 }
 
 export const filterReceipts = (

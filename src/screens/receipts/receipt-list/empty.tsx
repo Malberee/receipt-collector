@@ -1,12 +1,14 @@
-import { store } from '@store'
 import { ArrowLeftIcon, cn } from 'merlo-ui'
-import { observer } from 'mobx-react-lite'
 import { cssInterop } from 'nativewind'
-import React from 'react'
+import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 
 import { useTheme } from '@providers'
+
+interface EmptyProps {
+  hasFilters: boolean
+}
 
 cssInterop(ArrowLeftIcon, {
   className: {
@@ -17,17 +19,9 @@ cssInterop(ArrowLeftIcon, {
   },
 })
 
-export const Empty = observer(() => {
+export const Empty: FC<EmptyProps> = ({ hasFilters }) => {
   const { t } = useTranslation()
   const { isDark } = useTheme()
-
-  const filters = store.filters
-  const hasFilters = Object.values(filters).some((filter) => {
-    if (Array.isArray(filter)) {
-      return !!filter.length
-    }
-    return !!Object.values(filter).length
-  })
 
   return (
     <View className="flex-1">
@@ -55,4 +49,4 @@ export const Empty = observer(() => {
       </View>
     </View>
   )
-})
+}

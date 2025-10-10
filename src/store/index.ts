@@ -30,18 +30,6 @@ export type ReceiptType = {
   products: ProductType[]
 }
 
-type Filters = {
-  amount: {
-    from?: number
-    to?: number
-  }
-  date: {
-    from?: Date
-    to?: Date
-  }
-  rarities?: Rarity[]
-}
-
 export type Theme = 'light' | 'dark' | 'system'
 export type Language = 'en' | 'uk'
 
@@ -61,11 +49,6 @@ class Store {
     lang: 'en',
     currency: 'USD',
     showRarityAnimation: true,
-  }
-
-  filters: Filters = {
-    amount: {},
-    date: {},
   }
 
   constructor() {

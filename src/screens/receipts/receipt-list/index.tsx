@@ -10,9 +10,10 @@ import { Receipt } from './receipt'
 
 interface ReceiptListProps {
   data: ReceiptType[]
+  hasFilters: boolean
 }
 
-export const ReceiptList: FC<ReceiptListProps> = ({ data }) => {
+export const ReceiptList: FC<ReceiptListProps> = ({ data, hasFilters }) => {
   const [receiptToDelete, setReceiptToDelete] = useState('')
 
   const renderItem = useCallback<ListRenderItem<ReceiptType>>(
@@ -42,6 +43,6 @@ export const ReceiptList: FC<ReceiptListProps> = ({ data }) => {
       ) : null}
     </>
   ) : (
-    <Empty />
+    <Empty hasFilters={hasFilters} />
   )
 }
