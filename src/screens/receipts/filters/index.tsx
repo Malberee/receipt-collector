@@ -1,8 +1,7 @@
 import { store } from '@store'
 import { Slider } from 'merlo-ui'
 import { observer } from 'mobx-react-lite'
-import moment from 'moment'
-import React, { useEffect, useState, type FC } from 'react'
+import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, {
@@ -15,6 +14,7 @@ import Animated, {
 
 import type { Rarity } from '@constants'
 
+import type { FiltersType } from '../utils'
 import { DateRangePicker } from './date-ranger-picker'
 import { Rarities } from './rarities'
 
@@ -30,23 +30,17 @@ type Overload = {
 }
 
 interface FiltersProps {
-  onValueChange: Overload
+  filters: FiltersType
   isExpanded: SharedValue<boolean>
+  onValueChange: Overload
 }
 
 export const Filters: FC<FiltersProps> = observer(
-  ({ isExpanded, onValueChange }) => {
-    const maxAmount = Math.ceil(
-      Math.max(...store.receipts.map((receipt) => receipt.amount)),
-    )
-
-    const timestamps = store.receipts.map((receipt) => moment(receipt.date))
-    const minDate = moment.min(timestamps).clone().startOf('day')
-    const maxDate = moment.max(timestamps).clone().endOf('day')
+  ({ filters, isExpanded, onValueChange }) => {
+    const { amount, date } = filters
 
     const { t } = useTranslation()
     const height = useSharedValue(0)
-    const [amountRange, setAmountRange] = useState([0, maxAmount])
 
     const derivedHeight = useDerivedValue(() =>
       withTiming(height.value * Number(isExpanded.value), {
@@ -58,11 +52,6 @@ export const Filters: FC<FiltersProps> = observer(
       height: derivedHeight.value,
     }))
 
-    useEffect(() => {
-      setAmountRange([0, maxAmount])
-      onValueChange('amount', { from: 0, to: maxAmount })
-    }, [maxAmount])
-
     return (
       <Animated.View style={[bodyStyle, { overflow: 'hidden' }]}>
         <View
@@ -71,13 +60,12 @@ export const Filters: FC<FiltersProps> = observer(
             height.value = e.nativeEvent.layout.height
           }}
         >
-          {maxAmount > 0 ? (
+          {amount.to > 0 ? (
             <Slider
               label={t('Amount')}
-              maxValue={maxAmount}
-              defaultValue={[0, maxAmount]}
-              value={amountRange}
-              onChange={(value) => setAmountRange(value as number[])}
+              maxValue={amount.to}
+              defaultValue={[0, amount.to]}
+              value={[amount.from, amount.to]}
               onChangeEnd={(values) => {
                 const [from, to] = values as number[]
                 onValueChange('amount', { from, to })
@@ -90,8 +78,8 @@ export const Filters: FC<FiltersProps> = observer(
           ) : null}
 
           <DateRangePicker
-            min={minDate.valueOf()}
-            max={maxDate.valueOf()}
+            min={new Date(date.from).getTime()}
+            max={new Date(date.to).getTime()}
             onValueChange={([from, to]) => onValueChange('date', { from, to })}
           />
 

@@ -1,8 +1,8 @@
 import { PortalHost } from '@gorhom/portal'
 import { store } from '@store'
 import { Button, Plus } from 'merlo-ui'
+import { reaction } from 'mobx'
 import { observer } from 'mobx-react-lite'
-import moment from 'moment'
 import React, { useEffect, useRef, useState } from 'react'
 import { View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
@@ -12,25 +12,13 @@ import { Container, Modal, ReceiptForm, ScannerButton } from '@components'
 import { Filters } from './filters'
 import { Header } from './header'
 import { ReceiptList } from './receipt-list'
-import { filterReceipts, type FiltersType } from './utils'
+import { filterReceipts, getFilters, type FiltersType } from './utils'
 
 export const Receipts = observer(() => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const initialFilters = useRef({} as FiltersType)
   const [filters, setFilters] = useState<FiltersType>(() => {
-    const maxAmount = Math.ceil(
-      Math.max(...store.receipts.map((receipt) => receipt.amount)),
-    )
-
-    const timestamps = store.receipts.map((receipt) => moment(receipt.date))
-    const minDate = moment.min(timestamps).clone().startOf('day')
-    const maxDate = moment.max(timestamps).clone().endOf('day')
-
-    const initialState: FiltersType = {
-      amount: { from: 0, to: maxAmount },
-      date: { from: minDate.toDate(), to: maxDate.toDate() },
-      rarities: [],
-    }
+    const initialState = getFilters(store.receipts)
 
     initialFilters.current = initialState
 
@@ -54,6 +42,17 @@ export const Receipts = observer(() => {
     )
   }, [filters])
 
+  useEffect(() => {
+    const dispose = reaction(
+      () => store.receipts.map((receipt) => receipt),
+      () => {
+        setFilters(getFilters(store.receipts))
+      },
+    )
+
+    return () => dispose()
+  }, [])
+
   return (
     <Container>
       <Header
@@ -62,6 +61,7 @@ export const Receipts = observer(() => {
         }}
       />
       <Filters
+        filters={filters}
         isExpanded={isExpanded}
         onValueChange={(key, value) =>
           setFilters((prevState) => ({ ...prevState, [key]: value }))
