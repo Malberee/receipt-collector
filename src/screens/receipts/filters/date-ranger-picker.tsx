@@ -9,8 +9,8 @@ import { DatePicker, Modal } from '@components'
 type ModalType = 'start' | 'end' | 'none'
 
 interface DateRangePickerProps {
-  min: number
-  max: number
+  min: Date
+  max: Date
   onValueChange: (value: [Date, Date]) => void
 }
 
@@ -24,8 +24,8 @@ export const DateRangePicker: FC<DateRangePickerProps> = ({
   const formatDate = (date: Moment | Date) =>
     moment(date).format('DD.MM.YYYY [ • ] HH:mm')
 
-  const [startDate, setStartDate] = useState<Date>(new Date(min))
-  const [endDate, setEndDate] = useState<Date>(new Date(max))
+  const [startDate, setStartDate] = useState<Date>(min)
+  const [endDate, setEndDate] = useState<Date>(max)
   const [modalType, setModalType] = useState<ModalType>('none')
 
   const dates = {
@@ -34,8 +34,8 @@ export const DateRangePicker: FC<DateRangePickerProps> = ({
   }
 
   useEffect(() => {
-    setStartDate(new Date(min))
-    setEndDate(new Date(max))
+    setStartDate(min)
+    setEndDate(max)
   }, [min, max])
 
   return (

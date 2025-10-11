@@ -5,15 +5,16 @@ import Animated, { LinearTransition } from 'react-native-reanimated'
 
 import { DeleteDialog } from '@components'
 
+import { useFilters } from '../filters'
 import { Empty } from './empty'
 import { Receipt } from './receipt'
 
 interface ReceiptListProps {
   data: ReceiptType[]
-  hasFilters: boolean
 }
 
-export const ReceiptList: FC<ReceiptListProps> = ({ data, hasFilters }) => {
+export const ReceiptList: FC<ReceiptListProps> = ({ data }) => {
+  const { hasFilters } = useFilters()
   const [receiptToDelete, setReceiptToDelete] = useState('')
 
   const renderItem = useCallback<ListRenderItem<ReceiptType>>(
