@@ -8,7 +8,8 @@ import { type Rarity, rarityColors } from '@constants'
 import { MarkIcon } from './mark-icon'
 
 interface RaritiesProps {
-  onValueChange: (value: Rarity[]) => void
+  value?: Rarity[]
+  onValueChange?: (value: Rarity[]) => void
 }
 
 const iconColors = {
@@ -20,22 +21,27 @@ const iconColors = {
   none: 'text-default-foreground',
 }
 
-export const Rarities: FC<RaritiesProps> = ({ onValueChange }) => {
+export const Rarities: FC<RaritiesProps> = ({ value = [], onValueChange }) => {
   const { t } = useTranslation()
-  const [selectedRarities, setSelectedRarities] = useState<Rarity[]>([])
+  const [selectedRarities, setSelectedRarities] = useState<Rarity[]>(value)
   const rarities = Object.keys(rarityColors) as Rarity[]
 
   const handleSelect = (rarity: Rarity) => {
+    let result = []
+
     if (selectedRarities.includes(rarity)) {
-      setSelectedRarities(selectedRarities.filter((r) => r !== rarity))
+      result = selectedRarities.filter((r) => r !== rarity)
     } else {
-      setSelectedRarities([...selectedRarities, rarity])
+      result = [...selectedRarities, rarity]
     }
+
+    onValueChange?.(result)
+    setSelectedRarities(result)
   }
 
   useEffect(() => {
-    onValueChange(selectedRarities)
-  }, [selectedRarities])
+    setSelectedRarities(value)
+  }, [value])
 
   return (
     <View>

@@ -22,7 +22,7 @@ interface FiltersProps {
 
 export const Filters: FC<FiltersProps> = observer(({ isExpanded }) => {
   const { initialFilters, filters, onValueChange } = useFilters()
-  const { amount, date } = filters
+  const { amount, date, rarities } = filters
   const { amount: initialAmount } = initialFilters
 
   const { t } = useTranslation()
@@ -76,6 +76,7 @@ export const Filters: FC<FiltersProps> = observer(({ isExpanded }) => {
         />
 
         <Rarities
+          value={rarities}
           onValueChange={(values) => onValueChange('rarities', values)}
         />
       </View>
