@@ -1,5 +1,5 @@
 import * as Haptics from 'expo-haptics'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   type Camera,
   type CodeScanner,
@@ -13,6 +13,8 @@ import { getScanArea, isWithinScanArea, mapScreenToFrame } from '@utils'
 
 export type ScannerType = 'barcode' | 'qr'
 
+const SCAN_INTERVAL = 3000
+
 const codeTypes: Record<string, CodeType[]> = {
   qr: ['qr'],
   barcode: ['ean-8', 'ean-13', 'code-128', 'code-39', 'code-93'],
@@ -24,19 +26,24 @@ export const useScanner = (
   onScan: (data: string) => void,
 ) => {
   const [enableTorch, setEnableTorch] = useState(false)
+  const lastScannedTime = useRef(0)
   const { hasPermission } = useCameraPermission()
 
   const scanAreaSize = { width: 300, height: type === 'qr' ? 300 : 100 }
   const scanAreaScreen = getScanArea(scanAreaSize.width, scanAreaSize.height)
 
-  const onCodeScanned: CodeScanner['onCodeScanned'] = async (codes, frame) => {
+  const onCodeScanned: CodeScanner['onCodeScanned'] = (codes, frame) => {
     if (!codes[0].frame || !codes[0].value || !shouldScan) return
+
+    const now = Date.now()
+    if (now - lastScannedTime.current < SCAN_INTERVAL) return
 
     frame = { width: frame.height, height: frame.width }
     const area = mapScreenToFrame(frame, scanAreaScreen)
     const isInside = isWithinScanArea(codes[0].frame, area)
 
     if (isInside) {
+      lastScannedTime.current = now
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
       onScan(codes[0].value)
     }
