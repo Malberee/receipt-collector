@@ -9,6 +9,7 @@ import { useDrawer } from '@providers'
 import { FilterIcon } from './filter-icon'
 
 interface HeaderProps {
+  showFilters: boolean
   toggleFilters: () => void
 }
 
@@ -21,7 +22,7 @@ cssInterop(FilterIcon, {
   },
 })
 
-export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
+export const Header: FC<HeaderProps> = ({ showFilters, toggleFilters }) => {
   const { show } = useDrawer()
 
   return (
@@ -36,16 +37,18 @@ export const Header: FC<HeaderProps> = ({ toggleFilters }) => {
         }
         onPress={show}
       />
-      <Button
-        isIconOnly
-        variant="light"
-        size="lg"
-        color="default"
-        startContent={
-          <FilterIcon className="text-foreground" width={24} height={24} />
-        }
-        onPress={toggleFilters}
-      />
+      {showFilters ? (
+        <Button
+          isIconOnly
+          variant="light"
+          size="lg"
+          color="default"
+          startContent={
+            <FilterIcon className="text-foreground" width={24} height={24} />
+          }
+          onPress={toggleFilters}
+        />
+      ) : null}
     </View>
   )
 }

@@ -24,11 +24,12 @@ export const Receipts = withFilters(
     return (
       <Container>
         <Header
+          showFilters={!!store.receipts.length}
           toggleFilters={() => {
             isExpanded.value = !isExpanded.value
           }}
         />
-        <Filters isExpanded={isExpanded} />
+        {store.receipts.length ? <Filters isExpanded={isExpanded} /> : null}
         <ReceiptList data={data} />
         <View className="mb-4 w-full flex-row gap-4">
           <ScannerButton type="qr" />
