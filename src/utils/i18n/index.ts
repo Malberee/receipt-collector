@@ -10,10 +10,15 @@ export { changeLocale } from './change-locale'
 
 const resources = { en: { translation: en }, uk: { translation: uk } }
 
-i18n.use(mmkvLanguageDetector).use(initReactI18next).init({
-  resources,
-  fallbackLng: 'en',
-})
-i18n.on('initialized', (options) => moment.locale(options.lng))
+i18n
+  .use(mmkvLanguageDetector)
+  .use(initReactI18next)
+  .init(
+    {
+      resources,
+      fallbackLng: 'en',
+    },
+    () => moment.locale(i18n.language),
+  )
 
 export default i18n
