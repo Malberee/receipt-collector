@@ -15,6 +15,7 @@ import { formatCurrency } from '@utils'
 
 interface ReceiptProps {
   receipt: ReceiptType
+  showSeparator: boolean
   onDelete: (id: string) => void
 }
 
@@ -24,46 +25,53 @@ cssInterop(Pressable, {
   },
 })
 
-export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
-  const { id, amount, date, rarity, products, autoCalcAmount } = receipt
-  const { t } = useTranslation()
-  const { isDark } = useTheme()
+export const Receipt = observer<ReceiptProps>(
+  ({ receipt, showSeparator, onDelete }) => {
+    const { id, amount, date, rarity, products, autoCalcAmount } = receipt
+    const { t } = useTranslation()
+    const { isDark } = useTheme()
 
-  const receiptAmount = autoCalcAmount
-    ? products.reduce((acc, product) => acc + product.calculatedPrice, 0)
-    : amount
+    const receiptAmount = autoCalcAmount
+      ? products.reduce((acc, product) => acc + product.calculatedPrice, 0)
+      : amount
 
-  return (
-    <SwipeToDelete
-      width={Dimensions.get('screen').width}
-      onDelete={() => onDelete(id)}
-    >
-      <Pressable
-        className={cn(
-          'bg-default-50 px-4 active:bg-[#f7f7f8]',
-          isDark && 'active:!bg-[#222222]',
-        )}
-        onPress={() => router.navigate(`/${id}`)}
+    return (
+      <SwipeToDelete
+        width={Dimensions.get('screen').width}
+        onDelete={() => onDelete(id)}
       >
-        <View className="w-full flex-row items-center justify-between px-4 py-4">
-          <View className="flex-col justify-between">
-            <Text className="text-xl text-foreground">
-              {formatCurrency(receiptAmount)}
-            </Text>
-            <Text className="text-sm capitalize text-foreground-500">
-              {moment(date).calendar(null, {
-                sameDay: `[${t('Today')}] [ • ] HH:mm`,
-                lastDay: `[${t('Yesterday')}] [ • ] HH:mm`,
-                lastWeek: 'DD MMMM [ • ] LT',
-                sameElse: `DD MMMM ${moment().year() !== moment(date).year() ? 'YYYY ' : ''}[ • ] HH:mm`,
-              })}
-            </Text>
+        <Pressable
+          className={cn(
+            'bg-default-50 px-4 active:bg-[#f7f7f8]',
+            isDark && 'active:!bg-[#222222]',
+          )}
+          onPress={() => router.navigate(`/${id}`)}
+        >
+          <View
+            className={cn(
+              'w-full flex-row items-center justify-between px-4 py-4',
+              showSeparator && 'border-b border-default-100',
+            )}
+          >
+            <View className="flex-col justify-between">
+              <Text className="text-xl text-foreground">
+                {formatCurrency(receiptAmount)}
+              </Text>
+              <Text className="text-sm capitalize text-foreground-500">
+                {moment(date).calendar(null, {
+                  sameDay: `[${t('Today')}] [ • ] HH:mm`,
+                  lastDay: `[${t('Yesterday')}] [ • ] HH:mm`,
+                  lastWeek: 'DD MMMM [ • ] LT',
+                  sameElse: `DD MMMM ${moment().year() !== moment(date).year() ? 'YYYY ' : ''}[ • ] HH:mm`,
+                })}
+              </Text>
+            </View>
+            {rarity !== 'none' ? (
+              <RarityChip rarity={rarity} pointerEvents="none" />
+            ) : null}
           </View>
-          {rarity !== 'none' ? (
-            <RarityChip rarity={rarity} pointerEvents="none" />
-          ) : null}
-        </View>
-      </Pressable>
-    </SwipeToDelete>
-  )
-})
+        </Pressable>
+      </SwipeToDelete>
+    )
+  },
+)
