@@ -29,7 +29,6 @@ export const ReceiptList: FC<ReceiptListProps> = ({ data }) => {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        removeClippedSubviews
         itemLayoutAnimation={LinearTransition}
         ItemSeparatorComponent={() => (
           <View className="mx-4 h-px flex-1 bg-default-100" />
