@@ -1,6 +1,6 @@
 import { type ReceiptType, store } from '@store'
 import { type FC, useCallback, useState } from 'react'
-import type { ListRenderItem } from 'react-native'
+import { View, type ListRenderItem } from 'react-native'
 import Animated, { LinearTransition } from 'react-native-reanimated'
 
 import { DeleteDialog } from '@components'
@@ -18,14 +18,8 @@ export const ReceiptList: FC<ReceiptListProps> = ({ data }) => {
   const [receiptToDelete, setReceiptToDelete] = useState('')
 
   const renderItem = useCallback<ListRenderItem<ReceiptType>>(
-    ({ item, index }) => (
-      <Receipt
-        receipt={item}
-        showSeparator={index < data.length - 1}
-        onDelete={setReceiptToDelete}
-      />
-    ),
-    [data.length],
+    ({ item }) => <Receipt receipt={item} onDelete={setReceiptToDelete} />,
+    [data],
   )
 
   return data.length ? (
@@ -37,6 +31,11 @@ export const ReceiptList: FC<ReceiptListProps> = ({ data }) => {
         keyExtractor={(item) => item.id}
         removeClippedSubviews
         itemLayoutAnimation={LinearTransition}
+        ItemSeparatorComponent={() => (
+          <View className="h-px px-4">
+            <View className="size-full bg-default-100" />
+          </View>
+        )}
       />
       {receiptToDelete ? (
         <DeleteDialog
