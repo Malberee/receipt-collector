@@ -1,6 +1,6 @@
 import { type ReceiptType, store } from '@store'
 import { type FC, useCallback, useState } from 'react'
-import { type ListRenderItem } from 'react-native'
+import { View, type ListRenderItem } from 'react-native'
 import Animated, { LinearTransition } from 'react-native-reanimated'
 
 import { DeleteDialog } from '@components'
@@ -31,6 +31,9 @@ export const ReceiptList: FC<ReceiptListProps> = ({ data }) => {
         keyExtractor={(item) => item.id}
         removeClippedSubviews
         itemLayoutAnimation={LinearTransition}
+        ItemSeparatorComponent={() => (
+          <View className="mx-4 h-px flex-1 bg-default-100" />
+        )}
       />
       {receiptToDelete ? (
         <DeleteDialog

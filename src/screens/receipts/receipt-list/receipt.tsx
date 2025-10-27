@@ -45,7 +45,7 @@ export const Receipt = observer<ReceiptProps>(({ receipt, onDelete }) => {
         )}
         onPress={() => router.navigate(`/${id}`)}
       >
-        <View className="w-full flex-row items-center justify-between border-b border-default-100 px-4 py-4">
+        <View className="w-full flex-row items-center justify-between px-4 py-4">
           <View className="flex-col justify-between">
             <Text className="text-xl text-foreground">
               {formatCurrency(receiptAmount)}
