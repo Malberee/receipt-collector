@@ -998,13 +998,6 @@
     "@types/conventional-commits-parser" "^5.0.0"
     chalk "^5.3.0"
 
-"@conarti/eslint-plugin-feature-sliced@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@conarti/eslint-plugin-feature-sliced/-/eslint-plugin-feature-sliced-1.0.5.tgz#7f177b673256f066221a73363f2f1b6a5a8612bc"
-  integrity sha512-Gx90Zupi8nv6cCP3O6cYWE9GT4RIw0D9JBHWeUwXEv7qmjCd3dXSqDEmQchN7k41hhCPupZvMevH4JrSORcVjQ==
-  dependencies:
-    picomatch "^2.3.1"
-
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
