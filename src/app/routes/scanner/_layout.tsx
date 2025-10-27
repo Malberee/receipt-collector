@@ -11,7 +11,7 @@ const ScannerLayout = () => {
   return (
     <View className="flex-1 bg-default-50">
       <View className="absolute z-10 p-4" style={{ top }}>
-        <BackButton />
+        <BackButton iconClassName="text-white" />
       </View>
       <Slot />
     </View>
