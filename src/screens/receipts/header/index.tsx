@@ -26,17 +26,7 @@ export const Header: FC<HeaderProps> = ({ showFilters, toggleFilters }) => {
   const { show } = useDrawer()
 
   return (
-    <View className="w-full flex-row justify-between pb-4">
-      <Button
-        isIconOnly
-        variant="light"
-        size="lg"
-        color="default"
-        startContent={
-          <MenuIcon className="text-foreground" width={28} height={28} />
-        }
-        onPress={show}
-      />
+    <View className="w-full flex-row pb-4">
       {showFilters ? (
         <Button
           isIconOnly
@@ -49,6 +39,18 @@ export const Header: FC<HeaderProps> = ({ showFilters, toggleFilters }) => {
           onPress={toggleFilters}
         />
       ) : null}
+
+      <Button
+        isIconOnly
+        variant="light"
+        size="lg"
+        color="default"
+        className="ml-auto"
+        startContent={
+          <MenuIcon className="text-foreground" width={28} height={28} />
+        }
+        onPress={show}
+      />
     </View>
   )
 }

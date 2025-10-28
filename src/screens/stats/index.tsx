@@ -94,7 +94,7 @@ export const Stats = () => {
         startContent={
           <MenuIcon className="text-foreground" width={28} height={28} />
         }
-        className="mb-4"
+        className="mb-4 ml-auto"
         onPress={show}
       />
 

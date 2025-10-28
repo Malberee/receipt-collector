@@ -23,7 +23,7 @@ export const Navbar: FC<NavbarProps> = ({ onNavigate }) => {
   const pathname = usePathname()
 
   return (
-    <View className="flex-col gap-4">
+    <View className="mb-auto mt-auto gap-4">
       {Object.entries(routes).map(([path, { label, Icon }]) => {
         const isActive = pathname === path
 

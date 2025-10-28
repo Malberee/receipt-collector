@@ -6,8 +6,8 @@ import Animated, {
   Easing,
   FadeIn,
   FadeOut,
-  SlideInLeft,
-  SlideOutLeft,
+  SlideInRight,
+  SlideOutRight,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -41,15 +41,15 @@ export const Drawer: FC<DrawerProps> = ({ children, onClose }) => {
           )}
         />
         <Animated.View
-          className="h-full w-[65%] rounded-r-3xl border-r border-default-100 bg-default-50 px-6"
+          className="h-full w-[65%] self-end rounded-l-3xl border-l border-default-100 bg-default-50 px-6"
           style={{
             paddingTop: top + rem.get(),
             paddingBottom: bottom + rem.get(),
           }}
-          entering={SlideInLeft.easing(Easing.inOut(Easing.cubic)).duration(
+          entering={SlideInRight.easing(Easing.inOut(Easing.cubic)).duration(
             ANIMATION_DURATION,
           )}
-          exiting={SlideOutLeft.easing(Easing.inOut(Easing.cubic)).duration(
+          exiting={SlideOutRight.easing(Easing.inOut(Easing.cubic)).duration(
             ANIMATION_DURATION,
           )}
         >
