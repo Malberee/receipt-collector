@@ -1,6 +1,6 @@
 import { Portal } from '@gorhom/portal'
 import { rem } from 'nativewind'
-import type { FC, PropsWithChildren } from 'react'
+import { type FC, type PropsWithChildren } from 'react'
 import { Dimensions, Pressable, View } from 'react-native'
 import Animated, {
   Easing,
@@ -10,6 +10,8 @@ import Animated, {
   SlideOutLeft,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { useBackHandler } from '@hooks'
 
 interface DrawerProps extends PropsWithChildren {
   onClose: () => void
@@ -22,6 +24,8 @@ const ANIMATION_DURATION = 500
 export const Drawer: FC<DrawerProps> = ({ children, onClose }) => {
   const { width, height } = Dimensions.get('screen')
   const { top, bottom } = useSafeAreaInsets()
+
+  useBackHandler(onClose)
 
   return (
     <Portal hostName="modal-portal">

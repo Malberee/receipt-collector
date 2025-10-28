@@ -2,13 +2,7 @@ import { Portal } from '@gorhom/portal'
 import { Button, Plus } from 'merlo-ui'
 import { cssInterop } from 'nativewind'
 import React, { type FC, type PropsWithChildren, useEffect } from 'react'
-import {
-  BackHandler,
-  Dimensions,
-  Keyboard,
-  Pressable,
-  View,
-} from 'react-native'
+import { Dimensions, Keyboard, Pressable, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Animated, {
   FadeIn,
@@ -17,6 +11,8 @@ import Animated, {
   FadeOutDown,
   LinearTransition,
 } from 'react-native-reanimated'
+
+import { useBackHandler } from '@hooks'
 
 interface ModalProps extends PropsWithChildren {
   onClose: () => void
@@ -35,22 +31,14 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
 export const Modal: FC<ModalProps> = ({ children, onClose }) => {
   useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      () => {
-        onClose()
-        return true
-      },
-    )
     const keyboardListener = Keyboard.addListener('keyboardDidHide', () => {
       Keyboard.dismiss()
     })
 
-    return () => {
-      backHandler.remove()
-      keyboardListener.remove()
-    }
+    return () => keyboardListener.remove()
   }, [])
+
+  useBackHandler(onClose)
 
   return (
     <Portal hostName="modal-portal">
