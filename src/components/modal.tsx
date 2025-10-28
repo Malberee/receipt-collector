@@ -62,7 +62,7 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
             onPress={onClose}
           />
           <Animated.View
-            className="rounded-medium border border-default-100 bg-default-50 p-4 pt-10"
+            className="rounded-[1.75rem] border border-default-100 bg-default-50 p-4 pt-10"
             entering={FadeInDown.duration(100)}
             exiting={FadeOutDown.duration(100)}
             layout={LinearTransition.duration(200)}
